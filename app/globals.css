@@ -1,21 +1,1029 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.nav {
+  height: 70px;
+  filter: drop-shadow(0px 10px 4px hwb(0 46% 54% / 0.23));
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+}
+
+.nav img {
+  width: 250px;
+  cursor: pointer;
+}
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 14px;
+}
+.nav-menu-item {
+  cursor: pointer;
+  margin: 0px 15px;
+  border-radius: 50px;
+  border: 3px solid #fff;
+  padding: 5px 10px;
+  transition: all 0.1s ease-in-out;
+}
+.nav-menu-item:hover {
+  border: 3px solid #5dacad;
+}
+.nav-btn-cont {
+  display: flex;
+  flex-direction: row;
+}
+.btn {
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 30px;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.sign-up-btn {
+  background-color: #59c8ea;
+  color: #0a1763;
+  border: 3px solid #0a1763;
+}
+.sign-up-btn:hover {
+  background-color: #0a1763;
+  color: white;
+}
+.log-in-btn {
+  border: 3px solid #5dacad;
+  color: #5dacad;
+  margin-left: 20px;
+}
+.log-in-btn:hover {
+  background-color: #5dacad;
+  color: white;
+}
+.hero {
+  background-color: lightblue;
+  background-image: url("../public/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 695px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+.hero-cont {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero h5 {
+  margin: 0;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 65px;
+  color: #e2f1f1;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.hero p {
+  margin: 0;
+  font-family: "halcom", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  color: #e2f1f1;
+  text-align: center;
+}
+.hero .hero-btn {
+  background-color: #59c8ea;
+  border: 3px solid #0a1763;
+  color: #0a1763;
+  text-align: center;
+  margin: 30px;
+  font-size: 25px;
+  padding: 10px 50px;
+}
+.hero-btn:hover {
+  color: white;
+  background-color: #0a1763;
+}
+.about {
+  min-height: 100vh; /* Still ensures it fills the viewport */
+  padding-top: 200px; /* Adjust the padding to create the space you need */
+  width: 100vw;
+  background-color: white;
+  background-image: url("../public/about-bg2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box; /* Ensures padding is included in height */
+  position: relative;
+}
+
+.heading {
+  position: absolute;
+  top: 0px; /* Adjust as needed to position within the padding space */
+  left: 75px;
+  font-size: 50px;
+  font-weight: bold;
+  color: #0a1763; /* Change to desired text color */
+  z-index: 1; /* Make sure heading appears above other content */
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 500;
+}
+
+.about .diag {
+  position: absolute; /* Keeps .diag positioned absolutely inside .about */
+  top: 150px; /* Starts after the 100px padding from .about */
+  left: 0;
+  right: 0;
+  height: calc(100vh - 150px); /* Ensure .diag covers the remaining space */
+  background-color: #e2f1f1;
+  clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+  z-index: 0; /* Ensure .diag stays behind the squares */
+}
+
+.diag-2 {
+  height: 100vh;
+  background-color: #e2f1f1;
+  clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+  z-index: 0; /* Ensure .diag stays behind the squares */
+}
+
+.diag-mirror {
+  width: 100vw;
+  background-image: url("../public/bg2-noise-2.jpg"); /* Same as .about background */
+  background-size: 110%;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  position: relative; /* Keeps the layout structured */
+  height: 1000px;
+}
+
+.squares {
+  position: absolute; /* Position the squares inside .about */
+  top: 150px; /* Same as .diag's start point to align them correctly */
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 150px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1; /* Ensure squares are above the .diag background */
+}
+
+.squares .square {
+  width: 255px;
+  height: 300px;
+  /* position:relative; */
+  pointer-events: auto;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.squares .square .box-header {
+  width: 60%;
+  height: 75px;
+  /* position:relative; */
+  pointer-events: auto;
+  position: absolute;
+  background-color: #e2f1f1;
+  border-radius: 50px;
+  border: solid 3px #0a1763;
+  transform: translate(32%, -50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-family: "filson-soft", sans-serif;
+  color: #0a1763;
+  font-weight: 600;
+}
+.squares .square .box-foot {
+  width: 85px;
+  height: 85px;
+  /* position:relative; */
+  pointer-events: auto;
+  position: absolute;
+  background-color: white;
+  border-radius: 50px;
+  border: solid 3px #0a1763;
+  transform: translate(96%, 275%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.squares .square .box-front {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 0;
+  left: 0;
+  z-index: 2; /* Ensure the box is above the box-behind */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0a1763;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-size: 22px; /* Adjust the font size based on the new dimensions */
+  text-align: center;
+}
+.squares .square .box-front p {
+  width: 90%;
+}
+
+.squares .square .box-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  transform: translate(20px, 20px);
+  z-index: 1; /* Ensure the box is above the box-behind */
+}
+.squares .square .box-header-back {
+  width: 60%;
+  height: 75px;
+  /* position:relative; */
+  pointer-events: auto;
+  position: absolute;
+  background-color: #0a1763;
+  border-radius: 50px;
+  border: solid 3px #0a1763;
+  transform: translate(41%, -43%);
+  z-index: 1;
+}
+.squares .square .box-foot-back {
+  width: 85px;
+  height: 85px;
+  /* position:relative; */
+  pointer-events: auto;
+  position: absolute;
+  background-color: #0a1763;
+  border-radius: 50px;
+  border: solid 3px #0a1763;
+  transform: translate(113%, 282%);
+  z-index: 1;
+}
+#square1 {
+  top: 25%;
+  left: 23%;
+}
+
+#square2 {
+  top: 50%;
+  left: 47%;
+}
+
+#square3 {
+  top: 70%;
+  left: 71%;
+}
+
+.top-big-square {
+  left: 50%; /* Center it horizontally */
+  transform: translate(-50%, -152%);
+  z-index: 1;
+  width: 60vw; /* Adjust size for the large square */
+  height: 50vh;
+  position: relative;
+}
+.top-big-square .box-pic {
+  width: 33%;
+  height: 100%;
+  background-image: url("../public/bg2-noise-2.jpg"); /* Same background as .diag-2 */
+  border: solid 3px #0a1763;
+  border-radius: 50px 0 0 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 0;
+  left: 0;
+  z-index: 3; /* Ensure the box is above the box-behind */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.top-big-square .square {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 0;
+  left: 0;
+  z-index: 2; /* Ensure the box is above the box-behind */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.top-big-square .square .cont {
+  height: 100%;
+  width: 62%;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* margin-top: 25px; */
+  margin-right: 25px;
+  transform: translateY(20px);
+}
+.top-big-square .square .cont h3 {
+  font-size: 42px;
+  font-family: "halcom", sans-serif;
+  font-weight: 500;
+  color: #0a1763;
+  margin-bottom: 0;
+  text-align: center;
+}
+.top-big-square .square .cont p {
+  margin-top: 35px;
+  color: #0a1763;
+  text-align: center;
+  font-size: 22px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+}
+.top-big-square .square .cont .blog-post-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #59c8ea;
+  align-self: flex-end;
+  margin-right: 20px;
+  font-size: 26px;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 300;
+}
+.top-big-square .square .cont .blog-post-link h5 {
+  margin-right: 15px;
+  margin-left: auto;
+}
+
+.top-big-square .back-square {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 20px;
+  left: 20px;
+  z-index: 1; /* Ensure the box is above the box-behind */
+}
+
+.big-square {
+  position: absolute;
+  top: 50%; /* Place it below the second diagonal */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Ensure it’s horizontally centered */
+  z-index: 1;
+}
+
+.big-square .square {
+  width: 60vw; /* Adjust size for the large square */
+  height: 50vh;
+  position: relative;
+}
+.big-square .square .box-front {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 0;
+  left: 0;
+  z-index: 2; /* Ensure the box is above the box-behind */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.big-square .square .box-front h5 {
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  text-align: center;
+  color: #0a1763;
+  width: 40vw;
+}
+.big-square .square .box-front .schedule-btn {
+  width: 700px;
+  height: 75px;
+  background-color: #0a1763;
+  color: white;
+  font-family: "filson-soft", sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.big-square .square .box-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 20px; /* Shift it 20px down */
+  left: 20px; /* Shift it 20px to the right */
+  z-index: 1; /* Ensure the box-behind is behind the box */
+}
+.learn-more {
+  position: absolute;
+  top: 99%; /* Place below the big square */
+  left: 87%;
+  transform: translateX(-50%);
+  z-index: 2; /* Ensure it’s above other content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer: cursor;
+}
+
+.learn-more a {
+  color: #59c8ea; /* Dark color for the link */
+  font-family: "filson-soft", sans-serif;
+  font-size: 30px; /* Font size for the link */
+  font-weight: 400;
+  text-decoration: none; /* Remove underline */
+  margin-right: 15px;
+
+  /* background-color: #0a1763;  */
+
+  transition: background-color 0.3s;
+}
+
+.learn-more a:hover {
+}
+/* Style the new heading inside .diag-2 */
+.bottom-heading {
+  position: absolute;
+  left: 75px;
+  font-size: 50px;
+  z-index: 1; /* Ensure heading is above background */
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 500;
+  margin-top: 50px;
+}
+.offer {
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 800px;
+  background-color: white;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.offer .cont {
+  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.row-1 {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+.offer-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: 30px;
+}
+.icon-placeholder {
+  width: 100px;
+  height: 100px;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.thing-cont {
+  width: 300px;
+  height: 75px;
+  position: relative;
+  margin-bottom: 40px;
+}
+.thing {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 600px;
+  font-size: 30px;
+  color: #0a1763;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.thing-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 20px; /* Shift it 20px down */
+  left: 20px; /* Shift it 20px to the right */
+  z-index: 1; /* Ensure the box-behind is behind the box */
+}
+.thing-circle {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thing-circle-active {
+  width: 25px;
+  height: 25px;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  z-index: 6;
+}
+.connection-line {
+  height: 75px;
+  width: 3px;
+  background-color: #0a1763;
+}
+.row-2 {
+  width: 100%;
+}
+.offer .bubble-cont {
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+
+.bubble {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.bubble-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+.sign-up {
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 1200px; /* Adjusted height for sign-up section */
+  background-image: url("../public/bg2-noise-2.jpg"); /* Same background as .diag-2 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative; /* Necessary for positioning the big square */
+  display: flex;
+  justify-content: center;
+  align-items: space-evenly;
+}
+
+.sign-up .cont2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.sign-up .cont2 .row-1 {
+  width: 85vw;
+  display: flex;
+}
+.sign-up .cont2 .row-1 h4 {
+  font-size: 45px;
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+.sign-up .cont2 .row-1 .free-sign-up-btn {
+  margin-top: 80px;
+  font-size: 45px;
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #59c8ea;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  height: 75px;
+  width: 400px;
+}
+
+.sign-up .cont2 .row-3 {
+  text-align: center;
+}
+.sign-up .cont2 .row-4 {
+  justify-content: center;
+}
+.diag-3 {
+  height: 67%;
+  width: 100%;
+  top: 400px;
+  background-color: white;
+  clip-path: polygon(0% 0%, 100% 100%, 0% 100%); /* Corrected clip-path */
+  position: absolute;
+
+  left: 0;
+  z-index: 0;
+}
+
+/* Big square inside the sign-up section */
+.big-square.sign-up-square {
+  position: absolute;
+  top: 67%; /* Adjust position to overlap diagonals */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.blog-prev {
+  width: 100vw;
+  height: 1000px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 250px;
+}
+.blog-prev h1 {
+  align-self: flex-start;
+  margin-left: 50px;
+  margin-bottom: 50px;
+  font-size: 50px;
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 500;
+}
+.blog-prev .cont {
+  width: 80vw;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 75px;
+  z-index: 3;
+  position: relative;
+}
+.post {
+  position: relative; /* This is crucial for positioning the boxes inside */
+  width: 650px; /* Same width as the boxes */
+  height: 300px; /* Same height as the boxes */
+}
+.post1 {
+  align-self: flex-start;
+}
+.post2 {
+  align-self: flex-end;
+}
+.post3 {
+  align-self: flex-start;
+}
+.post .box-pic {
+  width: 33%;
+  height: 100%;
+  background-image: url("../public/bg2-noise-2.jpg"); /* Same background as .diag-2 */
+  border: solid 3px #0a1763;
+  border-radius: 50px 0 0 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 0;
+  left: 0;
+  z-index: 3; /* Ensure the box is above the box-behind */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.post .box-front {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 0;
+  left: 0;
+  z-index: 2; /* Ensure the box is above the box-behind */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.post .box-front .cont {
+  width: 60%;
+  align-self: flex-end;
+  justify-content: center;
+  margin-top: 25px;
+  margin-right: 25px;
+  transform: translateY(20px);
+}
+.post .box-front .cont h3 {
+  font-size: 32px;
+  font-family: "halcom", sans-serif;
+  font-weight: 500;
+  color: #0a1763;
+  margin-bottom: 0;
+}
+.post .box-front .cont p {
+  font-size: 18px;
+  font-family: "halcom", sans-serif;
+  font-weight: 300;
+}
+.post .box-front .cont .blog-post-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #59c8ea;
+  align-self: flex-end;
+  margin-right: 20px;
+  font-size: 26px;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 300;
+}
+.post .box-front .cont .blog-post-link h5 {
+  margin-right: 15px;
+}
+.post .box-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 20px; /* Shift it 20px down */
+  left: 20px; /* Shift it 20px to the right */
+  z-index: 1; /* Ensure the box-behind is behind the box */
+}
+
+.blog-prev .blog-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  margin-right: 100px;
+  margin-bottom: 200px;
+  z-index: 3;
+  position: relative;
+}
+.blog-link h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 15px;
+  color: #59c8ea;
+  font-family: "filson-soft", sans-serif;
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.credit-score {
+  height: 700px;
+  width: 100vw;
+  background-color: #e2f1f1;
+  background-image: url("../public/credit-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  position: relative;
+}
+.credit-score .bubble-cont {
+  position: relative; /* This is crucial for positioning the boxes inside */
+  width: 60vw; /* Same width as the boxes */
+  height: 450px; /* Same height as the boxes */
+}
+.box {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 0;
+  left: 0;
+  z-index: 2; /* Ensure the box is above the box-behind */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.box h5 {
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  text-align: center;
+  color: #0a1763;
+}
+.box .credit-report-btn {
+  width: 500px;
+  height: 75px;
+  background-color: #0a1763;
+  color: white;
+  font-family: "filson-soft", sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.box-behind {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 50px;
+  position: absolute; /* Position the box absolutely within the bubble-cont */
+  top: 20px; /* Shift it 20px down */
+  left: 20px; /* Shift it 20px to the right */
+  z-index: 1; /* Ensure the box-behind is behind the box */
+}
+
+.footer-diag {
+  height: 2400px;
+  width: 100vw;
+  background-image: url("../public/footer-bg-4.jpg"); /* Same background as .diag-2 */
+  background-size: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-color: #0a1763;
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transform: translateY(-1400px);
+  display: flex;
+  justify-content: center;
+}
+.footer-diag .diag {
+  height: 1900px;
+  width: 100vw;
+  background-color: white;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%); /* Corrected clip-path */
+  position: absolute;
+  left: 0;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.footer-diag .cont {
+  width: 85vw;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  justify-content: center;
+}
+.footer-diag .row-1 {
+  align-self: flex-start;
+}
+.footer-diag .row-1 .icon-logo {
+  width: 90px;
+  height: 90px;
+  background-color: #e2f1f1;
+  border-radius: 15px;
+  margin-bottom: 45px;
+}
+#icon-logo-png {
+  width: 90px;
+}
+.footer-diag .row-2 svg {
+  width: 35px;
+  margin-right: 15px;
+}
+.row-3 {
+  font-size: 24px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #e2f1f1;
+  margin-bottom: 15px;
+}
+.row-4 {
+  display: flex;
+  margin-bottom: 15px;
+}
+.row-4 .app-btn {
+  width: 250px;
+  height: 75px;
+  background-color: #e2f1f1;
+  border-radius: 50px;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.row-4 .app-btn p {
+  text-align: center;
+  font-size: 20px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #0a1763;
+}
+.row-4 .app-btn svg {
+  width: 35px;
+}
+.footer-diag .row-5 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: white;
+  font-size: 20px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 50px;
+}
+.footer-diag .row-5 .section-cat {
+  color: white;
+  font-size: 24px;
+  font-family: "halcom", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.footer-diag .row-5 p {
+  cursor: pointer;
+}
+.footer-diag .row-6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-diag .row-6 .line {
+  width: 95%;
+  height: 1px;
+  background-color: white;
+}
+.footer-diag .row-7 {
+  text-align: center;
+  font-size: 20px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  margin-bottom: 15px;
 }
