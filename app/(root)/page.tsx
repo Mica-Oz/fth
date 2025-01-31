@@ -1,8 +1,10 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
       <div className="nav">
-        <img src="./logo.png" alt="Logo" />
+        <img src="../public/fth-logo-new.png" alt="Logo" />
 
         <div className="nav-menu">
           <div className="nav-menu-item">ABOUT</div>
@@ -13,8 +15,12 @@ export default function Home() {
           <div className="nav-menu-item">FIN101</div>
         </div>
         <div className="nav-btn-cont">
-          <div className="sign-up-btn btn">FREE SIGN UP</div>
-          <div className="log-in-btn btn">LOG IN</div>
+          <Link href={"/signup"}>
+            <div className="sign-up-btn btn">FREE SIGN UP</div>
+          </Link>
+          <Link href={"/login"}>
+            <div className="log-in-btn btn">LOG IN</div>
+          </Link>
         </div>
       </div>
       <div className="hero">

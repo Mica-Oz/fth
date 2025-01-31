@@ -11,6 +11,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 50px;
+  position: relative;
+  z-index: 20;
 }
 
 .nav img {
@@ -52,6 +54,10 @@ body {
   font-style: normal;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  text-decoration: none;
+}
+.btn a {
+  text-decoration: none;
 }
 
 .sign-up-btn {
@@ -904,6 +910,293 @@ body {
   z-index: 1; /* Ensure the box-behind is behind the box */
 }
 
+.footer-diag {
+  height: 2400px;
+  width: 100vw;
+  background-image: url("../public/footer-bg-4.jpg"); /* Same background as .diag-2 */
+  background-size: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-color: #0a1763;
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transform: translateY(-1400px);
+  display: flex;
+  justify-content: center;
+}
+.footer-diag .diag {
+  height: 1900px;
+  width: 100vw;
+  background-color: white;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%); /* Corrected clip-path */
+  position: absolute;
+  left: 0;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.footer-diag .cont {
+  width: 85vw;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  justify-content: center;
+}
+.footer-diag .row-1 {
+  align-self: flex-start;
+}
+.footer-diag .row-1 .icon-logo {
+  width: 90px;
+  height: 90px;
+  background-color: #e2f1f1;
+  border-radius: 15px;
+  margin-bottom: 45px;
+}
+#icon-logo-png {
+  width: 90px;
+}
+.footer-diag .row-2 svg {
+  width: 35px;
+  margin-right: 15px;
+}
+.row-3 {
+  font-size: 24px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #e2f1f1;
+  margin-bottom: 15px;
+}
+.row-4 {
+  display: flex;
+  margin-bottom: 15px;
+}
+.row-4 .app-btn {
+  width: 250px;
+  height: 75px;
+  background-color: #e2f1f1;
+  border-radius: 50px;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.row-4 .app-btn p {
+  text-align: center;
+  font-size: 20px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #0a1763;
+}
+.row-4 .app-btn svg {
+  width: 35px;
+}
+.footer-diag .row-5 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: white;
+  font-size: 20px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 50px;
+}
+.footer-diag .row-5 .section-cat {
+  color: white;
+  font-size: 24px;
+  font-family: "halcom", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.footer-diag .row-5 p {
+  cursor: pointer;
+}
+.footer-diag .row-6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-diag .row-6 .line {
+  width: 95%;
+  height: 1px;
+  background-color: white;
+}
+.footer-diag .row-7 {
+  text-align: center;
+  font-size: 20px;
+  font-family: "halcom", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  margin-bottom: 15px;
+}
+.bubble-cont {
+  z-index: 10;
+}
+.main-cont {
+  height: 610px;
+  width: 100vw;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.bubble-cont {
+  width: 650px;
+  height: 600px;
+  position: relative;
+  margin-top: 110px;
+}
+.bubble-header {
+  width: 70%;
+  height: 75px;
+  background-color: #e2f1f1;
+  border: solid 3px #0a1763;
+  position: absolute;
+  z-index: 9;
+  left: 15%;
+  top: -6%;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 600;
+  color: #0a1763;
+}
+.bubble-header.login {
+  width: 50%;
+  left: 26%;
+}
+.bubble-header-back {
+  width: 70%;
+  height: 75px;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  position: absolute;
+  z-index: 3;
+  left: 18%;
+  top: -5%;
+  border-radius: 50px;
+}
+.bubble-header-back.login {
+  width: 50%;
+  left: 29.5%;
+}
+.bubble-front {
+  width: 100%;
+  height: 90%;
+  background-color: white;
+  border: solid 3px #0a1763;
+  border-radius: 100px;
+  z-index: 6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 0 50px;
+}
+.bubble-front.login {
+  height: 70%;
+}
+.create-form {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.input-row {
+  width: 70%;
+}
+.form-row-1 {
+  font-family: "halcom", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #0a1763;
+  text-align: center;
+}
+.form-row-7 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "halcom", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #0a1763;
+}
+
+.form-row-7 input {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+.form-row-8 {
+  width: 200px;
+  height: 60px;
+  border-radius: 50px;
+  background-color: #59c8ea;
+  border: solid 3px #0a1763;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "filson-soft", sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: #0a1763;
+}
+.form-row-9 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "halcom", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #0a1763;
+}
+.create-form .text-input {
+  width: 100%;
+  background-color: #e2f1f1;
+  color: #0a1763;
+  border: solid 2px #0a1763;
+  border-radius: 50px;
+  font-size: 18px;
+  height: 30px;
+  padding-left: 15px;
+}
+.create-form .text-input::placeholder {
+  color: #5dacad;
+}
+.create-form .text-input:focus {
+  outline: none;
+}
+.create-form a {
+  color: #5dacad;
+  font-weight: bold;
+}
+.bubble-back {
+  width: 100%;
+  height: 114%;
+  background-color: #0a1763;
+  border: solid 3px #0a1763;
+  border-radius: 100px;
+  z-index: 2;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.bubble-back.login {
+  height: 94%;
+}
 .footer-diag {
   height: 2400px;
   width: 100vw;
