@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const page = () => {
+const DashUsers = () => {
   return (
     <div>
       <h1>Dashboard Users</h1>
@@ -16,4 +16,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default DashUsers;

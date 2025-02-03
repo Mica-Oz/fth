@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 // import { useStytchUser } from "@stytch/nextjs";
 import { useStytch } from "@stytch/nextjs";
 
-const page = () => {
+const Signup = () => {
   const router = useRouter();
 
   const stytch = useStytch();
@@ -240,4 +240,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Signup;

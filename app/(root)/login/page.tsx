@@ -1,18 +1,21 @@
 "use client";
 import React, { FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // import { useStytchUser } from "@stytch/nextjs";
 import { useStytch } from "@stytch/nextjs";
 
 const Page = () => {
+  const router = useRouter();
   const stytch = useStytch();
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
     await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
-    alert(`Magic Link sent to ${inputs.email}`);
+    console.log("hey", inputs);
+    router.push("/awaitauth"); // Navigate to the 'about' page
   };
 
   return (
