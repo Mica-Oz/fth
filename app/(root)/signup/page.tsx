@@ -4,43 +4,46 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 // import { useStytchUser } from "@stytch/nextjs";
-import { useStytch } from "@stytch/nextjs";
+// import { useStytch } from "@stytch/nextjs";
 
 const Signup = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const stytch = useStytch();
+  // const stytch = useStytch();
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
-    console.log("hey", inputs);
-    router.push("/awaitauth"); // Navigate to the 'about' page
+    console.log("hey", JSON.stringify(inputs));
+    // setIsLoading(true);
 
-    await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
+    try {
+      const response = await fetch("/api/create-case", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputs),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit case");
+      }
+
+      const result = await response.json();
+      console.log("Case submitted successfully:", result);
+    } catch (err) {
+      // setError('There was an error submitting the case. Please try again.');
+      console.error(err);
+    } finally {
+      // setIsLoading(false);
+    }
+    // router.push("/awaitauth"); // Navigate to the 'about' page
+
+    // await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
   };
   return (
     <>
-      <div className="nav">
-        <img src="./logo.png" alt="" />
-
-        <div className="nav-menu">
-          <div className="nav-menu-item">ABOUT</div>
-          <div className="nav-menu-item">TAX RESOLUTION</div>
-          <div className="nav-menu-item">BLOG</div>
-          <div className="nav-menu-item">FAQ</div>
-          <div className="nav-menu-item">CONTACT</div>
-          <div className="nav-menu-item">FIN101</div>
-        </div>
-        <div className="nav-btn-cont">
-          <Link href={"/signup"}>
-            <div className="sign-up-btn btn">FREE SIGN UP</div>
-          </Link>
-          <Link href={"/login"}>
-            <div className="log-in-btn btn">LOG IN</div>
-          </Link>
-        </div>
-      </div>
       <div className="main-cont">
         <div className="bubble-cont">
           <div className="bubble-header">CREATE ACCOUNT</div>
@@ -60,7 +63,7 @@ const Signup = () => {
               </div>
               <div className="form-row-3 input-row">
                 <input
-                  name="firstName"
+                  name="FirstName"
                   className="text-input"
                   type="text"
                   placeholder="First Name"
@@ -68,7 +71,7 @@ const Signup = () => {
               </div>
               <div className="form-row-4 input-row">
                 <input
-                  name="lastName"
+                  name="LastName"
                   className="text-input"
                   type="text"
                   placeholder="Last Name"
@@ -83,7 +86,7 @@ const Signup = () => {
               </div> */}
               <div className="form-row-6 input-row">
                 <input
-                  name="phoneNumber"
+                  name="CellPhone"
                   className="text-input"
                   type="text"
                   placeholder="Phone Number"

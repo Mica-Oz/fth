@@ -1,6 +1,9 @@
 body {
   margin: 0;
 }
+a {
+  all: unset;
+}
 
 .nav {
   height: 70px;
@@ -16,7 +19,7 @@ body {
 }
 
 .nav img {
-  width: 250px;
+  /* width: 250px; */
   cursor: pointer;
 }
 .nav-menu {
@@ -56,7 +59,7 @@ body {
   transition: all 0.1s ease-in-out;
   text-decoration: none;
 }
-.btn a {
+.nav a {
   text-decoration: none;
 }
 

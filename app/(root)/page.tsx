@@ -1,28 +1,8 @@
-import Link from "next/link";
+// import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      <div className="nav">
-        <img src="../public/fth-logo-new.png" alt="Logo" />
-
-        <div className="nav-menu">
-          <div className="nav-menu-item">ABOUT</div>
-          <div className="nav-menu-item">TAX RESOLUTION</div>
-          <div className="nav-menu-item">BLOG</div>
-          <div className="nav-menu-item">FAQ</div>
-          <div className="nav-menu-item">CONTACT</div>
-          <div className="nav-menu-item">FIN101</div>
-        </div>
-        <div className="nav-btn-cont">
-          <Link href={"/signup"}>
-            <div className="sign-up-btn btn">FREE SIGN UP</div>
-          </Link>
-          <Link href={"/login"}>
-            <div className="log-in-btn btn">LOG IN</div>
-          </Link>
-        </div>
-      </div>
       <div className="hero">
         <div className="hero-cont">
           <h5>
