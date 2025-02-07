@@ -10,7 +10,7 @@ const FooterDiag = () => {
         <div className="cont">
           <div className="row-1">
             <div className="icon-logo">
-              <Image src={icon} alt="Logo" height={80} className="iconLogo" />
+              <Image src={icon} alt="Logo" height={81} className="iconLogo" />
             </div>
           </div>
           <div className="row-2">
