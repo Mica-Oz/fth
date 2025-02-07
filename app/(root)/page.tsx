@@ -1,12 +1,32 @@
 // import Link from "next/link";
+"use client";
+import React from "react";
+import Typed from "typed.js";
 
 export default function Home() {
+  // Create reference to store the DOM element containing the animation
+  const el = React.useRef(null);
+  React.useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: [
+        "Know where you stand with the IRS?",
+        "Know where you stand with the IRS.",
+      ],
+      typeSpeed: 80,
+    });
+
+    return () => {
+      // Destroy Typed instance during cleanup to stop animation
+      typed.destroy();
+    };
+  }, []);
+
   return (
     <>
       <div className="hero">
         <div className="hero-cont">
           <h5>
-            <span id="typer"></span>
+            <span ref={el}></span>
           </h5>
           <p>
             Your confidential IRS tax report will clearly summarize a 10+ year

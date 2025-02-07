@@ -3,15 +3,15 @@ import React, { FormEvent } from "react";
 import Link from "next/link";
 // import { useState } from "react";
 
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // import { useStytchUser } from "@stytch/nextjs";
-// import { useStytch } from "@stytch/nextjs";
+import { useStytch } from "@stytch/nextjs";
 
 const Signup = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
-  // const stytch = useStytch();
+  const stytch = useStytch();
   // const [error, setError] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
 
@@ -19,6 +19,7 @@ const Signup = () => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
+
     console.log("Submitting Data:", inputs);
     // setIsLoading(true);
 
@@ -30,13 +31,13 @@ const Signup = () => {
         },
         body: JSON.stringify(inputs),
       });
+      console.log("response from front end", response);
+      // if (!response.ok) {
+      //   throw new Error("Failed to submit case");
+      // }
 
-      if (!response.ok) {
-        throw new Error("Failed to submit case");
-      }
-
-      const result = await response.json();
-      console.log("Case submitted successfully:", result);
+      // const result = await response.json();
+      console.log("Case submitted successfully:");
     } catch (err) {
       // setError("There was an error submitting the case. Please try again.");
       console.error(err);
@@ -44,9 +45,9 @@ const Signup = () => {
     // finally {
     //   setIsLoading(false);
     // }
-    // router.push("/awaitauth"); // Navigate to the 'about' page
+    router.push("/awaitauth"); // Navigate to the 'about' page
 
-    // await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
+    await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
   };
   return (
     <>
@@ -59,14 +60,14 @@ const Signup = () => {
               <div className="form-row-1">
                 <p>Welcome! Please fill in your details to get started.</p>
               </div>
-              {/* <div className="form-row-2 input-row">
+              <div className="form-row-2 input-row">
                 <input
                   name="email"
                   className="text-input"
                   type="text"
                   placeholder="Email Address"
                 />
-              </div> */}
+              </div>
               <div className="form-row-3 input-row">
                 <input
                   name="FirstName"
