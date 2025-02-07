@@ -4,6 +4,10 @@ import React, { useEffect } from "react";
 import Typed from "typed.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
+import icon1 from "@/public/icon1.png";
+import icon2 from "@/public/icon2.png";
+import icon3 from "@/public/icon3.png";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -58,7 +62,9 @@ export default function Home() {
         <div className="squares" data-aos="fade-right" data-aos-delay="300">
           <div className="square" id="square1">
             <div className="box-header">1</div>
-            <div className="box-foot"></div>
+            <div className="box-foot">
+              <Image alt={"icon"} src={icon1} width={55} className="icon1" />
+            </div>
             <div className="box-front">
               <p>
                 Securely provide us with some basic information about yourself
@@ -70,7 +76,9 @@ export default function Home() {
           </div>
           <div className="square" id="square2">
             <div className="box-header">2</div>
-            <div className="box-foot"></div>
+            <div className="box-foot">
+              <Image alt={"icon"} src={icon2} width={60} className="icon2" />
+            </div>
             <div className="box-front">
               <p>
                 We process your information with the IRS and generate your Tax
@@ -83,7 +91,9 @@ export default function Home() {
           </div>
           <div className="square" id="square3">
             <div className="box-header">3</div>
-            <div className="box-foot"></div>
+            <div className="box-foot">
+              <Image alt={"icon"} src={icon3} width={50} className="icon3" />
+            </div>
             <div className="box-front">
               <p>
                 Review your Tax History Report with one of our expert tax
