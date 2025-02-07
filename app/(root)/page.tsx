@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 export default function Home() {
   // Create reference to store the DOM element containing the animation
   const typer = React.useRef(null);
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -54,7 +55,7 @@ export default function Home() {
           Our Process is Simple:
         </h1>
         <div className="diag"></div>
-        <div className="squares">
+        <div className="squares" data-aos="fade-right" data-aos-delay="300">
           <div className="square" id="square1">
             <div className="box-header">1</div>
             <div className="box-foot"></div>

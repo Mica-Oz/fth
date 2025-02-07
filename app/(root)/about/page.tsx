@@ -1,7 +1,22 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import SplitWith from "@/app/components/splitBubbleWTitle";
+import FooterDiag from "@/app/components/footerDiag";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Page = () => {
-  return <div>About</div>;
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  return (
+    <>
+      <div className="about-main">
+        <SplitWith />
+      </div>
+      <FooterDiag />
+    </>
+  );
 };
 
 export default Page;
