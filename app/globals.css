@@ -1,3 +1,4 @@
+@import url("https://use.typekit.net/knq0qds.css");
 body {
   margin: 0;
 }
@@ -469,30 +470,43 @@ a {
 }
 .learn-more {
   position: absolute;
-  top: 99%; /* Place below the big square */
-  left: 87%;
+  top: 98.5%; /* Place below the big square */
+  left: 83%;
   transform: translateX(-50%);
   z-index: 2; /* Ensure it’s above other content */
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer: cursor;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50px;
+  padding: 0 15px;
 }
-
+.learn-more:hover {
+  background-color: #0a1763;
+  transform: translateX(-50%) scale(1.1);
+}
 .learn-more a {
-  color: #59c8ea; /* Dark color for the link */
+  color: #0a1763; /* Dark color for the link */
   font-family: "filson-soft", sans-serif;
-  font-size: 30px; /* Font size for the link */
-  font-weight: 400;
+  font-size: 35px; /* Font size for the link */
+  font-weight: 500;
   text-decoration: none; /* Remove underline */
   margin-right: 15px;
 
-  /* background-color: #0a1763;  */
-
-  transition: background-color 0.3s;
+  transition: all 0.3s ease-in-out;
 }
-
-.learn-more a:hover {
+.learn-more:hover a {
+  color: white;
+}
+.learn-more svg {
+  transition: all 0.3s ease-in-out;
+}
+.learn-more:hover svg {
+  fill: white !important;
+}
+#learn-more-arrow {
+  margin-top: 4px;
 }
 /* Style the new heading inside .diag-2 */
 .bottom-heading {

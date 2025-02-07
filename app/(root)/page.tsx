@@ -1,13 +1,19 @@
 // import Link from "next/link";
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Typed from "typed.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
-  const el = React.useRef(null);
-  React.useEffect(() => {
-    const typed = new Typed(el.current, {
+  const typer = React.useRef(null);
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
+  useEffect(() => {
+    const typed = new Typed(typer.current, {
       strings: [
         "Know where you stand with the IRS?",
         "Know where you stand with the IRS.",
@@ -26,21 +32,27 @@ export default function Home() {
       <div className="hero">
         <div className="hero-cont">
           <h5>
-            <span ref={el}></span>
+            <span ref={typer}></span>
           </h5>
-          <p>
+          <p data-aos="fade-left" data-aos-delay="150">
             Your confidential IRS tax report will clearly summarize a 10+ year
             history of your IRS Individual Master File. We can identify any
             potential issues and help you find resolution safely and securely.
           </p>
-          <div className="hero-btn btn">
+          <div
+            className="hero-btn btn"
+            data-aos="fade-right"
+            data-aos-delay="250"
+          >
             GET YOUR FREE <br />
             TAX HISTORY
           </div>
         </div>
       </div>
       <div className="about">
-        <h1 className="heading">Our Process is Simple:</h1>
+        <h1 className="heading" data-aos="fade-right" data-aos-delay="200">
+          Our Process is Simple:
+        </h1>
         <div className="diag"></div>
         <div className="squares">
           <div className="square" id="square1">
@@ -83,15 +95,16 @@ export default function Home() {
           </div>
         </div>
         <div className="learn-more">
-          <a href="#">Learn More</a>
+          <a href="/about">Learn More</a>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
             height="30"
-            fill="#59c8ea"
+            fill="#0a1763"
             className="bi bi-arrow-right"
             viewBox="0 0 16 16"
+            id="learn-more-arrow"
           >
             <path
               fillRule="evenodd"
