@@ -8,6 +8,7 @@ import Image from "next/image";
 import icon1 from "@/public/icon1.png";
 import icon2 from "@/public/icon2.png";
 import icon3 from "@/public/icon3.png";
+import icon from "@/public/fth-logo-icon-new.png";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -410,7 +411,7 @@ export default function Home() {
         <div className="cont">
           <div className="row-1">
             <div className="icon-logo">
-              <img id="icon-logo-png" src="./icon-logo.png" />
+              <Image src={icon} alt="Logo" height={80} className="iconLogo" />
             </div>
           </div>
           <div className="row-2">

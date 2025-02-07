@@ -382,7 +382,7 @@ a {
 }
 .top-big-square .square .cont h3 {
   font-size: 42px;
-  font-family: "halcom", sans-serif;
+  font-family: "filson-soft", sans-serif;
   font-weight: 500;
   color: #0a1763;
   margin-bottom: 0;
@@ -686,7 +686,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .sign-up .cont2 .row-1 {
   width: 85vw;

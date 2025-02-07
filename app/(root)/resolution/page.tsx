@@ -1,7 +1,22 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import SplitWith2 from "@/app/components/resBubble";
+import FooterDiag from "@/app/components/footerDiag";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Page = () => {
-  return <div>Tax Resolution</div>;
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  return (
+    <>
+      <div className="about-main">
+        <SplitWith2 />
+      </div>
+      <FooterDiag />
+    </>
+  );
 };
 
 export default Page;
