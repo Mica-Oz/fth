@@ -16,6 +16,9 @@ a {
   align-items: center;
   padding: 10px 50px;
   position: relative;
+  /* position: fixed;
+  width: 95%;
+  opacity: 0.95; */
   z-index: 20;
 }
 
@@ -406,7 +409,19 @@ a {
   font-size: 26px;
   font-family: "filson-soft", sans-serif;
   font-weight: 300;
+  cursor: pointer;
+  border-radius: 35px;
+  height: 45px;
+  padding: 0 15px;
+  margin-top: 20px;
+  transition: all 0.3s ease-in-out;
 }
+.top-big-square .square .cont .blog-post-link:hover {
+  background-color: #0a1763;
+  color: white;
+  transform: scale(1.1);
+}
+
 .top-big-square .square .cont .blog-post-link h5 {
   margin-right: 15px;
   margin-left: auto;
@@ -489,7 +504,7 @@ a {
 .learn-more {
   position: absolute;
   top: 98.5%; /* Place below the big square */
-  left: 83%;
+  left: 87%;
   transform: translateX(-50%);
   z-index: 2; /* Ensure it’s above other content */
   display: flex;
@@ -499,6 +514,7 @@ a {
   transition: all 0.3s ease-in-out;
   border-radius: 50px;
   padding: 0 15px;
+  height: 45px;
 }
 .learn-more:hover {
   background-color: #0a1763;
@@ -507,7 +523,7 @@ a {
 .learn-more a {
   color: #0a1763; /* Dark color for the link */
   font-family: "filson-soft", sans-serif;
-  font-size: 35px; /* Font size for the link */
+  font-size: 26px; /* Font size for the link */
   font-weight: 500;
   text-decoration: none; /* Remove underline */
   margin-right: 15px;
@@ -771,7 +787,7 @@ a {
 .post {
   position: relative; /* This is crucial for positioning the boxes inside */
   width: 650px; /* Same width as the boxes */
-  height: 300px; /* Same height as the boxes */
+  height: 320px; /* Same height as the boxes */
 }
 .post1 {
   align-self: flex-start;
@@ -785,7 +801,7 @@ a {
 .post .box-pic {
   width: 33%;
   height: 100%;
-  background-image: url("../public/bg2-noise-2.jpg");
+  /* background-image: url("../public/bg2-noise-2.jpg"); */
 
   border: solid 3px #0a1763;
   border-radius: 50px 0 0 50px;
@@ -797,6 +813,21 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+#inflation-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#fresh-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#damage-img {
+  background-size: cover;
+  background-position: -400px 0;
+  background-repeat: no-repeat;
 }
 .post .box-front {
   width: 100%;
@@ -822,7 +853,7 @@ a {
   transform: translateY(20px);
 }
 .post .box-front .cont h3 {
-  font-size: 32px;
+  font-size: 27px;
   font-family: "halcom", sans-serif;
   font-weight: 500;
   color: #0a1763;
@@ -843,6 +874,7 @@ a {
   font-size: 26px;
   font-family: "filson-soft", sans-serif;
   font-weight: 300;
+  height: 45px;
 }
 .post .box-front .cont .blog-post-link h5 {
   margin-right: 15px;
@@ -1450,6 +1482,14 @@ a {
   /* margin-top: 25px; */
   margin-right: 25px;
   transform: translateY(20px);
+}
+.split-bubble-with-title .square .cont .bullets {
+  font-size: 15px;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 00;
+  color: #0a1763;
+  margin-bottom: 0;
+  margin-left: 30px;
 }
 .split-bubble-with-title .square .cont h3 {
   font-size: 42px;

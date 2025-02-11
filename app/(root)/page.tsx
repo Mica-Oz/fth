@@ -4,14 +4,18 @@ import React, { useEffect } from "react";
 import Typed from "typed.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Link from "next/link";
 import Image from "next/image";
 import icon1 from "@/public/icon1.png";
 import icon2 from "@/public/icon2.png";
 import icon3 from "@/public/icon3.png";
 import icon from "@/public/fth-logo-icon-new.png";
 import heroBG from "@/public/bg.jpg";
-import aboutBG from "@/public/about-bg2.jpg";
-import whyBG from "@/public/taxform.jpg";
+import aboutBG2 from "@/public/aboutbg5.jpg";
+import whyBG from "@/public/taxform2.jpeg";
+import inflation from "@/public/inflation.jpeg";
+import fresh from "@/public/fresh.jpeg";
+import damage from "@/public/damage.jpeg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -48,17 +52,22 @@ export default function Home() {
             history of your IRS Individual Master File. We can identify any
             potential issues and help you find resolution safely and securely.
           </p>
-          <div
-            className="hero-btn btn"
-            data-aos="fade-right"
-            data-aos-delay="250"
-          >
-            GET YOUR FREE <br />
-            TAX HISTORY
-          </div>
+          <Link href={"/signup"}>
+            <div
+              className="hero-btn btn"
+              data-aos="fade-right"
+              data-aos-delay="250"
+            >
+              GET YOUR FREE <br />
+              TAX HISTORY
+            </div>
+          </Link>
         </div>
       </div>
-      <div className="about" style={{ backgroundImage: `url(${aboutBG.src})` }}>
+      <div
+        className="about"
+        style={{ backgroundImage: `url(${aboutBG2.src})` }}
+      >
         <h1 className="heading" data-aos="fade-right" data-aos-delay="200">
           Our Process is Simple:
         </h1>
@@ -110,7 +119,7 @@ export default function Home() {
           </div>
         </div>
         <div className="learn-more">
-          <a href="/about">Learn More</a>
+          <Link href={"/about"}>Learn More</Link>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +159,9 @@ export default function Home() {
                 </strong>
               </p>
               <div className="blog-post-link">
-                <h5>Read More</h5>
+                <Link href={"/why"}>
+                  <h5>Read More</h5>
+                </Link>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="22"
@@ -293,14 +304,21 @@ export default function Home() {
         <h1>Read Our Blog:</h1>
         <div className="cont">
           <div className="post post1">
-            <div className="box-pic"></div>
+            <div
+              className="box-pic"
+              id="inflation-img"
+              style={{ backgroundImage: `url(${inflation.src})` }}
+            ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>Example Title</h3>
+                <h3>
+                  How Inflation Helps You Save On Taxes And Makes You Pay More
+                  On Your Tax Debt
+                </h3>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Dicta unde delectus qui fugit velit iste aspernatur est
-                  placeat repellendus. Dolorum, eos iure...
+                  Inflation is the hot subject now. It’s not only impacting your
+                  credit cards and bank accounts and your groceries and your
+                  gasoline, but it’s also impacting your taxes....
                 </p>
                 <div className="blog-post-link">
                   <h5>Read Post</h5>
@@ -323,14 +341,19 @@ export default function Home() {
             <div className="box-back"></div>
           </div>
           <div className="post post2">
-            <div className="box-pic"></div>
+            <div
+              className="box-pic"
+              id="fresh-img"
+              style={{ backgroundImage: `url(${fresh.src})` }}
+            ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>Example Title</h3>
+                <h3>The IRS Fresh Start Program Can Wipe Out Your Tax Debt</h3>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Dicta unde delectus qui fugit velit iste aspernatur est
-                  placeat repellendus. Dolorum, eos iure...
+                  You might be reading this because you’ve heard that the IRS
+                  can wipe out some or perhaps all of your tax debt. It’s true.
+                  It can happen under the Fresh Start Program, also known as the
+                  Fresh Start Initiative...
                 </p>
                 <div className="blog-post-link">
                   <h5>Read Post</h5>
@@ -353,14 +376,18 @@ export default function Home() {
             <div className="box-back"></div>
           </div>
           <div className="post post3">
-            <div className="box-pic"></div>
+            <div
+              className="box-pic"
+              id="damage-img"
+              style={{ backgroundImage: `url(${damage.src})` }}
+            ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>Example Title</h3>
+                <h3>Is Your Storm Damage Tax Deductible? It Depends.</h3>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Dicta unde delectus qui fugit velit iste aspernatur est
-                  placeat repellendus. Dolorum, eos iure...
+                  Is your storm damage tax deductible? It depends on how much
+                  damage you had, how much coverage you had from insurance, and
+                  more...
                 </p>
                 <div className="blog-post-link">
                   <h5>Read Post</h5>
