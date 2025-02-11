@@ -18,6 +18,8 @@ import fresh from "@/public/fresh.jpeg";
 import damage from "@/public/damage.jpeg";
 import blur1 from "@/public/blurbg1.jpg";
 import blur2 from "@/public/blurbg2.jpg";
+import creditBG from "@/public/credit-bg.png";
+import footerBG from "@/public/footer-bg-4.jpg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -433,7 +435,10 @@ export default function Home() {
           </svg>
         </div>
       </div>
-      <div className="credit-score">
+      <div
+        className="credit-score"
+        style={{ backgroundImage: `url(${creditBG.src})` }}
+      >
         <div className="bubble-cont">
           <div className="box">
             <h5>
@@ -445,7 +450,10 @@ export default function Home() {
           <div className="box-behind"></div>
         </div>
       </div>
-      <div className="footer-diag">
+      <div
+        className="footer-diag"
+        style={{ backgroundImage: `url(${footerBG.src})` }}
+      >
         <div className="diag"></div>
         <div className="cont">
           <div className="row-1">

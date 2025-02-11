@@ -918,7 +918,7 @@ a {
   height: 700px;
   width: 100vw;
   background-color: #e2f1f1;
-  background-image: url("../public/credit-bg.png");
+  /* background-image: url("../public/credit-bg.png"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -932,6 +932,7 @@ a {
   position: relative; /* This is crucial for positioning the boxes inside */
   width: 60vw; /* Same width as the boxes */
   height: 450px; /* Same height as the boxes */
+  margin-top: 0;
 }
 .box {
   width: 100%;
@@ -985,7 +986,7 @@ a {
 .footer-diag {
   height: 2400px;
   width: 100vw;
-  background-image: url("../public/footer-bg-4.jpg"); /* Same background as .diag-2 */
+  /* background-image: url("../public/footer-bg-4.jpg"); Same background as .diag-2 */
   background-size: 100%;
   background-position: bottom;
   background-repeat: no-repeat;
