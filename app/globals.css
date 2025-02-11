@@ -1444,6 +1444,10 @@ a {
   height: 66vh;
   position: relative;
 }
+.split-bubble-with-title.fin101-bubble {
+  height: 340px !important;
+}
+
 .split-bubble-with-title .header-bubble {
   width: 35%;
   height: 75px;

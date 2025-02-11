@@ -1,7 +1,22 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import Bubble from "@/app/components/faqBubble";
+import FooterDiag from "@/app/components/footerDiag";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-const FAQ = () => {
-  return <div>FAQ</div>;
+const Page = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  return (
+    <>
+      <div className="about-main">
+        <Bubble />
+      </div>
+      <FooterDiag />
+    </>
+  );
 };
 
-export default FAQ;
+export default Page;
