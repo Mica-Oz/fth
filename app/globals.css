@@ -184,7 +184,7 @@ a {
 }
 
 .diag-2 {
-  height: 100vh;
+  height: 820px;
   background-color: #e2f1f1;
   clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
   z-index: 0; /* Ensure .diag stays behind the squares */
@@ -192,12 +192,15 @@ a {
 
 .diag-mirror {
   width: 100vw;
-  background-image: url("../public/bg2-noise-2.jpg"); /* Same as .about background */
+  /* background-image: url("../public/bg2-noise-2.jpg"); Same as .about background */
   background-size: 110%;
   /* background-position: center; */
   background-repeat: no-repeat;
   position: relative; /* Keeps the layout structured */
   height: 1000px;
+}
+#blur1 {
+  background-position: bottom;
 }
 
 .squares {
@@ -688,7 +691,7 @@ a {
   min-width: 100vw;
   max-width: 100vw;
   height: 1200px; /* Adjusted height for sign-up section */
-  background-image: url("../public/bg2-noise-2.jpg"); /* Same background as .diag-2 */
+  /* background-image: url("../public/bg2-noise-2.jpg"); Same background as .diag-2 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

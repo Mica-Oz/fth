@@ -16,6 +16,8 @@ import whyBG from "@/public/taxform2.jpeg";
 import inflation from "@/public/inflation.jpeg";
 import fresh from "@/public/fresh.jpeg";
 import damage from "@/public/damage.jpeg";
+import blur1 from "@/public/blurbg1.jpg";
+import blur2 from "@/public/blurbg2.jpg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -137,7 +139,11 @@ export default function Home() {
           </svg>
         </div>
       </div>
-      <div className="diag-mirror">
+      <div
+        className="diag-mirror"
+        id="blur1"
+        style={{ backgroundImage: `url(${blur1.src})` }}
+      >
         <div className="diag-2"></div>
 
         <h1 className="bottom-heading">What We Offer:</h1>
@@ -234,7 +240,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="sign-up">
+      <div className="sign-up" style={{ backgroundImage: `url(${blur2.src})` }}>
         <div className="cont2">
           <div className="row-1">
             <h4>
