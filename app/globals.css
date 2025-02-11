@@ -497,9 +497,9 @@ a {
   border: 3px solid #0a1763;
 }
 .big-square .square .box-front .schedule-btn:hover {
-  color: #0a1763;
+  color: #5dacad;
   background-color: white;
-  border: 3px solid #0a1763;
+  border: 3px solid #5dacad;
 }
 
 .big-square .square .box-back {
@@ -920,8 +920,17 @@ a {
   margin-bottom: 200px;
   z-index: 3;
   position: relative;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 5px 20px;
 }
-.blog-link h4 {
+
+.blog-prev .blog-link:hover {
+  background-color: #0a1763;
+  transform: scale(1.1);
+}
+.blog-prev .blog-link h4 {
   margin-top: 0;
   margin-bottom: 0;
   margin-right: 15px;
@@ -929,6 +938,15 @@ a {
   font-family: "filson-soft", sans-serif;
   font-size: 35px;
   font-weight: 500;
+}
+.blog-prev .blog-link:hover h4 {
+  color: white;
+}
+.blog-prev .blog-link svg {
+  transform: translateY(2px);
+}
+.blog-prev .blog-link:hover svg {
+  fill: white !important;
 }
 
 .credit-score {
@@ -944,6 +962,7 @@ a {
   justify-content: center;
   z-index: 3;
   position: relative;
+  top: 40px;
 }
 .credit-score .bubble-cont {
   position: relative; /* This is crucial for positioning the boxes inside */
@@ -1535,6 +1554,9 @@ a {
   font-family: "halcom", sans-serif;
   font-weight: 400;
 }
+.contact-bubble .cont p {
+  margin-top: 0 !important;
+}
 .split-bubble-with-title .square .cont .blog-post-link {
   display: flex;
   align-items: center;
@@ -1572,4 +1594,47 @@ a {
 }
 .icon1 {
   margin-left: 6px;
+}
+.blog-head {
+  width: 100vw;
+  height: 1000px;
+  background-position: top;
+  background-size: cover;
+  position: relative;
+}
+.blog-head .diag {
+  height: 1000px;
+  top: 150px;
+  background-color: white;
+  clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+}
+
+.contact-bubble {
+  height: 800px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.contact-form input {
+  width: 100%;
+  background-color: #e2f1f1;
+  color: #0a1763;
+  border: solid 2px #0a1763;
+  border-radius: 50px;
+  font-size: 18px;
+  height: 30px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+#contact-message {
+  height: 200px;
+}
+.contact-form input::placeholder {
+  color: #5dacad;
+}
+.contact-form input:focus {
+  outline: none;
 }
