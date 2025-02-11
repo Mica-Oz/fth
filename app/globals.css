@@ -1597,20 +1597,21 @@ a {
 }
 .blog-head {
   width: 100vw;
-  height: 1000px;
+  height: 870px;
   background-position: top;
   background-size: cover;
   position: relative;
 }
 .blog-head .diag {
-  height: 1000px;
-  top: 150px;
-  background-color: white;
+  height: 700px;
+  top: 170px;
+  position: relative;
+  background-color: #fff;
   clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
 }
 
 .contact-bubble {
-  height: 800px;
+  height: 600px;
 }
 
 .contact-form {
@@ -1630,7 +1631,7 @@ a {
   margin-bottom: 10px;
 }
 #contact-message {
-  height: 200px;
+  padding: 15px 15px 140px 15px;
 }
 .contact-form input::placeholder {
   color: #5dacad;
