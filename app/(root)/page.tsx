@@ -9,6 +9,7 @@ import icon1 from "@/public/icon1.png";
 import icon2 from "@/public/icon2.png";
 import icon3 from "@/public/icon3.png";
 import icon from "@/public/fth-logo-icon-new.png";
+import heroBG from "@/public/bg.jpg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -35,7 +36,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="hero">
+      <div className="hero" style={{ backgroundImage: `url(${heroBG.src})` }}>
         <div className="hero-cont">
           <h5>
             <span ref={typer}></span>
