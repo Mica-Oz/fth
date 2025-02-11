@@ -1,11 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import icon from "@/public/fth-logo-icon-new.png";
+import footerBG from "@/public/footer-bg-4.jpg";
 
 const FooterDiag = () => {
   return (
     <>
-      <div className="footer-diag about">
+      <div
+        className="footer-diag about"
+        style={{ backgroundImage: `url(${footerBG.src})` }}
+      >
         <div className="diag"></div>
         <div className="cont">
           <div className="row-1">
