@@ -339,8 +339,8 @@ a {
       rgba(144, 216, 185, 0.3),
       rgba(158, 218, 185, 0.287)
     ),
-    url(../public/taxform.jpeg);
-  /* background-image: url("../public/taxform.jpeg"); */
+    url(../public/taxform.jpg);
+  background-image: url("../public/taxform.jpg");
   background-size: cover;
   background-position: center;
   border: solid 3px #0a1763;

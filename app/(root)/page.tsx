@@ -11,6 +11,7 @@ import icon3 from "@/public/icon3.png";
 import icon from "@/public/fth-logo-icon-new.png";
 import heroBG from "@/public/bg.jpg";
 import aboutBG from "@/public/about-bg2.jpg";
+import whyBG from "@/public/taxform.jpeg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -133,7 +134,10 @@ export default function Home() {
         <h1 className="bottom-heading">What We Offer:</h1>
 
         <div className="top-big-square">
-          <div className="box-pic"></div>
+          <div
+            className="box-pic"
+            // style={{ backgroundImage: `url(${whyBG.src})` }}
+          ></div>
           <div className="square">
             <div className="cont">
               <h3>Why Get Your Free Tax History Report?</h3>
