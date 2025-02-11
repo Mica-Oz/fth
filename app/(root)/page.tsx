@@ -10,7 +10,7 @@ import icon1 from "@/public/icon1.png";
 import icon2 from "@/public/icon2.png";
 import icon3 from "@/public/icon3.png";
 import icon from "@/public/fth-logo-icon-new.png";
-import heroBG from "@/public/bg.jpg";
+import heroBG from "@/public/herobg3.jpg";
 import aboutBG2 from "@/public/aboutbg5.jpg";
 import whyBG from "@/public/taxform2.jpeg";
 import inflation from "@/public/inflation.jpeg";
