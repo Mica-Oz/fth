@@ -492,7 +492,16 @@ a {
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 3px solid #0a1763;
 }
+.big-square .square .box-front .schedule-btn:hover {
+  color: #0a1763;
+  background-color: white;
+  border: 3px solid #0a1763;
+}
+
 .big-square .square .box-back {
   width: 100%;
   height: 100%;
@@ -732,6 +741,14 @@ a {
   border-radius: 50px;
   height: 75px;
   width: 400px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.sign-up .cont2 .row-1 .free-sign-up-btn:hover {
+  color: white;
+  background-color: #0a1763;
+  transform: scale(1.1);
 }
 
 .sign-up .cont2 .row-3 {
@@ -824,7 +841,7 @@ a {
 }
 #fresh-img {
   background-size: cover;
-  background-position: center;
+  background-position: -90px;
   background-repeat: no-repeat;
 }
 #damage-img {
@@ -1419,8 +1436,8 @@ a {
   color: #0a1763;
   border-radius: 50px;
   position: absolute; /* Position the box absolutely within the bubble-cont */
-  top: -35;
-  left: 150;
+  top: -35px;
+  left: 150px;
   z-index: 6; /* Ensure the box is above the box-behind */
   display: flex;
   flex-direction: column;
@@ -1446,8 +1463,7 @@ a {
 .split-bubble-with-title .box-pic {
   width: 33%;
   height: 100%;
-  background-image: url("../public/bg2-noise-2.jpg");
-  /* background-image: url("../public/taxform.jpeg"); */
+
   background-size: cover;
   background-position: center;
   border: solid 3px #0a1763;
@@ -1460,6 +1476,14 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+#aboutBub {
+  background-size: cover;
+  background-position: right;
+}
+#resBub {
+  background-size: cover;
+  background-position: left;
 }
 .split-bubble-with-title .square {
   width: 100%;

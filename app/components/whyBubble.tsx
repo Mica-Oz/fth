@@ -1,4 +1,5 @@
 import React from "react";
+import blur3 from "@/public/blurbg3.jpg";
 
 const SplitWith3 = () => {
   return (
@@ -9,7 +10,12 @@ const SplitWith3 = () => {
         data-aos-delay="150"
       >
         <div className="header-bubble">Why?</div>
-        <div className="box-pic"></div>
+        <div
+          className="box-pic"
+          style={{
+            backgroundImage: `url(${blur3.src})`,
+          }}
+        ></div>
         <div className="square">
           <div className="cont">
             <h3>Why get your Free Tax History Report?</h3>

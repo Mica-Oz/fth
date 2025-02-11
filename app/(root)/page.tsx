@@ -249,11 +249,14 @@ export default function Home() {
               Your completely free and secure Tax <br />
               History Report is waiting for you.
             </h4>
-            <div className="free-sign-up-btn">FREE SIGN UP</div>
+            <Link href={"/signup"}>
+              <div className="free-sign-up-btn">FREE SIGN UP</div>
+            </Link>
           </div>
 
           <div className="row-3">
             <h4>Get the FreeTaxHistory App:</h4>
+            <h3>Coming Soon!</h3>
           </div>
           <div className="row-4">
             <div className="app-btn apple">
@@ -302,7 +305,9 @@ export default function Home() {
                   free 15 minute consultation with our team of lawyers.
                 </strong>
               </h5>
-              <div className="schedule-btn">SCHEDULE CONSULTATION</div>
+              <Link href={"/contact"}>
+                <div className="schedule-btn">SCHEDULE CONSULTATION</div>
+              </Link>
             </div>
             <div className="box-back"></div>
           </div>
