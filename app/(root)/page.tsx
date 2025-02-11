@@ -11,7 +11,7 @@ import icon3 from "@/public/icon3.png";
 import icon from "@/public/fth-logo-icon-new.png";
 import heroBG from "@/public/bg.jpg";
 import aboutBG from "@/public/about-bg2.jpg";
-import whyBG from "@/public/taxform.jpeg";
+import whyBG from "@/public/taxform.jpg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -136,7 +136,7 @@ export default function Home() {
         <div className="top-big-square">
           <div
             className="box-pic"
-            // style={{ backgroundImage: `url(${whyBG.src})` }}
+            style={{ backgroundImage: `url(${whyBG.src})` }}
           ></div>
           <div className="square">
             <div className="cont">
