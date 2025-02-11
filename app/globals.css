@@ -569,7 +569,7 @@ a {
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;
-  height: 800px;
+  height: 720px;
   background-color: white;
   display: flex;
   align-items: flex-start;
@@ -617,7 +617,7 @@ a {
   border: solid 3px #0a1763;
   border-radius: 50px;
   font-family: "filson-soft", sans-serif;
-  font-weight: 600px;
+  font-weight: 600;
   font-size: 30px;
   color: #0a1763;
   display: flex;
@@ -627,6 +627,10 @@ a {
   top: 0;
   left: 0;
   z-index: 2;
+}
+.active .thing {
+  background-color: #e2f1f1;
+  font-weight: 600;
 }
 .thing-back {
   width: 100%;
@@ -658,6 +662,9 @@ a {
   border-radius: 50px;
   z-index: 6;
 }
+.offer-icon {
+  margin-bottom: 20px;
+}
 .connection-line {
   height: 75px;
   width: 3px;
@@ -683,6 +690,12 @@ a {
   top: 0;
   left: 0;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "halcom", sans-serif;
+  color: #0a1763;
+  font-size: 35px;
 }
 .offer .bubble-back {
   width: 100%;

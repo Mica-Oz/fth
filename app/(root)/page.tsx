@@ -20,6 +20,9 @@ import blur1 from "@/public/blurbg1.jpg";
 import blur2 from "@/public/blurbg2.jpg";
 import creditBG from "@/public/credit-bg.png";
 import footerBG from "@/public/footer-bg-4.jpg";
+import offerIcon1 from "@/public/offer-icon1.jpg";
+import offerIcon2 from "@/public/offer-icon2.jpg";
+import offerIcon3 from "@/public/offer-icon3.jpg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -193,8 +196,13 @@ export default function Home() {
         <div className="cont">
           <div className="row-1">
             <div className="offer-cont">
-              <div className="icon-placeholder"></div>
-              <div className="thing-cont">
+              <Image
+                alt={"icon"}
+                src={offerIcon3}
+                width={150}
+                className="offer-icon"
+              />
+              <div className="thing-cont active">
                 <div className="thing" id="thing1">
                   INSIGHT
                 </div>
@@ -206,7 +214,12 @@ export default function Home() {
               <div className="connection-line"></div>
             </div>
             <div className="offer-cont">
-              <div className="icon-placeholder"></div>
+              <Image
+                alt={"icon"}
+                src={offerIcon1}
+                width={150}
+                className="offer-icon"
+              />
               <div className="thing-cont">
                 <div className="thing" id="thing2">
                   GUIDANCE
@@ -220,7 +233,12 @@ export default function Home() {
               ></div>
             </div>
             <div className="offer-cont">
-              <div className="icon-placeholder"></div>
+              <Image
+                alt={"icon"}
+                src={offerIcon2}
+                width={150}
+                className="offer-icon"
+              />
               <div className="thing-cont">
                 <div className="thing" id="thing3">
                   RESOLUTION
@@ -236,7 +254,9 @@ export default function Home() {
           </div>
           <div className="row-2">
             <div className="bubble-cont">
-              <div className="bubble"></div>
+              <div className="bubble">
+                Get a clear picture of your financial standing with the IRS.
+              </div>
               <div className="bubble-back"></div>
             </div>
           </div>
