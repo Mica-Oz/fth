@@ -10,6 +10,7 @@ import icon2 from "@/public/icon2.png";
 import icon3 from "@/public/icon3.png";
 import icon from "@/public/fth-logo-icon-new.png";
 import heroBG from "@/public/bg.jpg";
+import aboutBG from "@/public/about-bg2.jpg";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
@@ -56,7 +57,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="about">
+      <div className="about" style={{ backgroundImage: `url(${aboutBG.src})` }}>
         <h1 className="heading" data-aos="fade-right" data-aos-delay="200">
           Our Process is Simple:
         </h1>
