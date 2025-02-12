@@ -574,14 +574,20 @@ a {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  justify-content: center;
 }
 .offer .cont {
   width: 80%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+.offer-cont {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.offer-cont:hover {
+  transform: scale(1.05);
 }
 .row-1 {
   display: flex;
@@ -596,20 +602,14 @@ a {
   align-self: flex-start;
   margin-top: 30px;
 }
-.icon-placeholder {
-  width: 100px;
-  height: 100px;
-  border: solid 3px #0a1763;
-  border-radius: 50px;
-  background-color: white;
-  margin-bottom: 20px;
-}
+
 .thing-cont {
   width: 300px;
   height: 75px;
   position: relative;
   margin-bottom: 40px;
 }
+
 .thing {
   width: 100%;
   height: 100%;
@@ -664,6 +664,7 @@ a {
 }
 .offer-icon {
   margin-bottom: 20px;
+  transition: all 0.2s ease-in-out;
 }
 .connection-line {
   height: 75px;
@@ -1019,6 +1020,7 @@ a {
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+  cursor: pointer;
 }
 .box-behind {
   width: 100%;
@@ -1103,6 +1105,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
 }
 .row-4 .app-btn p {
   text-align: center;
@@ -1618,10 +1621,18 @@ a {
   background-position: top;
   background-size: cover;
   position: relative;
+  padding-top: 50px;
+}
+.blog-header {
+  font-family: "filson soft", sans-serif;
+  font-size: 35px;
+  color: #0a1763;
+  margin: 0 0 0 50px;
+  font-weight: 500;
 }
 .blog-head .diag {
   height: 700px;
-  top: 170px;
+  top: 120px;
   position: relative;
   background-color: #fff;
   clip-path: polygon(0% 0%, 100% 100%, 0% 100%);

@@ -471,7 +471,9 @@ export default function Home() {
               Get Your Free Credit Report <br />
               and FICO Score
             </h5>
-            <div className="credit-report-btn">GET CREDIT SCORE</div>
+            <Link href={"/credit"}>
+              <div className="credit-report-btn">GET CREDIT SCORE</div>
+            </Link>
           </div>
           <div className="box-behind"></div>
         </div>
