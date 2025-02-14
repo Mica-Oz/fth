@@ -24,25 +24,25 @@ const Signup = () => {
     console.log("Submitting Data:", inputs);
     // setIsLoading(true);
 
-    try {
-      const response = await fetch("/api/case", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputs),
-      });
-      console.log("response from front end", response);
-      // if (!response.ok) {
-      //   throw new Error("Failed to submit case");
-      // }
+    // try {
+    //   const response = await fetch("/api/case", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(inputs),
+    //   });
+    //   console.log("response from front end", response);
+    //   // if (!response.ok) {
+    //   //   throw new Error("Failed to submit case");
+    //   // }
 
-      // const result = await response.json();
-      console.log("Case submitted successfully:");
-    } catch (err) {
-      // setError("There was an error submitting the case. Please try again.");
-      console.error(err);
-    }
+    //   // const result = await response.json();
+    //   console.log("Case submitted successfully:");
+    // } catch (err) {
+    //   // setError("There was an error submitting the case. Please try again.");
+    //   console.error(err);
+    // }
     // finally {
     //   setIsLoading(false);
     // }

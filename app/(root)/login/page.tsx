@@ -18,27 +18,27 @@ const Page = () => {
     console.log("hey", inputs);
     // create case in IRS LOGICS
 
-    try {
-      const response = await fetch("/api/create-case", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputs),
-      });
+    // try {
+    //   const response = await fetch("/api/create-case", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(inputs),
+    //   });
 
-      if (!response.ok) {
-        throw new Error("Failed to submit case");
-      }
+    //   if (!response.ok) {
+    //     throw new Error("Failed to submit case");
+    //   }
 
-      const result = await response.json();
-      console.log("Case submitted successfully:", result);
-    } catch (err) {
-      // setError("There was an error submitting the case. Please try again.");
-      console.error(err);
-    } finally {
-      // setIsLoading(false);
-    }
+    //   const result = await response.json();
+    //   console.log("Case submitted successfully:", result);
+    // } catch (err) {
+    //   // setError("There was an error submitting the case. Please try again.");
+    //   console.error(err);
+    // } finally {
+    //   // setIsLoading(false);
+    // }
 
     //add case ID as metadata to stytch auth
     router.push("/awaitauth"); // Navigate to the 'about' page
