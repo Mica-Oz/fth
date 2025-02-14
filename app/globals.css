@@ -1064,7 +1064,6 @@ a {
 .footer-diag {
   height: 2400px;
   width: 100vw;
-  /* background-image: url("../public/footer-bg-4.jpg"); Same background as .diag-2 */
   background-size: 100%;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -1129,7 +1128,7 @@ a {
   height: 75px;
   background-color: #e2f1f1;
   border-radius: 50px;
-  margin-right: 25px;
+
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -1353,7 +1352,6 @@ a {
 .footer-diag {
   height: 2400px;
   width: 100vw;
-  background-image: url("../public/footer-bg-4.jpg"); /* Same background as .diag-2 */
   background-size: 100%;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -1411,13 +1409,13 @@ a {
 .row-4 {
   display: flex;
   margin-bottom: 15px;
+  justify-content: space-between;
 }
 .row-4 .app-btn {
   width: 250px;
   height: 75px;
   background-color: #e2f1f1;
   border-radius: 50px;
-  margin-right: 25px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -1525,8 +1523,8 @@ a {
 
   border-radius: 50px;
   position: absolute; /* Position the box absolutely within the bubble-cont */
-  top: -25;
-  left: 175;
+  top: -25px;
+  left: 175px;
   z-index: 1; /* Ensure the box is above the box-behind */
   display: flex;
   flex-direction: column;
@@ -1741,4 +1739,18 @@ a {
   color: #5dacad;
   font-weight: 600;
   cursor: pointer;
+}
+.footer-diag.block {
+  height: 2140px;
+}
+.icon-cont {
+  width: 38%;
+}
+.app-cont {
+  width: 38%;
+}
+.top-row-cont {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

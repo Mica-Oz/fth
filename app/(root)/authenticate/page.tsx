@@ -1,8 +1,13 @@
 // import React, { useEffect } from "react";
 // import { useStytch, useStytchSession } from "@stytch/nextjs";
+import FooterBlock from "@/app/components/footerBlock";
 
 const Authenticate = () => {
-  return <div>You have made it into your client portal!</div>;
+  return (
+    <div>
+      <FooterBlock />
+    </div>
+  );
 };
 
 export default Authenticate;

@@ -62,7 +62,7 @@ const FooterDiag = () => {
           <div className="row-3">
             <h4>Get the FreeTaxHistory App:</h4>
           </div>
-          <div className="row-4">
+          <div className="row-4" style={{ width: "38%" }}>
             <div className="app-btn apple">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
