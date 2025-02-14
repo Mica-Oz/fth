@@ -1,10 +1,12 @@
 import React from "react";
+import FooterDiag from "@/app/components/footerDiag";
+import AwaitBubble from "@/app/components/awaitauthBubble";
 
 const Awaitauth = () => {
   return (
-    <div>
-      We have sent a magic link to your email. Please go click the link to
-      finish logging in!
+    <div className="await-auth-main">
+      <AwaitBubble />
+      <FooterDiag />
     </div>
   );
 };

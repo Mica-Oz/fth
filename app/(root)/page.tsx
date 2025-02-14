@@ -353,7 +353,7 @@ export default function Home() {
                   credit cards and bank accounts and your groceries and your
                   gasoline, but it’s also impacting your taxes....
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/1"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -368,7 +368,7 @@ export default function Home() {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>
@@ -388,7 +388,7 @@ export default function Home() {
                   It can happen under the Fresh Start Program, also known as the
                   Fresh Start Initiative...
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/2"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -403,7 +403,7 @@ export default function Home() {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>
@@ -422,7 +422,7 @@ export default function Home() {
                   damage you had, how much coverage you had from insurance, and
                   more...
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/3"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -437,7 +437,7 @@ export default function Home() {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>
