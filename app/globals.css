@@ -831,7 +831,7 @@ a {
 }
 
 .post {
-  animation: 1s ease-out 0s 1 slideInFromLeft;
+  animation: 0.7s ease-out 0s 1 slideInFromLeft;
   position: relative; /* This is crucial for positioning the boxes inside */
   width: 650px; /* Same width as the boxes */
   height: 320px; /* Same height as the boxes */
