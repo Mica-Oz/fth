@@ -233,7 +233,8 @@ a {
   position: absolute;
   transform: translate(-50%, -50%);
 }
-.squares .square .box-header {
+
+.square .box-header {
   width: 60%;
   height: 75px;
   /* position:relative; */
@@ -252,7 +253,7 @@ a {
   color: #0a1763;
   font-weight: 600;
 }
-.squares .square .box-foot {
+.square .box-foot {
   width: 85px;
   height: 85px;
   /* position:relative; */
@@ -267,7 +268,7 @@ a {
   align-items: center;
   justify-content: center;
 }
-.squares .square .box-front {
+.square .box-front {
   width: 100%;
   height: 100%;
   background-color: white;
@@ -286,11 +287,11 @@ a {
   font-size: 22px; /* Adjust the font size based on the new dimensions */
   text-align: center;
 }
-.squares .square .box-front p {
+.square .box-front p {
   width: 90%;
 }
 
-.squares .square .box-back {
+.square .box-back {
   width: 100%;
   height: 100%;
   background-color: #0a1763;
@@ -299,7 +300,7 @@ a {
   transform: translate(20px, 20px);
   z-index: 1; /* Ensure the box is above the box-behind */
 }
-.squares .square .box-header-back {
+.square .box-header-back {
   width: 60%;
   height: 75px;
   /* position:relative; */
@@ -311,7 +312,7 @@ a {
   transform: translate(41%, -43%);
   z-index: 1;
 }
-.squares .square .box-foot-back {
+.square .box-foot-back {
   width: 85px;
   height: 85px;
   /* position:relative; */
@@ -1741,7 +1742,8 @@ a {
   cursor: pointer;
 }
 .footer-diag.block {
-  height: 2140px;
+  height: 730px;
+  transform: none;
 }
 .icon-cont {
   width: 38%;
@@ -1753,4 +1755,335 @@ a {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+.dash-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dash-greet {
+  font-size: 30px;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 400px;
+  color: #0a1763;
+  margin: 50px 10px 70px;
+}
+.dash-cont .row-2 {
+  width: 80%;
+  height: 400px;
+
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 70px;
+}
+.dash-cont .progress-bubble {
+  width: 57%;
+  height: 100%;
+  position: relative;
+}
+
+.progress-bubble .square-front {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  background-color: white;
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.progress-bubble .square-front .circle-cont {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+.progress-bubble .square-front .circle-cont .outer-circle {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #0a1763;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.progress-bubble .square-front .circle-cont .outer-circle .inner-circle {
+  width: 12px;
+  height: 12px;
+  border: 3px solid #0a1763;
+  border-radius: 50px;
+  background-color: #0a1763;
+  z-index: 5;
+}
+.progress-bubble .square-front .line-cont {
+  width: 3px;
+  height: 70px;
+  background-color: #0a1763;
+}
+.progress-bubble .square-front .status-bubble {
+  width: 85%;
+  border: 3px solid #0a1763;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  border-radius: 90px;
+  margin-bottom: 30px;
+}
+.progress-bubble .square-front .status-bubble p {
+  font-family: "filson-soft", sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  color: #0a1763;
+}
+.progress-bubble .square-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  background-color: #0a1763;
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+.dash-cont .to-do-bubble {
+  width: 38%;
+  height: 100%;
+  position: relative;
+}
+.to-do-bubble .square-front {
+  background-color: #e2f1f1;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "filson-soft", sans-serif;
+  color: #0a1763;
+}
+.to-do-bubble .square-front .to-do-head {
+  font-size: 50px;
+  font-weight: 600;
+  margin: 10px;
+}
+.to-do-bubble .square-front .to-do-msg {
+  font-size: 30px;
+  width: 80%;
+  font-weight: 400;
+  text-align: center;
+  margin: 10px 0 20px;
+}
+.tax-history-req-btn {
+  width: 80%;
+  height: 125px;
+  color: #0a1763;
+  background-color: #59c8ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  text-align: center;
+  font-weight: 500;
+  border: 3px solid #0a1763;
+  cursor: pointer;
+  border-radius: 100px;
+  margin-bottom: 40px;
+  transition: all 0.3s ease-in-out;
+}
+.tax-history-req-btn:hover {
+  color: white;
+  background-color: #0a1763;
+  transform: scale(1.05);
+}
+.to-do-bubble .square-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  background-color: #0a1763;
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+.dash-cont .row-3 {
+  height: 90px;
+  width: 80%;
+  margin-bottom: 90px;
+  position: relative;
+}
+.row-3.bar-bubble .square-front {
+  background-color: #e2f1f1;
+}
+.bar-bubble .square-front {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.bar-bubble .square-front p {
+  z-index: 6;
+  color: #0a1763;
+  margin-left: 70px;
+  font-weight: 600;
+}
+
+.learn-more-btn {
+  background-color: #59c8ea;
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  border-radius: 50px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  margin-right: 75px;
+  border: 3px solid #0a1763;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.learn-more-btn:hover {
+  background-color: #0a1763;
+  color: white;
+  transform: scale(1.05);
+}
+.dash-cont .row-4 {
+  height: 400px;
+  width: 80%;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.detail-bubble {
+  width: 30%;
+  height: 100%;
+  position: relative;
+}
+.detail-bubble .square-front {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  background-color: white;
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  z-index: 2;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail-bubble .square-front p {
+  font-family: "filson-soft", san-serif;
+  font-size: 45px;
+  font-weight: 600;
+  color: #9aa5de;
+  text-align: center;
+  width: 80%;
+}
+.detail-bubble .square-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  position: relative;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+
+.dash-cont .row-5 {
+  height: 90px;
+  width: 80%;
+  margin-bottom: 50px;
+  position: relative;
+}
+.dash-cont .row-6 {
+  height: 90px;
+  width: 80%;
+  margin-bottom: 100px;
+  position: relative;
+}
+.bar-bubble .square-front {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+  background-color: white;
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  z-index: 2;
+  position: absolute;
+}
+
+.bar-bubble .square-back {
+  width: 100%;
+  height: 100%;
+  background-color: #0a1763;
+
+  border: 3px solid #0a1763;
+  border-radius: 80px;
+  position: relative;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+}
+.dash-cont .bubble-header {
+  width: 85%;
+  left: 7.5%;
+  top: -7%;
+}
+.dash-cont .bubble-header-back {
+  width: 85%;
+  left: 11%;
+  top: -5%;
+  z-index: 0;
+}
+.dash-cont .row-5 p {
+  font-size: 24px;
+  font-family: "filson-soft", sans-serif;
+}
+.dash-cont .row-6 p {
+  font-size: 24px;
+  font-family: "filson-soft", sans-serif;
+}
+
+.row-5 .learn-more-btn {
+  background-color: #0a1763;
+  color: white;
+}
+.row-5 .learn-more-btn:hover {
+  color: #5dacad;
+  border: 3px solid #5dacad;
+  background-color: white;
+}
+.row-6 .learn-more-btn {
+  background-color: #0a1763;
+  color: white;
+}
+.row-6 .learn-more-btn:hover {
+  color: #5dacad;
+  border: 3px solid #5dacad;
+  background-color: white;
+}
+.scale-icon {
+  margin-left: 50px;
+}
+.score-icon {
+  margin-left: 55px;
 }
