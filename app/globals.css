@@ -2087,3 +2087,96 @@ a {
 .score-icon {
   margin-left: 55px;
 }
+.action-bubble {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 80px;
+}
+.action-1-1 .header-bubble {
+  width: 50%;
+}
+.action-1-1 .header-bubble-back {
+  width: 50%;
+}
+.action-bubble .form-cont {
+  width: 80%;
+  height: 60%;
+  z-index: 6;
+  overflow-y: auto;
+}
+.action-bubble .sub-heading {
+  z-index: 7;
+  align-self: flex-start;
+  margin-left: 80px;
+  margin-top: 70px;
+  font-family: "halcom", sans-serif;
+  color: #0a1763;
+  font-weight: 400;
+  font-size: 18px;
+}
+.action-bubble .square {
+  justify-content: flex-start;
+}
+.action-buble .form-cont {
+  display: flex;
+  flex-direction: column;
+}
+.action-bubble .form-cat {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-bubble .cat-title {
+  font-family: "halcom", sans-serif;
+  color: #0a1763;
+  font-weight: 600;
+  font-size: 21px;
+}
+.action-bubble .form-cat input {
+  width: 80%;
+  background-color: #e2f1f1;
+  color: #0a1763;
+  border: solid 2px #0a1763;
+  border-radius: 50px;
+  font-size: 18px;
+  height: 30px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+
+.action-bubble .form-cat input::placeholder {
+  color: #5dacad;
+}
+.action-bubble .form-cat input:focus {
+  outline: none;
+}
+.action-bubble .next-btn {
+  width: 170px;
+  height: 50px;
+  background-color: #59c8ea;
+  border: 3px solid #0a1763;
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  border-radius: 50px;
+  text-align: center;
+  align-self: flex-end;
+  margin-right: 50px;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.action-bubble .next-btn:hover {
+  color: white;
+  background-color: #0a1763;
+  transform: scale(1.05);
+}
+
+.action-bubble .sig-pad {
+  width: 90%;
+  height: 200px;
+  background-color: #e2f1f1;
+  border: 3px solid #0a1763;
+  border-radius: 50px;
+}

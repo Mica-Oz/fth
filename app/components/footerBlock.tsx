@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import icon from "@/public/fth-logo-icon-new.png";
 
-const FooterDiag = () => {
+const FooterBlock = () => {
   return (
     <>
       <div className="footer-diag block">
@@ -145,4 +145,4 @@ const FooterDiag = () => {
   );
 };
 
-export default FooterDiag;
+export default FooterBlock;

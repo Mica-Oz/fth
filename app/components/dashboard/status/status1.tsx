@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import scales from "@/public/scales-icon.png";
+
 const Dash = () => {
   return (
     <div className="dash-cont">
@@ -45,10 +46,10 @@ const Dash = () => {
             <p className="to-do-msg">
               Fill out Tax History Report Request Form{" "}
             </p>
-            <div className="tax-history-req-btn">
+            <Link href="/dashboard/action1/1" className="tax-history-req-btn">
               REQUEST TAX <br />
               HISTORY REPORT
-            </div>
+            </Link>
           </div>
           <div className="square-back"></div>
         </div>
