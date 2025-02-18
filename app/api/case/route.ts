@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 export async function POST(req: Request) {
   if (req.method === "POST") {
     try {
