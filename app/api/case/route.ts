@@ -18,6 +18,8 @@ export async function POST(req: Request) {
           apikey: API_KEY,
         },
       });
+      console.log("response data", response.data);
+      console.log("response status", response.status);
 
       return Response.json(response.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
