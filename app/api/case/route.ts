@@ -14,10 +14,10 @@ export async function POST(req: Request) {
 
       // Make the request to the IRS Logics API
       const response = await axios.post(API_URL, data, {
+        withCredentials: true,
         params: {
           apikey: API_KEY,
         },
-        withCredentials: true,
       });
       console.log("response data", response.data);
       console.log("response status", response.status);
