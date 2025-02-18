@@ -1,14 +1,7 @@
 import axios from "axios";
-// import { NextApiRequest, NextApiResponse } from "next";
-
-// type ResponseData = {
-//   data: string;
-//   message: string;
-//   error: string;
-// };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-export async function POST(req: any, res: any) {
+export async function POST(req: Request) {
   if (req.method === "POST") {
     try {
       // IRS Logics API endpoint and key
@@ -26,11 +19,8 @@ export async function POST(req: any, res: any) {
           apikey: API_KEY,
         },
       });
-      console.log(response.data);
-      console.log("status", response.status);
 
-      return;
-      // res.status(200).json(response.data);
+      return Response.json(response.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       // Handle any errors (e.g., logging, custom error response)
@@ -38,12 +28,7 @@ export async function POST(req: any, res: any) {
       console.error("Error response:", error.response?.data); // Log error details
       console.error("Status code:", error.response?.status); // Check status code
       console.error("Error message:", error.message); // Check error message
-      return;
-      // res.status(500).json({
-      //   error: "Failed to submit case",
-      //   data: "",
-      //   message: "",
-      // });
+      return error;
     }
   } else {
     // Handle unsupported methods

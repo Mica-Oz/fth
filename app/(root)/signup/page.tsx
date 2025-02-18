@@ -3,16 +3,16 @@ import React, { FormEvent } from "react";
 import Link from "next/link";
 // import { useState } from "react";
 
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 // import { useStytchUser } from "@stytch/nextjs";
-import { useStytch } from "@stytch/nextjs";
+// import { useStytch } from "@stytch/nextjs";
 import FooterDiag from "@/app/components/footerDiag";
 
 const Signup = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const stytch = useStytch();
+  // const stytch = useStytch();
   // const [error, setError] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
 
@@ -24,31 +24,32 @@ const Signup = () => {
     console.log("Submitting Data:", inputs);
     // setIsLoading(true);
 
-    // try {
-    //   const response = await fetch("/api/case", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(inputs),
-    //   });
-    //   console.log("response from front end", response);
-    //   // if (!response.ok) {
-    //   //   throw new Error("Failed to submit case");
-    //   // }
+    try {
+      const response = await fetch("/api/case", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputs),
+      });
+      console.log("response from front end", response);
+      // if (!response.ok) {
+      //   throw new Error("Failed to submit case");
+      // }
 
-    //   // const result = await response.json();
-    //   console.log("Case submitted successfully:");
-    // } catch (err) {
-    //   // setError("There was an error submitting the case. Please try again.");
-    //   console.error(err);
-    // }
+      // const result = await response.json();
+      // console.log("Case submitted successfully:");
+    } catch (err) {
+      // setError("There was an error submitting the case. Please try again.");
+      console.error(err);
+    }
+
     // finally {
     //   setIsLoading(false);
     // }
-    router.push("/awaitauth"); // Navigate to the 'about' page
+    // router.push("/awaitauth"); // Navigate to the 'about' page
 
-    await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
+    // await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
   };
   return (
     <>
