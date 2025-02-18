@@ -17,6 +17,7 @@ export async function POST(req: Request) {
         params: {
           apikey: API_KEY,
         },
+        withCredentials: true,
       });
       console.log("response data", response.data);
       console.log("response status", response.status);
