@@ -1811,6 +1811,17 @@ a {
   justify-content: center;
   z-index: 3;
 }
+.progress-bubble .square-front .circle-cont .outer-circle.complete {
+  width: 30px;
+  height: 30px;
+  background-color: #59c8ea;
+  border: 3px solid #59c8ea;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
 .progress-bubble .square-front .circle-cont .outer-circle .inner-circle {
   width: 12px;
   height: 12px;
@@ -1884,6 +1895,10 @@ a {
   text-align: center;
   margin: 10px 0 20px;
 }
+.to-do-bubble .square-front .to-do-msg.highlight {
+  color: #59c8ea;
+  font-weight: 600;
+}
 .tax-history-req-btn {
   width: 80%;
   height: 125px;
@@ -1932,13 +1947,24 @@ a {
   align-items: center;
   justify-content: flex-start;
 }
+.bar-bubble.alert .square-front {
+  background-color: #59c8ea;
+  border: 3px solid #59c8ea;
+}
 .bar-bubble .square-front p {
   z-index: 6;
   color: #0a1763;
-  margin-left: 70px;
+  margin-left: 20px;
+  font-weight: 600;
+  width: 800px;
+}
+.bar-bubble .square-front p .highlight {
+  color: #59c8ea;
   font-weight: 600;
 }
-
+.bar-bubble .square-front svg {
+  margin-left: 50px;
+}
 .learn-more-btn {
   background-color: #59c8ea;
   color: #0a1763;
@@ -1992,6 +2018,14 @@ a {
   font-size: 45px;
   font-weight: 600;
   color: #9aa5de;
+  text-align: center;
+  width: 80%;
+}
+.detail-bubble .square-front p.active {
+  font-family: "filson-soft", san-serif;
+  font-size: 45px;
+  font-weight: 800;
+  color: #0a1763;
   text-align: center;
   width: 80%;
 }
