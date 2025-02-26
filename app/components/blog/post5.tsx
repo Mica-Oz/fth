@@ -48,7 +48,7 @@ const Post = () => {
           <div className="box-front blog-post">
             <div className="cont post-bubble">
               <p style={{ marginTop: "0" }}>
-                In Fact, You May Not Have To Face The IRS At All
+                In Fact, You May Not Have To Face The IRS At All.
               </p>
             </div>
           </div>

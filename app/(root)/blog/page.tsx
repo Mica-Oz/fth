@@ -6,6 +6,11 @@ import fresh from "@/public/fresh.jpeg";
 import damage from "@/public/damage.jpeg";
 import time from "@/public/time.jpeg";
 import irs from "@/public/irs.jpeg";
+import tip from "@/public/tipping.jpeg";
+import compromise from "@/public/compromise.jpeg";
+import innocent from "@/public/innocent.jpeg";
+import home from "@/public/home.jpeg";
+import forsale from "@/public/forsale.jpeg";
 
 import Link from "next/link";
 import AOS from "aos";
@@ -177,7 +182,7 @@ const Blog = () => {
             <div className="box-front">
               <div className="cont">
                 <h3>You Don’t Have To Face The IRS Alone</h3>
-                <p>In Fact, You May Not Have To Face The IRS At All...</p>
+                <p>In fact, you may not have to face the IRS at all...</p>
                 <Link href={"/blog/post/5"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
@@ -201,19 +206,20 @@ const Blog = () => {
           <div className="post post2">
             <div
               className="box-pic"
-              id="fresh-img"
-              style={{ backgroundImage: `url(${fresh.src})` }}
+              id="innocent-img"
+              style={{ backgroundImage: `url(${innocent.src})` }}
             ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>The IRS Fresh Start Program Can Wipe Out Your Tax Debt</h3>
+                <h3>
+                  Are You An Innocent Spouse? It Could Help Resolve Your Taxes
+                </h3>
                 <p>
-                  You might be reading this because you’ve heard that the IRS
-                  can wipe out some or perhaps all of your tax debt. It’s true.
-                  It can happen under the Fresh Start Program, also known as the
-                  Fresh Start Initiative...
+                  One of the worst parts about getting divorced — ranking right
+                  up there with custody of the kids and child support — is
+                  dealing with money owed to the IRS....
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/6"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +234,7 @@ const Blog = () => {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>
@@ -236,18 +242,14 @@ const Blog = () => {
           <div className="post post1">
             <div
               className="box-pic"
-              id="damage-img"
-              style={{ backgroundImage: `url(${damage.src})` }}
+              id="tip-img"
+              style={{ backgroundImage: `url(${tip.src})` }}
             ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>Is Your Storm Damage Tax Deductible? It Depends.</h3>
-                <p>
-                  Is your storm damage tax deductible? It depends on how much
-                  damage you had, how much coverage you had from insurance, and
-                  more...
-                </p>
-                <Link href={"/blog/post/3"} className="blog-post-link">
+                <h3>Tipping And The IRS </h3>
+                <p>Yes, the IRS has its hand in the tip jar...</p>
+                <Link href={"/blog/post/7"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -270,19 +272,21 @@ const Blog = () => {
           <div className="post post2">
             <div
               className="box-pic"
-              id="fresh-img"
-              style={{ backgroundImage: `url(${fresh.src})` }}
+              id="tip-img"
+              style={{ backgroundImage: `url(${compromise.src})` }}
             ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>The IRS Fresh Start Program Can Wipe Out Your Tax Debt</h3>
+                <h3>
+                  Can You Get An IRS Fresh Start Or Offer In Compromise On Your
+                  Own?{" "}
+                </h3>
                 <p>
-                  You might be reading this because you’ve heard that the IRS
-                  can wipe out some or perhaps all of your tax debt. It’s true.
-                  It can happen under the Fresh Start Program, also known as the
-                  Fresh Start Initiative...
+                  If you ask the IRS they’ll tell you that you can file a
+                  request for an Offer In Compromise, which is part of the IRS
+                  Fresh Start Program, on your own...
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/8"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -297,7 +301,7 @@ const Blog = () => {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>
@@ -305,18 +309,20 @@ const Blog = () => {
           <div className="post post1">
             <div
               className="box-pic"
-              id="damage-img"
-              style={{ backgroundImage: `url(${damage.src})` }}
+              id="home-img"
+              style={{ backgroundImage: `url(${home.src})` }}
             ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>Is Your Storm Damage Tax Deductible? It Depends.</h3>
+                <h3>What’s Not Tax Deductible When You Buy A Home</h3>
                 <p>
-                  Is your storm damage tax deductible? It depends on how much
-                  damage you had, how much coverage you had from insurance, and
-                  more...
+                  This is a tough time for the real estate market and it’s a
+                  tough time for Realtors. One of the great sales pitches to
+                  home buyers is that Uncle Sam will subsidize your home
+                  purchase with certain expenses being tax deductible. But be
+                  careful ...
                 </p>
-                <Link href={"/blog/post/3"} className="blog-post-link">
+                <Link href={"/blog/post/9"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -339,19 +345,17 @@ const Blog = () => {
           <div className="post post2">
             <div
               className="box-pic"
-              id="fresh-img"
-              style={{ backgroundImage: `url(${fresh.src})` }}
+              id="forsale-img"
+              style={{ backgroundImage: `url(${forsale.src})` }}
             ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>The IRS Fresh Start Program Can Wipe Out Your Tax Debt</h3>
+                <h3>Tax Issues When You Sell Your Real Estate</h3>
                 <p>
-                  You might be reading this because you’ve heard that the IRS
-                  can wipe out some or perhaps all of your tax debt. It’s true.
-                  It can happen under the Fresh Start Program, also known as the
-                  Fresh Start Initiative...
+                  This is a rough time of year to be selling your home or other
+                  real estate. Not only are we facing...
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/10"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -366,7 +370,7 @@ const Blog = () => {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>
