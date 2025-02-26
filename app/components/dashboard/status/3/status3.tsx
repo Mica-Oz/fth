@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import scales from "@/public/scales-icon.png";
+import LogoIcon from "@/public/fth-logo-icon-new.png";
 
 const Dash = () => {
   return (
@@ -12,17 +13,32 @@ const Dash = () => {
           <strong style={{ color: "#2e5a7e" }}>Test!</strong>
         </p>
       </div>
+      <div className="row-6 alert bar-bubble">
+        <div className="square-front">
+          <Image
+            alt={"icon"}
+            src={LogoIcon}
+            width={60}
+            className="scale-icon"
+          />
+          <p>
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            Your Tax History Report is complete!
+          </p>
+        </div>
+        <div className="square-back"></div>
+      </div>
       <div className="row-2">
         <div className="progress-bubble">
           <div className="bubble-header">Tax History Report Progress</div>
           <div className="square-front">
             <div className="circle-cont">
+              <div className="outer-circle complete"></div>
+              <div className="outer-circle complete"></div>
+
               <div className="outer-circle">
                 <div className="inner-circle"></div>
               </div>
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
 
               <div className="outer-circle"></div>
 
@@ -34,7 +50,7 @@ const Dash = () => {
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>Request Tax History Report</p>
+              <p>View Tax History Report</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -44,35 +60,31 @@ const Dash = () => {
         <div className="to-do-bubble">
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
-            <p className="to-do-msg">
-              Fill out Tax History Report Request Form{" "}
-            </p>
-            <Link href="/dashboard/action1/1" className="tax-history-req-btn">
-              REQUEST TAX <br />
+            <p className="to-do-msg">Your Tax Report History is complete!</p>
+            <Link href="/dashboard/action2" className="tax-history-req-btn">
+              VIEW TAX <br />
               HISTORY REPORT
             </Link>
           </div>
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-3 bar-bubble">
+      <div className="row-6 bar-bubble">
         <div className="square-front">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="50"
-            height="50"
-            fill="#0a1763"
-            className="bi bi-patch-question"
-            viewBox="0 0 16 16"
-          >
-            <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.7 1.7 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745" />
-            <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z" />
-            <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0" />
-          </svg>
-
-          <p>Wondering what a Tax History Report will show you?</p>
-          <Link href={"/about"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">LEARN MORE</div>
+          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
+          <p>
+            Looking for Tax Resolution? Schedule a{" "}
+            <span style={{ color: "#2e5a7e" }}>
+              {" "}
+              <strong>
+                free 15 minute <br />
+                consultation{" "}
+              </strong>
+            </span>
+            with our team of tax lawyers.
+          </p>
+          <Link href={"/contact"} style={{ marginLeft: "auto" }}>
+            <div className="learn-more-btn">SCHEDULE NOW</div>
           </Link>
         </div>
         <div className="square-back"></div>
@@ -84,14 +96,7 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p>
-              Awaiting
-              <br />
-              Tax
-              <br />
-              History
-              <br /> Report
-            </p>
+            <p className="active">$34,567</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
@@ -102,13 +107,10 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p>
-              Awaiting
+            <p className="active">
+              2 Years
               <br />
-              Tax
-              <br />
-              History
-              <br /> Report
+              Unfiled
             </p>
           </div>
           <div className="bubble-header-back"></div>
@@ -120,20 +122,21 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p>
-              Awaiting
+            <p className="active">
+              Unpaid
               <br />
-              Tax
+              -
               <br />
-              History
-              <br /> Report
+              No Payment
+              <br />
+              Plan Yet
             </p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-5 bar-bubble">
+      <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -152,26 +155,6 @@ const Dash = () => {
           <p>Check your credit score for free while you wait!</p>
           <Link href={"/credit"} style={{ marginLeft: "auto" }}>
             <div className="learn-more-btn">GET MY SCORE</div>
-          </Link>
-        </div>
-        <div className="square-back"></div>
-      </div>
-      <div className="row-6 bar-bubble">
-        <div className="square-front">
-          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
-          <p>
-            Looking for Tax Resolution? Schedule a{" "}
-            <span style={{ color: "#2e5a7e" }}>
-              {" "}
-              <strong>
-                free 15 minute <br />
-                consultation{" "}
-              </strong>
-            </span>
-            with our team of tax lawyers.
-          </p>
-          <Link href={"/contact"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">SCHEDULE NOW</div>
           </Link>
         </div>
         <div className="square-back"></div>

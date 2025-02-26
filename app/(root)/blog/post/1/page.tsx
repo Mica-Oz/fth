@@ -1,7 +1,13 @@
-import React from "react";
+import Post from "@/app/components/blog/post1";
+import FooterBlock from "@/app/components/footerBlock";
 
-const Post = () => {
-  return <div>1</div>;
+const SinglePost = () => {
+  return (
+    <>
+      <Post />
+      <FooterBlock />
+    </>
+  );
 };
 
-export default Post;
+export default SinglePost;

@@ -1,35 +1,29 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import scales from "@/public/scales-icon.png";
 import LogoIcon from "@/public/fth-logo-icon-new.png";
+import scales from "@/public/scales-icon.png";
 
 const Dash = () => {
   return (
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
-          Welcome to your Dashboard, <strong>Test!</strong>
+          Welcome to your Dashboard,{" "}
+          <strong style={{ color: "#2e5a7e" }}>Test!</strong>
         </p>
       </div>
-      <div className="row-6 alert bar-bubble">
-        <div className="square-front">
-          <Image
-            alt={"icon"}
-            src={LogoIcon}
-            width={60}
-            className="scale-icon"
-          />
-          <p>Congratulations! Your Tax History Report is complete!</p>
-        </div>
-        <div className="square-back"></div>
-      </div>
+
       <div className="row-2">
         <div className="progress-bubble">
           <div className="bubble-header">Tax History Report Progress</div>
           <div className="square-front">
             <div className="circle-cont">
               <div className="outer-circle complete"></div>
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
               <div className="outer-circle complete"></div>
 
               <div className="outer-circle">
@@ -39,14 +33,10 @@ const Dash = () => {
               <div className="outer-circle"></div>
 
               <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>View Tax History Report</p>
+              <p>Processing Your Eligibility</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -56,31 +46,32 @@ const Dash = () => {
         <div className="to-do-bubble">
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
-            <p className="to-do-msg">Your Tax Report History is complete!</p>
-            <Link href="/dashboard/action2/1" className="tax-history-req-btn">
-              VIEW TAX <br />
-              HISTORY REPORT
-            </Link>
+            <p className="to-do-msg" style={{ width: "90%" }}>
+              Sit back and relax while we analyze what Fresh Start Programs you
+              are eligible for!
+            </p>
+            <p className="to-do-msg highlight" style={{ width: "90%" }}>
+              We will notify you by email and text when your eligibility is
+              ready for review!
+            </p>
           </div>
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-6 bar-bubble">
+      <div className="row-3 bar-bubble">
         <div className="square-front">
-          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
+          <Image
+            alt={"icon"}
+            src={LogoIcon}
+            width={60}
+            className="scale-icon"
+          />
           <p>
-            Looking for Tax Resolution? Schedule a{" "}
-            <span style={{ color: "#59c8ea" }}>
-              {" "}
-              <strong>
-                free 15 minute <br />
-                consultation{" "}
-              </strong>
-            </span>
-            with our team of tax lawyers.
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            Your Tax History Report is complete!
           </p>
-          <Link href={"/contact"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">SCHEDULE NOW</div>
+          <Link href={"/dashboard/action2"} style={{ marginLeft: "auto" }}>
+            <div className="learn-more-btn">VIEW HERE</div>
           </Link>
         </div>
         <div className="square-back"></div>
@@ -132,7 +123,7 @@ const Dash = () => {
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
+      <div className="row-5 bar-bubble">
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -151,6 +142,26 @@ const Dash = () => {
           <p>Check your credit score for free while you wait!</p>
           <Link href={"/credit"} style={{ marginLeft: "auto" }}>
             <div className="learn-more-btn">GET MY SCORE</div>
+          </Link>
+        </div>
+        <div className="square-back"></div>
+      </div>
+      <div className="row-6 bar-bubble">
+        <div className="square-front">
+          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
+          <p>
+            Looking for Tax Resolution? Schedule a{" "}
+            <span style={{ color: "#2e5a7e" }}>
+              {" "}
+              <strong>
+                free 15 minute <br />
+                consultation{" "}
+              </strong>
+            </span>
+            with our team of tax lawyers.
+          </p>
+          <Link href={"/contact"} style={{ marginLeft: "auto" }}>
+            <div className="learn-more-btn">SCHEDULE NOW</div>
           </Link>
         </div>
         <div className="square-back"></div>

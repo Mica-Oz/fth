@@ -1,15 +1,32 @@
 import React from "react";
 import Link from "next/link";
-// import Image from "next/image";
+import Image from "next/image";
 // import scales from "@/public/scales-icon.png";
+import LogoIcon from "@/public/fth-logo-icon-new.png";
 
 const Dash = () => {
   return (
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
-          Welcome to your Dashboard, <strong>Test!</strong>
+          Welcome to your Dashboard,{" "}
+          <strong style={{ color: "#2e5a7e" }}>Test!</strong>
         </p>
+      </div>
+      <div className="row-6 alert bar-bubble">
+        <div className="square-front">
+          <Image
+            alt={"icon"}
+            src={LogoIcon}
+            width={60}
+            className="scale-icon"
+          />
+          <p style={{ width: "100%" }}>
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            You are enrolled in a Fresh Start Payment Plan!
+          </p>
+        </div>
+        <div className="square-back"></div>
       </div>
       <div className="row-2">
         <div className="progress-bubble">
@@ -17,23 +34,23 @@ const Dash = () => {
           <div className="square-front">
             <div className="circle-cont">
               <div className="outer-circle complete"></div>
-              <div className="outer-circle">
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete final">
                 <div className="inner-circle"></div>
               </div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>Generating Tax History Report</p>
+              <p>Tax Resolution In Progress!</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -42,38 +59,36 @@ const Dash = () => {
 
         <div className="to-do-bubble">
           <div className="square-front">
-            <p className="to-do-head">To Do:</p>
+            <p className="to-do-head">CONGRATS!</p>
             <p className="to-do-msg">
-              Sit back and relax while we generate your tax history report.
+              You have taken the necessary steps to reconcile your balance with
+              the IRS!{" "}
             </p>
-            <p className="to-do-msg highlight">
-              We will notify you by email and text when your report is ready for
-              review!
+            <p className="to-do-head" style={{ fontSize: "34px" }}>
+              Questions?
             </p>
+
+            <Link href="/contact" className="tax-history-req-btn contact">
+              CONTACT SUPPORT
+            </Link>
           </div>
           <div className="square-back"></div>
         </div>
       </div>
       <div className="row-3 bar-bubble">
         <div className="square-front">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="50"
-            height="50"
-            fill="#0a1763"
-            className="bi bi-clipboard2-check-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5" />
-            <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5m6.769 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708" />
-          </svg>
+          <Image
+            alt={"icon"}
+            src={LogoIcon}
+            width={60}
+            className="scale-icon"
+          />
           <p>
-            <span className="highlight">Get ahead on your next step!</span>{" "}
-            Submit Eligibility Request Form to see what Fresh Start programs you
-            are eligible for.
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            Your Tax History Report is complete!
           </p>
-          <Link href={"/about"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">CHECK ELIGIBILITY</div>
+          <Link href={"/dashboard/action2"} style={{ marginLeft: "auto" }}>
+            <div className="learn-more-btn">VIEW HERE</div>
           </Link>
         </div>
         <div className="square-back"></div>
@@ -85,14 +100,7 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p>
-              Awaiting
-              <br />
-              Tax
-              <br />
-              History
-              <br /> Report
-            </p>
+            <p className="active">$34,567</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
@@ -103,13 +111,10 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p>
-              Awaiting
+            <p className="active">
+              2 Years
               <br />
-              Tax
-              <br />
-              History
-              <br /> Report
+              Unfiled
             </p>
           </div>
           <div className="bubble-header-back"></div>
@@ -121,13 +126,14 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p>
-              Awaiting
+            <p className="active">
+              Unpaid
               <br />
-              Tax
+              -
               <br />
-              History
-              <br /> Report
+              No Payment
+              <br />
+              Plan Yet
             </p>
           </div>
           <div className="bubble-header-back"></div>

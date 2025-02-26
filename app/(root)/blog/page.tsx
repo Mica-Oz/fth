@@ -41,7 +41,7 @@ const Blog = () => {
                   credit cards and bank accounts and your groceries and your
                   gasoline, but it’s also impacting your taxes....
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/1"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ const Blog = () => {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>
@@ -72,11 +72,10 @@ const Blog = () => {
                 <h3>The IRS Fresh Start Program Can Wipe Out Your Tax Debt</h3>
                 <p>
                   You might be reading this because you’ve heard that the IRS
-                  can wipe out some or perhaps all of your tax debt. It’s true.
-                  It can happen under the Fresh Start Program, also known as the
-                  Fresh Start Initiative...
+                  can wipe out some or perhaps all of your tax debt. It’s
+                  true...
                 </p>
-                <div className="blog-post-link">
+                <Link href={"/blog/post/2"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +90,7 @@ const Blog = () => {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>

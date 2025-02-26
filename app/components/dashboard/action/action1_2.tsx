@@ -24,7 +24,7 @@ const Action1_2 = () => {
               <div className="sig-pad"></div>
             </div>
           </form>
-          <Link href="/dashboard/status2/1" className="next-btn">
+          <Link href="/dashboard/status2" className="next-btn">
             SUBMIT
           </Link>
         </div>
