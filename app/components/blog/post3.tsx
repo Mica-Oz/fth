@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import fresh from "@/public/fresh.jpeg";
+import damage from "@/public/damage.jpeg";
 
 import Icon from "@/public/fth-logo-icon-new.png";
 
@@ -28,11 +28,11 @@ const Post = () => {
       </div>
       <div className="row-2">
         <p className="title">
-          The IRS Fresh Start Program Can Wipe Out Your Tax Debt
+          Is Your Storm Damage Tax Deductible? It Depends.
         </p>
         <p className="date">
           {/* <strong>Published on </strong> */}
-          22 June 2022
+          30 September 2022
         </p>
         <p className="author">
           By{" "}
@@ -45,14 +45,14 @@ const Post = () => {
           <div
             className="box-pic"
             id="inflation-img"
-            style={{ backgroundImage: `url(${fresh.src})` }}
+            style={{ backgroundImage: `url(${damage.src})` }}
           ></div>
           <div className="box-front blog-post">
             <div className="cont post-bubble">
               <p style={{ marginTop: "0" }}>
-                You might be reading this because you’ve heard that the IRS can
-                wipe out some or perhaps all of your tax debt. <br />
-                It’s true...
+                Is your storm damage tax deductible? It depends on how much
+                damage you had, how much coverage you had from insurance, and
+                more...
               </p>
             </div>
           </div>
@@ -66,40 +66,117 @@ const Post = () => {
           as the Offer In Compromise.
         </p>
 
-        <p className="body-h">IT CAN TAKE AS LITTLE AS 15 MINUTES</p>
-
-        <p className="body-p">
-          It can take as little as 15 minutes to find out if you can qualify for
-          a Fresh Start Program. We’ll be honest with you. Not everyone
-          qualifies, and the IRS judges each taxpayer’s application
-          independently — on a case-by-case basis. But we have years of
-          experience and we can tell you if we think you will qualify for a
-          Fresh Start or for other assistance to help you deal with your tax
-          debt and other IRS issues.
-        </p>
-        <p className="body-p">
-          When taxpayers request their <strong>Free Tax History Report</strong>
-          Survey, they are able to see if they qualify for the IRS Fresh Start
-          Program and begin their journey toward tax resolution in minutes.
+        <p className="body-h">
+          THE FEDERAL DISASTER DECLARATION IS <br />
+          SOMETHING NEW
         </p>
 
-        <p className="body-h">WHAT THE FRESH START PROGRAM CAN DO</p>
         <p className="body-p">
-          The Fresh Start Program can offer natural relief to taxpayers who owe
-          thousands of dollars in back taxes. If you don’t owe a lot of money,
-          we can tell you about other tax relief options that are easier to
-          qualify for and can help you resolve your tax issues faster. But if
-          you do owe thousands of dollars, you should know that in some cases,
-          the IRS has wiped out all back taxes owed — that’s 100% of pending tax
-          bills.
+          The tax law changed a few years ago. In order for storm damage to be
+          tax deductible you must be in a federally declared disaster area. This
+          rule is supposed to stay in effect until 2025. It might be extended or
+          it’s possible that Congress might change the law sometime in the
+          future. But right now, if you’re not in a federal disaster area your
+          storm losses are not tax deductible.
         </p>
         <p className="body-p">
-          There are a lot of tax relief companies that will tell you this, but
-          you must be careful. In some cases, it’s nothing more than “bait and
-          switch” advertising with unscrupulous tax relief companies trying to
-          sell you other, more expensive services. When you speak with us, you
-          know that our reputation is based on years of honestly representing
-          our client taxpayers.{" "}
+          What’s difficult to realize is that the same storm might create a
+          federal disaster in one state, but not in another state. Meanwhile,
+          the state without the federal disaster declaration might have flooding
+          and severe damage and those losses will not be tax deductible.
+        </p>
+
+        <p className="body-h">THE IRS CHECK LIST FOR STORM DEDUCTIONS</p>
+        <p className="body-p">
+          The IRS says that for storm losses to be tax deductible you must live
+          in a federally declared disaster area. And if you are in the federal
+          disaster area you experienced a loss of personal property such as
+          furniture, your car, your home. You will need a list of that property
+          that was damaged or lost — and the best list to have is an inventory
+          of your property.
+        </p>
+        <p className="body-h">CREATING AN INVENTORY</p>
+        <p className="body-p">
+          After a major disaster such as what Hurricane Ian caused to parts of
+          Florida, you can see why a home inventory is needed. When a home is
+          wiped away by storm surge or high winds it can be impossible to
+          remember everything you had. You can create an inventory by taking
+          photos with your cell phone, or creating lists of your possessions by
+          going room to room. Don’t keep the inventory at home — put it in a
+          bank safe deposit box or send it to a trusted friend or relative in
+          another state where it might survive even if your home doesn’t.
+        </p>
+        <p className="body-h">KNOW THE FAIR MARKET VALUE</p>
+        <p className="body-p">
+          Part of the process of knowing if you have tax deductible losses and
+          filing a claim with your insurance, is knowing the fair market value
+          of your property. It helps if you kept receipts of major items such as
+          appliances and furniture and electronics.
+        </p>
+        <p className="body-h">KNOW YOUR COSTS TO MAKE REPAIRS AND CLEAN UP</p>
+        <p className="body-p">
+          You’ll also need to know what the costs are for cleaning up and
+          repairing the damage. You’ll need this information for your insurance
+          claim and for any tax deduction you might claim.
+          <Image alt={"icon"} src={Icon} className="icon-punct"></Image>
+        </p>
+        <p className="body-h">INSURANCE COMES FIRST, THEN THE IRS DEDUCTION</p>
+        <p className="body-p">
+          Before you can claim an IRS tax deduction for your storm loss, you’ll
+          have to deal with your insurance company first. If the insurance
+          company covers your losses, you have nothing to deduct on your taxes.
+        </p>
+        <p className="body-h">STANDARD DEDUCTION OR ITEMIZED DEDUCTION</p>
+        <p className="body-p">
+          If there is a loss that is not covered by insurance, then you have to
+          determine if the loss is more than the value of your standard
+          deduction when you file your taxes. If the losses exceed the value of
+          your standard deduction, you will have to itemize your deductions to
+          use the losses from the storm.
+        </p>
+        <p className="body-p">
+          But this is very important. You might be able to deduct losses when
+          using the standard deduction and without itemizing. Here’s what the
+          IRS says:
+        </p>
+        <p className="body-p">
+          “In certain federally declared disasters the law allows for a casualty
+          loss to be taken without having to exceed your standard deduction. In
+          this situation, the net casualty loss can be added to your standard
+          deduction.”
+        </p>
+        <p className="body-p">
+          This is why you should consult with a tax professional and be sure you
+          are up to date with what federal disaster orders were issued.
+        </p>
+        <p className="body-h">
+          ARE YOUR LOSSES IN EXCESS OF 10% OF YOUR ADJUSTED GROSS INCOME?
+        </p>
+        <p className="body-p">
+          There is another condition that must be met in most cases: are your
+          storm losses in excess of 10% of your adjusted gross income? Again,
+          consult with your tax professional because this condition might also
+          change depending on the disaster and the political climate.
+        </p>
+        <p className="body-h">THERE ARE OTHER FORMS OF GOVERNMENT HELP</p>
+        <p className="body-p">
+          Don’t forget there may be other forms of government help if you are a
+          storm victim, and even if you are not in a federal disaster area.
+          Follow the news. Watch for announcements. Ask questions.
+        </p>
+        <p className="body-h">GET A FREE CONSULTATION ABOUT YOUR TAX ISSUES</p>
+        <p className="body-p">
+          Remember that we offer a free telephone consultation about your tax
+          issues including questions about your tax debt, missing tax refunds,
+          filing overdue returns, and tax deductions for storm damage. Storm
+          damage might add to your tax debt and financial problems in which case
+          the IRS Fresh Start and the IRS Offer In Compromise Programs might be
+          able to help you. Our free consultation will help you know if you
+          qualify for the IRS Fresh Start Program and the IRS Offer In
+          Compromise Program. If you don’t qualify, there are other programs
+          including payment plans that you could use to resolve your tax debt.
+          We’ll give you information at no charge about how to use these various
+          self-help programs.
           <Image alt={"icon"} src={Icon} className="icon-punct"></Image>
         </p>
 

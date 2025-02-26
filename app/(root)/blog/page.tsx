@@ -4,6 +4,9 @@ import blur2 from "@/public/blurbg2.jpg";
 import inflation from "@/public/inflation.jpeg";
 import fresh from "@/public/fresh.jpeg";
 import damage from "@/public/damage.jpeg";
+import time from "@/public/time.jpeg";
+import irs from "@/public/irs.jpeg";
+
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -105,9 +108,8 @@ const Blog = () => {
               <div className="cont">
                 <h3>Is Your Storm Damage Tax Deductible? It Depends.</h3>
                 <p>
-                  Is your storm damage tax deductible? It depends on how much
-                  damage you had, how much coverage you had from insurance, and
-                  more...
+                  It depends on how much damage you had, how much coverage you
+                  had from insurance, and more...
                 </p>
                 <Link href={"/blog/post/3"} className="blog-post-link">
                   <h5>Read Post</h5>
@@ -132,18 +134,21 @@ const Blog = () => {
           <div className="post post2">
             <div
               className="box-pic"
-              id="damage-img"
-              style={{ backgroundImage: `url(${damage.src})` }}
+              id="time-img"
+              style={{ backgroundImage: `url(${time.src})` }}
             ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>Is Your Storm Damage Tax Deductible? It Depends.</h3>
+                <h3>
+                  There Are Time Limits When Dealing With The IRS That Can Help
+                  You Or Hurt You
+                </h3>
                 <p>
-                  Is your storm damage tax deductible? It depends on how much
-                  damage you had, how much coverage you had from insurance, and
-                  more...
+                  No one enjoys dealing with the IRS over audits or even
+                  criminal investigations. But the IRS has some time limits that
+                  it must follow....
                 </p>
-                <Link href={"/blog/post/2"} className="blog-post-link">
+                <Link href={"/blog/post/4"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -166,21 +171,14 @@ const Blog = () => {
           <div className="post post1">
             <div
               className="box-pic"
-              id="inflation-img"
-              style={{ backgroundImage: `url(${inflation.src})` }}
+              id="irs-img"
+              style={{ backgroundImage: `url(${irs.src})` }}
             ></div>
             <div className="box-front">
               <div className="cont">
-                <h3>
-                  How Inflation Helps You Save On Taxes And Makes You Pay More
-                  On Your Tax Debt
-                </h3>
-                <p>
-                  Inflation is the hot subject now. It’s not only impacting your
-                  credit cards and bank accounts and your groceries and your
-                  gasoline, but it’s also impacting your taxes....
-                </p>
-                <div className="blog-post-link">
+                <h3>You Don’t Have To Face The IRS Alone</h3>
+                <p>In Fact, You May Not Have To Face The IRS At All...</p>
+                <Link href={"/blog/post/5"} className="blog-post-link">
                   <h5>Read Post</h5>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +193,7 @@ const Blog = () => {
                       d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
                     />
                   </svg>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="box-back"></div>

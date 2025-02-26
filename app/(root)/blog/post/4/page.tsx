@@ -1,4 +1,4 @@
-import Post from "@/app/components/blog/post3";
+import Post from "@/app/components/blog/post4";
 import FooterBlock from "@/app/components/footerBlock";
 
 const SinglePost = () => {

@@ -874,6 +874,16 @@ a {
   background-position: -400px 0;
   background-repeat: no-repeat;
 }
+#time-img {
+  background-size: cover;
+  background-position: -200px 0;
+  background-repeat: no-repeat;
+}
+#irs-img {
+  background-size: cover;
+  background-position: -190px 0;
+  background-repeat: no-repeat;
+}
 .post .box-front {
   width: 100%;
   height: 100%;
