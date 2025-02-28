@@ -1,9 +1,9 @@
 import React from "react";
 import Nav from "@/app/components/authNav";
 import FooterBlock from "@/app/components/footerBlock";
-import Bubble from "@/app/components/dashboard/action/action3_3";
+import Bubble from "@/app/components/dashboard/action/action2";
 
-const Action1 = () => {
+const Action1_2 = () => {
   return (
     <div>
       <Nav />
@@ -13,4 +13,4 @@ const Action1 = () => {
   );
 };
 
-export default Action1;
+export default Action1_2;

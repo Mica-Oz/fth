@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import report from "@/public/report.png";
 
 const Action = () => {
   return (
@@ -13,80 +15,31 @@ const Action = () => {
 
         <div className="square">
           <p className="sub-heading">
-            We just need a few more details before we can submit your request!
+            Here is your Tax History Report! If you have any questions about
+            your report, <br />
+            please{" "}
+            <Link
+              href={"/contact"}
+              style={{
+                color: "#5dacad",
+                textDecoration: "underline 2px #5dacad",
+                fontWeight: "500",
+                cursor: "pointer",
+              }}
+            >
+              contact support.
+            </Link>
           </p>
-          <p className="form-group">Taxpayer Information</p>
-          <form className="form-cont">
-            <div className="form-cat">
-              <p className="cat-title">General:</p>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                name="middleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
-              />
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="dob"
-                id="dob"
-                placeholder="Date of Birth"
-              />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
-              <input
-                type="text"
-                name="maritalStatus"
-                id="maritalStatus"
-                placeholder="Marital Status"
-              />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Address:</p>
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input type="text" name="city" id="city" placeholder="City" />
-              <input type="text" name="state" id="state" placeholder="State" />
-              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="employmentType"
-                id="employmentType"
-                placeholder="Employment Type"
-              />
-              <input
-                type="text"
-                name="occupation"
-                id="occupation"
-                placeholder="Occupation"
-              />
-            </div>
-          </form>
-          <Link href="/dashboard/action3/2" className="next-btn">
-            Next
+          <p className="form-group">Report</p>
+          <div className="report-cont">
+            <Image alt={"icon"} src={report} width={800} className="icon3" />
+          </div>
+          <Link
+            href="/dashboard/status4"
+            style={{ width: "450px" }}
+            className="next-btn"
+          >
+            BACK TO DASHBOARD
           </Link>
         </div>
         <div className="header-bubble-back"></div>

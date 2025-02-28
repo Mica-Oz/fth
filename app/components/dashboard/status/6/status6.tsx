@@ -64,7 +64,9 @@ const Dash = () => {
               You are Eligible for multiple Fresh Start Payment Plans!
             </p>
             <Link href="/dashboard/action4" className="tax-history-req-btn">
-              VIEW PLANS
+              SCHEDULE CALL
+              <br />
+              TO REVIEW PLANS
             </Link>
           </div>
           <div className="square-back"></div>

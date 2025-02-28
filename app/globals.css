@@ -350,7 +350,7 @@ a {
   transform: translate(-50%, -152%);
   z-index: 1;
   width: 60vw; /* Adjust size for the large square */
-  height: 50vh;
+  height: 450px;
   position: relative;
 }
 .top-big-square .box-pic {
@@ -468,7 +468,7 @@ a {
 
 .big-square .square {
   width: 60vw; /* Adjust size for the large square */
-  height: 50vh;
+  height: 450px;
   position: relative;
 }
 .big-square .square .box-front {
@@ -1526,7 +1526,7 @@ a {
   margin-top: 100px;
   z-index: 3;
   width: 60vw; /* Adjust size for the large square */
-  height: 66vh;
+  height: 600px;
   position: relative;
 }
 .split-bubble-with-title.fin101-bubble {
@@ -1928,6 +1928,7 @@ a {
   z-index: 5;
 }
 .progress-bubble .square-front .line-cont {
+  visibility: hidden;
   width: 3px;
   height: 70px;
   background-color: #0a1763;
@@ -2597,4 +2598,10 @@ a {
 .user-menu-li:hover {
   background-color: #0a1763;
   color: white;
+}
+.report-cont {
+  width: 800px;
+  height: 300px;
+  margin-top: 30px;
+  overflow-y: scroll;
 }
