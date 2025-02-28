@@ -1,0 +1,102 @@
+import React from "react";
+import Link from "next/link";
+
+const Action = () => {
+  return (
+    <>
+      <div
+        className="split-bubble-with-title action-bubble action-1-1"
+        data-aos="fade-right"
+        data-aos-delay="150"
+      >
+        <div className="header-bubble">Eligibility Request Form</div>
+
+        <div className="square">
+          <p
+            className="sub-heading"
+            style={{ visibility: "hidden", marginBottom: "0" }}
+          >
+            We just need a few more details before we can submit your request!
+          </p>
+          <p className="form-group">Monthly Expenses</p>
+          <form className="form-cont">
+            <div className="form-cat">
+              <p className="cat-title">Employment:</p>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                placeholder="First Name"
+              />
+              <input
+                type="text"
+                name="middleInit"
+                id="middleInit"
+                placeholder="Middle Initial"
+              />
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                placeholder="Last Name"
+              />
+              <input
+                type="text"
+                name="dob"
+                id="dob"
+                placeholder="Date of Birth"
+              />
+              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
+              <input
+                type="text"
+                name="maritalStatus"
+                id="maritalStatus"
+                placeholder="Marital Status"
+              />
+            </div>
+            <div className="form-cat">
+              <p className="cat-title">Household Size:</p>
+              <input
+                type="text"
+                name="streetAddress1"
+                id="streetAddress1"
+                placeholder="Street Address"
+              />
+              <input
+                type="text"
+                name="streetAddress1"
+                id="streetAddress1"
+                placeholder="Street Address"
+              />
+              <input type="text" name="city" id="city" placeholder="City" />
+              <input type="text" name="state" id="state" placeholder="State" />
+              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
+            </div>
+            <div className="form-cat">
+              <p className="cat-title">Employment:</p>
+              <input
+                type="text"
+                name="employmentType"
+                id="employmentType"
+                placeholder="Employment Type"
+              />
+              <input
+                type="text"
+                name="occupation"
+                id="occupation"
+                placeholder="Occupation"
+              />
+            </div>
+          </form>
+          <Link href="/dashboard/action3/6" className="next-btn">
+            Next
+          </Link>
+        </div>
+        <div className="header-bubble-back"></div>
+        <div className="back-square"></div>
+      </div>
+    </>
+  );
+};
+
+export default Action;

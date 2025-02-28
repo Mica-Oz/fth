@@ -11,7 +11,7 @@ const Page = () => {
   }, []);
   return (
     <>
-      <div className="about-main">
+      <div className="about-main faq">
         <Bubble />
       </div>
       <FooterDiag />
