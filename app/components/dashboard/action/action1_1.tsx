@@ -85,7 +85,7 @@ const Action1_1 = () => {
             </div>
           </form>
           <Link href="/dashboard/action1/2" className="next-btn">
-            Next
+            NEXT
           </Link>
         </div>
         <div className="header-bubble-back"></div>

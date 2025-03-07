@@ -1286,7 +1286,7 @@ a {
 }
 .bubble-front {
   width: 100%;
-  height: 90%;
+  height: 114%;
   background-color: white;
   border: solid 3px #0a1763;
   border-radius: 100px;
@@ -1300,7 +1300,7 @@ a {
   padding: 70px 0 50px;
 }
 .bubble-front.login {
-  height: 70%;
+  height: 94%;
 }
 .create-form {
   width: 90%;
@@ -1452,7 +1452,7 @@ a {
 .row-4 {
   display: flex;
   margin-bottom: 15px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .row-4 .app-btn {
   width: 250px;
@@ -2604,4 +2604,106 @@ a {
   height: 300px;
   margin-top: 30px;
   overflow-y: scroll;
+}
+
+.sig-pad-cont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; */
+  height: 250px;
+  width: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0;
+
+  font-family: Helvetica, Sans-Serif;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.signature-pad {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-size: 10px;
+  width: 100%;
+  height: 100%;
+  max-width: 700px;
+  max-height: 460px;
+}
+
+.signature-pad::before,
+.signature-pad::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  width: 40%;
+  height: 10px;
+  bottom: 10px;
+  background: transparent;
+}
+
+.signature-pad::before {
+  left: 20px;
+  -webkit-transform: skew(-3deg) rotate(-3deg);
+  transform: skew(-3deg) rotate(-3deg);
+}
+
+.signature-pad::after {
+  right: 20px;
+  -webkit-transform: skew(3deg) rotate(3deg);
+  transform: skew(3deg) rotate(3deg);
+}
+
+.signature-pad--body {
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background-color: #e2f1f1;
+  border: 3px solid #0a1763;
+  border-radius: 50px;
+}
+
+.signature-pad--body canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  cursor: url("../public/pen.svg") 16 16;
+}
+
+.signature-pad--footer {
+  /* color: #c3c3c3; */
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 8px;
+}
+
+.signature-pad--actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 8px;
 }
