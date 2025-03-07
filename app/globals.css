@@ -2623,7 +2623,6 @@ a {
   -ms-user-select: none;
   user-select: none;
   margin: 0;
-
   font-family: Helvetica, Sans-Serif;
 }
 *,
@@ -2631,7 +2630,26 @@ a {
 *::after {
   box-sizing: border-box;
 }
-
+.sig-pad-cont button {
+  background-color: white;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 400;
+  color: #5dacad;
+  border: 2px #5dacad solid;
+  border-radius: 50px;
+  margin: 0px 7px;
+  transition: 0.2s all ease-in-out;
+  cursor: pointer;
+}
+.sig-pad-cont button:hover {
+  background-color: #5dacad;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 400;
+  color: white;
+  border: 2px #5dacad solid;
+  border-radius: 50px;
+  margin: 0px 7px;
+}
 .signature-pad {
   position: relative;
   display: -webkit-box;
@@ -2688,7 +2706,6 @@ a {
   width: 100%;
   height: 100%;
   border-radius: 4px;
-  cursor: url("../public/pen.svg") 16 16;
 }
 
 .signature-pad--footer {
@@ -2706,4 +2723,21 @@ a {
   -ms-flex-pack: justify;
   justify-content: space-between;
   margin-top: 8px;
+}
+.sig-btm-cont {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+.sig-btm-cont p {
+  transform: translateY(13px);
+  margin-right: 25px;
+  font-size: 16px;
+  font-family: "halcom", sans-serif;
+  color: #0a1763;
+}
+.sig-btm-cont input {
+  transform: translateY(12px);
+  margin-right: 15px;
 }

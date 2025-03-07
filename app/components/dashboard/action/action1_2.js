@@ -52,6 +52,7 @@ const Action1_2 = () => {
     const pdfDoc = await PDFDocument.load(formPdfBytes, {
       ignoreEncryption: true,
     });
+    console.log(" sigCanvas.current:", sigCanvas.current);
 
     const form = pdfDoc.getForm();
 
@@ -70,7 +71,6 @@ const Action1_2 = () => {
     //         break;
     //     }
     //   }
-
     const pngUrl = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
     const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer());
     const pngImage = await pdfDoc.embedPng(pngImageBytes);
@@ -80,7 +80,7 @@ const Action1_2 = () => {
 
     page.drawImage(pngImage, {
       x: 65,
-      y: 110,
+      y: 130,
       width: pngDims.width,
       height: pngDims.height,
     });
@@ -130,11 +130,11 @@ const Action1_2 = () => {
                           className="button clear"
                           onClick={clear}
                         >
-                          Clear
+                          CLEAR
                         </button>
 
                         <button type="button" className="button" onClick={undo}>
-                          Undo
+                          UNDO
                         </button>
                       </div>
                     </div>
@@ -143,13 +143,30 @@ const Action1_2 = () => {
               </div>
             </div>
           </form>
-          <Link
-            onClick={fillForm}
-            href="/dashboard/status2"
-            className="next-btn"
-          >
-            SUBMIT
-          </Link>
+          <div className="sig-btm-cont">
+            <input type="checkbox"></input>
+            <p>
+              {" "}
+              I agree to the{" "}
+              <span
+                className="tandc"
+                style={{
+                  color: "#5dacad",
+                  textDecoration: "underline 1px #5dacad",
+                  fontWeight: "600",
+                }}
+              >
+                Terms & Condtitions
+              </span>
+            </p>
+            <Link
+              onClick={fillForm}
+              href="/dashboard/status2"
+              className="next-btn"
+            >
+              SUBMIT
+            </Link>
+          </div>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>
