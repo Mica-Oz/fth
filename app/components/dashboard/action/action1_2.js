@@ -49,6 +49,7 @@ const Action1_2 = () => {
   };
 
   async function fillForm() {
+    console.log(" sigCanvas.current:", sigCanvas.current);
     //   var form_data = await update_variables();
     const formUrl = "/8821.pdf";
     const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
@@ -56,7 +57,6 @@ const Action1_2 = () => {
     const pdfDoc = await PDFDocument.load(formPdfBytes, {
       ignoreEncryption: true,
     });
-    console.log(" sigCanvas.current:", sigCanvas.current);
 
     const form = pdfDoc.getForm();
 
