@@ -8,10 +8,14 @@ const Action1_2 = () => {
   const sigCanvas = useRef(null);
 
   function clear() {
+    console.log(" sigCanvas.current:", sigCanvas.current);
+
     sigCanvas.current.clear();
   }
 
   function undo() {
+    console.log(" sigCanvas.current:", sigCanvas.current);
+
     let data = sigCanvas.current.toData();
     if (data) {
       data.pop(); // remove the last dot or line
