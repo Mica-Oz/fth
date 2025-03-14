@@ -9,8 +9,7 @@ const Nav = () => {
   const { session } = useStytchSession();
   const stytch = useStytch();
 
-  console.log("sessio- nav:", session);
-  console.log("stytch.session:", stytch.session);
+  console.log("nav component - ", session);
 
   const handleLogOut = useCallback(async () => {
     console.log("logot clicked");

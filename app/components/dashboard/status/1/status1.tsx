@@ -1,35 +1,86 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
+// useState,
 import Link from "next/link";
 import Image from "next/image";
 import scales from "@/public/scales-icon.png";
 import { useStytchUser, useStytchSession } from "@stytch/nextjs";
-import { userStore } from "@/app/store/user";
+import { useRouter } from "next/navigation";
 
 const Dash = () => {
-  const session = useStytchSession();
+  const { session } = useStytchSession();
+  const router = useRouter();
   const { user, isInitialized } = useStytchUser();
-  const userCtx = userStore((state: any) => state.user);
-  // const updateUserCtx = userStore((state: any) => state.updateUser);
-  // updateUserCtx({
-  //   fName: "",
-  //   lName: "",
-  //   id: user?.untrusted_metadata.id,
-  // });
+  const caseID = user?.untrusted_metadata.id as string;
 
-  console.log("user:", user);
-  console.log("isInitialized:", isInitialized);
-  console.log("session:", session);
-  return (
+  console.log("BEEEEEEEEEP::::", caseID);
+
+  interface LogicsUser {
+    data: {
+      FirstName: string;
+      [key: string]: any; // Allow other unknown properties
+    };
+    [key: string]: any; // Allow other top-level properties
+  }
+
+  const [logicsUser, setlogicsUser] = useState<LogicsUser | null>(null);
+
+  useEffect(() => {
+    console.log(
+      "useEffect triggered - isInitialized:",
+      isInitialized,
+      "caseID:",
+      caseID
+    );
+
+    async function fetchLogicsUser() {
+      if (isInitialized && caseID) {
+        console.log("caseid", caseID);
+        try {
+          const response = await fetch("/api/case", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              caseID: caseID,
+            },
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          console.log(
+            "Get request submitted successfully---- response in front end::",
+            data
+          );
+          setlogicsUser(data);
+        } catch (err) {
+          // setError("There was an error submitting the case. Please try again.");
+          console.error(err);
+          router.push("/oops");
+        }
+      }
+    }
+    fetchLogicsUser();
+  }, [caseID, isInitialized, router, session]);
+
+  console.log(
+    "At render time - isInitialized:",
+    isInitialized,
+    "caseID:",
+    caseID
+  );
+  console.log("logicsuser:", logicsUser);
+  const result = (
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
           Welcome to your Dashboard,{" "}
           <strong style={{ color: "#2e5a7e" }}>
-            {" "}
-            {user?.name.first_name}!
+            {logicsUser?.data.FirstName}!
             <br />
-            {userCtx.id}
           </strong>
         </p>
       </div>
@@ -199,6 +250,13 @@ const Dash = () => {
       </div>
     </div>
   );
+  console.log(
+    "Before returning - isInitialized - isInitialized:",
+    isInitialized,
+    "caseID:",
+    caseID
+  );
+  return result;
 };
 
 export default Dash;

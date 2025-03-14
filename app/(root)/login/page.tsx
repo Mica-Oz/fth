@@ -3,19 +3,28 @@ import React, { FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-// import { useStytchUser } from "@stytch/nextjs";
+import { useStytchSession } from "@stytch/nextjs";
 import { useStytch } from "@stytch/nextjs";
 import FooterDiag from "@/app/components/footerDiag";
 
 const Page = () => {
   const router = useRouter();
   const stytch = useStytch();
+  const session = useStytchSession();
+  console.log("login-session:", session);
+
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
     try {
-      await stytch.magicLinks.email.send(inputs.email as string);
+      await stytch.magicLinks.email.send(inputs.email as string, {
+        login_magic_link_url: "http://localhost:3000/auth/login",
+        login_expiration_minutes: 60,
+        signup_magic_link_url: "http://localhost:3000/oops",
+        signup_expiration_minutes: 60,
+      });
+
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {
       router.push("/signup"); // Navigate to the 'check email' page

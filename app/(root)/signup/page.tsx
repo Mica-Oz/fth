@@ -3,17 +3,14 @@
 import React, { FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useStytch } from "@stytch/nextjs";
+import { useStytch, useStytchSession } from "@stytch/nextjs";
 import FooterDiag from "@/app/components/footerDiag";
-import { userStore } from "@/app/store/user";
 
 const Signup = () => {
   const router = useRouter();
   const stytch = useStytch();
-
-  const user = userStore((state: any) => state.user);
-  const updateUser = userStore((state: any) => state.updateUser);
-
+  const session = useStytchSession();
+  console.log("signup-session:", session);
   // const [error, setError] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
 
@@ -46,15 +43,12 @@ const Signup = () => {
       const match = data.data.match(caseIdPattern);
       const caseID = match[1];
       console.log("caseid just nums::", caseID);
-      updateUser({
-        fName: inputs.FirstName,
-        lName: inputs.LastName,
-        id: caseID,
-      });
+
       await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
-        login_magic_link_url: "http://localhost:3000/auth?id={" + caseID + "}",
+        login_magic_link_url: "http://localhost:3000/auth/login",
         login_expiration_minutes: 60,
-        signup_magic_link_url: "http://localhost:3000/auth?id={" + caseID + "}",
+        signup_magic_link_url:
+          "http://localhost:3000/auth/signup?id={" + caseID + "}",
         signup_expiration_minutes: 60,
       });
 
@@ -79,9 +73,7 @@ const Signup = () => {
           <div className="bubble-front">
             <form action="submit" className="create-form" onSubmit={submit}>
               <div className="form-row-1">
-                <p>
-                  Welcome {user.id}! Please fill in your details to get started.
-                </p>
+                <p>Welcome! Please fill in your details to get started.</p>
               </div>
               <div className="form-row-2 input-row">
                 <input
