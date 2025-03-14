@@ -1,15 +1,36 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import scales from "@/public/scales-icon.png";
+import { useStytchUser, useStytchSession } from "@stytch/nextjs";
+import { userStore } from "@/app/store/user";
 
 const Dash = () => {
+  const session = useStytchSession();
+  const { user, isInitialized } = useStytchUser();
+  const userCtx = userStore((state: any) => state.user);
+  // const updateUserCtx = userStore((state: any) => state.updateUser);
+  // updateUserCtx({
+  //   fName: "",
+  //   lName: "",
+  //   id: user?.untrusted_metadata.id,
+  // });
+
+  console.log("user:", user);
+  console.log("isInitialized:", isInitialized);
+  console.log("session:", session);
   return (
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
           Welcome to your Dashboard,{" "}
-          <strong style={{ color: "#2e5a7e" }}>Test!</strong>
+          <strong style={{ color: "#2e5a7e" }}>
+            {" "}
+            {user?.name.first_name}!
+            <br />
+            {userCtx.id}
+          </strong>
         </p>
       </div>
       <div className="row-2">

@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { FormEvent } from "react";
 import Link from "next/link";
-// import { useState } from "react";
-
-// import { useRouter } from "next/navigation";
-
-// import { useStytchUser } from "@stytch/nextjs";
-// import { useStytch } from "@stytch/nextjs";
+import { useRouter } from "next/navigation";
+import { useStytch } from "@stytch/nextjs";
 import FooterDiag from "@/app/components/footerDiag";
+import { userStore } from "@/app/store/user";
 
 const Signup = () => {
-  // const router = useRouter();
+  const router = useRouter();
+  const stytch = useStytch();
 
-  // const stytch = useStytch();
+  const user = userStore((state: any) => state.user);
+  const updateUser = userStore((state: any) => state.updateUser);
+
   // const [error, setError] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
 
@@ -32,24 +33,42 @@ const Signup = () => {
         },
         body: JSON.stringify(inputs),
       });
-      console.log("response from front end", response);
-      // if (!response.ok) {
-      //   throw new Error("Failed to submit case");
-      // }
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(
+        "Case submitted successfully---- response in front end::",
+        data
+      );
+      console.log("datadata::", data.data);
+      const caseIdPattern = /(\d+)/;
+      const match = data.data.match(caseIdPattern);
+      const caseID = match[1];
+      console.log("caseid just nums::", caseID);
+      updateUser({
+        fName: inputs.FirstName,
+        lName: inputs.LastName,
+        id: caseID,
+      });
+      await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+        login_magic_link_url: "http://localhost:3000/auth?id={" + caseID + "}",
+        login_expiration_minutes: 60,
+        signup_magic_link_url: "http://localhost:3000/auth?id={" + caseID + "}",
+        signup_expiration_minutes: 60,
+      });
 
-      // const result = await response.json();
-      // console.log("Case submitted successfully:");
+      router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {
       // setError("There was an error submitting the case. Please try again.");
       console.error(err);
+      alert("There was an error creating your account, please try again.");
+      router.refresh();
     }
 
     // finally {
     //   setIsLoading(false);
     // }
-    // router.push("/awaitauth"); // Navigate to the 'about' page
-
-    // await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
   };
   return (
     <>
@@ -60,7 +79,9 @@ const Signup = () => {
           <div className="bubble-front">
             <form action="submit" className="create-form" onSubmit={submit}>
               <div className="form-row-1">
-                <p>Welcome! Please fill in your details to get started.</p>
+                <p>
+                  Welcome {user.id}! Please fill in your details to get started.
+                </p>
               </div>
               <div className="form-row-2 input-row">
                 <input

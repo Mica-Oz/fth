@@ -14,34 +14,14 @@ const Page = () => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
-    await stytch.magicLinks.email.loginOrCreate(inputs.email as string);
-    console.log("hey", inputs);
-    // create case in IRS LOGICS
-
-    // try {
-    //   const response = await fetch("/api/create-case", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(inputs),
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error("Failed to submit case");
-    //   }
-
-    //   const result = await response.json();
-    //   console.log("Case submitted successfully:", result);
-    // } catch (err) {
-    //   // setError("There was an error submitting the case. Please try again.");
-    //   console.error(err);
-    // } finally {
-    //   // setIsLoading(false);
-    // }
-
-    //add case ID as metadata to stytch auth
-    router.push("/awaitauth"); // Navigate to the 'about' page
+    try {
+      await stytch.magicLinks.email.send(inputs.email as string);
+      router.push("/awaitauth"); // Navigate to the 'check email' page
+    } catch (err) {
+      router.push("/signup"); // Navigate to the 'check email' page
+      alert("no account found");
+      console.log("err:", err);
+    }
   };
 
   return (
