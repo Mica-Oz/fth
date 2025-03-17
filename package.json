@@ -24,8 +24,7 @@
     "react-router-dom": "^7.3.0",
     "react-signature-canvas": "^1.1.0-alpha.1",
     "stytch": "^12.7.0",
-    "typed.js": "^2.1.0",
-    "zustand": "^5.0.3"
+    "typed.js": "^2.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

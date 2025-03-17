@@ -2,8 +2,10 @@
 import { useEffect, useCallback } from "react";
 import { useStytch, useStytchSession } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useAppContext } from "@/app/context";
 
 const Auth = () => {
+  const { userData, setUserData } = useAppContext();
   const params = useSearchParams();
   const stytch = useStytch();
   const { session } = useStytchSession();
@@ -11,7 +13,7 @@ const Auth = () => {
   console.log("session at top:", session);
   console.log("params:", params);
   const caseID = params.get("id");
-  // console.log("id:", caseID);
+  console.log("id:", caseID);
   const caseIdPattern = /(\d+)/;
   const match = caseID?.match(caseIdPattern);
   const sanitizedID = match?.[1] ?? "";
@@ -25,26 +27,62 @@ const Auth = () => {
     });
   }, [sanitizedID, stytch.user]);
 
-  useEffect(() => {
-    if (session) {
-      router.push("/dashboard/status1"); // Navigate to the 'check email' page
-
-      console.log(params);
-    } else {
-      console.log("????");
-      const token = new URLSearchParams(window.location.search).get("token");
-      stytch.magicLinks
-        .authenticate(token || "", {
-          session_duration_minutes: 60,
-        })
-        .then(() => {
-          update();
-
-          alert(`successfully autheticated: ${params}`);
-
-          router.refresh();
+  async function fetchLogicsUser() {
+    if (caseID) {
+      console.log("caseid", sanitizedID);
+      try {
+        const response = await fetch("/api/case", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            caseID: sanitizedID,
+          },
         });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log(
+          "Get request submitted successfully---- response in front end::",
+          data
+        );
+        return data;
+      } catch (err) {
+        // setError("There was an error submitting the case. Please try again.");
+        console.error(err);
+        router.push("/oops");
+      }
     }
+  }
+  useEffect(() => {
+    const authenticateUser = async () => {
+      if (session) {
+        router.push("/dashboard/status1");
+        console.log(params);
+      } else {
+        console.log("????");
+        const token = new URLSearchParams(window.location.search).get("token");
+        await stytch.magicLinks
+          .authenticate(token || "", {
+            session_duration_minutes: 60,
+          })
+          .then(() => {
+            update();
+          });
+        // Fetch logics user only after authentication
+        const logicsUser = await fetchLogicsUser();
+        if (logicsUser) {
+          setUserData(logicsUser);
+          console.log("User Data:", userData);
+        }
+
+        router.refresh();
+      }
+    };
+
+    authenticateUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stytch, session]);
 

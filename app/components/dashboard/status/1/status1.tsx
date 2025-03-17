@@ -1,86 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useEffect, useState } from "react";
-// useState,
 import Link from "next/link";
 import Image from "next/image";
 import scales from "@/public/scales-icon.png";
-import { useStytchUser, useStytchSession } from "@stytch/nextjs";
-import { useRouter } from "next/navigation";
+import { useStytchUser } from "@stytch/nextjs";
+import { useAppContext } from "@/app/context";
 
 const Dash = () => {
-  const { session } = useStytchSession();
-  const router = useRouter();
-  const { user, isInitialized } = useStytchUser();
-  const caseID = user?.untrusted_metadata.id as string;
-
-  console.log("BEEEEEEEEEP::::", caseID);
-
-  interface LogicsUser {
-    data: {
-      FirstName: string;
-      [key: string]: any; // Allow other unknown properties
-    };
-    [key: string]: any; // Allow other top-level properties
-  }
-
-  const [logicsUser, setlogicsUser] = useState<LogicsUser | null>(null);
-
-  useEffect(() => {
-    console.log(
-      "useEffect triggered - isInitialized:",
-      isInitialized,
-      "caseID:",
-      caseID
-    );
-
-    async function fetchLogicsUser() {
-      if (isInitialized && caseID) {
-        console.log("caseid", caseID);
-        try {
-          const response = await fetch("/api/case", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              caseID: caseID,
-            },
-          });
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-
-          const data = await response.json();
-
-          console.log(
-            "Get request submitted successfully---- response in front end::",
-            data
-          );
-          setlogicsUser(data);
-        } catch (err) {
-          // setError("There was an error submitting the case. Please try again.");
-          console.error(err);
-          router.push("/oops");
-        }
-      }
-    }
-    fetchLogicsUser();
-  }, [caseID, isInitialized, router, session]);
+  const { isInitialized } = useStytchUser();
+  // const { session } = useStytchSession();
+  const { userData } = useAppContext();
+  console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 1 COMP:", userData);
+  // console.log("USER SESSION INIDE STATUS 1 COMP:", session);
 
   console.log(
     "At render time - isInitialized:",
     isInitialized,
     "caseID:",
-    caseID
+    userData
   );
-  console.log("logicsuser:", logicsUser);
   const result = (
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
           Welcome to your Dashboard,{" "}
           <strong style={{ color: "#2e5a7e" }}>
-            {logicsUser?.data.FirstName}!
-            <br />
+            {userData?.data.FirstName}!
           </strong>
         </p>
       </div>
@@ -254,7 +199,7 @@ const Dash = () => {
     "Before returning - isInitialized - isInitialized:",
     isInitialized,
     "caseID:",
-    caseID
+    userData?.data.CaseID
   );
   return result;
 };

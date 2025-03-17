@@ -3,9 +3,15 @@ import React, { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import Link from "next/link";
 import { PDFDocument } from "pdf-lib";
+import { useStytchUser } from "@stytch/nextjs";
+import { useRouter } from "next/navigation";
 
 const Action1_2 = () => {
+  const router = useRouter();
+
   const sigCanvas = useRef(null);
+  const { user } = useStytchUser();
+  const caseID = user?.untrusted_metadata.id;
 
   function clear() {
     console.log(" sigCanvas.current:", sigCanvas.current);
@@ -23,32 +29,62 @@ const Action1_2 = () => {
     }
   }
 
-  let downloadBlob, downloadURL;
+  // let downloadBlob, downloadURL;
 
-  downloadBlob = function (data, fileName, mimeType) {
-    var blob, url;
-    blob = new Blob([data], {
-      type: mimeType,
-    });
-    url = window.URL.createObjectURL(blob);
-    downloadURL(url, fileName);
-    setTimeout(function () {
-      return window.URL.revokeObjectURL(url);
-    }, 1000);
-  };
+  // downloadBlob = function (data, fileName, mimeType) {
+  //   var blob, url;
+  //   blob = new Blob([data], {
+  //     type: mimeType,
+  //   });
+  //   url = window.URL.createObjectURL(blob);
+  //   downloadURL(url, fileName);
+  //   setTimeout(function () {
+  //     return window.URL.revokeObjectURL(url);
+  //   }, 1000);
+  // };
 
-  downloadURL = function (data, fileName) {
-    let a;
-    a = document.createElement("a");
-    a.href = data;
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.style = "display: none";
-    a.click();
-    a.remove();
-  };
+  // downloadURL = function (data, fileName) {
+  //   let a;
+  //   a = document.createElement("a");
+  //   a.href = data;
+  //   a.download = fileName;
+  //   document.body.appendChild(a);
+  //   a.style = "display: none";
+  //   a.click();
+  //   a.remove();
+  // };
 
-  async function fillForm() {
+  async function logicsPdfUpload(pdf, caseID) {
+    if (pdf) {
+      console.log("pdf:", pdf);
+      try {
+        const response = await fetch("/api/pdf", {
+          method: "POST",
+          headers: {
+            contentType: "application/pdf",
+            caseID: caseID,
+          },
+          body: pdf,
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log(
+          "Get request submitted successfully---- response in front end::",
+          data
+        );
+        return data;
+      } catch (err) {
+        // setError("There was an error submitting the case. Please try again.");
+        console.error(err);
+        router.push("/oops");
+      }
+    }
+  }
+  async function submitForm() {
     console.log(" sigCanvas.current:", sigCanvas.current);
     //   var form_data = await update_variables();
     const formUrl = "/8821.pdf";
@@ -97,9 +133,13 @@ const Action1_2 = () => {
     console.log(formattedDate);
     page.drawText(`${formattedDate}`, { x: 450, y: 140, size: 10 });
     form.flatten();
-    const pdfBytes = await pdfDoc.save();
 
-    downloadBlob(pdfBytes, formUrl, "application/pdf");
+    //call api
+
+    const pdfBytes = await pdfDoc.save();
+    logicsPdfUpload(pdfBytes, caseID);
+
+    // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
 
   return (
@@ -164,7 +204,7 @@ const Action1_2 = () => {
               </span>
             </p>
             <Link
-              onClick={fillForm}
+              onClick={submitForm}
               href="/dashboard/status2"
               className="next-btn"
             >
