@@ -1,15 +1,18 @@
 "use client";
+import { Suspense } from "react";
 import { useEffect, useCallback } from "react";
 import { useStytch, useStytchSession } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppContext } from "@/app/context";
 
-const Auth = () => {
+// Component with all the hooks
+function AuthContent() {
   const { userData, setUserData } = useAppContext();
   const params = useSearchParams();
   const stytch = useStytch();
   const { session } = useStytchSession();
   const router = useRouter();
+
   console.log("session at top:", session);
   console.log("params:", params);
   const caseID = params.get("id");
@@ -56,6 +59,7 @@ const Auth = () => {
       }
     }
   }
+
   useEffect(() => {
     const authenticateUser = async () => {
       if (session) {
@@ -92,5 +96,13 @@ const Auth = () => {
       <p>authenticating</p>
     </>
   );
-};
-export default Auth;
+}
+
+// Main Auth component with Suspense boundary
+export default function Auth() {
+  return (
+    <Suspense fallback={<p>Loading authentication...</p>}>
+      <AuthContent />
+    </Suspense>
+  );
+}
