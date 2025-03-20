@@ -1,8 +1,9 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStytch, useStytchSession, useStytchUser } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppContext } from "@/app/context";
+import statusDict from "@/app/utilities/statusData/statusDict";
 
 const Auth = () => {
   const params = useSearchParams();
@@ -10,78 +11,85 @@ const Auth = () => {
   const { session } = useStytchSession();
   const { user } = useStytchUser();
   const router = useRouter();
+  const { setUserData } = useAppContext();
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+
   console.log("session at top:", session);
   console.log("params:", params);
-  const { setUserData } = useAppContext();
+  console.log("user at top:", user);
 
-  // console.log("id:", caseID);
-  // const caseIdPattern = /(\d+)/;
-  // const match = caseID?.match(caseIdPattern);
-  // const sanitizedID = match?.[1] ?? "";
-  // console.log("initial:", caseID, "final:", sanitizedID);
-
+  // First useEffect - handles initial authentication
   useEffect(() => {
     if (session) {
-      router.push("/dashboard/status1"); // Navigate to the 'check email' page
-
-      console.log(params);
+      // router.push(`/dashboard/status1`); // Navigate to the 'check email' page
+      console.log("Session exists, navigating");
     } else {
-      console.log("????");
+      console.log("No session, attempting authentication");
       const token = new URLSearchParams(window.location.search).get("token");
-      stytch.magicLinks
-        .authenticate(token || "", {
-          session_duration_minutes: 60,
-        })
-        .then(() => {
-          const caseID = user?.untrusted_metadata.id as string;
-
-          async function fetchLogicsUser() {
-            console.log("TESTTTTT");
-            if (caseID) {
-              console.log("caseid", caseID);
-              try {
-                const response = await fetch("/api/case", {
-                  method: "GET",
-                  headers: {
-                    "Content-Type": "application/json",
-                    caseID: caseID,
-                  },
-                });
-                if (!response.ok) {
-                  throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                console.log(
-                  "Get request submitted successfully---- response in front end::",
-                  data
-                );
-                setUserData(data);
-              } catch (err) {
-                // setError("There was an error submitting the case. Please try again.");
-                console.error(err);
-                router.push("/oops");
-              }
-            }
-          }
-          fetchLogicsUser();
-        })
-        .then(() => {
-          alert(`successfully autheticated: ?`);
-        })
-        .then(() => {
-          router.refresh();
-        });
+      if (token && !isAuthenticating) {
+        setIsAuthenticating(true);
+        stytch.magicLinks
+          .authenticate(token, {
+            session_duration_minutes: 60,
+          })
+          .then(() => {
+            alert(`successfully authenticated`);
+            router.refresh();
+          })
+          .catch((error) => {
+            console.error("Authentication failed:", error);
+            router.push("/oops");
+          });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stytch, session]);
 
+  // Second useEffect - watches for user data changes
+  useEffect(() => {
+    if (user && user.untrusted_metadata?.id) {
+      const caseID = user.untrusted_metadata.id as string;
+      console.log("User detected, caseID:", caseID);
+
+      async function fetchLogicsUser() {
+        try {
+          const response = await fetch("/api/case", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              caseID: caseID,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Get request submitted successfully:", data);
+          setUserData(data);
+          const id = data.data.StatusID;
+          const route = statusDict[id as keyof typeof statusDict];
+
+          console.log("route:", route, "id:", id);
+          router.push("/dashboard/" + route);
+        } catch (err) {
+          console.error(err);
+          router.push("/oops");
+        }
+      }
+
+      fetchLogicsUser();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   return (
     <>
       <br />
-      <p>authenticating</p>
+      <p>Authenticating...</p>
     </>
   );
 };
+
 export default Auth;

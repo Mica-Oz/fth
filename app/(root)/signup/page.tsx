@@ -18,6 +18,8 @@ const Signup = () => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
+    inputs.statusID = "183";
+    inputs.statusName = "Status 1.1 - Report Not Yet Requested";
 
     console.log("Submitting Data:", inputs);
     // setIsLoading(true);

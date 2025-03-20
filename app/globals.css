@@ -644,6 +644,7 @@ a {
   top: 0;
   left: 0;
   z-index: 2;
+  transition: all 0.2s ease-in-out;
 }
 .active .thing {
   background-color: #e2f1f1;
@@ -2512,9 +2513,9 @@ a {
   position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
   right: -50;
-  top: 65;
+  top: 55;
   width: 100vw; /* Full width */
-  height: 2315px; /* Full height */
+  height: 100vh; /* Full height */
   overflow: hidden; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */

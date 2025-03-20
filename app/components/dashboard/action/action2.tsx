@@ -1,9 +1,18 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import report from "@/public/report.png";
+import updateStatus from "@/app/utilities/api/updateStatus";
+import { useStytchUser } from "@stytch/nextjs";
 
 const Action = () => {
+  const { user } = useStytchUser();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const caseID = user?.untrusted_metadata.id;
+  async function acknowledge() {
+    await updateStatus(184, caseID);
+  }
   return (
     <>
       <div
@@ -36,6 +45,7 @@ const Action = () => {
           </div>
           <Link
             href="/dashboard/status4"
+            onClick={acknowledge}
             style={{ width: "450px" }}
             className="next-btn"
           >

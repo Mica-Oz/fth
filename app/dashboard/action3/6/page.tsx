@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "@/app/components/authNav";
+import Nav from "@/app/components/nav";
 import FooterBlock from "@/app/components/footerBlock";
 import Bubble from "@/app/components/dashboard/action/action3_6";
 

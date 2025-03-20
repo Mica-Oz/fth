@@ -16,7 +16,7 @@ const Dash = () => {
   console.log(
     "At render time - isInitialized:",
     isInitialized,
-    "caseID:",
+    "userData:",
     userData
   );
   const result = (

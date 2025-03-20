@@ -1,6 +1,6 @@
 // import Link from "next/link";
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Typed from "typed.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -28,6 +28,16 @@ export default function Home() {
   // Create reference to store the DOM element containing the animation
   const typer = React.useRef(null);
 
+  type OfferState = {
+    1?: string;
+    2?: string;
+    3?: string;
+  };
+
+  const [activeOffer, setActiveOffer] = useState<OfferState>({
+    1: "Get a clear picture of your financial standing with the IRS.",
+  });
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -47,6 +57,78 @@ export default function Home() {
     };
   }, []);
 
+  const activateOfferHandler: React.MouseEventHandler<HTMLDivElement> = (
+    event
+  ) => {
+    const containerElement = event.currentTarget;
+
+    // First, remove the active class from all offer containers
+    const allOfferContainers = document.querySelectorAll(".offer-cont");
+    allOfferContainers.forEach((el) => {
+      el.classList.remove("active");
+      // Also remove active class from thing-cont and reset connection lines
+      const thingCont = el.querySelector(".thing-cont");
+      const thingCircle = el.querySelector(".thing-circle");
+      const thingInnerCircle = el.querySelector(
+        ".thing-circle-active"
+      ) as HTMLElement;
+      const connectionLine = el.querySelector(
+        ".connection-line"
+      ) as HTMLElement;
+
+      if (thingCont) thingCont.classList.remove("active");
+      if (thingCircle) thingCircle.classList.remove("active");
+      if (connectionLine) connectionLine.style.display = "none";
+      if (thingInnerCircle) thingInnerCircle.style.display = "none";
+    });
+
+    // Add active class to the clicked container
+    containerElement.classList.add("active");
+
+    // Add active class to the thing-cont inside the clicked container
+    const thingCont = containerElement.querySelector(".thing-cont");
+    if (thingCont) thingCont.classList.add("active");
+
+    // Add active class to the thing-circle inside the clicked container
+    const thingCircle = containerElement.querySelector(".thing-circle");
+    if (thingCircle) {
+      thingCircle.classList.add("active");
+      // Add the active element to thing-circle if it doesn't exist
+      if (!thingCircle.querySelector(".thing-circle-active")) {
+        const activeCircle = document.createElement("div");
+        activeCircle.className = "thing-circle-active";
+        thingCircle.appendChild(activeCircle);
+      }
+    }
+
+    // Show the connection line of the clicked container
+    const connectionLine = containerElement.querySelector(
+      ".connection-line"
+    ) as HTMLElement;
+
+    if (connectionLine) connectionLine.style.display = "block";
+    // Show the connection line of the clicked container
+    const thingInnerCircle = containerElement.querySelector(
+      ".thing-circle-active"
+    ) as HTMLElement;
+
+    if (thingInnerCircle) thingInnerCircle.style.display = "block";
+
+    // Update state based on which offer was clicked
+    if (containerElement.id === "offer1") {
+      setActiveOffer({
+        1: "Get a clear picture of your financial standing with the IRS.",
+      });
+    } else if (containerElement.id === "offer2") {
+      setActiveOffer({
+        2: "Expert guidance on how to address your tax situation.",
+      });
+    } else if (containerElement.id === "offer3") {
+      setActiveOffer({
+        3: "Complete resolution services for your tax issues.",
+      });
+    }
+  };
   return (
     <>
       <div className="hero" style={{ backgroundImage: `url(${heroBG.src})` }}>
@@ -195,7 +277,11 @@ export default function Home() {
       <div className="offer">
         <div className="cont">
           <div className="row-1">
-            <div className="offer-cont">
+            <div
+              className="offer-cont active"
+              id="offer1"
+              onClick={activateOfferHandler}
+            >
               <Image
                 alt={"icon"}
                 src={offerIcon3}
@@ -213,7 +299,11 @@ export default function Home() {
               </div>
               <div className="connection-line"></div>
             </div>
-            <div className="offer-cont">
+            <div
+              className="offer-cont"
+              id="offer2"
+              onClick={activateOfferHandler}
+            >
               <Image
                 alt={"icon"}
                 src={offerIcon1}
@@ -232,7 +322,11 @@ export default function Home() {
                 style={{ display: "none" }}
               ></div>
             </div>
-            <div className="offer-cont">
+            <div
+              className="offer-cont"
+              id="offer3"
+              onClick={activateOfferHandler}
+            >
               <Image
                 alt={"icon"}
                 src={offerIcon2}
@@ -255,7 +349,7 @@ export default function Home() {
           <div className="row-2">
             <div className="bubble-cont">
               <div className="bubble">
-                Get a clear picture of your financial standing with the IRS.
+                {activeOffer[1] || activeOffer[2] || activeOffer[3]}
               </div>
               <div className="bubble-back"></div>
             </div>

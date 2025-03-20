@@ -5,12 +5,16 @@ import Link from "next/link";
 import { PDFDocument } from "pdf-lib";
 import { useStytchUser } from "@stytch/nextjs";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
+import updateStatus from "@/app/utilities/api/updateStatus";
 
 const Action1_2 = () => {
   const router = useRouter();
-
+  const { userData } = useAppContext();
+  console.log("USER DATA FROM CONTEXT BUT INIDE Action1/2 COMP:", userData);
   const sigCanvas = useRef(null);
   const { user } = useStytchUser();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const caseID = user?.untrusted_metadata.id;
 
   function clear() {
@@ -54,6 +58,7 @@ const Action1_2 = () => {
   //   a.remove();
   // };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function logicsPdfUpload(pdf, caseID) {
     if (pdf) {
       console.log("pdf:", pdf);
@@ -84,10 +89,55 @@ const Action1_2 = () => {
       }
     }
   }
+  async function update_variables() {
+    const formUrl = "/8821-base.pdf";
+    const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
+    const pdfDoc = await PDFDocument.load(formPdfBytes);
+    const form = pdfDoc.getForm();
+    const fields = form.getFields();
+    fields.forEach((field) => {
+      const type = field.constructor.name;
+      const name = field.getName();
+      console.log(`${type}: ${name}`);
+      console.log("typof:", typeof name);
+    });
+    const box1String =
+      userData.data.FirstName +
+      " " +
+      userData.data.LastName +
+      "\n" +
+      userData.data.Address +
+      " " +
+      userData.data.AptNo +
+      "\n" +
+      userData.data.City +
+      " " +
+      userData.data.State +
+      ", " +
+      userData.data.Zip;
+    const form_data = {
+      "/8821-base.pdf": {
+        "F8821_topmostSubform[0].Page1[0].f1_6[0]": {
+          type: "PDFTextField",
+          data: box1String,
+        },
+        "F8821_topmostSubform[0].Page1[0].f1_7[0]": {
+          type: "PDFTextField",
+          data: userData.data.SSN,
+        },
+        "F8821_topmostSubform[0].Page1[0].f1_8[0]": {
+          type: "PDFTextField",
+          data: userData.data.CellPhone,
+        },
+      },
+    };
+    return form_data;
+  }
   async function submitForm() {
     console.log(" sigCanvas.current:", sigCanvas.current);
-    //   var form_data = await update_variables();
-    const formUrl = "/8821.pdf";
+    var form_data = await update_variables();
+    console.log("formdata from submitform call:", form_data);
+    const formUrl = "/8821-base.pdf";
     const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
 
     const pdfDoc = await PDFDocument.load(formPdfBytes, {
@@ -95,22 +145,27 @@ const Action1_2 = () => {
     });
 
     const form = pdfDoc.getForm();
+    console.log("get form call 304", form);
 
-    //   for (const [fieldname, datadict] of Object.entries(form_data[path])) {
-    //     var field = form.getField(fieldname);
-    //     switch (datadict["type"]) {
-    //       case "PDFTextField":
-    //         try {
-    //           field.setText(datadict["data"]);
-    //         } catch {}
-    //         break;
-    //       case "PDFCheckBox":
-    //         if (datadict["data"] == "check") {
-    //           field.check();
-    //         }
-    //         break;
-    //     }
-    //   }
+    for (const [fieldname, datadict] of Object.entries(form_data[formUrl])) {
+      console.log("fieldname:", fieldname, "datadict:", datadict);
+      var field = form.getField(fieldname);
+      console.log("field:", field);
+      switch (datadict["type"]) {
+        case "PDFTextField":
+          try {
+            field.setText(datadict["data"]);
+          } catch (error) {
+            console.log(error);
+          }
+          break;
+        case "PDFCheckBox":
+          if (datadict["data"] == "check") {
+            field.check();
+          }
+          break;
+      }
+    }
     const pngUrl = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
     const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer());
     const pngImage = await pdfDoc.embedPng(pngImageBytes);
@@ -138,7 +193,7 @@ const Action1_2 = () => {
 
     const pdfBytes = await pdfDoc.save();
     logicsPdfUpload(pdfBytes, caseID);
-
+    await updateStatus(184, caseID);
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
 

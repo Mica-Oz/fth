@@ -1,22 +1,80 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/fth-logo-new.png";
 import { useStytchSession, useStytch } from "@stytch/nextjs";
-import { useCallback } from "react";
-
+import { useCallback, useEffect } from "react";
+import { useAppContext } from "@/app/context";
+import statusDict from "@/app/utilities/statusData/statusDict";
 const Nav = () => {
   const { session } = useStytchSession();
+  const { userData } = useAppContext();
+
   const stytch = useStytch();
+  // const [modalToggled, setmodalToggled] = useState<boolean>(false);
+  const modalToggleHandler: React.MouseEventHandler<HTMLDivElement> = () => {
+    const modal = document.querySelector(".modal") as HTMLElement;
+    if (modal.style.display === "block") {
+      modal.style.display = "none";
+    } else {
+      modal.style.display = "block";
+    }
+  };
+  // Close modal function
+  const closeModal = () => {
+    const modal = document.querySelector(".modal") as HTMLElement;
+    if (modal && modal.style.display === "block") {
+      modal.style.display = "none";
+    }
+  };
+
+  // Add event listeners for clicks outside the modal and scroll
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Check if modal is open and click is outside both modal content and button
+      const modal = document.querySelector(".modal") as HTMLElement;
+      const userMenu = document.querySelector(".user-menu") as HTMLElement;
+      const userMenuBtn = document.querySelector(
+        ".user-menu-btn"
+      ) as HTMLElement;
+
+      if (
+        modal &&
+        modal.style.display === "block" &&
+        !userMenu.contains(event.target as Node) &&
+        !userMenuBtn.contains(event.target as Node)
+      ) {
+        closeModal();
+      }
+    };
+
+    // Handle scroll events
+    const handleScroll = () => {
+      closeModal();
+    };
+
+    // Add event listeners
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listeners
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   console.log("nav component - ", session);
 
   const handleLogOut = useCallback(async () => {
-    console.log("logot clicked");
+    console.log("logout clicked");
     await stytch.session.revoke();
     alert("logged out");
   }, [stytch]);
-
+  const id = userData?.data.StatusID || undefined;
+  const route = statusDict[id as keyof typeof statusDict];
+  console.log("id:", id, "route:", route);
   if (session) {
     return (
       <div className="nav">
@@ -45,7 +103,7 @@ const Nav = () => {
           </div>
         </div>
         <div className="nav-btn-cont auth">
-          <div className="user-menu-btn">
+          <div className="user-menu-btn" onClick={modalToggleHandler}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="35"
@@ -68,7 +126,7 @@ const Nav = () => {
               <div className="triangle3"></div>
               <div className="user-menu">
                 <Link
-                  href={"/dashboard/status1"}
+                  href={"/dashboard/" + route}
                   className="dash-li user-menu-li"
                 >
                   DASHBOARD
