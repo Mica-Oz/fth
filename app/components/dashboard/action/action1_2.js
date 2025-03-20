@@ -209,14 +209,13 @@ const Action1_2 = () => {
       await submitForm(); // Wait for form submission to complete
       router.push("/dashboard/status2"); // Then navigate programmatically
     } catch (error) {
-       console.error("Error details:", {
-      message: error.message,
-      stack: error.stack,
-      name: error.name,
-      error: error.toString()
-    });
-    alert(`Error: ${error.message || "Unknown error occurred"}`);
-  }
+      console.error("Error details:", {
+        message: error.message,
+        stack: error.stack,
+        name: error.name,
+        error: error.toString(),
+      });
+      alert(`Error: ${error.message || "Unknown error occurred"}`);
     }
   };
 
