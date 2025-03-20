@@ -1,11 +1,13 @@
 "use client";
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useStytch, useStytchSession, useStytchUser } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import statusDict from "@/app/utilities/statusData/statusDict";
 
-const Auth = () => {
+// Component with all the hooks
+function AuthContent() {
   const params = useSearchParams();
   const stytch = useStytch();
   const { session } = useStytchSession();
@@ -21,7 +23,6 @@ const Auth = () => {
   // First useEffect - handles initial authentication
   useEffect(() => {
     if (session) {
-      // router.push(`/dashboard/status1`); // Navigate to the 'check email' page
       console.log("Session exists, navigating");
     } else {
       console.log("No session, attempting authentication");
@@ -90,6 +91,13 @@ const Auth = () => {
       <p>Authenticating...</p>
     </>
   );
-};
+}
 
-export default Auth;
+// Main Auth component with Suspense boundary
+export default function Auth() {
+  return (
+    <Suspense fallback={<p>Loading authentication...</p>}>
+      <AuthContent />
+    </Suspense>
+  );
+}
