@@ -133,6 +133,7 @@ const Action1_2 = () => {
     };
     return form_data;
   }
+
   async function submitForm() {
     console.log(" sigCanvas.current:", sigCanvas.current);
     var form_data = await update_variables();
@@ -196,6 +197,23 @@ const Action1_2 = () => {
     await updateStatus(184, caseID);
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default navigation
+
+    if (!sigCanvas.current) {
+      console.error("Signature canvas not initialized");
+      alert("Please sign the document before submitting");
+      return;
+    }
+
+    try {
+      await submitForm(); // Wait for form submission to complete
+      router.push("/dashboard/status2"); // Then navigate programmatically
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("There was an error submitting the form. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -258,13 +276,9 @@ const Action1_2 = () => {
                 Terms & Condtitions
               </span>
             </p>
-            <Link
-              onClick={submitForm}
-              href="/dashboard/status2"
-              className="next-btn"
-            >
+            <button onClick={handleSubmit} className="next-btn">
               SUBMIT
-            </Link>
+            </button>
           </div>
         </div>
         <div className="header-bubble-back"></div>
