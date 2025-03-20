@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
-import Link from "next/link";
 import { PDFDocument } from "pdf-lib";
 import { useStytchUser } from "@stytch/nextjs";
 import { useRouter } from "next/navigation";
