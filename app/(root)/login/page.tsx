@@ -28,11 +28,9 @@ const Page = () => {
 
       //beta environment call
       await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
-        login_magic_link_url:
-          "http://fth-c9p62li0p-mica-ozs-projects.vercel.app/auth/login",
+        login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
         login_expiration_minutes: 60,
-        signup_magic_link_url:
-          "fth-c9p62li0p-mica-ozs-projects.vercel.app/oops",
+        signup_magic_link_url: "https://fth-beta.vercel.app/oops",
         signup_expiration_minutes: 60,
       });
 
