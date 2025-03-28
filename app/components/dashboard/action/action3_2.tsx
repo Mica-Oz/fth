@@ -1,7 +1,89 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
+import { createActivity } from "@/app/utilities/api/activities";
 
 const Action = () => {
+  const { userData } = useAppContext();
+  const router = useRouter();
+
+  // Create a ref for the form
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submit = async (e: any) => {
+    console.log("Submit function called!"); // Debugging log
+    e.preventDefault();
+
+    // Check if form ref exists
+    if (!formRef.current) return;
+
+    // Collect form data using the form elements
+    const formData = {
+      employmentType: (
+        formRef.current.querySelector(
+          'select[name="employmentType"]'
+        ) as HTMLSelectElement
+      )?.value,
+      occupation: (
+        formRef.current.querySelector(
+          'input[name="occupation"]'
+        ) as HTMLInputElement
+      )?.value,
+      employerName: (
+        formRef.current.querySelector(
+          'input[name="employerName"]'
+        ) as HTMLInputElement
+      )?.value,
+      startDate: (
+        formRef.current.querySelector(
+          'input[name="startDate"]'
+        ) as HTMLInputElement
+      )?.value,
+      grossIncome: (
+        formRef.current.querySelector(
+          'input[name="grossIncome"]'
+        ) as HTMLInputElement
+      )?.value,
+      netIncome: (
+        formRef.current.querySelector(
+          'input[name="netIncome"]'
+        ) as HTMLInputElement
+      )?.value,
+      paymentFrequency: (
+        formRef.current.querySelector(
+          'input[name="paymentFrequency"]'
+        ) as HTMLInputElement
+      )?.value,
+    };
+
+    console.log("Form Data:", formData);
+    console.log("id from action  3/2", userData?.data.CaseID);
+    console.log(
+      "Form Data string:",
+      JSON.stringify(formData)
+        .replace(/,/g, `',\n'`)
+        .replace(/["']+/g, "")
+        .replace(/:/g, ": ")
+        .replace(/[{}]+/g, "")
+    );
+    const processedJSON = JSON.stringify(formData)
+      .replace(/,/g, `',<br/>'`)
+      .replace(/["']+/g, "")
+      .replace(/:/g, ": ")
+      .replace(/[{}]+/g, "");
+
+    createActivity(
+      userData?.data.CaseID,
+      "Employment Info",
+      processedJSON,
+      "FinancialInterview"
+    );
+
+    // Your existing routing logic
+    router.push("/dashboard/action3/3");
+  };
   return (
     <>
       <div
@@ -18,68 +100,21 @@ const Action = () => {
           >
             We just need a few more details before we can submit your request!
           </p>
-          <p className="form-group">Taxpayer Details</p>
-          <form className="form-cont">
+          <p className="form-group">Employment Details</p>
+          <form className="form-cont" ref={formRef}>
             <div className="form-cat">
               <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                name="middleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
-              />
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="dob"
-                id="dob"
-                placeholder="Date of Birth"
-              />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
-              <input
-                type="text"
-                name="maritalStatus"
-                id="maritalStatus"
-                placeholder="Marital Status"
-              />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Household Size:</p>
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input type="text" name="city" id="city" placeholder="City" />
-              <input type="text" name="state" id="state" placeholder="State" />
-              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="employmentType"
-                id="employmentType"
-                placeholder="Employment Type"
-              />
+              <select name="employmentType">
+                {/* <option value="" disabled selected>
+                  Employment Type
+                </option> */}
+                <option value="1">W2 Wage Earner</option>
+                <option value="2">1099 Self Employed</option>
+                <option value="3">Both: W2 & 1099</option>
+                <option value="4">Unemployed</option>
+                <option value="5">Retired</option>
+                <option value="6">Disabled</option>
+              </select>
               <input
                 type="text"
                 name="occupation"
@@ -87,10 +122,49 @@ const Action = () => {
                 placeholder="Occupation"
               />
             </div>
+            <div className="form-cat">
+              <p className="cat-title">Employer:</p>
+              <input
+                type="text"
+                name="employerName"
+                id="employerName"
+                placeholder="Employer Name"
+              />
+              <input
+                type="text"
+                name="startDate"
+                id="startDate"
+                placeholder="Start Date"
+              />
+              <input
+                type="text"
+                name="grossIncome"
+                id="grossIncome"
+                placeholder="Gross Income"
+              />
+              <input
+                type="text"
+                name="netIncome"
+                id="netIncome"
+                placeholder="Net Income"
+              />
+              <select name="paymentFrequency">
+                {/* <option value="" disabled selected>
+                  Payment Frequency
+                </option> */}
+                <option value="1">Weekly</option>
+                <option value="2">Bi-Weekly</option>
+                <option value="3">Monthly</option>
+                <option value="4">Quarterly</option>
+                <option value="5">Yearly</option>
+                <option value="6">Other</option>
+              </select>
+            </div>
           </form>
-          <Link href="/dashboard/action3/3" className="next-btn">
+
+          <button onClick={submit} className="next-btn">
             Next
-          </Link>
+          </button>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

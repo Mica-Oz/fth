@@ -1,17 +1,25 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import report from "@/public/report.png";
+// import Image from "next/image";
+// import report from "@/public/report.png";
 import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
+import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+import { useAppContext } from "@/app/context";
 
 const Action = () => {
+  const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const caseID = user?.untrusted_metadata.id;
+  const caseID = user?.untrusted_metadata.id as string;
+
+  console.log("USER DATA FROM CONTEXT BUT INIDE Action2 COMP:", userData);
+
   async function acknowledge() {
-    await updateStatus(184, caseID);
+    await updateStatus(188, caseID);
+    const updatedUser = await getLogicsUser(caseID);
+    setUserData(updatedUser);
   }
   return (
     <>
@@ -41,7 +49,14 @@ const Action = () => {
           </p>
           <p className="form-group">Report</p>
           <div className="report-cont">
-            <Image alt={"icon"} src={report} width={800} className="icon3" />
+            {/* <Image alt={"icon"} src={"report"} width={800} className="icon3" /> */}
+            <iframe
+              // src={"https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf"}
+              src="https://docs.google.com/viewer?url=https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf&embedded=true"
+              width={800}
+              height={300}
+              className="icon3"
+            ></iframe>
           </div>
           <Link
             href="/dashboard/status4"

@@ -47,22 +47,22 @@ const Signup = () => {
       console.log("caseid just nums::", caseID);
 
       //local alpha environment call
-      // await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
-      //   login_magic_link_url: "http://localhost:3000/auth/login",
-      //   login_expiration_minutes: 60,
-      //   signup_magic_link_url:
-      //     "http://localhost:3000/auth/signup?id={" + caseID + "}",
-      //   signup_expiration_minutes: 60,
-      // });
-
-      //beta environment call
       await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
-        login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
+        login_magic_link_url: "http://localhost:3000/auth/login",
         login_expiration_minutes: 60,
         signup_magic_link_url:
-          "https://fth-beta.vercel.app/auth/signup?id={" + caseID + "}",
+          "http://localhost:3000/auth/signup?id={" + caseID + "}",
         signup_expiration_minutes: 60,
       });
+
+      //beta environment call
+      // await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+      //   login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
+      //   login_expiration_minutes: 60,
+      //   signup_magic_link_url:
+      //     "https://fth-beta.vercel.app/auth/signup?id={" + caseID + "}",
+      //   signup_expiration_minutes: 60,
+      // });
 
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {

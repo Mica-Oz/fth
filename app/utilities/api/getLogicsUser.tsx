@@ -18,8 +18,12 @@ export default async function fetchLogicsUser(caseID: string) {
     }
 
     const data = await response.json();
+    console.log(
+      "Get logics user request submitted successfully from utilities:",
+      data
+    );
+
     return data;
-    console.log("Get request submitted successfully:", data);
   } catch (err) {
     console.error(err);
   }

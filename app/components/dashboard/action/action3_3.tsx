@@ -1,7 +1,116 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
+import { createActivity } from "@/app/utilities/api/activities";
 
 const Action = () => {
+  const { userData } = useAppContext();
+  const router = useRouter();
+
+  // Create a ref for the form
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submit = async (e: any) => {
+    e.preventDefault();
+
+    // Check if form ref exists
+    if (!formRef.current) return;
+
+    // Collect form data using the form elements
+    const formData = {
+      tpWages: (
+        formRef.current.querySelector(
+          'select[name="tpWages"]'
+        ) as HTMLSelectElement
+      )?.value,
+      tpSocialSecurity: (
+        formRef.current.querySelector(
+          'input[name="tpSocialSecurity"]'
+        ) as HTMLInputElement
+      )?.value,
+      tpPension: (
+        formRef.current.querySelector(
+          'input[name="tpPension"]'
+        ) as HTMLInputElement
+      )?.value,
+      spWages: (
+        formRef.current.querySelector(
+          'input[name="spWages"]'
+        ) as HTMLInputElement
+      )?.value,
+      spSocialSecurity: (
+        formRef.current.querySelector(
+          'input[name="spSocialSecurity"]'
+        ) as HTMLInputElement
+      )?.value,
+      spPension: (
+        formRef.current.querySelector(
+          'input[name="spPension"]'
+        ) as HTMLInputElement
+      )?.value,
+      divLessInterest: (
+        formRef.current.querySelector(
+          'input[name="divLessInterest"]'
+        ) as HTMLInputElement
+      )?.value,
+      rentalIncome: (
+        formRef.current.querySelector(
+          'input[name="rentalIncome"]'
+        ) as HTMLInputElement
+      )?.value,
+      rentalExpenses: (
+        formRef.current.querySelector(
+          'input[name="rentalExpenses"]'
+        ) as HTMLInputElement
+      )?.value,
+      distributions: (
+        formRef.current.querySelector(
+          'input[name="distributions"]'
+        ) as HTMLInputElement
+      )?.value,
+      alimony: (
+        formRef.current.querySelector(
+          'input[name="alimony"]'
+        ) as HTMLInputElement
+      )?.value,
+      childSupport: (
+        formRef.current.querySelector(
+          'input[name="childSupport"]'
+        ) as HTMLInputElement
+      )?.value,
+      other: (
+        formRef.current.querySelector('input[name="other"]') as HTMLInputElement
+      )?.value,
+    };
+
+    console.log("Form Data:", formData);
+    console.log("id from action  3/1", userData?.data.CaseID);
+    console.log(
+      "Form Data string:",
+      JSON.stringify(formData)
+        .replace(/,/g, `',\n'`)
+        .replace(/["']+/g, "")
+        .replace(/:/g, ": ")
+        .replace(/[{}]+/g, "")
+    );
+    const processedJSON = JSON.stringify(formData)
+      .replace(/,/g, `',<br/>'`)
+      .replace(/["']+/g, "")
+      .replace(/:/g, ": ")
+      .replace(/[{}]+/g, "");
+
+    createActivity(
+      userData?.data.CaseID,
+      "Monthly Income",
+      processedJSON,
+      "FinancialInterview"
+    );
+
+    // Your existing routing logic
+    router.push("/dashboard/action3/4");
+  };
   return (
     <>
       <div
@@ -19,78 +128,100 @@ const Action = () => {
             We just need a few more details before we can submit your request!
           </p>
           <p className="form-group">Monthly Income</p>
-          <form className="form-cont">
+          <form className="form-cont" ref={formRef}>
             <div className="form-cat">
-              <p className="cat-title">Employment:</p>
+              <p className="cat-title">Primary Taxpayer:</p>
               <input
                 type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
+                name="tpWages"
+                id="tpWages"
+                placeholder="Wages"
               />
               <input
                 type="text"
-                name="middleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
+                name="tpSocialSecurity"
+                id="tpSocialSecurity"
+                placeholder="Social Security"
               />
               <input
                 type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="dob"
-                id="dob"
-                placeholder="Date of Birth"
-              />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
-              <input
-                type="text"
-                name="maritalStatus"
-                id="maritalStatus"
-                placeholder="Marital Status"
+                name="tpPension"
+                id="tpPension"
+                placeholder="Pension(s)"
               />
             </div>
             <div className="form-cat">
-              <p className="cat-title">Household Size:</p>
+              <p className="cat-title">
+                Spouse/Other Contributors to the Household:
+              </p>
               <input
                 type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
+                name="spWages"
+                id="spWages"
+                placeholder="Wages"
               />
               <input
                 type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
+                name="spSocialSecurity"
+                id="spSocialSecurity"
+                placeholder="Social Security"
               />
-              <input type="text" name="city" id="city" placeholder="City" />
-              <input type="text" name="state" id="state" placeholder="State" />
-              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
+              <input
+                type="text"
+                name="spPension"
+                id="spPension"
+                placeholder="Pension(s)"
+              />
             </div>
             <div className="form-cat">
-              <p className="cat-title">Employment:</p>
+              <p className="cat-title">Other:</p>
               <input
                 type="text"
-                name="employmentType"
-                id="employmentType"
-                placeholder="Employment Type"
+                name="divLessInterest"
+                id="divLessInterest"
+                placeholder="Dividends minus Interest"
               />
               <input
                 type="text"
-                name="occupation"
-                id="occupation"
-                placeholder="Occupation"
+                name="rentalIncome"
+                id="rentalIncome"
+                placeholder="Rental Income"
+              />
+              <input
+                type="text"
+                name="rentalExpenses"
+                id="rentalExpenses"
+                placeholder="Rental Expenses"
+              />
+              <input
+                type="text"
+                name="distributions"
+                id="distributions"
+                placeholder="Distributions (K-1)"
+              />
+              <input
+                type="text"
+                name="alimony"
+                id="alimony"
+                placeholder="Alimony"
+              />
+              <input
+                type="text"
+                name="childSupport"
+                id="childSupport"
+                placeholder="Child Support"
+              />
+              <input
+                type="text"
+                name="other"
+                id="other"
+                placeholder="Other (Rent subsidy, Oil credit, etc.)"
               />
             </div>
           </form>
-          <Link href="/dashboard/action3/4" className="next-btn">
+          <button onClick={submit} className="next-btn">
             Next
-          </Link>
+          </button>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

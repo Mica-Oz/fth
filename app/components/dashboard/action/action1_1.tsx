@@ -7,7 +7,7 @@ import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 const Action1_1 = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
-  const { userData } = useAppContext();
+  const { userData, setUserData } = useAppContext();
   const caseID = userData.data.CaseID;
 
   const submit: React.MouseEventHandler<HTMLDivElement> = async (e) => {
@@ -40,7 +40,8 @@ const Action1_1 = () => {
           "Case Updated successfully From action1/1---- response in front end::",
           data
         );
-        await getLogicsUser(caseID);
+        const updatedUser = await getLogicsUser(caseID);
+        setUserData(updatedUser);
 
         router.push("/dashboard/action1/2"); // Navigate to the 'check email' page
       } catch (err) {

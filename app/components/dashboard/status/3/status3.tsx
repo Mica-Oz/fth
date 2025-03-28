@@ -1,16 +1,23 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import scales from "@/public/scales-icon.png";
 import LogoIcon from "@/public/fth-logo-icon-new.png";
+import { useAppContext } from "@/app/context";
 
 const Dash = () => {
+  const { userData } = useAppContext();
+  console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 3 COMP:", userData);
+
   return (
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
           Welcome to your Dashboard,{" "}
-          <strong style={{ color: "#2e5a7e" }}>Test!</strong>
+          <strong style={{ color: "#2e5a7e" }}>
+            {userData?.data.FirstName}!
+          </strong>
         </p>
       </div>
       <div className="row-6 alert bar-bubble">

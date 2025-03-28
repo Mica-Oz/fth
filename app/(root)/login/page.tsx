@@ -19,20 +19,20 @@ const Page = () => {
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
     try {
       // alpha environment call
-      // await stytch.magicLinks.email.send(inputs.email as string, {
-      //   login_magic_link_url: "http://localhost:3000/auth/login",
-      //   login_expiration_minutes: 60,
-      //   signup_magic_link_url: "http://localhost:3000/oops",
-      //   signup_expiration_minutes: 60,
-      // });
-
-      //beta environment call
-      await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
-        login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
+      await stytch.magicLinks.email.send(inputs.email as string, {
+        login_magic_link_url: "http://localhost:3000/auth/login",
         login_expiration_minutes: 60,
-        signup_magic_link_url: "https://fth-beta.vercel.app/oops",
+        signup_magic_link_url: "http://localhost:3000/oops",
         signup_expiration_minutes: 60,
       });
+
+      //beta environment call
+      // await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+      //   login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
+      //   login_expiration_minutes: 60,
+      //   signup_magic_link_url: "https://fth-beta.vercel.app/oops",
+      //   signup_expiration_minutes: 60,
+      // });
 
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {

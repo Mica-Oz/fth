@@ -6,10 +6,11 @@ import { useStytchUser } from "@stytch/nextjs";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import updateStatus from "@/app/utilities/api/updateStatus";
+import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Action1_2 = () => {
   const router = useRouter();
-  const { userData } = useAppContext();
+  const { userData, setUserData } = useAppContext();
   console.log("USER DATA FROM CONTEXT BUT INIDE Action1/2 COMP:", userData);
   const sigCanvas = useRef(null);
   const { user } = useStytchUser();
@@ -194,6 +195,8 @@ const Action1_2 = () => {
     const pdfBytes = await pdfDoc.save();
     logicsPdfUpload(pdfBytes, caseID);
     await updateStatus(184, caseID);
+    const updatedUser = await getLogicsUser(caseID);
+    setUserData(updatedUser);
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
   const handleSubmit = async (e) => {
