@@ -1,7 +1,71 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
+import { createActivity } from "@/app/utilities/api/activities";
 
 const Action = () => {
+  const { userData } = useAppContext();
+  const router = useRouter();
+
+  // Create a ref for the form
+  const formRef = useRef<HTMLFormElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submit = async (e: any) => {
+    e.preventDefault();
+
+    // Check if form ref exists
+    if (!formRef.current) return;
+    // Collect form data using the form elements
+    const formData = {
+      IRS_plan: (
+        formRef.current.querySelector(
+          'input[name="q1"]:checked'
+        ) as HTMLInputElement
+      )?.value,
+      state_plan: (
+        formRef.current.querySelector(
+          'input[name="q2"]:checked'
+        ) as HTMLInputElement
+      )?.value,
+      bankruptcy: (
+        formRef.current.querySelector(
+          'input[name="q3"]:checked'
+        ) as HTMLInputElement
+      )?.value,
+      rev_officer: (
+        formRef.current.querySelector(
+          'input[name="q4"]:checked'
+        ) as HTMLInputElement
+      )?.value,
+    };
+
+    console.log("Form Data:", formData);
+    console.log("id from action  3/7", userData?.data.CaseID);
+    console.log(
+      "Form Data string:",
+      JSON.stringify(formData)
+        .replace(/,/g, `',\n'`)
+        .replace(/["']+/g, "")
+        .replace(/:/g, ": ")
+        .replace(/[{}]+/g, "")
+    );
+    const processedJSON = JSON.stringify(formData)
+      .replace(/,/g, `',<br/>'`)
+      .replace(/["']+/g, "")
+      .replace(/:/g, ": ")
+      .replace(/[{}]+/g, "");
+
+    createActivity(
+      userData?.data.CaseID,
+      "Current Status",
+      processedJSON,
+      "FinancialInterview"
+    );
+
+    // Your existing routing logic
+    router.push("/dashboard/action3/8");
+  };
   return (
     <>
       <div
@@ -19,78 +83,49 @@ const Action = () => {
             We just need a few more details before we can submit your request!
           </p>
           <p className="form-group">Current Status</p>
-          <form className="form-cont">
+          <form className="form-cont" ref={formRef}>
             <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                name="middleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
-              />
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="dob"
-                id="dob"
-                placeholder="Date of Birth"
-              />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
-              <input
-                type="text"
-                name="maritalStatus"
-                id="maritalStatus"
-                placeholder="Marital Status"
-              />
+              <p className="cat-title">
+                Are you currently in a payment plan with the IRS?
+              </p>
+              <input type="radio" id="yes" name="q1" value="yes" />
+              <label htmlFor="yes">Yes</label>
+
+              <input type="radio" id="no" name="q1" value="no" />
+              <label htmlFor="no">No</label>
             </div>
             <div className="form-cat">
-              <p className="cat-title">Household Size:</p>
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input type="text" name="city" id="city" placeholder="City" />
-              <input type="text" name="state" id="state" placeholder="State" />
-              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
+              <p className="cat-title">
+                Are you currently in a payment plan with the State?
+              </p>
+              <input type="radio" id="yes" name="q2" value="yes" />
+              <label htmlFor="yes">Yes</label>
+
+              <input type="radio" id="no" name="q2" value="no" />
+              <label htmlFor="no">No</label>
             </div>
             <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="employmentType"
-                id="employmentType"
-                placeholder="Employment Type"
-              />
-              <input
-                type="text"
-                name="occupation"
-                id="occupation"
-                placeholder="Occupation"
-              />
+              <p className="cat-title">Are you currently in bankruptcy?</p>
+              <input type="radio" id="yes" name="q3" value="yes" />
+              <label htmlFor="yes">Yes</label>
+
+              <input type="radio" id="no" name="q3" value="no" />
+              <label htmlFor="no">No</label>
+            </div>
+            <div className="form-cat">
+              <p className="cat-title">
+                Do you currently have or are assigned to a Revenue officer?
+              </p>
+              <input type="radio" id="yes" name="q4" value="yes" />
+              <label htmlFor="yes">Yes</label>
+
+              <input type="radio" id="no" name="q4" value="no" />
+              <label htmlFor="no">No</label>
             </div>
           </form>
-          <Link href="/dashboard/action3/8" className="next-btn">
+          <button onClick={submit} className="next-btn">
             Next
-          </Link>
+          </button>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

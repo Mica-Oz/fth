@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useStytch, useStytchSession } from "@stytch/nextjs";
@@ -13,6 +13,21 @@ const Signup = () => {
   console.log("signup-session:", session);
   // const [error, setError] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
+  const [currentEnv, setCurrentEnv] = useState("");
+
+  useEffect(() => {
+    // This only runs in the browser
+    const currentURL = window.location.href;
+    if (currentURL.includes("local")) {
+      setCurrentEnv("alpha");
+    } else if (currentURL.includes("beta")) {
+      setCurrentEnv("beta");
+    } else if (currentURL.includes(".com")) {
+      setCurrentEnv("prod");
+    }
+  }, []);
+
+  console.log("env", currentEnv);
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,24 +60,25 @@ const Signup = () => {
       const match = data.data.match(caseIdPattern);
       const caseID = match[1];
       console.log("caseid just nums::", caseID);
-
-      //local alpha environment call
-      await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
-        login_magic_link_url: "http://localhost:3000/auth/login",
-        login_expiration_minutes: 60,
-        signup_magic_link_url:
-          "http://localhost:3000/auth/signup?id={" + caseID + "}",
-        signup_expiration_minutes: 60,
-      });
-
-      //beta environment call
-      // await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
-      //   login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
-      //   login_expiration_minutes: 60,
-      //   signup_magic_link_url:
-      //     "https://fth-beta.vercel.app/auth/signup?id={" + caseID + "}",
-      //   signup_expiration_minutes: 60,
-      // });
+      if (currentEnv === "alpha") {
+        //local alpha environment call
+        await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+          login_magic_link_url: "http://localhost:3000/auth/login",
+          login_expiration_minutes: 60,
+          signup_magic_link_url:
+            "http://localhost:3000/auth/signup?id={" + caseID + "}",
+          signup_expiration_minutes: 60,
+        });
+      } else if (currentEnv === "beta") {
+        //beta environment call
+        await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+          login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
+          login_expiration_minutes: 60,
+          signup_magic_link_url:
+            "https://fth-beta.vercel.app/auth/signup?id={" + caseID + "}",
+          signup_expiration_minutes: 60,
+        });
+      }
 
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {

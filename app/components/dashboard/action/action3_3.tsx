@@ -22,8 +22,8 @@ const Action = () => {
     const formData = {
       tpWages: (
         formRef.current.querySelector(
-          'select[name="tpWages"]'
-        ) as HTMLSelectElement
+          'input[name="tpWages"]'
+        ) as HTMLInputElement
       )?.value,
       tpSocialSecurity: (
         formRef.current.querySelector(
@@ -86,7 +86,7 @@ const Action = () => {
     };
 
     console.log("Form Data:", formData);
-    console.log("id from action  3/1", userData?.data.CaseID);
+    console.log("id from action  3/3", userData?.data.CaseID);
     console.log(
       "Form Data string:",
       JSON.stringify(formData)

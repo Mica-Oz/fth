@@ -1,7 +1,77 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
+import { createActivity } from "@/app/utilities/api/activities";
 
 const Action = () => {
+  const { userData } = useAppContext();
+  const router = useRouter();
+
+  // Create a ref for the form
+  const formRef = useRef<HTMLFormElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submit = async (e: any) => {
+    e.preventDefault();
+
+    // Check if form ref exists
+    if (!formRef.current) return;
+    // Collect form data using the form elements
+    const formData = {
+      firstName: (
+        formRef.current.querySelector(
+          'input[name="firstName"]'
+        ) as HTMLInputElement
+      )?.value,
+      lastName: (
+        formRef.current.querySelector(
+          'input[name="lastName"]'
+        ) as HTMLInputElement
+      )?.value,
+      dob: (
+        formRef.current.querySelector('input[name="dob"]') as HTMLInputElement
+      )?.value,
+      ssn: (
+        formRef.current.querySelector('input[name="ssn"]') as HTMLInputElement
+      )?.value,
+      relationship: (
+        formRef.current.querySelector(
+          'input[name="relationship"]'
+        ) as HTMLInputElement
+      )?.value,
+      taxYears: (
+        formRef.current.querySelector(
+          'input[name="taxYears"]'
+        ) as HTMLInputElement
+      )?.value,
+    };
+
+    console.log("Form Data:", formData);
+    console.log("id from action  3/8", userData?.data.CaseID);
+    console.log(
+      "Form Data string:",
+      JSON.stringify(formData)
+        .replace(/,/g, `',\n'`)
+        .replace(/["']+/g, "")
+        .replace(/:/g, ": ")
+        .replace(/[{}]+/g, "")
+    );
+    const processedJSON = JSON.stringify(formData)
+      .replace(/,/g, `',<br/>'`)
+      .replace(/["']+/g, "")
+      .replace(/:/g, ": ")
+      .replace(/[{}]+/g, "");
+
+    createActivity(
+      userData?.data.CaseID,
+      "Dependents",
+      processedJSON,
+      "FinancialInterview"
+    );
+
+    // Your existing routing logic
+    router.push("/dashboard/action3/9");
+  };
   return (
     <>
       <div
@@ -19,21 +89,16 @@ const Action = () => {
             We just need a few more details before we can submit your request!
           </p>
           <p className="form-group">Dependents</p>
-          <form className="form-cont">
+          <form className="form-cont" ref={formRef}>
             <div className="form-cat">
-              <p className="cat-title">Employment:</p>
+              <p className="cat-title">Dependent #1:</p>
               <input
                 type="text"
                 name="firstName"
                 id="firstName"
                 placeholder="First Name"
               />
-              <input
-                type="text"
-                name="middleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
-              />
+
               <input
                 type="text"
                 name="lastName"
@@ -49,48 +114,22 @@ const Action = () => {
               <input type="text" name="ssn" id="ssn" placeholder="SSN" />
               <input
                 type="text"
-                name="maritalStatus"
-                id="maritalStatus"
-                placeholder="Marital Status"
-              />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Household Size:</p>
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
+                name="relationship"
+                id="relationship"
+                placeholder="Relationship"
               />
               <input
                 type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input type="text" name="city" id="city" placeholder="City" />
-              <input type="text" name="state" id="state" placeholder="State" />
-              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="employmentType"
-                id="employmentType"
-                placeholder="Employment Type"
-              />
-              <input
-                type="text"
-                name="occupation"
-                id="occupation"
-                placeholder="Occupation"
+                name="taxYears"
+                id="taxYears"
+                placeholder="Tax Years"
               />
             </div>
           </form>
-          <Link href="/dashboard/action3/9" className="next-btn">
+          <div className="addAnotherDepBtn">Add Another+</div>
+          <button onClick={submit} className="next-btn">
             Next
-          </Link>
+          </button>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

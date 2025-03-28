@@ -1,16 +1,72 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 // import scales from "@/public/scales-icon.png";
 import LogoIcon from "@/public/fth-logo-icon-new.png";
+import { useAppContext } from "@/app/context";
+import { getActivities } from "@/app/utilities/api/activities";
+import { useStytchUser } from "@stytch/nextjs";
 
 const Dash = () => {
+  const { userData, setUserData } = useAppContext();
+  const { user } = useStytchUser();
+  const caseID = user?.untrusted_metadata.id as string;
+  async function loadActivities() {
+    const activities = await getActivities(caseID);
+    console.log("ACTIVITIES:", activities);
+    for (const key in activities) {
+      const subObj = activities[key];
+      for (const key in subObj) {
+        if (key === "ActivityType" && subObj[key] === "CurrLiab") {
+          console.log("activitytype:", subObj[key]);
+          console.log("Subject", subObj["Subject"]);
+          const currentLiability = subObj["Subject"];
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          setUserData((prevData: any) => ({
+            ...prevData,
+            currentLiability,
+          }));
+        } else if (key === "ActivityType" && subObj[key] === "YearsUnfiled") {
+          console.log("activitytype:", subObj[key]);
+          console.log("Subject", subObj["Subject"]);
+          const yearsUnfiled = subObj["Subject"];
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          setUserData((prevData: any) => ({
+            ...prevData,
+            yearsUnfiled,
+          }));
+        } else if (key === "ActivityType" && subObj[key] === "PaymentStatus") {
+          console.log("activitytype:", subObj[key]);
+          console.log("Subject", subObj["Subject"]);
+          const paymentStatus = subObj["Subject"];
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          setUserData((prevData: any) => ({
+            ...prevData,
+            paymentStatus,
+          }));
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    loadActivities();
+  }, []);
+
+  console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 4 COMP:", userData);
+
   return (
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
           Welcome to your Dashboard,{" "}
-          <strong style={{ color: "#2e5a7e" }}>Test!</strong>
+          <strong style={{ color: "#2e5a7e" }}>
+            {userData?.data.FirstName}!
+          </strong>
         </p>
       </div>
       <div className="row-6 alert bar-bubble">
@@ -63,8 +119,8 @@ const Dash = () => {
             <p className="to-do-msg">
               You are Eligible for multiple Fresh Start Payment Plans!
             </p>
-            <Link href="/dashboard/action4" className="tax-history-req-btn">
-              SCHEDULE CALL
+            <Link href="/contact" className="tax-history-req-btn">
+              CONTACT OUR REPS
               <br />
               TO REVIEW PLANS
             </Link>
@@ -97,7 +153,7 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p className="active">$34,567</p>
+            <p className="active">{userData.currentLiability}</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
@@ -109,7 +165,7 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              2 Years
+              {userData.yearsUnfiled}
               <br />
               Unfiled
             </p>
@@ -124,13 +180,14 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              Unpaid
+              {userData.paymentStatus}
+              {/* Unpaid
               <br />
               -
               <br />
               No Payment
               <br />
-              Plan Yet
+              Plan Yet */}
             </p>
           </div>
           <div className="bubble-header-back"></div>

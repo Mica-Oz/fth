@@ -1,7 +1,57 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "@/app/context";
+// import { createActivity } from "@/app/utilities/api/activities";
+import updateStatus from "@/app/utilities/api/updateStatus";
+import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Action = () => {
+  const router = useRouter();
+  const { userData, setUserData } = useAppContext();
+  console.log("USER DATA FROM CONTEXT BUT INIDE Action 3/9 COMP:", userData);
+
+  // Create a ref for the form
+  const formRef = useRef<HTMLFormElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submit = async (e: any) => {
+    e.preventDefault();
+
+    // Check if form ref exists
+    if (!formRef.current) return;
+    // Collect form data using the form elements
+    const formData = {
+      test: "test",
+    };
+    const caseID = userData?.data.CaseID;
+    console.log("Form Data:", formData);
+    console.log("id from action  3/9", userData?.data.CaseID);
+    // console.log(
+    //   "Form Data string:",
+    //   JSON.stringify(formData)
+    //     .replace(/,/g, `',\n'`)
+    //     .replace(/["']+/g, "")
+    //     .replace(/:/g, ": ")
+    //     .replace(/[{}]+/g, "")
+    // );
+    // const processedJSON = JSON.stringify(formData)
+    //   .replace(/,/g, `',<br/>'`)
+    //   .replace(/["']+/g, "")
+    //   .replace(/:/g, ": ")
+    //   .replace(/[{}]+/g, "");
+
+    // createActivity(
+    //   userData?.data.CaseID,
+    //   "Current Status",
+    //   processedJSON,
+    //   "FinancialInterview"
+    // );
+    await updateStatus(189, caseID);
+    const updatedUser = await getLogicsUser(caseID);
+    setUserData(updatedUser);
+    // Your existing routing logic
+    router.push("/dashboard/status6");
+  };
   return (
     <>
       <div
@@ -19,78 +69,10 @@ const Action = () => {
             We just need a few more details before we can submit your request!
           </p>
           <p className="form-group">Tax Years</p>
-          <form className="form-cont">
-            <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                name="middleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
-              />
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="dob"
-                id="dob"
-                placeholder="Date of Birth"
-              />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
-              <input
-                type="text"
-                name="maritalStatus"
-                id="maritalStatus"
-                placeholder="Marital Status"
-              />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Household Size:</p>
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input type="text" name="city" id="city" placeholder="City" />
-              <input type="text" name="state" id="state" placeholder="State" />
-              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="employmentType"
-                id="employmentType"
-                placeholder="Employment Type"
-              />
-              <input
-                type="text"
-                name="occupation"
-                id="occupation"
-                placeholder="Occupation"
-              />
-            </div>
-          </form>
-          <Link href="/dashboard/status5" className="next-btn">
+          <form className="form-cont" ref={formRef}></form>
+          <button onClick={submit} className="next-btn">
             Next
-          </Link>
+          </button>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

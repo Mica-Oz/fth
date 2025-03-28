@@ -19,75 +19,7 @@ const Action = () => {
             We just need a few more details before we can submit your request!
           </p>
           <p className="form-group">Assets</p>
-          <form className="form-cont">
-            <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                name="middleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
-              />
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="dob"
-                id="dob"
-                placeholder="Date of Birth"
-              />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
-              <input
-                type="text"
-                name="maritalStatus"
-                id="maritalStatus"
-                placeholder="Marital Status"
-              />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Household Size:</p>
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input
-                type="text"
-                name="streetAddress1"
-                id="streetAddress1"
-                placeholder="Street Address"
-              />
-              <input type="text" name="city" id="city" placeholder="City" />
-              <input type="text" name="state" id="state" placeholder="State" />
-              <input type="text" name="zip" id="zip" placeholder="Zip Code" />
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Employment:</p>
-              <input
-                type="text"
-                name="employmentType"
-                id="employmentType"
-                placeholder="Employment Type"
-              />
-              <input
-                type="text"
-                name="occupation"
-                id="occupation"
-                placeholder="Occupation"
-              />
-            </div>
-          </form>
+          <form className="form-cont"></form>
           <Link href="/dashboard/action3/5" className="next-btn">
             Next
           </Link>
