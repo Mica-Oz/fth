@@ -167,7 +167,7 @@ const Action1_2 = () => {
           break;
       }
     }
-    const pngUrl = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+    const pngUrl = sigCanvas.current.getCanvas().toDataURL("image/png");
     const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer());
     const pngImage = await pdfDoc.embedPng(pngImageBytes);
     const pngDims = pngImage.scale(0.25);
