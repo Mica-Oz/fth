@@ -42,7 +42,7 @@ const Page = () => {
         });
       } else if (currentEnv === "beta") {
         //beta environment call
-        await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+        await stytch.magicLinks.email.send(inputs.email as string, {
           login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
           login_expiration_minutes: 60,
           signup_magic_link_url: "https://fth-beta.vercel.app/oops",
@@ -52,7 +52,7 @@ const Page = () => {
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {
       router.push("/signup"); // Navigate to the 'check email' page
-      alert("no account found");
+      alert("error logging in" + err);
       console.log("err:", err);
     }
   };
