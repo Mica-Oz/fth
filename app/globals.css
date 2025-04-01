@@ -2512,8 +2512,8 @@ a {
   display: none;
   position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
-  right: -50;
-  top: 55;
+  right: -50px;
+  top: 55px;
   width: 100vw; /* Full width */
   height: 100vh; /* Full height */
   overflow: hidden; /* Enable scroll if needed */
@@ -2526,7 +2526,7 @@ a {
   background-color: #0a1763;
   position: absolute;
   top: 10px;
-  right: 55;
+  right: 55px;
 
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
   z-index: 4;
@@ -2537,7 +2537,7 @@ a {
   background-color: white;
   position: absolute;
   top: 13px;
-  right: 55;
+  right: 55px;
   z-index: 6;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
@@ -2547,7 +2547,7 @@ a {
   background-color: #0a1763;
   position: absolute;
   top: 11px;
-  right: 45;
+  right: 45px;
   z-index: 3;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
@@ -2558,7 +2558,7 @@ a {
   background-color: white;
   position: absolute;
   top: 23px;
-  right: 25;
+  right: 25px;
   border-radius: 20px;
   z-index: 5;
   border: #0a1763 3px solid;
@@ -2572,8 +2572,8 @@ a {
   height: 110px;
   background-color: #0a1763;
   position: absolute;
-  top: 28;
-  right: 10;
+  top: 28px;
+  right: 10px;
   border-radius: 20px;
   z-index: 3;
   border: #0a1763 3px solid;

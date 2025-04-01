@@ -35,7 +35,7 @@ const Signup = () => {
     const inputs = Object.fromEntries(form.entries()); // FormData to Object
     inputs.statusID = "183";
     inputs.statusName = "Status 1.1 - Report Not Yet Requested";
-
+    inputs.SETOfficerName = "Mica Oszczakiewicz";
     console.log("Submitting Data:", inputs);
     // setIsLoading(true);
 
