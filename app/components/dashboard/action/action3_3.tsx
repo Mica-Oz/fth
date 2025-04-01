@@ -128,6 +128,13 @@ const Action = () => {
             We just need a few more details before we can submit your request!
           </p>
           <p className="form-group">Monthly Income</p>
+          <p
+            className="sub-heading"
+            style={{ marginBottom: "0", marginTop: "7px" }}
+          >
+            Feel free to use rough estimations for income - this can be updated
+            in the future.
+          </p>
           <form className="form-cont" ref={formRef}>
             <div className="form-cat">
               <p className="cat-title">Primary Taxpayer:</p>
