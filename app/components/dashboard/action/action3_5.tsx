@@ -187,7 +187,7 @@ const Action = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1"
+        className="split-bubble-with-title action-bubble action-3"
         data-aos="fade-right"
         data-aos-delay="150"
       >

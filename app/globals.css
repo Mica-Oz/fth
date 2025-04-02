@@ -2241,6 +2241,9 @@ a {
   z-index: 6;
   overflow-y: auto;
 }
+.action-3 .form-cont {
+  height: 50%;
+}
 .action-bubble .sub-heading {
   z-index: 7;
   align-self: flex-start;
@@ -2288,7 +2291,7 @@ a {
 .action-bubble .form-cat select {
   width: 80%;
   background-color: #e2f1f1;
-  color: #0a1763;
+  color: #5dacad;
   border: solid 2px #0a1763;
   border-radius: 50px;
   font-size: 18px;
@@ -2299,6 +2302,13 @@ a {
   -webkit-appearance: none; /* Remove default appearance */
   -moz-appearance: none; /* Remove default appearance for Firefox */
   appearance: none; /* Remove default appearance */
+  background: #e2f1f1
+    url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2225%22%20height=%2225%22%20fill=%22%235dacad%22%20class=%22bi%20bi-caret-right-fill%22%20viewBox=%220%200%2016%2016%22%20transform=%22rotate(90)%22%3E%3Cpath%20d=%22m12.14%208.753-5.482%204.796c-.646.566-1.658.106-1.658-.753V3.204a1%201%200%200%201%201.659-.753l5.48%204.796a1%201%200%200%201%200%201.506z%22/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  background-size: 10px;
+}
+.action-bubble .form-cat select option[value]:not([value=""]) {
+  color: #0a1763; /* Change color when an option is selected */
 }
 
 .action-bubble .form-cat input[type="text"] {
@@ -2414,7 +2424,7 @@ input[type="number"] {
   margin: 0 10px 0 0; /* Remove default margin */
   padding: 0 10px 0 0; /* Remove default padding */
   width: 70px;
-  height: 25px;
+  height: 30px;
   position: relative;
   cursor: pointer; /* Show pointer cursor on hover */
   background-color: #e2f1f1;
@@ -2422,10 +2432,10 @@ input[type="number"] {
   border: solid 2px #0a1763;
   border-radius: 50px;
   font-size: 18px;
-  height: 30px;
   padding-left: 15px;
   margin-bottom: 10px;
 }
+
 .action-bubble td {
   text-align: center;
 }
@@ -2439,7 +2449,8 @@ input[type="checkbox"] {
   border: 2px solid #0a1763; /* 2px border with #0a1763 color */
   background-color: white; /* Initially white background */
   cursor: pointer; /* Show pointer cursor on hover */
-  transition: background-color 0.3s, border-color 0.3s; /* Smooth transition */
+  /* transition: background-color 0.3s, border-color 0.3s;  */
+  /* Smooth transition */
 }
 
 /* Style when the checkbox is checked */
@@ -2463,6 +2474,8 @@ input[type="checkbox"]:checked {
   margin-top: 25px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  position: absolute;
+  bottom: 20px;
 }
 .action-bubble .next-btn:hover {
   color: white;

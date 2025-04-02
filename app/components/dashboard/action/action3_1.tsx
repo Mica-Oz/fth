@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import { createActivity } from "@/app/utilities/api/activities";
@@ -11,10 +11,21 @@ const Action = () => {
   // Create a ref for the form
   const formRef = useRef<HTMLFormElement>(null);
 
-  const [selectedValue, setSelectedValue] = useState(""); // for controlled form
+  // Add a state to manage the selected marital status
+  const [maritalStatus, setMaritalStatus] = useState("");
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(event.target.value);
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectElement = e.target;
+
+    // Update the state when the selection changes
+    setMaritalStatus(selectElement.value);
+
+    // Change text color based on selection
+    if (selectElement.value) {
+      selectElement.style.color = "#0a1763"; // Change text color to #0a1763
+    } else {
+      selectElement.style.color = "#5dacad"; // Default color if nothing is selected
+    }
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,11 +37,7 @@ const Action = () => {
 
     // Collect form data using the form elements
     const formData = {
-      maritalStatus: (
-        formRef.current.querySelector(
-          'select[name="marital-status"]'
-        ) as HTMLSelectElement
-      )?.value,
+      maritalStatus,
       spouseFirstName: (
         formRef.current.querySelector(
           'input[name="firstName"]'
@@ -99,7 +106,7 @@ const Action = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1"
+        className="split-bubble-with-title action-bubble action-3"
         data-aos="fade-right"
         data-aos-delay="150"
       >
@@ -117,12 +124,11 @@ const Action = () => {
               <p className="cat-title">Marital Status:</p>
               <select
                 name="marital-status"
-                value={selectedValue} // controlled select
-                onChange={handleChange}
-                className="action-bubble form-cat"
+                value={maritalStatus} // Controlled select box
+                onChange={handleSelectChange}
               >
-                <option value="" disabled hidden>
-                  Select...
+                <option value="" disabled>
+                  Select Martial Status...
                 </option>
                 <option value="1">Single</option>
                 <option value="2">Married Filing Jointly</option>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import { createActivity } from "@/app/utilities/api/activities";
@@ -11,6 +11,28 @@ const Action = () => {
   // Create a ref for the form
   const formRef = useRef<HTMLFormElement>(null);
 
+  // Add state to manage selected values
+  const [employmentType, setEmploymentType] = useState("");
+  const [paymentFrequency, setPaymentFrequency] = useState("");
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    // Update the appropriate state based on the select's name
+    if (name === "employmentType") {
+      setEmploymentType(value);
+    } else if (name === "paymentFrequency") {
+      setPaymentFrequency(value);
+    }
+
+    // Check if the selected option has a value (not null or empty)
+    if (value) {
+      e.target.style.color = "#0a1763"; // Change text color to #0a1763
+    } else {
+      e.target.style.color = "#5dacad"; // Default color if nothing is selected
+    }
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
     console.log("Submit function called!"); // Debugging log
@@ -21,11 +43,7 @@ const Action = () => {
 
     // Collect form data using the form elements
     const formData = {
-      employmentType: (
-        formRef.current.querySelector(
-          'select[name="employmentType"]'
-        ) as HTMLSelectElement
-      )?.value,
+      employmentType,
       occupation: (
         formRef.current.querySelector(
           'input[name="occupation"]'
@@ -51,11 +69,7 @@ const Action = () => {
           'input[name="netIncome"]'
         ) as HTMLInputElement
       )?.value,
-      paymentFrequency: (
-        formRef.current.querySelector(
-          'input[name="paymentFrequency"]'
-        ) as HTMLInputElement
-      )?.value,
+      paymentFrequency,
     };
 
     console.log("Form Data:", formData);
@@ -84,10 +98,11 @@ const Action = () => {
     // Your existing routing logic
     router.push("/dashboard/action3/3");
   };
+
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1"
+        className="split-bubble-with-title action-bubble action-3"
         data-aos="fade-right"
         data-aos-delay="150"
       >
@@ -104,10 +119,14 @@ const Action = () => {
           <form className="form-cont" ref={formRef}>
             <div className="form-cat">
               <p className="cat-title">Employment:</p>
-              <select name="employmentType">
-                {/* <option value="" disabled selected>
-                  Employment Type
-                </option> */}
+              <select
+                name="employmentType"
+                value={employmentType} // Controlled value for the select input
+                onChange={handleSelectChange}
+              >
+                <option value="" disabled>
+                  Select Employment Type...
+                </option>
                 <option value="1">W2 Wage Earner</option>
                 <option value="2">1099 Self Employed</option>
                 <option value="3">Both: W2 & 1099</option>
@@ -148,10 +167,14 @@ const Action = () => {
                 id="netIncome"
                 placeholder="Net Income"
               />
-              <select name="paymentFrequency">
-                {/* <option value="" disabled selected>
-                  Payment Frequency
-                </option> */}
+              <select
+                name="paymentFrequency"
+                value={paymentFrequency} // Controlled value for the select input
+                onChange={handleSelectChange}
+              >
+                <option value="" disabled>
+                  Select Payment Frequency...
+                </option>
                 <option value="1">Weekly</option>
                 <option value="2">Bi-Weekly</option>
                 <option value="3">Monthly</option>
