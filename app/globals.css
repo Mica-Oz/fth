@@ -1038,7 +1038,7 @@ a {
   justify-content: center;
   z-index: 3;
   position: relative;
-  top: 40px;
+  top: 300px;
 }
 .credit-score .bubble-cont {
   position: relative; /* This is crucial for positioning the boxes inside */
@@ -1114,10 +1114,11 @@ a {
   position: absolute;
   left: 0;
   z-index: 0;
-  transform: translateY(-1400px);
+  transform: translateY(-1170px);
   display: flex;
   justify-content: center;
 }
+
 .faq .footer-diag {
   transform: translateY(-1210px);
 }
@@ -1397,20 +1398,7 @@ a {
 .bubble-back.login {
   height: 94%;
 }
-.footer-diag {
-  height: 2400px;
-  width: 100%;
-  background-size: 100%;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-color: #0a1763;
-  position: absolute;
-  left: 0;
-  z-index: 0;
-  transform: translateY(-1400px);
-  display: flex;
-  justify-content: center;
-}
+
 .footer-diag .diag {
   height: 1900px;
   width: 100vw;
