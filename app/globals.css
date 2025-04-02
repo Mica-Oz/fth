@@ -843,7 +843,7 @@ a {
   animation: 0.7s ease-out 0s 1 slideInFromLeft;
   position: relative; /* This is crucial for positioning the boxes inside */
   width: 650px; /* Same width as the boxes */
-  height: 320px; /* Same height as the boxes */
+  height: 400px; /* Same height as the boxes */
 }
 .post1 {
   align-self: flex-start;
@@ -1727,7 +1727,7 @@ a {
 
 .split-bubble-with-title .back-square {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   background-color: #0a1763;
   border: solid 3px #0a1763;
   border-radius: 50px;
@@ -1745,7 +1745,7 @@ a {
   top: 610px;
 }
 .footer-diag.blog {
-  top: 3500px;
+  top: 4230px;
   z-index: 0;
 }
 .icon1 {
@@ -1786,6 +1786,8 @@ a {
   width: 100vw;
   height: 1100px;
   background-color: #e2f1f1;
+  position: absolute;
+  top: 1010px;
 }
 .diag.blog {
   background-color: #e2f1f1;
