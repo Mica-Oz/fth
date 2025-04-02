@@ -86,12 +86,24 @@ const Action = () => {
                 <thead>
                   <tr>
                     <td>&nbsp;</td>
-                    <td>Owe Federal Taxes</td>
-                    <td>Owe State Taxes</td>
-                    <td>Owe Local Taxes</td>
-                    <td>Unfiled Federal Taxes</td>
-                    <td>Unfiled State Taxes</td>
-                    <td>Unfiled Local Taxes</td>
+                    <td className="cat-title2">
+                      Owe <br /> Federal Taxes
+                    </td>
+                    <td className="cat-title2">
+                      Owe <br /> State Taxes
+                    </td>
+                    <td className="cat-title2">
+                      Owe <br /> Local Taxes
+                    </td>
+                    <td className="cat-title2">
+                      Unfiled <br /> Federal Taxes
+                    </td>
+                    <td className="cat-title2">
+                      Unfiled <br /> State Taxes
+                    </td>
+                    <td className="cat-title2">
+                      Unfiled <br /> Local Taxes
+                    </td>
                   </tr>
                 </thead>
                 <tbody>

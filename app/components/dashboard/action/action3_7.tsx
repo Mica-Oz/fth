@@ -88,39 +88,59 @@ const Action = () => {
               <p className="cat-title">
                 Are you currently in a payment plan with the IRS?
               </p>
-              <input type="radio" id="yes" name="q1" value="yes" />
-              <label htmlFor="yes">Yes</label>
-
-              <input type="radio" id="no" name="q1" value="no" />
-              <label htmlFor="no">No</label>
+              <div className="radio-row">
+                <div className="radio-cont">
+                  <input type="radio" id="yes" name="q1" value="yes" />
+                  <label htmlFor="yes">Yes</label>
+                </div>
+                <div className="radio-cont">
+                  <input type="radio" id="no" name="q1" value="no" />
+                  <label htmlFor="no">No</label>
+                </div>
+              </div>
             </div>
             <div className="form-cat">
               <p className="cat-title">
                 Are you currently in a payment plan with the State?
               </p>
-              <input type="radio" id="yes" name="q2" value="yes" />
-              <label htmlFor="yes">Yes</label>
-
-              <input type="radio" id="no" name="q2" value="no" />
-              <label htmlFor="no">No</label>
+              <div className="radio-row">
+                <div className="radio-cont">
+                  <input type="radio" id="yes" name="q2" value="yes" />
+                  <label htmlFor="yes">Yes</label>
+                </div>
+                <div className="radio-cont">
+                  <input type="radio" id="no" name="q2" value="no" />
+                  <label htmlFor="no">No</label>
+                </div>
+              </div>
             </div>
             <div className="form-cat">
               <p className="cat-title">Are you currently in bankruptcy?</p>
-              <input type="radio" id="yes" name="q3" value="yes" />
-              <label htmlFor="yes">Yes</label>
-
-              <input type="radio" id="no" name="q3" value="no" />
-              <label htmlFor="no">No</label>
+              <div className="radio-row">
+                <div className="radio-cont">
+                  <input type="radio" id="yes" name="q3" value="yes" />
+                  <label htmlFor="yes">Yes</label>
+                </div>
+                <div className="radio-cont">
+                  <input type="radio" id="no" name="q3" value="no" />
+                  <label htmlFor="no">No</label>
+                </div>
+              </div>
             </div>
             <div className="form-cat">
               <p className="cat-title">
                 Do you currently have or are assigned to a Revenue officer?
               </p>
-              <input type="radio" id="yes" name="q4" value="yes" />
-              <label htmlFor="yes">Yes</label>
-
-              <input type="radio" id="no" name="q4" value="no" />
-              <label htmlFor="no">No</label>
+              <div className="radio-row">
+                <div className="radio-cont">
+                  <input type="radio" id="yes" name="q4" value="yes" />
+                  <label htmlFor="yes">Yes</label>
+                </div>
+                <div className="radio-cont">
+                  <input type="radio" id="no" name="q4" value="no" />
+                  <label htmlFor="no">No</label>
+                </div>
+              </div>
             </div>
           </form>
           <button onClick={submit} className="next-btn">

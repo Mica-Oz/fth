@@ -73,7 +73,12 @@ const Action = () => {
             We just need a few more details before we can submit your request!
           </p>
           <p className="form-group">IRS Letter</p>
-          <form className="form-cont" id="textareaform" ref={formRef}>
+          <form
+            className="form-cont"
+            id="textareaform"
+            ref={formRef}
+            style={{ height: "30%" }}
+          >
             <div className="form-cat">
               <p className="cat-title">
                 Have you received correspondence from the IRS?:

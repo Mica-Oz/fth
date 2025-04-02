@@ -2278,6 +2278,12 @@ a {
   font-weight: 600;
   font-size: 21px;
 }
+.action-bubble .cat-title2 {
+  font-family: "halcom", sans-serif;
+  color: #0a1763;
+  font-weight: 600;
+  font-size: 16px;
+}
 .action-bubble .form-cat select {
   width: 80%;
   background-color: #e2f1f1;
@@ -2286,7 +2292,7 @@ a {
   border-radius: 50px;
   font-size: 18px;
   height: 30px;
-  padding-left: 15px;
+  padding: 0 15px;
   margin-bottom: 10px;
 }
 .action-bubble .form-cat input[type="text"] {
@@ -2309,6 +2315,7 @@ a {
 }
 .action-bubble .form-cat .radio-row {
   display: flex;
+  align-items: center;
 }
 .action-bubble .form-cat .radio-cont {
   color: #0a1763;
@@ -2316,34 +2323,123 @@ a {
   font-size: 18px;
   height: 30px;
   padding-left: 15px;
-  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+}
+input[type="radio"] {
+  appearance: none; /* Removes default appearance */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  margin: 0 10px 0 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  width: 25px;
+  height: 25px;
+  position: relative;
+  cursor: pointer; /* Show pointer cursor on hover */
 }
 input[type="radio"]:after {
   width: 25px;
   height: 25px;
   border-radius: 15px;
-  top: -2px;
-  left: -1px;
+  /* top: -2px;
+  left: -1px; */
   position: relative;
-  background-color: #d1d3d1;
+  background-color: white;
   content: "";
   display: inline-block;
   visibility: visible;
-  /* border: 2px solid white; */
+  border: 2px solid #0a1763;
 }
 
 input[type="radio"]:checked:after {
   width: 25px;
   height: 25px;
   border-radius: 15px;
-  top: -2px;
-  left: -1px;
+  /* top: -2px;
+  left: -1px; */
   position: relative;
-  background-color: #ffa500;
+  background-color: #5dacad;
   content: "";
   display: inline-block;
   visibility: visible;
-  /* border: 2px solid white; */
+  border: 2px solid #5dacad;
+}
+
+textarea#details {
+  resize: none;
+  box-sizing: border-box;
+  border: 2px solid #0a1763;
+  border-radius: 10px;
+  background-color: #e2f1f1;
+  font-size: 16px;
+  resize: none;
+  padding: 15px;
+  color: #0a1763;
+}
+textarea::-webkit-input-placeholder {
+  /* Chrome/Safari/Opera */
+  color: #5dacad;
+}
+
+textarea::-moz-placeholder {
+  /* Firefox */
+  color: #5dacad;
+  opacity: 1; /* Firefox sets opacity by default to 0.54 */
+}
+
+textarea:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #5dacad;
+}
+
+textarea:-moz-placeholder {
+  /* Firefox 18- */
+  color: #5dacad;
+}
+
+textarea::placeholder {
+  color: #5dacad;
+}
+textarea:focus {
+  outline: none;
+}
+input[type="number"] {
+  margin: 0 10px 0 0; /* Remove default margin */
+  padding: 0 10px 0 0; /* Remove default padding */
+  width: 70px;
+  height: 25px;
+  position: relative;
+  cursor: pointer; /* Show pointer cursor on hover */
+  background-color: #e2f1f1;
+  color: #0a1763;
+  border: solid 2px #0a1763;
+  border-radius: 50px;
+  font-size: 18px;
+  height: 30px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+.action-bubble td {
+  text-align: center;
+}
+/* Style for the checkbox */
+input[type="checkbox"] {
+  -webkit-appearance: none; /* Remove default checkbox appearance */
+  appearance: none; /* Remove default checkbox appearance */
+  width: 30px; /* Set the width of the checkbox */
+  height: 30px; /* Set the height of the checkbox */
+  border-radius: 50%; /* Make it circular */
+  border: 2px solid #0a1763; /* 2px border with #0a1763 color */
+  background-color: white; /* Initially white background */
+  cursor: pointer; /* Show pointer cursor on hover */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+/* Style when the checkbox is checked */
+input[type="checkbox"]:checked {
+  background-color: #5dacad; /* Change background color when checked */
+  border-color: #5dacad; /* Optionally, match the border color with the background */
 }
 .action-bubble .next-btn {
   width: 170px;
