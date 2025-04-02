@@ -2284,6 +2284,7 @@ a {
   font-weight: 600;
   font-size: 16px;
 }
+/* Style for the select dropdown */
 .action-bubble .form-cat select {
   width: 80%;
   background-color: #e2f1f1;
@@ -2294,7 +2295,12 @@ a {
   height: 30px;
   padding: 0 15px;
   margin-bottom: 10px;
+  outline: none; /* Remove the blue outline when focused */
+  -webkit-appearance: none; /* Remove default appearance */
+  -moz-appearance: none; /* Remove default appearance for Firefox */
+  appearance: none; /* Remove default appearance */
 }
+
 .action-bubble .form-cat input[type="text"] {
   width: 80%;
   background-color: #e2f1f1;

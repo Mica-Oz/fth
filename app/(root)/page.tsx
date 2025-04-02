@@ -415,9 +415,9 @@ export default function Home() {
           <div className="square">
             <div className="box-front">
               <h5>
-                If you are seeking Tax Resolution, contact us for a
+                If you are seeking Tax Resolution, contact us for a{" "}
                 <strong>
-                  free 15 minute consultation with our team of lawyers.
+                  free 15 minute consultation with our team of Tax Specialists.
                 </strong>
               </h5>
               <Link href={"/contact"}>

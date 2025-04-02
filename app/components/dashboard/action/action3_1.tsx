@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import { createActivity } from "@/app/utilities/api/activities";
@@ -10,6 +10,12 @@ const Action = () => {
 
   // Create a ref for the form
   const formRef = useRef<HTMLFormElement>(null);
+
+  const [selectedValue, setSelectedValue] = useState(""); // for controlled form
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(event.target.value);
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
@@ -109,12 +115,20 @@ const Action = () => {
           <form ref={formRef} className="form-cont">
             <div className="form-cat">
               <p className="cat-title">Marital Status:</p>
-              <select name="marital-status">
+              <select
+                name="marital-status"
+                value={selectedValue} // controlled select
+                onChange={handleChange}
+                className="action-bubble form-cat"
+              >
+                <option value="" disabled hidden>
+                  Select...
+                </option>
                 <option value="1">Single</option>
                 <option value="2">Married Filing Jointly</option>
-                <option value="3">Married Filing Seperately</option>
+                <option value="3">Married Filing Separately</option>
                 <option value="4">Head of Household</option>
-                <option value="4">Qualifying Widow</option>
+                <option value="5">Qualifying Widow</option>
               </select>
             </div>
             <div className="form-cat">
