@@ -416,8 +416,12 @@ export default function Home() {
             <div className="box-front">
               <h5>
                 If you are seeking Tax Resolution, contact us for a{" "}
-                <strong>
-                  free 15 minute consultation with our team of Tax Specialists.
+                <strong style={{ color: "#5dacad" }}>
+                  FREE 15 MINUTE CONSULTATION
+                </strong>
+                <strong style={{ color: "#0a1763" }}>
+                  {" "}
+                  with our team of Tax Specialists.
                 </strong>
               </h5>
               <Link href={"/contact"}>
