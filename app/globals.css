@@ -90,6 +90,7 @@ a {
   background-color: #59c8ea;
   color: #0a1763;
   border: 3px solid #0a1763;
+  width: 180px;
 }
 .sign-up-btn:hover {
   background-color: #0a1763;
@@ -99,6 +100,7 @@ a {
   border: 3px solid #5dacad;
   color: #5dacad;
   margin-left: 20px;
+  width: 150px;
 }
 .log-in-btn:hover {
   background-color: #5dacad;
@@ -2286,7 +2288,18 @@ a {
   font-weight: 600;
   font-size: 21px;
 }
-.action-bubble .form-cat input {
+.action-bubble .form-cat select {
+  width: 80%;
+  background-color: #e2f1f1;
+  color: #0a1763;
+  border: solid 2px #0a1763;
+  border-radius: 50px;
+  font-size: 18px;
+  height: 30px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+.action-bubble .form-cat input[type="text"] {
   width: 80%;
   background-color: #e2f1f1;
   color: #0a1763;
@@ -2303,6 +2316,44 @@ a {
 }
 .action-bubble .form-cat input:focus {
   outline: none;
+}
+.action-bubble .form-cat .radio-row {
+  display: flex;
+}
+.action-bubble .form-cat .radio-cont {
+  color: #0a1763;
+  font-family: "Halcom", sans-serif;
+  font-size: 18px;
+  height: 30px;
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+input[type="radio"]:after {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  /* border: 2px solid white; */
+}
+
+input[type="radio"]:checked:after {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #ffa500;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  /* border: 2px solid white; */
 }
 .action-bubble .next-btn {
   width: 170px;

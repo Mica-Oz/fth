@@ -78,11 +78,16 @@ const Action = () => {
               <p className="cat-title">
                 Have you received correspondence from the IRS?:
               </p>
-              <input type="radio" id="yes" name="contact" value="yes" />
-              <label htmlFor="yes">Yes</label>
-
-              <input type="radio" id="no" name="contact" value="no" />
-              <label htmlFor="no">No</label>
+              <div className="radio-row">
+                <div className="radio-cont">
+                  <input type="radio" id="yes" name="contact" value="yes" />
+                  <label htmlFor="yes">Yes</label>
+                </div>
+                <div className="radio-cont">
+                  <input type="radio" id="no" name="contact" value="no" />
+                  <label htmlFor="no">No</label>
+                </div>
+              </div>
             </div>
             <div className="form-cat">
               <p className="cat-title">Details:</p>
