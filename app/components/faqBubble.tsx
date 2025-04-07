@@ -244,10 +244,9 @@ const SplitWith2 = () => {
                     step in to help.
                   </p>
                   <p>
-                    We understand other tax resolution services often fall short
-                    on their promises. We are happy to be here for you when
-                    other companies might fall short on your expectations. We
-                    will ensure your total satisfaction!
+                    We are happy to be here for you when other companies might
+                    fall short on your expectations. We will ensure your total
+                    satisfaction!
                   </p>
                 </div>
               </div>
