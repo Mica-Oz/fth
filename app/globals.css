@@ -47,6 +47,7 @@ a {
   font-weight: 800;
   font-style: normal;
   font-size: 14px;
+  min-width: 606px;
 }
 .nav-menu-item {
   cursor: pointer;
@@ -110,6 +111,56 @@ a {
   transform: scale(1.05);
   font-size: 16px;
 }
+
+.dropdown-cont {
+  display: none;
+}
+.dropdown-cont svg {
+  fill: #0a1763;
+  width: 30px;
+}
+@media (max-width: 1600px) {
+  .nav img {
+    scale: 0.8;
+  }
+}
+@media (max-width: 1450px) {
+  .nav img {
+    scale: 0.6;
+  }
+  .nav-menu {
+    font-size: 12px;
+  }
+  .nav-btn-cont {
+    scale: 0.8;
+  }
+  /* .dropdown-cont {
+    display: block;
+  } */
+}
+@media (max-width: 1380px) {
+  .nav-menu {
+    font-size: 10px;
+  }
+  .nav-btn-cont {
+    scale: 0.65;
+  }
+  /* .dropdown-cont {
+    display: block;
+  } */
+}
+@media (max-width: 1380px) {
+  .nav-menu {
+    display: none;
+  }
+  .nav-btn-cont {
+    display: none;
+  }
+  .dropdown-cont {
+    display: block;
+  }
+}
+
 .hero {
   background-color: lightblue;
   /* background-image: url("../public/bg.jpg"); */
@@ -2651,9 +2702,6 @@ input[type="checkbox"]:checked {
 .q-line:hover {
   border: solid 3px #5dacad;
 }
-.a-cont {
-  height: 0;
-}
 
 .q-cont svg {
   transition: 0.3s all ease-in-out;
@@ -2664,11 +2712,12 @@ input[type="checkbox"]:checked {
 }
 
 .a-slide-cont {
+  transition: height 0.3s ease-out;
   overflow: hidden;
   height: 0;
-  transition: height 0.3s ease-out;
 }
 .a-cont {
+  transition: height 0.3s ease-out;
   display: block;
   background-color: #e2f1f1;
   width: 80%;

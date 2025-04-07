@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+// import $ from "jquery";
 
 const SplitWith2 = () => {
   const [squareHeight, setSquareHeight] = useState<number>(0);
@@ -30,6 +31,7 @@ const SplitWith2 = () => {
       backSquare.style.height = `${squareHeight}px`;
     }
   }, [squareHeight]);
+
   const toggleAnswer: React.MouseEventHandler<HTMLDivElement> = (event) => {
     const qCont = event.currentTarget;
     const slideCont = qCont.querySelector(".a-slide-cont") as HTMLDivElement;
@@ -44,6 +46,8 @@ const SplitWith2 = () => {
       const slideToClose = el.querySelector(".a-slide-cont") as HTMLDivElement;
       if (slideToClose) {
         // Start closing the previously open question with a smooth transition
+        slideToClose.style.transition = "height .3s ease-in-out"; // This will trigger the transition
+
         slideToClose.style.height = "0px"; // This will trigger the transition
         slideToClose.classList.remove("open");
       }
@@ -77,7 +81,9 @@ const SplitWith2 = () => {
 
         <div className="square">
           <div className="cont">
-            <h3>Frequesntly Asked Questions:</h3>
+            <h3 style={{ marginBottom: "15px" }}>
+              Frequently Asked Questions:
+            </h3>
             <div className="q-cont " onClick={toggleAnswer}>
               <div className="q-line">
                 <p className="q">
@@ -99,7 +105,7 @@ const SplitWith2 = () => {
                   <p>
                     Yes! Getting your Tax History Report through us is
                     completely, 100% free. We do not require a credit card to
-                    sign up or receive your tax report.{" "}
+                    sign up or receive your Tax History Report.{" "}
                   </p>
                   <p>
                     If you choose to use our resolution services, then you will
@@ -131,7 +137,7 @@ const SplitWith2 = () => {
                   <p>
                     Submitting your Tax Report Request takes only a few minutes!
                     After we recive your request it can take 1-6 business days
-                    to receive your completely free comprehensive Tax History
+                    to receive your completely free, comprehensive Tax History
                     Report.
                   </p>
                   <p>
@@ -164,7 +170,7 @@ const SplitWith2 = () => {
                   <p>Yes! Your information is completely safe.</p>
                   <p>
                     We use the highest standards of security to ensure your
-                    information is safe and secur from bad actors.
+                    information is safe and secure from bad actors.
                   </p>
                 </div>
               </div>
@@ -191,7 +197,7 @@ const SplitWith2 = () => {
                 <div className="a-cont">
                   <p>
                     Even if you have already started a reszolution with another
-                    company but are not satisfied with your progress, we can
+                    company, but are not satisfied with your progress, we can
                     step in to help.
                   </p>
                   <p>
@@ -224,7 +230,8 @@ const SplitWith2 = () => {
                   <p>
                     Absolutely! This process is designed to be as smooth as
                     possible and allow you to easily and quickly sumbit a
-                    request for you Tax History Report in an automated fashion.{" "}
+                    request for your Tax History Report in an automated,
+                    discreet fashion.{" "}
                   </p>
                   <p>
                     However, if you have any questions, need support, or have

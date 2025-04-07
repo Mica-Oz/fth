@@ -68,7 +68,7 @@ const Page = () => {
               <div className="form-row-1">
                 <p>
                   Welcome Back! Please enter your Email address to recive your
-                  magic link to log in!.
+                  magic link to log in!
                 </p>
               </div>
               <div className="form-row-2 input-row">

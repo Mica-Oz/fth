@@ -145,7 +145,7 @@ const Signup = () => {
               <div className="form-row-7">
                 <input type="checkbox" className="checkbox"></input>
                 <p>
-                  I agree to the <a href="">Terms of Service</a> &
+                  I agree to the <a href="">Terms of Service</a> &{" "}
                   <a href="">Privacy Policy</a>
                 </p>
               </div>
