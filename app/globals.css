@@ -756,7 +756,7 @@ a {
   height: 1200px; /* Adjusted height for sign-up section */
   /* background-image: url("../public/bg2-noise-2.jpg"); Same background as .diag-2 */
   background-size: cover;
-  background-position: center;
+  background-position: right;
   background-repeat: no-repeat;
   position: relative; /* Necessary for positioning the big square */
   display: flex;
@@ -3185,6 +3185,9 @@ input[type="checkbox"]:checked {
     width: 110px !important;
     height: 98px !important;
   }
+  .sign-up {
+    height: 1400px;
+  }
   .sign-up .cont2 h4 {
     font-size: 26px !important;
   }
@@ -3197,14 +3200,19 @@ input[type="checkbox"]:checked {
     justify-content: space-between;
   }
   .diag-3 {
-    top: 550px;
+    top: 470px;
   }
   .big-square.sign-up-square {
-    top: 75% !important;
+    top: 65% !important;
   }
   .sign-up-square .schedule-btn {
     font-size: 24px !important;
     width: 280px !important;
+  }
+  .blog-prev h1 {
+    font-size: 35px;
+    position: relative;
+    top: -150px;
   }
 }
 
