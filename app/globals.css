@@ -3057,8 +3057,12 @@ input[type="checkbox"]:checked {
   .hero h5 {
     font-size: 55px;
   }
-  .heading {
+  .heading,
+  .bottom-heading {
     font-size: 40px;
+  }
+  .bottom-heading {
+    margin-top: 80px;
   }
   .square .box-foot {
     transform: translate(20vw, 275%);
@@ -3151,8 +3155,12 @@ input[type="checkbox"]:checked {
   .hero .hero-btn {
     font-size: 20px;
   }
-  .heading {
+  .heading,
+  .bottom-heading {
     font-size: 35px;
+  }
+  .bottom-heading {
+    margin-top: 100px;
   }
   .square .box-foot {
     transform: translate(17.5vw, 275%);
@@ -3187,7 +3195,8 @@ input[type="checkbox"]:checked {
   .hero p {
     font-size: 16px;
   }
-  .heading {
+  .heading,
+  .bottom-heading {
     font-size: 30px;
   }
   .square .box-foot {
