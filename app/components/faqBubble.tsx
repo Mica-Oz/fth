@@ -31,7 +31,6 @@ const SplitWith2 = () => {
       backSquare.style.height = `${squareHeight}px`;
     }
   }, [squareHeight]);
-
   const toggleAnswer: React.MouseEventHandler<HTMLDivElement> = (event) => {
     const qCont = event.currentTarget;
     const slideCont = qCont.querySelector(".a-slide-cont") as HTMLDivElement;
@@ -45,11 +44,21 @@ const SplitWith2 = () => {
     openQs.forEach((el) => {
       const slideToClose = el.querySelector(".a-slide-cont") as HTMLDivElement;
       if (slideToClose) {
-        // Start closing the previously open question with a smooth transition
-        slideToClose.style.transition = "height .3s ease-in-out"; // This will trigger the transition
+        // For smooth closing animation, first set height to actual current height
+        slideToClose.style.height = `${slideToClose.scrollHeight}px`;
 
-        slideToClose.style.height = "0px"; // This will trigger the transition
-        slideToClose.classList.remove("open");
+        // Force a repaint before changing the height
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        slideToClose.offsetHeight;
+
+        // Now set the height to zero to trigger the transition
+        slideToClose.style.transition = "height .3s ease-in-out";
+        slideToClose.style.height = "0px";
+
+        slideToClose.addEventListener("transitionend", function removeOpen() {
+          slideToClose.classList.remove("open");
+          slideToClose.removeEventListener("transitionend", removeOpen);
+        });
       }
       el.classList.remove("active");
     });
@@ -196,7 +205,7 @@ const SplitWith2 = () => {
               <div className="a-slide-cont">
                 <div className="a-cont">
                   <p>
-                    Even if you have already started a reszolution with another
+                    Even if you have already started a resolution with another
                     company, but are not satisfied with your progress, we can
                     step in to help.
                   </p>
