@@ -434,7 +434,7 @@ export default function Home() {
       </div>
       <div className="blog-prev">
         <h1>Read Our Blog:</h1>
-        <div className="cont">
+        <div className="cont posts-cont">
           <div className="post post1">
             <div
               className="box-pic"
