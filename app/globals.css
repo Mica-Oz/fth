@@ -3015,6 +3015,9 @@ input[type="checkbox"]:checked {
   .offer .bubble {
     font-size: 26px !important;
   }
+  .sign-up-square .schedule-btn {
+    width: 600px !important;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -3049,6 +3052,13 @@ input[type="checkbox"]:checked {
   }
   .offer .bubble {
     font-size: 24px !important;
+  }
+  .sign-up-square h5 {
+    font-size: 25px !important;
+  }
+  .sign-up-square .schedule-btn {
+    font-size: 28px !important;
+    width: 500px !important;
   }
 }
 @media (max-width: 1124px) {
@@ -3114,6 +3124,10 @@ input[type="checkbox"]:checked {
   }
   .thing {
     font-size: 24px !important;
+  }
+  .sign-up-square .schedule-btn {
+    font-size: 26px !important;
+    width: 400px !important;
   }
 }
 @media (max-width: 850px) {
@@ -3185,6 +3199,10 @@ input[type="checkbox"]:checked {
   .diag-3 {
     top: 600px;
   }
+  .sign-up-square .schedule-btn {
+    font-size: 24px !important;
+    width: 280px !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -3228,6 +3246,13 @@ input[type="checkbox"]:checked {
   }
   .sign-up .cont2 .free-sign-up-btn {
     margin-top: -10px !important;
+  }
+  .sign-up-square .schedule-btn {
+    font-size: 24px !important;
+    width: 250px !important;
+  }
+  .sign-up-square h5 {
+    font-size: 22px !important;
   }
 }
 @media (max-width: 500px) {
