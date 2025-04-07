@@ -3197,7 +3197,10 @@ input[type="checkbox"]:checked {
     justify-content: space-between;
   }
   .diag-3 {
-    top: 600px;
+    top: 550px;
+  }
+  .big-square.sign-up-square {
+    top: 75% !important;
   }
   .sign-up-square .schedule-btn {
     font-size: 24px !important;
