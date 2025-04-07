@@ -178,7 +178,7 @@ a {
   transform: scale(1.05) !important;
 }
 .about {
-  min-height: 100vh; /* Still ensures it fills the viewport */
+  min-height: 1275px; /* Still ensures it fills the viewport */
   padding-top: 200px; /* Adjust the padding to create the space you need */
   width: 100vw;
   background-color: white;
@@ -208,13 +208,15 @@ a {
   top: 150px; /* Starts after the 100px padding from .about */
   left: 0;
   right: 0;
-  height: calc(100vh - 150px); /* Ensure .diag covers the remaining space */
+  height: 1125px; /* Ensure .diag covers the remaining space */
   background-color: #e2f1f1;
   clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
   z-index: 0; /* Ensure .diag stays behind the squares */
 }
 
 .diag-2 {
+  position: relative;
+  top: -1px;
   height: 820px;
   background-color: #e2f1f1;
   clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
@@ -232,6 +234,7 @@ a {
 }
 #blur1 {
   background-position: bottom;
+  background-size: cover;
 }
 
 .squares {
@@ -239,7 +242,7 @@ a {
   top: 150px; /* Same as .diag's start point to align them correctly */
   left: 0;
   width: 100vw;
-  height: calc(100vh - 150px);
+  height: 1125px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -413,10 +416,9 @@ a {
   align-self: flex-end;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
+  justify-content: center;
   /* margin-top: 25px; */
   margin-right: 25px;
-  transform: translateY(20px);
 }
 .top-big-square .square .cont h3 {
   font-size: 42px;
@@ -639,7 +641,7 @@ a {
 }
 
 .thing-cont {
-  width: 300px;
+  width: 21vw;
   height: 75px;
   position: relative;
   margin-bottom: 40px;
@@ -733,6 +735,8 @@ a {
   font-family: "halcom", sans-serif;
   color: #0a1763;
   font-size: 35px;
+  text-align: center;
+  padding: 0 15px;
 }
 .offer .bubble-back {
   width: 100%;
@@ -2939,6 +2943,12 @@ input[type="checkbox"]:checked {
   margin-right: 15px;
 }
 
+@media (max-width: 1600px) {
+  .top-big-square h3 {
+    font-size: 37px !important;
+  }
+}
+
 @media (max-width: 1450px) {
   .nav {
     padding: 10px 20px 10px 0;
@@ -2964,6 +2974,12 @@ input[type="checkbox"]:checked {
   .learn-more {
     left: 77%;
   }
+  .top-big-square h3 {
+    font-size: 33px !important;
+  }
+  .top-big-square p {
+    font-size: 20px !important;
+  }
 }
 @media (max-width: 1380px) {
   .nav-menu {
@@ -2987,6 +3003,9 @@ input[type="checkbox"]:checked {
   }
   .nav-menu-item {
     margin: 0px;
+  }
+  .offer .bubble {
+    font-size: 26px !important;
   }
 }
 
@@ -3020,6 +3039,9 @@ input[type="checkbox"]:checked {
   .learn-more a {
     left: 84%;
   }
+  .offer .bubble {
+    font-size: 24px !important;
+  }
 }
 @media (max-width: 1124px) {
   .nav-menu {
@@ -3047,6 +3069,12 @@ input[type="checkbox"]:checked {
   .about {
     background-position: right -800px center;
   }
+  .thing {
+    font-size: 28px !important;
+  }
+  .offer .bubble {
+    font-size: 22px !important;
+  }
 }
 @media (max-width: 1000px) {
   .square .box-foot {
@@ -3058,6 +3086,15 @@ input[type="checkbox"]:checked {
   .learn-more {
     left: 77%;
     width: 250px;
+  }
+  .top-big-square h3 {
+    font-size: 30px !important;
+  }
+  .top-big-square p {
+    font-size: 18px !important;
+  }
+  .thing {
+    font-size: 24px !important;
   }
 }
 @media (max-width: 850px) {
@@ -3073,7 +3110,43 @@ input[type="checkbox"]:checked {
   .learn-more a {
     font-size: 19px;
   }
+  .top-big-square .square .cont {
+    padding-top: 50px;
+    justify-content: flex-start;
+  }
+  .top-big-square h3 {
+    margin-left: 10px;
+  }
+  .top-big-square p {
+    display: none;
+  }
+  .top-big-square .square .cont .blog-post-link {
+    margin-top: 100px;
+  }
+  .thing {
+    font-size: 20px !important;
+  }
 }
+@media (max-width: 700px) {
+  .top-big-square h3 {
+    font-size: 28px !important;
+  }
+  .top-big-square .square .cont .blog-post-link {
+    width: 190px;
+    transform: translateX(30px);
+  }
+  .top-big-square .square .cont .blog-post-link:hover {
+    transform: translateX(30px) scale(1.1);
+  }
+  .thing {
+    font-size: 16px !important;
+  }
+  .offer-cont img {
+    width: 110px !important;
+    height: 98px !important;
+  }
+}
+
 @media (max-width: 600px) {
   .hero .hero-btn {
     font-size: 20px;
@@ -3089,6 +3162,19 @@ input[type="checkbox"]:checked {
   }
   .about {
     background-position: right -900px center;
+  }
+  .top-big-square h3 {
+    font-size: 27px !important;
+    margin-left: 20px;
+  }
+  .top-big-square .square .cont .blog-post-link {
+    margin-top: 100px;
+    margin-left: 30px;
+    font-size: 20px;
+    width: 160px;
+  }
+  .thing {
+    font-size: 14px !important;
   }
 }
 @media (max-width: 500px) {
@@ -3112,5 +3198,11 @@ input[type="checkbox"]:checked {
   }
   .about {
     background-position: right -1000px center;
+  }
+  .top-big-square .square .cont .blog-post-link {
+    margin-top: 100px;
+    margin-left: 90px;
+    font-size: 20px;
+    width: 160px;
   }
 }
