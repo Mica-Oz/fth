@@ -1218,6 +1218,7 @@ a {
 }
 .footer-diag .row-5 {
   display: flex;
+
   align-items: flex-start;
   justify-content: space-between;
   color: white;
@@ -1227,6 +1228,12 @@ a {
   font-style: normal;
   margin-bottom: 50px;
 }
+.footer-diag .row-5 .sub-row {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+}
+
 .footer-diag .row-5 .section-cat {
   color: white;
   font-size: 24px;
@@ -3136,6 +3143,19 @@ input[type="checkbox"]:checked {
     width: 400px;
     font-size: 35px;
   }
+  .footer-diag {
+    height: 2650px;
+  }
+  .footer-diag .row-5 {
+    flex-direction: column;
+  }
+  .footer-diag .row-5 .sub-row {
+    justify-content: space-between;
+  }
+  .footer-diag .row-5 .group2,
+  .footer-diag .row-5 .group4 {
+    text-align: right;
+  }
 }
 @media (max-width: 850px) {
   .square .box-foot {
@@ -3256,6 +3276,22 @@ input[type="checkbox"]:checked {
   .credit-score .credit-report-btn {
     width: 320px;
     font-size: 32px;
+  }
+  .footer-diag {
+    transform: translateY(-1290px);
+  }
+}
+@media (max-width: 675px) {
+  .footer-diag {
+    height: 2730px;
+  }
+  .footer-diag .row-3 {
+    font-size: 20px;
+  }
+  .footer-diag .row-4 {
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-around;
   }
 }
 

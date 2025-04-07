@@ -117,6 +117,7 @@ const FooterDiag = () => {
               <p>Terms & Conditions</p>
               <p>Privacy Policy</p>
             </div>
+
             <div className="footer-group group3">
               <h5 className="section-cat">Services</h5>
               <p>Free Tax History</p>
