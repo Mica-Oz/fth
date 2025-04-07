@@ -2980,6 +2980,14 @@ input[type="checkbox"]:checked {
   .top-big-square p {
     font-size: 20px !important;
   }
+  .sign-up .cont2 h4 {
+    font-size: 35px !important;
+  }
+  .sign-up .cont2 .free-sign-up-btn {
+    font-size: 35px !important;
+    width: 300px !important;
+    margin-top: 55px !important;
+  }
 }
 @media (max-width: 1380px) {
   .nav-menu {
@@ -3079,6 +3087,13 @@ input[type="checkbox"]:checked {
   .offer .bubble {
     font-size: 22px !important;
   }
+  .sign-up .cont2 .row-1 {
+    flex-direction: column;
+    align-items: center;
+  }
+  .sign-up .cont2 .free-sign-up-btn {
+    margin-top: -25px !important;
+  }
 }
 @media (max-width: 1000px) {
   .square .box-foot {
@@ -3130,6 +3145,13 @@ input[type="checkbox"]:checked {
   .thing {
     font-size: 20px !important;
   }
+  .sign-up .cont2 h4 {
+    font-size: 30px !important;
+  }
+  .sign-up .cont2 .free-sign-up-btn {
+    font-size: 30px !important;
+    width: 280px !important;
+  }
 }
 @media (max-width: 700px) {
   .top-big-square h3 {
@@ -3148,6 +3170,20 @@ input[type="checkbox"]:checked {
   .offer-cont img {
     width: 110px !important;
     height: 98px !important;
+  }
+  .sign-up .cont2 h4 {
+    font-size: 26px !important;
+  }
+  .sign-up .cont2 h3 {
+    font-size: 22px !important;
+  }
+  .sign-up .cont2 .row-4 {
+    flex-direction: column;
+    height: 160px;
+    justify-content: space-between;
+  }
+  .diag-3 {
+    top: 600px;
   }
 }
 
@@ -3183,6 +3219,15 @@ input[type="checkbox"]:checked {
   }
   .thing {
     font-size: 14px !important;
+  }
+  .sign-up .cont2 h4 {
+    font-size: 23px !important;
+  }
+  .sign-up .cont2 h3 {
+    font-size: 20px !important;
+  }
+  .sign-up .cont2 .free-sign-up-btn {
+    margin-top: -10px !important;
   }
 }
 @media (max-width: 500px) {
