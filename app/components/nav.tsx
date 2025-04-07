@@ -78,7 +78,7 @@ const Nav = () => {
   if (session) {
     return (
       <div className="nav">
-        <Link href="/">
+        <Link href="/" className="logo-cont">
           <Image src={logo} alt="Logo" height={50} />
         </Link>
 
@@ -144,7 +144,7 @@ const Nav = () => {
   } else {
     return (
       <div className="nav">
-        <Link href="/">
+        <Link href="/" className="logo-cont">
           <Image src={logo} alt="Logo" height={50} />
         </Link>
 
@@ -179,11 +179,11 @@ const Nav = () => {
         <div className="dropdown-cont">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
+            width="40"
+            height="40"
             fill="#0a1763"
             className="bi bi-list"
-            viewBox="0 0 30 30"
+            viewBox="0 0 16 16"
           >
             <path
               fillRule="evenodd"

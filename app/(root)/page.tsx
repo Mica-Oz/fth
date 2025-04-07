@@ -165,7 +165,7 @@ export default function Home() {
           <div className="square" id="square1">
             <div className="box-header">1</div>
             <div className="box-foot">
-              <Image alt={"icon"} src={icon1} width={55} className="icon1" />
+              <Image alt={"icon"} src={icon1} width={50} className="icon1" />
             </div>
             <div className="box-front">
               <p>
