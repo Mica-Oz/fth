@@ -2726,6 +2726,9 @@ input[type="checkbox"]:checked {
   border-radius: 50px;
   height: auto;
 }
+.animation-in-progress {
+  pointer-events: none; /* Disable clicks during animation */
+}
 .auth-nav-icon {
   transition: 0.2s all ease-in-out;
   cursor: pointer;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-// import $ from "jquery";
 
 const SplitWith2 = () => {
   const [squareHeight, setSquareHeight] = useState<number>(0);
@@ -33,8 +32,19 @@ const SplitWith2 = () => {
   }, [squareHeight]);
   const toggleAnswer: React.MouseEventHandler<HTMLDivElement> = (event) => {
     const qCont = event.currentTarget;
+
+    // Check if any animation is in progress - return early if so
+    if (document.querySelector(".animation-in-progress")) {
+      return;
+    }
+
     const slideCont = qCont.querySelector(".a-slide-cont") as HTMLDivElement;
     const aCont = qCont.querySelector(".a-cont") as HTMLDivElement;
+
+    // Mark animation as in progress
+    document.querySelectorAll(".q-cont").forEach((el) => {
+      el.classList.add("animation-in-progress");
+    });
 
     // Check if this question is already open
     const isActive = qCont.classList.contains("active");
@@ -72,9 +82,33 @@ const SplitWith2 = () => {
       slideCont.addEventListener("transitionend", function setAutoHeight() {
         slideCont.style.height = "auto";
         slideCont.removeEventListener("transitionend", setAutoHeight);
+
+        // Re-enable clicks when animation completes
+        document.querySelectorAll(".q-cont").forEach((el) => {
+          el.classList.remove("animation-in-progress");
+        });
       });
 
       qCont.classList.add("active");
+    } else {
+      // If closing all items without opening a new one, we need to re-enable clicks
+      // after the last animation completes
+      const lastSlide = openQs[openQs.length - 1]?.querySelector(
+        ".a-slide-cont"
+      ) as HTMLDivElement;
+      if (lastSlide) {
+        lastSlide.addEventListener("transitionend", function enableClicks() {
+          document.querySelectorAll(".q-cont").forEach((el) => {
+            el.classList.remove("animation-in-progress");
+          });
+          lastSlide.removeEventListener("transitionend", enableClicks);
+        });
+      } else {
+        // No animations to wait for, re-enable immediately
+        document.querySelectorAll(".q-cont").forEach((el) => {
+          el.classList.remove("animation-in-progress");
+        });
+      }
     }
   };
 
