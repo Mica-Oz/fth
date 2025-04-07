@@ -1606,15 +1606,19 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: height 0.3s ease-in-out;
 }
 
 .split-bubble-with-title.faq .square {
-  /* height: auto; */
+  height: auto;
   padding-bottom: 50px;
+  transition: height 0.3s ease-in-out;
 }
 .split-bubble-with-title.faq .back-square {
   /* height: auto; */
-  padding-bottom: 50px;
+  /* padding-bottom: 50px; */
+  position: absolute;
+  /* transition: height 0.3s ease-in-out; */
 }
 .split-bubble-with-title .faq .back-square .cont {
   height: 100%;
@@ -2632,29 +2636,46 @@ input[type="checkbox"]:checked {
 }
 .q-cont {
   margin-left: 100px;
+  cursor: pointer;
 }
 .q-line {
   display: flex;
   align-items: center;
   width: 90%;
   justify-content: space-between;
+  transition: 0.3s all ease-in-out;
+  border-radius: 50px;
+  border: solid 3px white;
+  padding-right: 15px;
+}
+.q-line:hover {
+  border: solid 3px #5dacad;
 }
 .a-cont {
-  background-color: #e2f1f1;
-  width: 80%;
-  margin-left: 20px;
-  padding: 25px;
-  border-radius: 50px;
+  height: 0;
+}
+
+.q-cont svg {
+  transition: 0.3s all ease-in-out;
 }
 .q-cont.active svg {
   fill: #5dacad;
   rotate: 90deg;
 }
-.a-cont {
-  display: none;
+
+.a-slide-cont {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.3s ease-out;
 }
-.q-cont.active .a-cont {
+.a-cont {
   display: block;
+  background-color: #e2f1f1;
+  width: 80%;
+  margin-left: 20px;
+  padding: 25px;
+  border-radius: 50px;
+  height: auto;
 }
 .auth-nav-icon {
   transition: 0.2s all ease-in-out;
