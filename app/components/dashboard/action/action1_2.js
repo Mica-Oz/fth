@@ -19,6 +19,7 @@ const Action1_2 = () => {
 
   function clear() {
     console.log(" sigCanvas.current:", sigCanvas.current);
+    //test
 
     sigCanvas.current.clear();
   }
