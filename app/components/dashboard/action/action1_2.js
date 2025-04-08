@@ -276,7 +276,11 @@ const Action1_2 = () => {
             <div className="form-cat">
               <p className="cat-title">E-sign:</p>
               <div className="sig-pad-cont">
-                <div id="signature-pad" className="signature-pad">
+                <div
+                  id="signature-pad"
+                  className="signature-pad"
+                  style={{ display: isSubmitting ? "none" : "block" }}
+                >
                   <div className="signature-pad--body">
                     <SignatureCanvas ref={sigCanvas} />
                   </div>
