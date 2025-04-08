@@ -167,7 +167,15 @@ const Action1_2 = () => {
           break;
       }
     }
-    const pngUrl = sigCanvas.current.getCanvas().toDataURL("image/png");
+    let pngUrl;
+    try {
+      // Try to get the trimmed canvas (which works when there's a signature)
+      pngUrl = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+    } catch (error) {
+      // Fallback to regular canvas if trimming fails
+      console.warn("Could not trim canvas, using full canvas instead:", error);
+      pngUrl = sigCanvas.current.getCanvas().toDataURL("image/png");
+    }
     const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer());
     const pngImage = await pdfDoc.embedPng(pngImageBytes);
     const pngDims = pngImage.scale(0.25);
