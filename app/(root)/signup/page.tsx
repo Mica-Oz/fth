@@ -18,7 +18,7 @@ const Signup = () => {
   useEffect(() => {
     // This only runs in the browser
     const currentURL = window.location.href;
-    if (currentURL.includes("local")) {
+    if (currentURL.includes("local") || currentURL.includes("alpha")) {
       setCurrentEnv("alpha");
     } else if (currentURL.includes("beta")) {
       setCurrentEnv("beta");
@@ -76,6 +76,15 @@ const Signup = () => {
           login_expiration_minutes: 60,
           signup_magic_link_url:
             "https://fth-beta.vercel.app/auth/signup?id={" + caseID + "}",
+          signup_expiration_minutes: 60,
+        });
+      } else if (currentEnv === "prod") {
+        //prod environment call
+        await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+          login_magic_link_url: "https://freetaxhistory.com/auth/login",
+          login_expiration_minutes: 60,
+          signup_magic_link_url:
+            "https://freetaxhistory.com/auth/signup?id={" + caseID + "}",
           signup_expiration_minutes: 60,
         });
       }

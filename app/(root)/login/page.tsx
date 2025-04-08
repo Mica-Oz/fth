@@ -48,6 +48,14 @@ const Page = () => {
           signup_magic_link_url: "https://fth-beta.vercel.app/oops",
           signup_expiration_minutes: 60,
         });
+      } else if (currentEnv === "prod") {
+        //prod environment call
+        await stytch.magicLinks.email.send(inputs.email as string, {
+          login_magic_link_url: "https://freetaxhistory.com/auth/login",
+          login_expiration_minutes: 60,
+          signup_magic_link_url: "https://freetaxhistory.com/oops",
+          signup_expiration_minutes: 60,
+        });
       }
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {
