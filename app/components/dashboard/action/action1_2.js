@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import trimCanvas from "@/app/utilities/pdf/trimCanvas";
 import { PDFDocument } from "pdf-lib";
@@ -17,6 +17,8 @@ const Action1_2 = () => {
   const { user } = useStytchUser();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const caseID = user?.untrusted_metadata.id;
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function clear() {
     console.log(" sigCanvas.current:", sigCanvas.current);
@@ -217,6 +219,8 @@ const Action1_2 = () => {
       alert("Please sign the document before submitting");
       return;
     }
+    // Hide the signature canvas during processing
+    setIsSubmitting(true);
 
     try {
       await submitForm(); // Wait for form submission to complete
@@ -229,11 +233,31 @@ const Action1_2 = () => {
         error: error.toString(),
       });
       alert(`Error: ${error.message || "Unknown error occurred"}`);
+      setIsSubmitting(false); // Show the canvas again if there's an error
     }
   };
 
   return (
     <>
+      {isSubmitting && (
+        <div
+          className="loading-overlay"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255,255,255,0.7)",
+            zIndex: 10,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>Processing your submission...</p>
+        </div>
+      )}
       <div
         className="split-bubble-with-title action-bubble action-1-1"
         data-aos="fade-right"
