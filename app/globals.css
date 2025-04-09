@@ -2977,6 +2977,9 @@ input[type="checkbox"]:checked {
   .dash-cont .row-3 {
     height: 140px;
   }
+  .bar-bubble .square-front p {
+    width: 700px;
+  }
 }
 @media (max-width: 1500px) {
   .bubble-header,
@@ -2988,6 +2991,9 @@ input[type="checkbox"]:checked {
   }
   .progress-bubble .square-front .status-bubble p {
     font-size: 30px;
+  }
+  .bar-bubble .square-front p {
+    width: 650px;
   }
 }
 
@@ -3030,6 +3036,9 @@ input[type="checkbox"]:checked {
     width: 300px !important;
     margin-top: 55px !important;
   }
+  .tax-history-req-btn {
+    font-size: 30px;
+  }
 }
 @media (max-width: 1380px) {
   .nav-menu {
@@ -3053,6 +3062,12 @@ input[type="checkbox"]:checked {
   }
   .dash-cont .row-3 {
     height: 160px;
+  }
+  .tax-history-req-btn {
+    font-size: 28px;
+  }
+  .bar-bubble .square-front p {
+    width: 600px;
   }
 }
 @media (max-width: 1300px) {
@@ -3090,6 +3105,12 @@ input[type="checkbox"]:checked {
   }
   .app-cont .row-4 .apple {
     margin-bottom: 15px;
+  }
+  .tax-history-req-btn {
+    font-size: 24px;
+  }
+  .bar-bubble .square-front p {
+    width: 500px;
   }
 }
 
@@ -3136,6 +3157,9 @@ input[type="checkbox"]:checked {
   .bubble-header,
   .header-bubble {
     font-size: 22px !important;
+  }
+  .bar-bubble .square-front p {
+    width: 400px;
   }
 }
 @media (max-width: 1124px) {
@@ -3191,6 +3215,9 @@ input[type="checkbox"]:checked {
   }
   .progress-bubble .square-front .status-bubble p {
     font-size: 24px;
+  }
+  .bar-bubble .square-front p {
+    width: 280px;
   }
 }
 @media (max-width: 1000px) {
