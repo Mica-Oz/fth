@@ -1968,6 +1968,7 @@ a {
   height: 150px;
   border-radius: 90px;
   margin-bottom: 30px;
+  padding: 0 10px;
 }
 .progress-bubble .square-front .status-bubble p {
   font-family: "filson-soft", sans-serif;
@@ -3060,7 +3061,9 @@ input[type="checkbox"]:checked {
   .progress-bubble .square-front .status-bubble p {
     font-size: 28px;
   }
-  .dash-cont .row-3 {
+  .dash-cont .row-3,
+  .dash-cont .row-5,
+  .dash-cont .row-6 {
     height: 160px;
   }
   .tax-history-req-btn {
@@ -3110,7 +3113,7 @@ input[type="checkbox"]:checked {
     font-size: 24px;
   }
   .bar-bubble .square-front p {
-    width: 500px;
+    width: 450px;
   }
 }
 
@@ -3213,6 +3216,10 @@ input[type="checkbox"]:checked {
   .header-bubble {
     font-size: 18px !important;
   }
+  .detail-bubble .bubble-header,
+  .detail-bubble .bubble-header-back {
+    min-width: 100px !important;
+  }
   .progress-bubble .square-front .status-bubble p {
     font-size: 24px;
   }
@@ -3278,33 +3285,43 @@ input[type="checkbox"]:checked {
   }
 
   .dash-cont .row-3,
-  .dash-cont .row-5 {
+  .dash-cont .row-5,
+  .dash-cont .row-6 {
     height: 300px;
+  }
+  .dash-cont .row-6 .scale-icon {
+    margin-left: 0 !important;
   }
 
   .dash-cont .row-3 .square-front,
-  .dash-cont .row-5 .square-front {
+  .dash-cont .row-5 .square-front,
+  .dash-cont .row-6 .square-front {
     flex-direction: column;
     height: 100%;
     justify-content: space-around;
     align-items: center;
   }
   .dash-cont .row-3 p,
-  .dash-cont .row-5 p {
+  .dash-cont .row-5 p,
+  .dash-cont .row-6 p {
     text-align: center;
     width: auto;
     margin-right: 20px;
   }
   .dash-cont .row-3 svg,
   .dash-cont .row-5 svg {
-    display: none;
+    margin-top: 20px;
+    margin-left: 0;
   }
   .dash-cont .row-3 a,
-  .dash-cont .row-5 a {
+  .dash-cont .row-5 a,
+  .dash-cont .row-6 a {
     margin-left: 0 !important;
+    transform: translateY(-10px);
   }
   .dash-cont .row-3 .learn-more-btn,
-  .dash-cont .row-5 .learn-more-btn {
+  .dash-cont .row-5 .learn-more-btn,
+  .dash-cont .row-6 .learn-more-btn {
     margin-right: 0 !important;
   }
   .dash-cont .row-4 {
@@ -3573,7 +3590,9 @@ input[type="checkbox"]:checked {
     text-align: center;
     margin-bottom: 10px;
   }
-  .dash-cont .row-3 {
+  .dash-cont .row-3,
+  .dash-cont .row-5,
+  .dash-cont .row-6 {
     height: 330px;
   }
   .hero .hero-btn {
@@ -3582,7 +3601,9 @@ input[type="checkbox"]:checked {
 }
 
 @media (max-width: 450) {
-  .dash-cont .row-3 {
+  .dash-cont .row-3,
+  .dash-cont .row-5,
+  .dash-cont .row-6 {
     height: 380px;
   }
   .app-cont .row-4 .app-btn {
@@ -3593,7 +3614,9 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 400) {
-  .dash-cont .row-3 {
+  .dash-cont .row-3,
+  .dash-cont .row-5,
+  .dash-cont .row-6 {
     height: 400px;
   }
   .footer-diag {
@@ -3603,7 +3626,8 @@ input[type="checkbox"]:checked {
     width: 210px !important;
   }
   .dash-cont .row-3 p,
-  .dash-cont .row-5 p {
+  .dash-cont .row-5 p,
+  .dash-cont .row-6 p {
     font-size: 20px;
   }
   .footer-diag .row-5 .sub-row h5 {
@@ -3616,7 +3640,9 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 300) {
-  .dash-cont .row-3 {
+  .dash-cont .row-3,
+  .dash-cont .row-5,
+  .dash-cont .row-6 {
     height: 500px;
   }
 }
