@@ -2997,7 +2997,6 @@ input[type="checkbox"]:checked {
   }
   .nav .logo-cont {
     scale: 0.9;
-    width: 80%;
   }
   .nav-menu {
     font-size: 12px;
@@ -3082,6 +3081,9 @@ input[type="checkbox"]:checked {
     width: 70% !important;
     min-width: 200px;
     left: 18% !important;
+  }
+  .app-cont .row-3 h4 {
+    margin-top: 0;
   }
   .app-cont .row-4 {
     flex-direction: column;
@@ -3230,6 +3232,7 @@ input[type="checkbox"]:checked {
   }
   .footer-diag .row-5 .sub-row {
     justify-content: space-between;
+    width: 100%;
   }
   .footer-diag .row-5 .group2,
   .footer-diag .row-5 .group4 {
@@ -3432,8 +3435,12 @@ input[type="checkbox"]:checked {
   }
   .footer-diag .row-4 {
     flex-direction: column;
-    height: 200px;
-    justify-content: space-around;
+    height: 180px;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .footer-diag .row-4 .apple {
+    margin-right: 0 !important;
   }
 }
 
@@ -3551,6 +3558,9 @@ input[type="checkbox"]:checked {
   .dash-cont .row-3 {
     height: 380px;
   }
+  .app-cont .row-4 .app-btn {
+    width: 230px !important;
+  }
   .footer-diag {
     height: 2850px;
   }
@@ -3561,6 +3571,16 @@ input[type="checkbox"]:checked {
   }
   .footer-diag {
     height: 2900px;
+  }
+  .app-cont .row-4 .app-btn {
+    width: 210px !important;
+  }
+  .dash-cont .row-3 p,
+  .dash-cont .row-5 p {
+    font-size: 20px;
+  }
+  .footer-diag .row-5 .sub-row h5 {
+    font-size: 20px;
   }
 }
 @media (max-width: 350) {
