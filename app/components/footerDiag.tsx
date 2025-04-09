@@ -7,7 +7,7 @@ const FooterDiag = () => {
   return (
     <>
       <div
-        className="footer-diag about"
+        className="footer-diag"
         style={{ backgroundImage: `url(${footerBG.src})` }}
       >
         <div className="diag"></div>

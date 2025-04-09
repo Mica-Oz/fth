@@ -39,7 +39,7 @@ const SplitWith2 = () => {
             </p>
           </div>
         </div>
-        <div className="header-bubble-back"></div>
+        <div className="header-bubble-back auth"></div>
         <div className="back-square"></div>
       </div>
     </>

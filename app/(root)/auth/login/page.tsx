@@ -34,7 +34,7 @@ function AuthContent() {
             session_duration_minutes: 60,
           })
           .then(() => {
-            alert(`successfully authenticated`);
+            // alert(`successfully authenticated`);
             router.refresh();
           })
           .catch((error) => {
