@@ -67,7 +67,7 @@ const Action = () => {
 
         <div className="square">
           <p
-            className="sub-heading"
+            className="sub-heading hide"
             style={{ visibility: "hidden", marginBottom: "0" }}
           >
             We just need a few more details before we can submit your request!

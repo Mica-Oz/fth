@@ -106,7 +106,7 @@ const Action = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-3"
+        className="split-bubble-with-title action-bubble action-3 action-3-1"
         data-aos="fade-right"
         data-aos-delay="150"
       >
@@ -116,7 +116,9 @@ const Action = () => {
           <p className="sub-heading">
             We just need a few more details before we can submit your request!
           </p>
-          <p className="form-group">Taxpayer Information</p>
+          <p className="form-group" style={{ marginTop: "0" }}>
+            Taxpayer Information
+          </p>
 
           {/* Add ref to the form */}
           <form ref={formRef} className="form-cont">

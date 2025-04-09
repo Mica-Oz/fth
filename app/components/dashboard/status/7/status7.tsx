@@ -115,12 +115,12 @@ const Dash = () => {
 
         <div className="to-do-bubble">
           <div className="square-front">
-            <p className="to-do-head">CONGRATS!</p>
-            <p className="to-do-msg">
+            <p className="to-do-head congrats">CONGRATS!</p>
+            <p className="to-do-msg" style={{ fontSize: "22px" }}>
               You have taken the necessary steps to reconcile your balance with
               the IRS!{" "}
             </p>
-            <p className="to-do-head" style={{ fontSize: "34px" }}>
+            <p className="to-do-head congrats" style={{ fontSize: "34px" }}>
               Questions?
             </p>
 

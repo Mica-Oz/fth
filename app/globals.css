@@ -3150,6 +3150,9 @@ input[type="checkbox"]:checked {
   .dash-cont .row-6 {
     height: 250px;
   }
+  .congrats {
+    font-size: 40px !important;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -3204,6 +3207,9 @@ input[type="checkbox"]:checked {
   }
   .action-2 {
     height: 720px !important;
+  }
+  .congrats {
+    font-size: 35px !important;
   }
 }
 @media (max-width: 1124px) {
@@ -3364,6 +3370,7 @@ input[type="checkbox"]:checked {
     margin-right: 20px;
   }
   .dash-cont .row-3 svg,
+  .dash-cont .row-3 img,
   .dash-cont .row-5 svg,
   .dash-cont .row-6 img {
     margin-top: 20px;
@@ -3392,6 +3399,23 @@ input[type="checkbox"]:checked {
   .dash-cont .bubble-header,
   .header-bubble {
     font-size: 24px !important;
+  }
+}
+@media (max-width: 900px) {
+  .action-3-1 {
+    height: 800px !important;
+  }
+  .action-3 {
+    height: 650px;
+  }
+  .action-3 .form-group {
+    margin-top: 50px;
+  }
+  .action-3 .form-cont {
+    height: 60%;
+  }
+  .hide {
+    display: none;
   }
 }
 @media (max-width: 850px) {
@@ -3687,6 +3711,13 @@ input[type="checkbox"]:checked {
     align-self: center;
     margin-right: 0;
   }
+  .dash-cont .bubble-header,
+  .header-bubble {
+    font-size: 14px !important;
+  }
+  .action-3 {
+    height: 700px;
+  }
 }
 
 @media (max-width: 450) {
@@ -3703,6 +3734,16 @@ input[type="checkbox"]:checked {
   }
   .action-2 {
     margin-right: 35px;
+  }
+  .dash-cont .bubble-header,
+  .header-bubble {
+    font-size: 14px !important;
+  }
+  .action-3 {
+    height: 750px;
+  }
+  .dash-cont {
+    margin-right: 15px;
   }
 }
 @media (max-width: 400) {
@@ -3728,10 +3769,23 @@ input[type="checkbox"]:checked {
   .action-2 {
     margin-right: 35px;
   }
+  .action-3 {
+    height: 800px;
+  }
+  .tax-history-req-btn.rep {
+    height: 200px;
+    border-radius: 75px;
+  }
+  .congrats {
+    font-size: 28px !important;
+  }
 }
 @media (max-width: 350) {
   .footer-diag {
     height: 2950px;
+  }
+  .congrats {
+    font-size: 22px !important;
   }
 }
 @media (max-width: 300) {
@@ -3748,5 +3802,8 @@ input[type="checkbox"]:checked {
   }
   .hero h5 {
     font-size: 40px;
+  }
+  .action-3 {
+    height: 850px;
   }
 }

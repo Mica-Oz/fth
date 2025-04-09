@@ -59,7 +59,7 @@ const Action = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1"
+        className="split-bubble-with-title action-bubble action-1-1 action-3"
         data-aos="fade-right"
         data-aos-delay="150"
       >
@@ -67,7 +67,7 @@ const Action = () => {
 
         <div className="square">
           <p
-            className="sub-heading"
+            className="sub-heading hide"
             style={{ visibility: "hidden", marginBottom: "0" }}
           >
             We just need a few more details before we can submit your request!

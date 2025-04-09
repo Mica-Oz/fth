@@ -119,7 +119,7 @@ const Dash = () => {
             <p className="to-do-msg">
               You are Eligible for multiple Fresh Start Payment Plans!
             </p>
-            <Link href="/contact" className="tax-history-req-btn">
+            <Link href="/contact" className="tax-history-req-btn rep">
               CONTACT OUR REPS
               <br />
               TO REVIEW PLANS
