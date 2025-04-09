@@ -3681,6 +3681,7 @@ input[type="checkbox"]:checked {
   }
   .action-2 {
     height: 750px !important;
+    margin-right: 40px;
   }
   .action-2 .next-btn {
     align-self: center;
@@ -3699,6 +3700,9 @@ input[type="checkbox"]:checked {
   }
   .footer-diag {
     height: 2850px;
+  }
+  .action-2 {
+    margin-right: 35px;
   }
 }
 @media (max-width: 400) {
@@ -3720,6 +3724,9 @@ input[type="checkbox"]:checked {
   }
   .footer-diag .row-5 .sub-row h5 {
     font-size: 20px;
+  }
+  .action-2 {
+    margin-right: 35px;
   }
 }
 @media (max-width: 350) {
