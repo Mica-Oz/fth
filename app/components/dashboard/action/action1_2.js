@@ -259,7 +259,7 @@ const Action1_2 = () => {
         </div>
       )}
       <div
-        className="split-bubble-with-title action-bubble action-1-1"
+        className="split-bubble-with-title action-bubble action-1-1 action-1-2"
         data-aos="fade-right"
         data-aos-delay="150"
       >
