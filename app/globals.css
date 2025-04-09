@@ -3236,26 +3236,33 @@ input[type="checkbox"]:checked {
     margin-bottom: 90px;
   }
 
-  .dash-cont .row-3 {
+  .dash-cont .row-3,
+  .dash-cont .row-5 {
     height: 300px;
   }
-  .dash-cont .row-3 .square-front {
+
+  .dash-cont .row-3 .square-front,
+  .dash-cont .row-5 .square-front {
     flex-direction: column;
     height: 100%;
     justify-content: space-around;
     align-items: center;
   }
-  .dash-cont .row-3 p {
+  .dash-cont .row-3 p,
+  .dash-cont .row-5 p {
     text-align: center;
     width: auto;
   }
-  .dash-cont .row-3 svg {
+  .dash-cont .row-3 svg,
+  .dash-cont .row-5 svg {
     display: none;
   }
-  .dash-cont .row-3 a {
+  .dash-cont .row-3 a,
+  .dash-cont .row-5 a {
     margin-left: 0 !important;
   }
-  .dash-cont .row-3 .learn-more-btn {
+  .dash-cont .row-3 .learn-more-btn,
+  .dash-cont .row-5 .learn-more-btn {
     margin-right: 0 !important;
   }
   .dash-cont .row-4 {
