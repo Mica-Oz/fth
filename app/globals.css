@@ -1894,7 +1894,7 @@ a {
 }
 .dash-cont .progress-bubble {
   width: 57%;
-  height: 100%;
+  height: 400px;
   position: relative;
 }
 
@@ -1970,6 +1970,7 @@ a {
   font-size: 35px;
   font-weight: 600;
   color: #0a1763;
+  text-align: center;
 }
 .progress-bubble .square-back {
   width: 100%;
@@ -2007,6 +2008,11 @@ a {
   font-size: 50px;
   font-weight: 600;
   margin: 10px;
+  background-color: white;
+  border-radius: 50px;
+  border: 3px solid;
+  padding: 5px 30px;
+  text-align: center;
 }
 .to-do-bubble .square-front .to-do-msg {
   font-size: 30px;
@@ -2064,7 +2070,7 @@ a {
   z-index: 1;
 }
 .dash-cont .row-3 {
-  height: 90px;
+  height: 110px;
   width: 80%;
   margin-bottom: 90px;
   position: relative;
@@ -2112,6 +2118,10 @@ a {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
+.row-3 .learn-more-btn {
+  width: 330px;
+}
+
 .learn-more-btn:hover {
   background-color: #0a1763;
   color: white;
@@ -2127,7 +2137,7 @@ a {
 }
 .detail-bubble {
   width: 30%;
-  height: 100%;
+  height: 400px;
   position: relative;
 }
 .detail-bubble .square-front {
@@ -2957,11 +2967,23 @@ input[type="checkbox"]:checked {
   .header-bubble {
     font-size: 30px !important;
   }
+  .to-do-msg {
+    font-size: 26px !important;
+  }
+  .dash-cont .row-3 {
+    height: 140px;
+  }
 }
 @media (max-width: 1500px) {
   .bubble-header,
   .header-bubble {
     font-size: 28px !important;
+  }
+  .to-do-msg {
+    font-size: 24px !important;
+  }
+  .progress-bubble .square-front .status-bubble p {
+    font-size: 30px;
   }
 }
 
@@ -3019,6 +3041,15 @@ input[type="checkbox"]:checked {
   .about {
     background-position: right -600px center;
   }
+  .to-do-msg {
+    font-size: 22px !important;
+  }
+  .progress-bubble .square-front .status-bubble p {
+    font-size: 28px;
+  }
+  .dash-cont .row-3 {
+    height: 160px;
+  }
 }
 @media (max-width: 1300px) {
   .nav-menu {
@@ -3041,7 +3072,8 @@ input[type="checkbox"]:checked {
     min-width: 200px;
     left: 15% !important;
   }
-  .header-bubble-back {
+  .header-bubble-back,
+  .bubble-header-back {
     width: 70% !important;
     min-width: 200px;
     left: 18% !important;
@@ -3144,6 +3176,9 @@ input[type="checkbox"]:checked {
   .header-bubble {
     font-size: 18px !important;
   }
+  .progress-bubble .square-front .status-bubble p {
+    font-size: 24px;
+  }
 }
 @media (max-width: 1000px) {
   .square .box-foot {
@@ -3188,6 +3223,48 @@ input[type="checkbox"]:checked {
   .footer-diag .row-5 .group2,
   .footer-diag .row-5 .group4 {
     text-align: right;
+  }
+  .dash-cont .row-2 {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+  .dash-cont .progress-bubble,
+  .dash-cont .to-do-bubble {
+    width: 100% !important;
+  }
+  .dash-cont .to-do-bubble {
+    margin-bottom: 90px;
+  }
+
+  .dash-cont .row-3 {
+    height: 300px;
+  }
+  .dash-cont .row-3 .square-front {
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .dash-cont .row-3 p {
+    text-align: center;
+    width: auto;
+  }
+  .dash-cont .row-3 svg {
+    display: none;
+  }
+  .dash-cont .row-3 a {
+    margin-left: 0 !important;
+  }
+  .dash-cont .row-3 .learn-more-btn {
+    margin-right: 0 !important;
+  }
+  .dash-cont .row-4 {
+    flex-direction: column;
+    height: 1400px;
+  }
+  .dash-cont .row-4 .detail-bubble {
+    width: 100%;
+    height: 400px;
   }
 }
 @media (max-width: 850px) {
@@ -3419,5 +3496,30 @@ input[type="checkbox"]:checked {
     margin-left: 90px;
     font-size: 20px;
     width: 160px;
+  }
+  .row-3 .learn-more-btn {
+    width: 230px;
+    height: 70px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .dash-cont .row-3 {
+    height: 330px;
+  }
+}
+
+@media (max-width: 450) {
+  .dash-cont .row-3 {
+    height: 380px;
+  }
+}
+@media (max-width: 400) {
+  .dash-cont .row-3 {
+    height: 400px;
+  }
+}
+@media (max-width: 300) {
+  .dash-cont .row-3 {
+    height: 500px;
   }
 }
