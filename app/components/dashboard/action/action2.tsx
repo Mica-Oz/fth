@@ -24,7 +24,7 @@ const Action = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1"
+        className="split-bubble-with-title action-bubble action-1-1 action-2"
         data-aos="fade-right"
         data-aos-delay="150"
       >
@@ -53,7 +53,7 @@ const Action = () => {
             <iframe
               // src={"https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf"}
               src="https://docs.google.com/viewer?url=https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf&embedded=true"
-              width={800}
+              width={"100%"}
               height={300}
               className="icon3"
             ></iframe>

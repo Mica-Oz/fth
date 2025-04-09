@@ -2822,11 +2822,24 @@ input[type="checkbox"]:checked {
   background-color: #0a1763;
   color: white;
 }
+
+.action-2 {
+  height: 680px !important;
+}
+.action-2 .next-btn {
+  width: 300px !important;
+  height: 110px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+}
 .report-cont {
-  width: 800px;
+  width: 80%;
   height: 300px;
   margin-top: 30px;
   overflow-y: scroll;
+  margin-bottom: 30px;
 }
 
 .sig-pad-cont {
@@ -3187,7 +3200,10 @@ input[type="checkbox"]:checked {
     width: 360px;
   }
   .action-bubble {
-    width: 90%;
+    width: 86%;
+  }
+  .action-2 {
+    height: 720px !important;
   }
 }
 @media (max-width: 1124px) {
@@ -3420,6 +3436,11 @@ input[type="checkbox"]:checked {
   .credit-score .credit-report-btn {
     width: 350px;
     font-size: 32px;
+  }
+  .action-2 .next-btn {
+    width: 200px !important;
+    height: 110px !important;
+    font-size: 20px;
   }
 }
 @media (max-width: 770px) {
@@ -3657,6 +3678,13 @@ input[type="checkbox"]:checked {
   }
   .hero .hero-btn {
     padding: 10px 20px;
+  }
+  .action-2 {
+    height: 750px !important;
+  }
+  .action-2 .next-btn {
+    align-self: center;
+    margin-right: 0;
   }
 }
 
