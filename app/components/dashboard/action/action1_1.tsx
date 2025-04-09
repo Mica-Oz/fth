@@ -58,7 +58,7 @@ const Action1_1 = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1"
+        className="split-bubble-with-title action-bubble action-1-1 action1-1"
         data-aos="fade-right"
         data-aos-delay="150"
       >

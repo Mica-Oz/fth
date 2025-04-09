@@ -319,10 +319,10 @@ const Action1_2 = () => {
                 Terms & Condtitions
               </span>
             </p>
-            <button onClick={handleSubmit} className="next-btn">
-              SUBMIT
-            </button>
           </div>
+          <button onClick={handleSubmit} className="next-btn">
+            SUBMIT
+          </button>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

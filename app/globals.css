@@ -1965,6 +1965,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 150px;
   border-radius: 90px;
   margin-bottom: 30px;
@@ -1976,6 +1977,7 @@ a {
   font-weight: 600;
   color: #0a1763;
   text-align: center;
+  margin: 5px;
 }
 .progress-bubble .square-back {
   width: 100%;
@@ -2965,6 +2967,8 @@ input[type="checkbox"]:checked {
   align-items: center;
   justify-content: flex-end;
   align-self: flex-end;
+  position: absolute;
+  bottom: 100px;
 }
 .sig-btm-cont p {
   transform: translateY(13px);
@@ -2976,6 +2980,7 @@ input[type="checkbox"]:checked {
 .sig-btm-cont input {
   transform: translateY(12px);
   margin-right: 15px;
+  z-index: 50;
 }
 
 @media (max-width: 1600px) {
@@ -2999,6 +3004,9 @@ input[type="checkbox"]:checked {
   }
   .bar-bubble .square-front p {
     width: 620px;
+  }
+  .row-6.alert p {
+    width: 800px !important;
   }
 }
 @media (max-width: 1500px) {
@@ -3400,6 +3408,9 @@ input[type="checkbox"]:checked {
   .header-bubble {
     font-size: 24px !important;
   }
+  .row-6.alert p {
+    width: 90% !important;
+  }
 }
 @media (max-width: 900px) {
   .action-3-1 {
@@ -3566,7 +3577,7 @@ input[type="checkbox"]:checked {
   }
   .dash-cont .bubble-header,
   .header-bubble {
-    font-size: 20px !important;
+    font-size: 24px !important;
   }
 }
 @media (max-width: 675px) {
@@ -3586,7 +3597,12 @@ input[type="checkbox"]:checked {
     margin-right: 0 !important;
   }
 }
-
+@media (max-width: 625px) {
+  .bubble-header.break {
+    display: flex;
+    flex-direction: column;
+  }
+}
 @media (max-width: 600px) {
   .hero .hero-btn {
     font-size: 20px;
@@ -3644,6 +3660,9 @@ input[type="checkbox"]:checked {
   .dash-cont .bubble-header,
   .header-bubble {
     font-size: 18px !important;
+  }
+  .bubble-header.break {
+    font-size: 24px !important;
   }
 }
 @media (max-width: 553px) {
@@ -3718,6 +3737,15 @@ input[type="checkbox"]:checked {
   .action-3 {
     height: 700px;
   }
+  .bubble-header.break {
+    display: flex;
+    flex-direction: column;
+    font-size: 22px !important;
+  }
+  .sig-btm-cont p {
+    width: 60%;
+    text-align: right;
+  }
 }
 
 @media (max-width: 450) {
@@ -3745,12 +3773,21 @@ input[type="checkbox"]:checked {
   .dash-cont {
     margin-right: 15px;
   }
+  .bubble-header.break {
+    font-size: 20px !important;
+  }
 }
 @media (max-width: 400) {
   .dash-cont .row-3,
   .dash-cont .row-5,
   .dash-cont .row-6 {
     height: 400px;
+  }
+  .dash-cont .row-3.long {
+    height: 420px;
+  }
+  .dash-cont .row-3.long .learn-more-btn {
+    width: 200px;
   }
   .footer-diag {
     height: 2900px;
@@ -3778,6 +3815,18 @@ input[type="checkbox"]:checked {
   }
   .congrats {
     font-size: 28px !important;
+  }
+  .bubble-header.break {
+    font-size: 18px !important;
+  }
+  .bubble-header,
+  .header-bubble,
+  .header-bubble-back,
+  .bubble-header-back {
+    min-width: 150px;
+  }
+  .action1-1 {
+    height: 720px !important;
   }
 }
 @media (max-width: 350) {

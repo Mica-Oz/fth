@@ -86,7 +86,10 @@ const Dash = () => {
       </div>
       <div className="row-2">
         <div className="progress-bubble">
-          <div className="bubble-header">Tax History Report Progress</div>
+          <div className="bubble-header break">
+            <div>Tax History&nbsp;</div>
+            <div> Report Progress</div>
+          </div>
           <div className="square-front">
             <div className="circle-cont">
               <div className="outer-circle complete"></div>
@@ -147,7 +150,7 @@ const Dash = () => {
       </div>
       <div className="row-4">
         <div className="detail-bubble">
-          <div className="bubble-header" style={{ fontSize: "30px" }}>
+          <div className="bubble-header break" style={{ fontSize: "30px" }}>
             Current Liability
           </div>
 
@@ -158,7 +161,7 @@ const Dash = () => {
           <div className="square-back"></div>
         </div>
         <div className="detail-bubble">
-          <div className="bubble-header" style={{ fontSize: "30px" }}>
+          <div className="bubble-header break" style={{ fontSize: "30px" }}>
             Years Unfiled
           </div>
 
@@ -173,7 +176,7 @@ const Dash = () => {
           <div className="square-back"></div>
         </div>
         <div className="detail-bubble">
-          <div className="bubble-header" style={{ fontSize: "30px" }}>
+          <div className="bubble-header break" style={{ fontSize: "30px" }}>
             Payment Status
           </div>
 
