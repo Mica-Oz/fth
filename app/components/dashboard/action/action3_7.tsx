@@ -69,12 +69,14 @@ const Action = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-3"
+        className="split-bubble-with-title action-bubble action-3 action-3-7"
         data-aos="fade-right"
         data-aos-delay="150"
       >
-        <div className="header-bubble">Eligibility Request Form</div>
-
+        <div className="header-bubble break">
+          <div>Eligibility&nbsp;</div>
+          <div>Request Form</div>
+        </div>
         <div className="square">
           <p
             className="sub-heading hide"
