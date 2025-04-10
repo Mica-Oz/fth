@@ -84,7 +84,7 @@ const Dash = () => {
             Submit Eligibility Request Form to see what Fresh Start programs you
             are eligible for.
           </p>
-          <Link href={"/dashboard/action3"} style={{ marginLeft: "auto" }}>
+          <Link href={"/dashboard/action3/1"} style={{ marginLeft: "auto" }}>
             <div className="learn-more-btn">CHECK ELIGIBILITY</div>
           </Link>
         </div>
