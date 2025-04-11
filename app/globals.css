@@ -177,7 +177,7 @@ a {
   background-color: #0a1763;
   transform: scale(1.05) !important;
 }
-.about {
+.about.process {
   min-height: 1275px; /* Still ensures it fills the viewport */
   padding-top: 200px; /* Adjust the padding to create the space you need */
   width: 100vw;
@@ -3087,8 +3087,8 @@ input[type="checkbox"]:checked {
   /* .dropdown-cont {
     display: block;
   } */
-  .about {
-    /* background-position: right -400px center; */
+  .about.process {
+    background-position: right -400px center;
   }
   .learn-more {
     left: 77%;
@@ -3151,8 +3151,8 @@ input[type="checkbox"]:checked {
   .nav-btn-cont {
     scale: 0.65;
   }
-  .about {
-    /* background-position: right -600px center; */
+  .about.process {
+    background-position: right -600px center;
   }
   .to-do-msg {
     font-size: 22px !important;
@@ -3254,8 +3254,8 @@ input[type="checkbox"]:checked {
   .square .box-foot-back {
     transform: translate(21.5vw, 282%);
   }
-  .about {
-    /* background-position: right -700px center; */
+  .about.process {
+    background-position: right -700px center;
   }
   .learn-more a {
     left: 84%;
@@ -3329,8 +3329,8 @@ input[type="checkbox"]:checked {
   .square .box-foot-back {
     transform: translate(21vw, 282%);
   }
-  .about {
-    /* background-position: right -800px center; */
+  .about.process {
+    background-position: right -800px center;
   }
   .thing {
     font-size: 28px !important;
@@ -3987,6 +3987,9 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 400) {
+  .heading {
+    left: 30px;
+  }
   .dash-cont .row-3,
   .dash-cont .row-5,
   .dash-cont .row-6 {

@@ -154,7 +154,7 @@ export default function Home() {
         </div>
       </div>
       <div
-        className="about"
+        className="about process"
         style={{ backgroundImage: `url(${aboutBG2.src})` }}
       >
         <h1 className="heading" data-aos="fade-right" data-aos-delay="200">
