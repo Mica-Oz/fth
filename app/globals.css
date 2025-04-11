@@ -3423,8 +3423,11 @@ input[type="checkbox"]:checked {
   .bubble-cont.login .form-row-7 {
     width: 90%;
   }
-  .form-row-7 .checkobox {
-    width: 30px !important;
+  .form-row-7 .checkbox {
+    width: 50px !important;
+  }
+  .form-row-7 p {
+    font-size: 14px;
   }
   .dash-cont .row-2 {
     flex-direction: column-reverse;
