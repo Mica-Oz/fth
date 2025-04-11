@@ -3690,7 +3690,7 @@ input[type="checkbox"]:checked {
     font-size: 32px;
   }
   .footer-diag {
-    transform: translateY(-1290px);
+    transform: translateY(-1230px);
   }
   .bubble-header,
   .header-bubble {
