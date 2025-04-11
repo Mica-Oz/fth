@@ -3018,7 +3018,11 @@ input[type="checkbox"]:checked {
 }
 @media (max-width: 1663px) {
   .split-bubble-with-title {
-    height: 650px;
+    height: 650px !important;
+  }
+  .split-bubble-with-title .square .cont {
+    overflow-y: scroll;
+    padding: 0px 15px 15px 0;
   }
 }
 @media (max-width: 1600px) {
@@ -3466,6 +3470,10 @@ input[type="checkbox"]:checked {
   }
   .split-bubble-with-title .box-pic {
     width: 25%;
+  }
+
+  .split-bubble-with-title.fin101-bubble {
+    height: 650px !important;
   }
 }
 @media (max-width: 900px) {
