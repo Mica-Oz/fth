@@ -3768,7 +3768,7 @@ input[type="checkbox"]:checked {
     width: 80vw;
   }
   .bottom-heading {
-    margin-top: -10px;
+    margin-top: 20px;
     left: 35px;
   }
   #process-heading {
