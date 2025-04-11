@@ -12,46 +12,60 @@ const Nav = () => {
   const { userData } = useAppContext();
 
   const stytch = useStytch();
-  // const [modalToggled, setmodalToggled] = useState<boolean>(false);
-  const modalToggleHandler: React.MouseEventHandler<HTMLDivElement> = () => {
-    const modal = document.querySelector(".modal") as HTMLElement;
-    if (modal.style.display === "block") {
-      modal.style.display = "none";
-    } else {
-      modal.style.display = "block";
-    }
-  };
-  // Close modal function
-  const closeModal = () => {
-    const modal = document.querySelector(".modal") as HTMLElement;
-    if (modal && modal.style.display === "block") {
-      modal.style.display = "none";
-    }
+  const modalToggleHandler =
+    (modalId: string): React.MouseEventHandler<HTMLDivElement> =>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (event) => {
+      console.log("clicked", modalId);
+      const modal = document.getElementById(modalId) as HTMLElement;
+      if (modal.style.display === "block") {
+        modal.style.display = "none";
+      } else {
+        modal.style.display = "block";
+      }
+    };
+
+  // Or  close all modals
+  const closeAllModals = () => {
+    const modals = document.querySelectorAll(
+      ".modal"
+    ) as NodeListOf<HTMLElement>;
+    modals.forEach((modal) => {
+      if (modal.style.display === "block") {
+        modal.style.display = "none";
+      }
+    });
   };
 
   // Add event listeners for clicks outside the modal and scroll
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Check if modal is open and click is outside both modal content and button
-      const modal = document.querySelector(".modal") as HTMLElement;
-      const userMenu = document.querySelector(".user-menu") as HTMLElement;
-      const userMenuBtn = document.querySelector(
+      // Get all modals and their associated buttons
+      const modals = document.querySelectorAll(
+        ".modal"
+      ) as NodeListOf<HTMLElement>;
+      const userMenuBtns = document.querySelectorAll(
         ".user-menu-btn"
-      ) as HTMLElement;
+      ) as NodeListOf<HTMLElement>;
 
-      if (
-        modal &&
-        modal.style.display === "block" &&
-        !userMenu.contains(event.target as Node) &&
-        !userMenuBtn.contains(event.target as Node)
-      ) {
-        closeModal();
-      }
+      modals.forEach((modal, index) => {
+        if (modal.style.display === "block") {
+          const userMenu = modal.querySelector(".user-menu") as HTMLElement;
+          const userMenuBtn = userMenuBtns[index];
+
+          if (
+            !userMenu.contains(event.target as Node) &&
+            !userMenuBtn.contains(event.target as Node)
+          ) {
+            modal.style.display = "none";
+          }
+        }
+      });
     };
 
     // Handle scroll events
     const handleScroll = () => {
-      closeModal();
+      closeAllModals();
     };
 
     // Add event listeners
@@ -103,7 +117,10 @@ const Nav = () => {
           </div>
         </div>
         <div className="nav-btn-cont auth">
-          <div className="user-menu-btn" onClick={modalToggleHandler}>
+          <div
+            className="user-menu-btn"
+            onClick={modalToggleHandler("wide-modal")}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="35"
@@ -119,7 +136,7 @@ const Nav = () => {
               />
             </svg>
           </div>
-          <div className="modal">
+          <div className="modal" id="wide-modal">
             <div className="modal-content">
               <div className="triangle"></div>
               <div className="triangle2"></div>
@@ -139,7 +156,67 @@ const Nav = () => {
             </div>
           </div>
         </div>
-        <div className="dropdown-cont">
+        <div className="nav-btn-cont dropdown-cont auth">
+          <div
+            className="user-menu-btn"
+            onClick={modalToggleHandler("narrow-modal")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              fill="#0a1763"
+              className="bi bi-list"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+              />
+            </svg>
+          </div>
+          <div className="modal" id="narrow-modal">
+            <div className="modal-content">
+              <div className="triangle"></div>
+              <div className="triangle2"></div>
+              <div className="triangle3"></div>
+              <div className="user-menu narrow auth">
+                <Link href={"/about"} className="about-li user-menu-li">
+                  ABOUT
+                </Link>
+                <Link
+                  href={"/resolution"}
+                  className="resolution-li user-menu-li"
+                >
+                  TAX RESOLUTION
+                </Link>
+                <Link href={"/blog"} className="blog-li user-menu-li">
+                  BLOG
+                </Link>
+                <Link href={"/faq"} className="faq-li user-menu-li">
+                  FAQ
+                </Link>
+                <Link href={"/contact"} className="contact-li user-menu-li">
+                  CONTACT
+                </Link>
+                <Link href={"/fin101"} className="fin101-li user-menu-li">
+                  FIN101
+                </Link>
+                <Link
+                  href={"/dashboard/" + route}
+                  className="dash-li user-menu-li"
+                >
+                  DASHBOARD
+                </Link>
+                <div onClick={handleLogOut} className="logout-li user-menu-li">
+                  LOG OUT
+                </div>
+              </div>
+              <div className="user-menu-back auth narrow"></div>
+            </div>
+          </div>
+        </div>
+        {/* <div className="dropdown-cont">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="40"
@@ -153,7 +230,7 @@ const Nav = () => {
               d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
             />
           </svg>
-        </div>
+        </div> */}
       </div>
     );
   } else {

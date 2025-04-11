@@ -2739,7 +2739,7 @@ input[type="checkbox"]:checked {
   display: none;
   position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
-  right: -70px;
+  right: -80px;
   top: 55px;
   width: 100vw; /* Full width */
   height: 100vh; /* Full height */
@@ -2753,7 +2753,7 @@ input[type="checkbox"]:checked {
   background-color: #0a1763;
   position: absolute;
   top: 10px;
-  right: 55px;
+  right: 80px;
 
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
   z-index: 4;
@@ -2764,7 +2764,7 @@ input[type="checkbox"]:checked {
   background-color: white;
   position: absolute;
   top: 13px;
-  right: 55px;
+  right: 80px;
   z-index: 6;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
@@ -2774,7 +2774,7 @@ input[type="checkbox"]:checked {
   background-color: #0a1763;
   position: absolute;
   top: 11px;
-  right: 45px;
+  right: 70px;
   z-index: 3;
   clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
 }
@@ -2785,7 +2785,7 @@ input[type="checkbox"]:checked {
   background-color: white;
   position: absolute;
   top: 23px;
-  right: 25px;
+  right: 45px;
   border-radius: 20px;
   z-index: 5;
   border: #0a1763 3px solid;
@@ -2794,13 +2794,16 @@ input[type="checkbox"]:checked {
   align-items: center;
   justify-content: center;
 }
+.user-menu.narrow.auth {
+  height: 350px;
+}
 .user-menu-back {
   width: 300px;
   height: 110px;
   background-color: #0a1763;
   position: absolute;
   top: 28px;
-  right: 10px;
+  right: 30px;
   border-radius: 20px;
   z-index: 3;
   border: #0a1763 3px solid;
@@ -2808,6 +2811,9 @@ input[type="checkbox"]:checked {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.user-menu-back.narrow.auth {
+  height: 360px;
 }
 .user-menu-li {
   font-family: "filson-soft", sans-serif;
@@ -3032,7 +3038,7 @@ input[type="checkbox"]:checked {
 
 @media (max-width: 1450px) {
   .nav {
-    padding: 10px 20px 10px 0;
+    padding: 10px 30px 10px 0;
   }
   .nav .logo-cont {
     scale: 0.9;
@@ -3072,7 +3078,19 @@ input[type="checkbox"]:checked {
   .tax-history-req-btn {
     font-size: 30px;
   }
+  .modal {
+    top: 63px;
+    right: -70px;
+    width: 200vw;
+    height: 200vh;
+  }
 }
+@media (max-width: 1380px) {
+  .modal {
+    top: 73px;
+  }
+}
+
 @media (max-width: 1244px) {
   .action-1-2 {
     height: 650px;
@@ -3235,7 +3253,15 @@ input[type="checkbox"]:checked {
   .dropdown-cont {
     display: block;
   }
-
+  .nav-btn-cont.auth {
+    width: 40px;
+    scale: 1;
+    margin-right: 50px;
+  }
+  .modal {
+    right: -65px;
+    top: 58;
+  }
   .hero h5 {
     font-size: 55px;
   }
