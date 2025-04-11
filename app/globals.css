@@ -3962,8 +3962,8 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 400) {
-  .about.process .heading {
-    left: 10px;
+  .process .heading {
+    left: 30px !important;
   }
   .dash-cont .row-3,
   .dash-cont .row-5,
