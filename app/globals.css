@@ -870,7 +870,7 @@ a {
   animation: 0.7s ease-out 0s 1 slideInFromLeft;
   position: relative; /* This is crucial for positioning the boxes inside */
   width: 35vw;
-  min-width: 400px;
+  min-width: 300px;
   /* Same width as the boxes */
   height: 400px; /* Same height as the boxes */
   margin-bottom: 40px;
