@@ -3949,6 +3949,9 @@ input[type="checkbox"]:checked {
   .blogBG {
     transform: translateY(50px);
   }
+  .footer-diag {
+    height: 2870px;
+  }
 }
 
 @media (max-width: 400) {
