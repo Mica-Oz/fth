@@ -3272,7 +3272,7 @@ input[type="checkbox"]:checked {
     margin-right: 50px;
   }
   .modal {
-    right: -65px;
+    right: -80px;
     top: 58;
   }
   .hero h5 {
@@ -3643,6 +3643,9 @@ input[type="checkbox"]:checked {
   .dash-cont .bubble-header,
   .header-bubble {
     font-size: 24px !important;
+  }
+  .nav-btn-cont.auth {
+    margin-right: 30px;
   }
 }
 @media (max-width: 675px) {
