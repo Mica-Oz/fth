@@ -1168,7 +1168,7 @@ a {
   transform: translateY(-1210px);
 }
 .footer-diag.blog {
-  top: 4570px !important;
+  top: 4470px !important;
 }
 .footer-diag .diag {
   height: 1900px;
@@ -1792,7 +1792,7 @@ a {
 }
 .blog-head {
   width: 100vw;
-  height: 930px;
+  height: 935px;
   background-position: top;
   background-size: cover;
   position: relative;
@@ -1827,7 +1827,7 @@ a {
 
   background-color: #e2f1f1;
   position: absolute;
-  top: 1010px;
+  top: 1008px;
 }
 .diag.blog {
   background-color: #e2f1f1;
@@ -4000,6 +4000,12 @@ input[type="checkbox"]:checked {
 
   .resolution .split-bubble-with-title .cont p {
     font-size: 18px;
+  }
+  .blog-head {
+    height: 990px;
+  }
+  .blogBG {
+    top: 1058px;
   }
 }
 @media (max-width: 350) {
