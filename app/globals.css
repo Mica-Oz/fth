@@ -3039,6 +3039,9 @@ input[type="checkbox"]:checked {
     overflow-y: scroll;
     padding: 0px 15px 15px 0;
   }
+  .blog .post .cont p {
+    display: none;
+  }
 }
 @media (max-width: 1600px) {
   .top-big-square h3 {
