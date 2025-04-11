@@ -3648,6 +3648,14 @@ input[type="checkbox"]:checked {
     position: relative;
     top: -150px;
   }
+  .post .box-front .cont .blog-post-link {
+    font-size: 20px;
+  }
+  .post .box-front .cont h3 {
+    font-size: 24px !important;
+    margin-left: 15px;
+  }
+
   .blog-prev h1 {
     font-size: 35px;
     position: relative;
@@ -3657,7 +3665,7 @@ input[type="checkbox"]:checked {
     margin-left: 100px;
     background-color: #59c8ea;
     border: #0a1763 solid 3px;
-    width: 320px;
+    width: 200px;
     top: -150px;
   }
   .blog-prev .blog-link h4 {
@@ -3673,6 +3681,9 @@ input[type="checkbox"]:checked {
   }
   .credit-score h5 {
     font-size: 26px;
+  }
+  .credit-score .bubble-cont {
+    width: 80vw;
   }
   .credit-score .credit-report-btn {
     width: 320px;
