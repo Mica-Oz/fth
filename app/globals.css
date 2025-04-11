@@ -3963,7 +3963,7 @@ input[type="checkbox"]:checked {
 }
 @media (max-width: 400) {
   .about.process .heading {
-    left: 30px;
+    left: 10px;
   }
   .dash-cont .row-3,
   .dash-cont .row-5,
