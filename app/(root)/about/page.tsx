@@ -14,7 +14,7 @@ const Page = () => {
       <div className="about-main">
         <SplitWith />
       </div>
-      <FooterDiag />
+      <FooterDiag page={"about"} />
     </>
   );
 };

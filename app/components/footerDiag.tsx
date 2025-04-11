@@ -3,11 +3,15 @@ import Image from "next/image";
 import icon from "@/public/fth-logo-icon-new.png";
 import footerBG from "@/public/footer-bg-4.jpg";
 
-const FooterDiag = () => {
+type FooterDiagProps = {
+  page?: string; // optional or required depending on your use case
+};
+
+const FooterDiag = ({ page }: FooterDiagProps) => {
   return (
     <>
       <div
-        className="footer-diag"
+        className={`footer-diag ${page}`}
         style={{ backgroundImage: `url(${footerBG.src})` }}
       >
         <div className="diag"></div>

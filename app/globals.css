@@ -1143,6 +1143,9 @@ a {
   justify-content: center;
 }
 
+.footer-diag.about {
+  transform: translateY(-1450px) !important;
+}
 .faq .footer-diag {
   transform: translateY(-1210px);
 }
@@ -1761,9 +1764,6 @@ a {
 }
 /* footer diag */
 
-.footer-diag.about {
-  top: 610px;
-}
 .footer-diag.blog {
   top: 4230px;
   z-index: 0;
@@ -3006,7 +3006,11 @@ input[type="checkbox"]:checked {
   margin-right: 15px;
   z-index: 50;
 }
-
+@media (max-width: 1663px) {
+  .about-main .split-bubble-with-title {
+    height: 650px;
+  }
+}
 @media (max-width: 1600px) {
   .top-big-square h3 {
     font-size: 37px !important;
@@ -3031,6 +3035,9 @@ input[type="checkbox"]:checked {
   }
   .row-6.alert p {
     width: 800px !important;
+  }
+  .about-main .split-bubble-with-title {
+    height: 700px;
   }
 }
 @media (max-width: 1500px) {
@@ -3097,6 +3104,9 @@ input[type="checkbox"]:checked {
     width: 200vw;
     height: 200vh;
   }
+  .about-main .split-bubble-with-title {
+    height: 750px;
+  }
 }
 @media (max-width: 1380px) {
   .modal {
@@ -3107,6 +3117,9 @@ input[type="checkbox"]:checked {
 @media (max-width: 1244px) {
   .action-1-2 {
     height: 650px;
+  }
+  .about-main .split-bubble-with-title {
+    height: 800px;
   }
 }
 @media (max-width: 1380px) {
@@ -3255,6 +3268,9 @@ input[type="checkbox"]:checked {
   .congrats {
     font-size: 35px !important;
   }
+  .about-main .split-bubble-with-title {
+    height: 850px;
+  }
 }
 @media (max-width: 1124px) {
   .nav-menu {
@@ -3329,6 +3345,9 @@ input[type="checkbox"]:checked {
   .dash-cont .row-5,
   .dash-cont .row-6 {
     height: 290px;
+  }
+  .about-main .split-bubble-with-title {
+    height: 900px;
   }
 }
 @media (max-width: 1000px) {
@@ -3458,6 +3477,12 @@ input[type="checkbox"]:checked {
   .action-bubble .form-group {
     margin-left: 10%;
   }
+  .about-main .split-bubble-with-title {
+    height: 975px;
+  }
+  .about-main .split-bubble-with-title .cont {
+    transform: translate(20px, 20px);
+  }
 }
 @media (max-width: 900px) {
   .action-3-1 {
@@ -3489,6 +3514,9 @@ input[type="checkbox"]:checked {
   }
   .hide {
     display: none;
+  }
+  .about-main .split-bubble-with-title {
+    height: 1050px;
   }
 }
 @media (max-width: 850px) {
@@ -3539,6 +3567,9 @@ input[type="checkbox"]:checked {
     height: 110px !important;
     font-size: 20px;
   }
+  .about-main .split-bubble-with-title {
+    height: 1150px;
+  }
 }
 @media (max-width: 770px) {
   .action-1-2 {
@@ -3546,6 +3577,9 @@ input[type="checkbox"]:checked {
   }
   .action-3-6 .form-cont {
     height: 38% !important;
+  }
+  .about-main .split-bubble-with-title {
+    height: 1300px;
   }
 }
 @media (max-width: 700px) {
@@ -3664,12 +3698,18 @@ input[type="checkbox"]:checked {
   .footer-diag .row-4 .apple {
     margin-right: 0 !important;
   }
+  .about-main .split-bubble-with-title {
+    height: 1450px;
+  }
 }
 @media (max-width: 625px) {
   .bubble-header.break,
   .header-bubble.break {
     display: flex;
     flex-direction: column !important;
+  }
+  .about-main .split-bubble-with-title {
+    height: 1500px;
   }
 }
 @media (max-width: 600px) {
@@ -3734,10 +3774,19 @@ input[type="checkbox"]:checked {
   .header-bubble.break {
     font-size: 24px !important;
   }
+  .about-main .split-bubble-with-title {
+    height: 1400px;
+  }
+  .about-main .split-bubble-with-title .cont p {
+    font-size: 20px;
+  }
 }
 @media (max-width: 553px) {
   .footer-diag {
     height: 2760px;
+  }
+  .about-main .split-bubble-with-title {
+    height: 1400px;
   }
 }
 @media (max-width: 527px) {
@@ -3820,10 +3869,16 @@ input[type="checkbox"]:checked {
     width: 60%;
     text-align: right;
   }
+  .about-main .split-bubble-with-title .cont h3 {
+    font-size: 30px;
+  }
 }
 @media (max-width: 475) {
   .action-3-6 .form-cont {
     height: 43% !important;
+  }
+  .about-main .split-bubble-with-title {
+    height: 1600px;
   }
 }
 @media (max-width: 450) {
@@ -3861,6 +3916,9 @@ input[type="checkbox"]:checked {
   .bubble-header.break,
   .header-bubble.break {
     font-size: 20px !important;
+  }
+  .about-main .split-bubble-with-title {
+    height: 1800px;
   }
 }
 @media (max-width: 400) {
@@ -3915,6 +3973,9 @@ input[type="checkbox"]:checked {
   .action1-1 {
     height: 720px !important;
   }
+  .about-main .split-bubble-with-title {
+    height: 1900px;
+  }
 }
 @media (max-width: 350) {
   .footer-diag {
@@ -3922,6 +3983,12 @@ input[type="checkbox"]:checked {
   }
   .congrats {
     font-size: 22px !important;
+  }
+  .about-main .split-bubble-with-title {
+    height: 2100px;
+  }
+  .nav-btn-cont.dropdown-cont.auth {
+    margin-right: 0px;
   }
 }
 @media (max-width: 300) {
