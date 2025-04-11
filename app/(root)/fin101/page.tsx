@@ -14,7 +14,7 @@ const Page = () => {
       <div className="about-main">
         <Bubble />
       </div>
-      <FooterDiag />
+      <FooterDiag page={"fin101"} />
     </>
   );
 };
