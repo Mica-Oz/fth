@@ -3755,8 +3755,17 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 600px) {
+  .nav-btn-cont.auth {
+    margin-right: -10px;
+  }
+  .hero {
+    height: 545px;
+  }
   .hero .hero-btn {
     font-size: 20px;
+  }
+  .hero h5 {
+    font-size: 30px;
   }
   .heading,
   .bottom-heading,
@@ -3772,9 +3781,7 @@ input[type="checkbox"]:checked {
   .square .box-foot-back {
     transform: translate(19.5vw, 282%);
   }
-  .about {
-    /* background-position: right -900px center; */
-  }
+
   .top-big-square h3 {
     font-size: 27px !important;
     margin-left: 20px;
