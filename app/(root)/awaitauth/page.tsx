@@ -6,7 +6,7 @@ const Awaitauth = () => {
   return (
     <div className="await-auth-main">
       <AwaitBubble />
-      <FooterDiag />
+      <FooterDiag page={"awaitauth"} />
     </div>
   );
 };
