@@ -11,10 +11,10 @@ const Page = () => {
   }, []);
   return (
     <>
-      <div className="about-main">
+      <div className="about-main resolution">
         <SplitWith2 />
       </div>
-      <FooterDiag />
+      <FooterDiag page={"resolution"} />
     </>
   );
 };
