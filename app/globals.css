@@ -3714,9 +3714,9 @@ input[type="checkbox"]:checked {
   .header-bubble {
     font-size: 24px !important;
   }
-  .nav-btn-cont.auth {
+  /* .nav-btn-cont.auth {
     margin-right: 30px;
-  }
+  } */
 }
 @media (max-width: 675px) {
   .footer-diag {
@@ -3755,9 +3755,9 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 600px) {
-  .nav-btn-cont.auth {
+  /* .nav-btn-cont.auth {
     margin-right: -10px;
-  }
+  } */
   .hero {
     height: 555px;
   }
