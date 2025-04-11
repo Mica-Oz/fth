@@ -3759,13 +3759,13 @@ input[type="checkbox"]:checked {
     margin-right: -10px;
   }
   .hero {
-    height: 545px;
+    height: 555px;
   }
   .hero .hero-btn {
     font-size: 20px;
   }
   .hero h5 {
-    font-size: 30px;
+    font-size: 35px;
   }
   .heading,
   .bottom-heading,
@@ -3854,9 +3854,9 @@ input[type="checkbox"]:checked {
     scale: 0.7;
     width: 50%;
   }
-  .hero h5 {
+  /* .hero h5 {
     font-size: 45px;
-  }
+  } */
   .hero p {
     font-size: 16px;
   }
