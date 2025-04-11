@@ -3522,6 +3522,19 @@ input[type="checkbox"]:checked {
   .split-bubble-with-title .box-pic {
     width: 25%;
   }
+  .blog-post {
+    width: 95%;
+  }
+  .blog-post .cont.post-bubble p {
+    font-size: 18px;
+    margin-left: 20px;
+  }
+  .blog-post .bubble.post {
+    height: 300px;
+  }
+  .blog-post .body-h {
+    width: 90%;
+  }
 }
 @media (max-width: 900px) {
   .action-3-1 {
