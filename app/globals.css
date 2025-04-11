@@ -1167,6 +1167,9 @@ a {
 .faq .footer-diag {
   transform: translateY(-1210px);
 }
+.footer-diag.blog {
+  top: 4470px !important;
+}
 .footer-diag .diag {
   height: 1900px;
   width: 100vw;
@@ -1789,7 +1792,7 @@ a {
 }
 .blog-head {
   width: 100vw;
-  height: 870px;
+  height: 930px;
   background-position: top;
   background-size: cover;
   position: relative;
@@ -1820,7 +1823,8 @@ a {
 }
 .blogBG {
   width: 100vw;
-  height: 1820px;
+  height: 2330px;
+
   background-color: #e2f1f1;
   position: absolute;
   top: 1010px;
