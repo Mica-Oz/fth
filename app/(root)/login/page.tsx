@@ -68,7 +68,7 @@ const Page = () => {
   return (
     <>
       <div className="main-cont">
-        <div className="bubble-cont">
+        <div className="bubble-cont login">
           <div className="bubble-header login">LOG IN</div>
           <div className="bubble-header-back login"></div>
           <div className="bubble-front login">

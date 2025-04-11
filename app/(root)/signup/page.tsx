@@ -104,7 +104,7 @@ const Signup = () => {
   return (
     <>
       <div className="main-cont">
-        <div className="bubble-cont">
+        <div className="bubble-cont signup">
           <div className="bubble-header">CREATE ACCOUNT</div>
           <div className="bubble-header-back"></div>
           <div className="bubble-front">
