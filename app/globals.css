@@ -1168,7 +1168,8 @@ a {
   transform: translateY(-1210px);
 }
 .footer-diag.blog {
-  top: 4558px !important;
+  top: 4509px !important;
+  z-index: 0;
 }
 .footer-diag .diag {
   height: 1900px;
@@ -1783,16 +1784,12 @@ a {
 }
 /* footer diag */
 
-.footer-diag.blog {
-  top: 4230px;
-  z-index: 0;
-}
 .icon1 {
   margin-left: 6px;
 }
 .blog-head {
   width: 100vw;
-  height: 935px;
+  height: 940px;
   background-position: top;
   background-size: cover;
   position: relative;
@@ -3945,6 +3942,15 @@ input[type="checkbox"]:checked {
     left: 30px !important;
   }
 }
+@media (max-width: 419) {
+  .blog-head {
+    height: 990px;
+  }
+  .blogBG {
+    transform: translateY(50px);
+  }
+}
+
 @media (max-width: 400) {
   .dash-cont .row-3,
   .dash-cont .row-5,
