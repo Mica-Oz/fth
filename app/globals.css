@@ -3960,7 +3960,7 @@ input[type="checkbox"]:checked {
   .resolution .split-bubble-with-title {
     height: 1650px;
   }
-  #process-heading {
+  .heading {
     left: 30px !important;
   }
 }
