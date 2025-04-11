@@ -368,10 +368,10 @@ a {
 }
 
 .top-big-square {
-  left: 50%; /* Center it horizontally */
+  left: 49%; /* Center it horizontally */
   transform: translate(-50%, -152%);
   z-index: 1;
-  width: 60vw; /* Adjust size for the large square */
+  width: 80vw; /* Adjust size for the large square */
   height: 450px;
   position: relative;
 }
@@ -3554,7 +3554,7 @@ input[type="checkbox"]:checked {
     display: none;
   }
   .top-big-square .square .cont .blog-post-link {
-    margin-top: 100px;
+    margin-top: 170px;
   }
   .thing {
     font-size: 20px !important;
