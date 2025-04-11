@@ -2716,9 +2716,18 @@ input[type="checkbox"]:checked {
 .q-line:hover {
   border: solid 3px #5dacad;
 }
+.q-line .q {
+  flex: 1;
+  margin-right: 10px; /* Space between text and caret */
+}
 
 .q-cont svg {
   transition: 0.3s all ease-in-out;
+}
+/* Make the SVG maintain consistent position */
+.q-line svg {
+  flex-shrink: 0; /* Prevents the SVG from shrinking */
+  align-self: center; /* Centers the SVG vertically */
 }
 .q-cont.active svg {
   fill: #5dacad;
@@ -3120,6 +3129,13 @@ input[type="checkbox"]:checked {
     right: -70px;
     width: 200vw;
     height: 200vh;
+  }
+  .split-bubble-with-title.faq .square .cont p {
+    text-indent: 0;
+  }
+  .q-cont {
+    margin-left: 20px;
+    cursor: pointer;
   }
 }
 @media (max-width: 1380px) {
