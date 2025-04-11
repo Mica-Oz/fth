@@ -3766,9 +3766,11 @@ input[type="checkbox"]:checked {
     width: 80vw;
   }
   .bottom-heading {
-    margin-top: 100px;
+    margin-top: -10px;
   }
-
+  .diag-mirror {
+    height: 900px;
+  }
   .top-big-square h3 {
     font-size: 27px !important;
     margin-left: 20px;
