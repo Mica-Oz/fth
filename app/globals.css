@@ -3769,6 +3769,10 @@ input[type="checkbox"]:checked {
   }
   .bottom-heading {
     margin-top: -10px;
+    left: 35px;
+  }
+  #process-heading {
+    left: 35px;
   }
   .diag-mirror {
     height: 900px;
