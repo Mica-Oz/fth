@@ -1352,7 +1352,7 @@ a {
   height: 114%;
   background-color: white;
   border: solid 3px #0a1763;
-  border-radius: 100px;
+  border-radius: 50px;
   z-index: 6;
   position: absolute;
   top: 0;
@@ -1448,7 +1448,7 @@ a {
   height: 114%;
   background-color: #0a1763;
   border: solid 3px #0a1763;
-  border-radius: 100px;
+  border-radius: 50px;
   z-index: 2;
   position: absolute;
   top: 20px;
