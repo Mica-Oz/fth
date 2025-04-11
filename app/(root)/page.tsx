@@ -163,7 +163,7 @@ export default function Home() {
           data-aos="fade-right"
           data-aos-delay="200"
         >
-          Our Process is Simple??:
+          Our Process is Simple:
         </h1>
         <div className="diag"></div>
         <div className="squares" data-aos="fade-right" data-aos-delay="300">
