@@ -4010,7 +4010,7 @@ input[type="checkbox"]:checked {
   .resolution .split-bubble-with-title .cont p {
     font-size: 18px;
   }
-  .blog-head {
+  /* .blog-head {
     height: 716px;
   }
   .footer-diag.blog {
@@ -4018,7 +4018,7 @@ input[type="checkbox"]:checked {
   }
   .blogBG {
     top: 1058px;
-  }
+  } */
 }
 @media (max-width: 350) {
   .footer-diag {
