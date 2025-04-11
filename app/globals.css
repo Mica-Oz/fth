@@ -3806,6 +3806,9 @@ input[type="checkbox"]:checked {
   .sign-up .cont2 .free-sign-up-btn {
     margin-top: -10px !important;
   }
+  .sign-up-square .square {
+    width: 70vw;
+  }
   .sign-up-square .schedule-btn {
     font-size: 24px !important;
     width: 250px !important;
@@ -3813,6 +3816,7 @@ input[type="checkbox"]:checked {
   .sign-up-square h5 {
     font-size: 22px !important;
   }
+
   .credit-score .credit-report-btn {
     width: 250px;
     font-size: 22px;
