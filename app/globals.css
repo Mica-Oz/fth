@@ -3809,6 +3809,9 @@ input[type="checkbox"]:checked {
   .sign-up-square .square {
     width: 70vw;
   }
+  .big-square .square .box-front h5 {
+    width: 50vw;
+  }
   .sign-up-square .schedule-btn {
     font-size: 24px !important;
     width: 250px !important;
