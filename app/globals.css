@@ -265,6 +265,7 @@ a {
   /* position:relative; */
   pointer-events: auto;
   position: absolute;
+
   background-color: #e2f1f1;
   border-radius: 50px;
   border: solid 3px #0a1763;
@@ -284,10 +285,11 @@ a {
   /* position:relative; */
   pointer-events: auto;
   position: absolute;
+  top: 80%;
+  left: 40%;
   background-color: white;
   border-radius: 50px;
   border: solid 3px #0a1763;
-  transform: translate(96%, 275%);
   z-index: 5;
   display: flex;
   align-items: center;
@@ -343,10 +345,11 @@ a {
   /* position:relative; */
   pointer-events: auto;
   position: absolute;
+  top: 84%;
+  left: 44%;
   background-color: #0a1763;
   border-radius: 50px;
   border: solid 3px #0a1763;
-  transform: translate(113%, 282%);
   z-index: 1;
 }
 #square1 {
@@ -3248,12 +3251,7 @@ input[type="checkbox"]:checked {
     width: 50vw;
     margin-left: auto;
   }
-  .square .box-foot {
-    transform: translate(20.5vw, 275%);
-  }
-  .square .box-foot-back {
-    transform: translate(21.5vw, 282%);
-  }
+
   .about.process {
     background-position: right -700px center;
   }
@@ -3323,12 +3321,7 @@ input[type="checkbox"]:checked {
   .bottom-heading {
     margin-top: 80px;
   }
-  .square .box-foot {
-    transform: translate(20vw, 275%);
-  }
-  .square .box-foot-back {
-    transform: translate(21vw, 282%);
-  }
+
   .about.process {
     background-position: right -800px center;
   }
@@ -3375,12 +3368,6 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 1000px) {
-  .square .box-foot {
-    transform: translate(19.5vw, 275%);
-  }
-  .square .box-foot-back {
-    transform: translate(20.5vw, 282%);
-  }
   .learn-more {
     left: 77%;
     width: 250px;
@@ -3550,12 +3537,6 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 850px) {
-  .square .box-foot {
-    transform: translate(19vw, 275%);
-  }
-  .square .box-foot-back {
-    transform: translate(20.5vw, 282%);
-  }
   .learn-more {
     width: 180px;
   }
@@ -3778,14 +3759,14 @@ input[type="checkbox"]:checked {
   .blog-prev h1 {
     font-size: 35px !important;
   }
+  .squares {
+    left: 27%;
+  }
+  .squares .square {
+    width: 80vw;
+  }
   .bottom-heading {
     margin-top: 100px;
-  }
-  .square .box-foot {
-    transform: translate(17.5vw, 275%);
-  }
-  .square .box-foot-back {
-    transform: translate(19.5vw, 282%);
   }
 
   .top-big-square h3 {
@@ -3870,12 +3851,6 @@ input[type="checkbox"]:checked {
   .bottom-heading,
   .blog-prev h1 {
     font-size: 30px !important;
-  }
-  .square .box-foot {
-    transform: translate(16.5vw, 275%);
-  }
-  .square .box-foot-back {
-    transform: translate(19vw, 282%);
   }
 
   .top-big-square .square .cont .blog-post-link {
