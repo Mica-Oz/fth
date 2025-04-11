@@ -1168,7 +1168,7 @@ a {
   transform: translateY(-1210px);
 }
 .footer-diag.blog {
-  top: 4700px !important;
+  top: 4558px !important;
 }
 .footer-diag .diag {
   height: 1900px;
@@ -4002,10 +4002,13 @@ input[type="checkbox"]:checked {
     font-size: 18px;
   }
   .blog-head {
-    height: 9x;
+    height: 716px;
+  }
+  .footer-diag.blog {
+    top: 4618px !important;
   }
   .blogBG {
-    top: 1500px;
+    top: 1058px;
   }
 }
 @media (max-width: 350) {
