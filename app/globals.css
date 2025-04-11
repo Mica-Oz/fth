@@ -3758,6 +3758,9 @@ input[type="checkbox"]:checked {
   /* .nav-btn-cont.auth {
     margin-right: -10px;
   } */
+  .user-menu-btn {
+    transform: translateX(20px);
+  }
   .hero {
     height: 555px;
   }
