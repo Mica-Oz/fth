@@ -3309,7 +3309,7 @@ input[type="checkbox"]:checked {
     margin-right: 50px;
   }
   .modal {
-    right: -90px;
+    right: -80px;
     top: 58px;
   }
   .hero h5 {
@@ -3759,7 +3759,10 @@ input[type="checkbox"]:checked {
     margin-right: -10px;
   } */
   .user-menu-btn {
-    transform: translateX(40px);
+    transform: translateX(50px);
+  }
+  .modal {
+    right: -100px;
   }
   .hero {
     height: 555px;
