@@ -157,7 +157,12 @@ export default function Home() {
         className="about process"
         style={{ backgroundImage: `url(${aboutBG2.src})` }}
       >
-        <h1 className="heading" data-aos="fade-right" data-aos-delay="200">
+        <h1
+          className="heading"
+          id="process-heading"
+          data-aos="fade-right"
+          data-aos-delay="200"
+        >
           Our Process is Simple:
         </h1>
         <div className="diag"></div>
