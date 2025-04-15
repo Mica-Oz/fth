@@ -1392,7 +1392,9 @@ a {
   font-weight: 300;
   color: #0a1763;
 }
-
+.form-row-7 p {
+  margin: 0;
+}
 .form-row-7 input {
   width: 15px;
   height: 15px;
@@ -2513,6 +2515,8 @@ input[type="number"] {
 input[type="checkbox"] {
   -webkit-appearance: none; /* Remove default checkbox appearance */
   appearance: none; /* Remove default checkbox appearance */
+  min-width: 30px; /* Set the width of the checkbox */
+  min-height: 30px; /* Set the height of the checkbox */
   width: 30px; /* Set the width of the checkbox */
   height: 30px; /* Set the height of the checkbox */
   border-radius: 50%; /* Make it circular */
@@ -3447,9 +3451,6 @@ input[type="checkbox"]:checked {
   .bubble-cont.login .form-row-9,
   .bubble-cont.login .form-row-7 {
     width: 90%;
-  }
-  .form-row-7 .checkbox {
-    width: 50px !important;
   }
   .form-row-7 p {
     font-size: 14px;
