@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-const toCamelCase = (str: string) =>
-  str
+const toTitleCase = (str: string) => {
+  return str
     .toLowerCase()
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) =>
-      index === 0 ? word.toLowerCase() : word.toUpperCase()
-    )
-    .replace(/\s+/g, "");
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
 
 export const signupSchema = z.object({
   email: z
@@ -19,14 +19,14 @@ export const signupSchema = z.object({
     .regex(/^[A-Za-z\s'-]+$/, {
       message: "First name must not contain numbers or symbols",
     })
-    .transform((val) => toCamelCase(val)),
+    .transform((val) => toTitleCase(val)),
   LastName: z
     .string()
     .min(1, { message: "Last name is required" })
     .regex(/^[A-Za-z\s'-]+$/, {
       message: "First name must not contain numbers or symbols",
     })
-    .transform((val) => toCamelCase(val)),
+    .transform((val) => toTitleCase(val)),
   // CellPhone: z
   //   .string()
   //   .min(10, { message: "Phone number must be 10 digits" })
