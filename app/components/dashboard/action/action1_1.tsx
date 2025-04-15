@@ -85,7 +85,7 @@ const Action1_1 = () => {
           <p>
             Could not load your case information. Please try logging in again.
           </p>
-          <div className="next-btn" onClick={() => router.push("/loginPass")}>
+          <div className="next-btn" onClick={() => router.push("/login")}>
             Return to Login
           </div>
         </div>

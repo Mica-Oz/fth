@@ -20,7 +20,7 @@ function PrivateRoute({
   useEffect(() => {
     // Only redirect if Stytch has finished initializing and there's no session
     if (isInitialized && !session) {
-      router.push("/loginPass");
+      router.push("/login");
     }
   }, [session, isInitialized, router]);
 

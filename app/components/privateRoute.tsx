@@ -16,7 +16,7 @@ function PrivateRoute({
   console.log("session from private route:", session);
   useEffect(() => {
     if (!session) {
-      router.push("/loginPass");
+      router.push("/login");
     }
   }, [session, router]);
 

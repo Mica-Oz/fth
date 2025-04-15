@@ -312,7 +312,7 @@ const Nav = () => {
           <Link href="/signup">
             <div className="sign-up-btn btn">FREE SIGN UP</div>
           </Link>
-          <Link href="/loginPass">
+          <Link href="/login">
             <div className="log-in-btn btn">LOG IN</div>
           </Link>
         </div>
@@ -355,7 +355,7 @@ const Nav = () => {
                   SIGN UP
                 </Link>
                 <Link
-                  href="/loginPass"
+                  href="/login"
                   className="login-li user-menu-li"
                   onClick={closeAllModals}
                 >
