@@ -63,7 +63,7 @@ function AuthContent() {
   useEffect(() => {
     const authenticateUser = async () => {
       if (session) {
-        router.push("/dashboard/status1");
+        router.push("/password");
         console.log(params);
       } else {
         console.log("????");

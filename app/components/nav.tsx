@@ -196,7 +196,7 @@ const Nav = () => {
   }
 
   // For authenticated users
-  if (session) {
+  if (session && session?.authentication_factors.length >= 2) {
     return (
       <div className="nav">
         <Link href="/" className="logo-cont">
@@ -312,7 +312,7 @@ const Nav = () => {
           <Link href="/signup">
             <div className="sign-up-btn btn">FREE SIGN UP</div>
           </Link>
-          <Link href="/login">
+          <Link href="/loginPass">
             <div className="log-in-btn btn">LOG IN</div>
           </Link>
         </div>
@@ -355,7 +355,7 @@ const Nav = () => {
                   SIGN UP
                 </Link>
                 <Link
-                  href="/login"
+                  href="/loginPass"
                   className="login-li user-menu-li"
                   onClick={closeAllModals}
                 >

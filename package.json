@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
     "@stytch/nextjs": "^21.4.1",
     "@stytch/react": "^19.2.0",
     "@stytch/vanilla-js": "^5.18.1",
@@ -21,10 +22,12 @@
     "pdf-lib": "^1.17.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.55.0",
     "react-router-dom": "^7.3.0",
     "react-signature-canvas": "^1.1.0-alpha.1",
     "stytch": "^12.7.0",
-    "typed.js": "^2.1.0"
+    "typed.js": "^2.1.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

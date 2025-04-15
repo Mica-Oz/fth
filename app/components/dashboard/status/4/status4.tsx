@@ -11,6 +11,7 @@ import { useStytchUser } from "@stytch/nextjs";
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
+  console.log("USER STATUS 4 ?", user);
   const caseID = user?.untrusted_metadata.id as string;
   async function loadActivities() {
     const activities = await getActivities(caseID);
