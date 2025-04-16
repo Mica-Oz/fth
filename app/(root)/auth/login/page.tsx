@@ -54,7 +54,7 @@ function AuthContent() {
 
       async function routeToPass() {
         try {
-          router.push("/password");
+          router.push("/sms");
         } catch (err) {
           console.log(err);
           router.push("/oops");

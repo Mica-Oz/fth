@@ -67,14 +67,7 @@ const Action1_1 = () => {
   };
   // Show loading state while userData is loading
   if (isLoading) {
-    return (
-      <div className="split-bubble-with-title action-bubble">
-        <div className="header-bubble">Loading...</div>
-        <div className="square">
-          {/* <p>Please wait while we load your information...</p> */}
-        </div>
-      </div>
-    );
+    return <div style={{ width: "100vw", height: "100vh" }}>Loading...</div>;
   }
   // If userData doesn't have the data we need even after loading
   if (!caseID) {

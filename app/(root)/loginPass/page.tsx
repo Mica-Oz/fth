@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { useStytchSession } from "@stytch/nextjs";
 import { useStytch } from "@stytch/nextjs";
 import FooterDiag from "@/app/components/footerDiag";
