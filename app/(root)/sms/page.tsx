@@ -91,9 +91,6 @@ const Page = () => {
       await stytch.otps.authenticate(data.otp, methodId, {
         session_duration_minutes: 60,
       });
-
-      // On successful authentication
-      router.push("/dashboard/status1");
     } catch (err) {
       setIsLoading(false);
       alert("Error verifying code! Try again");
