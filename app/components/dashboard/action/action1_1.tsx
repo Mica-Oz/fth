@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
@@ -8,12 +8,22 @@ const Action1_1 = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const { userData, setUserData } = useAppContext();
-  const caseID = userData.data.CaseID;
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Check if userData is properly loaded
+  useEffect(() => {
+    if (userData && userData.data) {
+      setIsLoading(false);
+    }
+  }, [userData]);
+
+  // Only access caseID when userData is properly loaded
+  const caseID = userData?.data?.CaseID;
 
   const submit: React.MouseEventHandler<HTMLDivElement> = async (e) => {
     e.preventDefault();
     // Check if form ref exists
-    if (formRef.current) {
+    if (formRef.current && caseID) {
       // Create FormData from the form reference
       const form = new FormData(formRef.current);
       const inputs = Object.fromEntries(form.entries());
@@ -21,7 +31,7 @@ const Action1_1 = () => {
       console.log("action1-1 inputs:", inputs);
       console.log("caseid from context:", caseID);
 
-      // setIsLoading(true);
+      setIsLoading(true);
 
       try {
         const response = await fetch("/api/case/update/action1-1", {
@@ -55,6 +65,27 @@ const Action1_1 = () => {
       // }
     }
   };
+  // Show loading state while userData is loading
+  if (isLoading) {
+    return <div style={{ width: "100vw", height: "100vh" }}>Loading...</div>;
+  }
+  // If userData doesn't have the data we need even after loading
+  if (!caseID) {
+    return (
+      <div className="split-bubble-with-title action-bubble">
+        <div className="header-bubble">Error</div>
+        <div className="square">
+          <p>
+            Could not load your case information. Please try logging in again.
+          </p>
+          <div className="next-btn" onClick={() => router.push("/login")}>
+            Return to Login
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div

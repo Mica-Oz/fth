@@ -154,7 +154,7 @@ const Dash = () => {
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-5 bar-bubble">
+      {/* <div className="row-5 bar-bubble">
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ const Dash = () => {
           </Link>
         </div>
         <div className="square-back"></div>
-      </div>
+      </div> */}
       <div className="row-6 bar-bubble">
         <div className="square-front">
           <Image alt={"icon"} src={scales} width={60} className="scale-icon" />

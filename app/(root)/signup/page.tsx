@@ -1,10 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useStytch, useStytchSession } from "@stytch/nextjs";
 import FooterDiag from "@/app/components/footerDiag";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signupSchema } from "@/app/schema/signupSchema";
+import { z } from "zod";
+
+type SignupInputs = z.infer<typeof signupSchema>;
 
 const Signup = () => {
   const router = useRouter();
@@ -13,6 +19,17 @@ const Signup = () => {
   console.log("signup-session:", session);
   // const [error, setError] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupInputs>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      agreeToTerms: false, // Add a default value
+    },
+  });
   const [currentEnv, setCurrentEnv] = useState("");
 
   useEffect(() => {
@@ -28,15 +45,11 @@ const Signup = () => {
   }, []);
 
   console.log("env", currentEnv);
-
-  const submit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = new FormData(e.target as HTMLFormElement);
-    const inputs = Object.fromEntries(form.entries()); // FormData to Object
-    inputs.statusID = "183";
-    inputs.statusName = "Status 1.1 - Report Not Yet Requested";
-    inputs.SETOfficerName = "James Grant";
-    console.log("Submitting Data:", inputs);
+  const submit = handleSubmit(async (data) => {
+    data.statusID = "183";
+    data.statusName = "Status 1.1 - Report Not Yet Requested";
+    data.SETOfficerName = "James Grant";
+    console.log("Submitting Data:", data);
     // setIsLoading(true);
 
     try {
@@ -45,24 +58,24 @@ const Signup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(inputs),
+        body: JSON.stringify(data),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const data = await response.json();
+      const resJSON = await response.json();
       console.log(
         "Case submitted successfully---- response in front end::",
-        data
+        resJSON
       );
-      console.log("datadata::", data.data);
+      console.log("datadata::", resJSON.data);
       const caseIdPattern = /(\d+)/;
-      const match = data.data.match(caseIdPattern);
+      const match = resJSON.data.match(caseIdPattern);
       const caseID = match[1];
       console.log("caseid just nums::", caseID);
       if (currentEnv === "alpha") {
         //local alpha environment call
-        await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+        await stytch.magicLinks.email.loginOrCreate(data.email as string, {
           login_magic_link_url: "http://localhost:3000/auth/login",
           login_expiration_minutes: 60,
           signup_magic_link_url:
@@ -71,7 +84,7 @@ const Signup = () => {
         });
       } else if (currentEnv === "beta") {
         //beta environment call
-        await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+        await stytch.magicLinks.email.loginOrCreate(data.email as string, {
           login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
           login_expiration_minutes: 60,
           signup_magic_link_url:
@@ -80,7 +93,7 @@ const Signup = () => {
         });
       } else if (currentEnv === "prod") {
         //prod environment call
-        await stytch.magicLinks.email.loginOrCreate(inputs.email as string, {
+        await stytch.magicLinks.email.loginOrCreate(data.email as string, {
           login_magic_link_url: "https://freetaxhistory.com/auth/login",
           login_expiration_minutes: 60,
           signup_magic_link_url:
@@ -100,7 +113,8 @@ const Signup = () => {
     // finally {
     //   setIsLoading(false);
     // }
-  };
+  });
+
   return (
     <>
       <div className="main-cont">
@@ -114,56 +128,120 @@ const Signup = () => {
               </div>
               <div className="form-row-2 input-row">
                 <input
+                  {...register("email")}
                   name="email"
                   className="text-input"
                   type="text"
                   placeholder="Email Address"
                 />
+                {errors.email && (
+                  <p className="form-error">
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-exclamation-triangle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                      <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                    </svg>
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div className="form-row-3 input-row">
                 <input
+                  {...register("FirstName")}
                   name="FirstName"
                   className="text-input"
                   type="text"
                   placeholder="First Name"
                 />
+                {errors.FirstName && (
+                  <p className="form-error">
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="bi bi-exclamation-triangle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                      <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                    </svg>
+                    {errors.FirstName.message}
+                  </p>
+                )}
               </div>
               <div className="form-row-4 input-row">
                 <input
+                  {...register("LastName")}
                   name="LastName"
                   className="text-input"
                   type="text"
                   placeholder="Last Name"
                 />
+                {errors.LastName && (
+                  <p className="form-error">
+                    {" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="bi bi-exclamation-triangle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                      <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                    </svg>
+                    {errors.LastName.message}
+                  </p>
+                )}
               </div>
-              {/* <div className="form-row-5 input-row">
-                <input
-                  className="text-input"
-                  type="password"
-                  placeholder="Password - 8 Character Minimum"
-                />
-              </div> */}
-              <div className="form-row-6 input-row">
-                <input
-                  name="CellPhone"
-                  className="text-input"
-                  type="text"
-                  placeholder="Phone Number"
-                />
-              </div>
+
               <div className="form-row-7">
-                <input type="checkbox" className="checkbox"></input>
+                <input
+                  type="checkbox"
+                  className="checkbox"
+                  {...register("agreeToTerms")}
+                ></input>
                 <p>
                   I agree to the <a href="">Terms of Service</a> &{" "}
                   <a href="">Privacy Policy</a>
                 </p>
               </div>
+              {errors.agreeToTerms && (
+                <p className="form-error">
+                  {" "}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-exclamation-triangle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                  </svg>
+                  {errors.agreeToTerms.message}
+                </p>
+              )}
               <button type="submit" className="form-row-8">
                 SIGN UP
               </button>
               <div className="form-row-9">
                 <p>
-                  Already have an account? <Link href={"/login"}>Log In</Link>
+                  Already have an account?{" "}
+                  <Link href={"/login"} style={{ cursor: "pointer" }}>
+                    Log In
+                  </Link>
                 </p>
               </div>
             </form>

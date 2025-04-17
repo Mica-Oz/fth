@@ -63,7 +63,7 @@ function AuthContent() {
   useEffect(() => {
     const authenticateUser = async () => {
       if (session) {
-        router.push("/dashboard/status1");
+        router.push("/sms");
         console.log(params);
       } else {
         console.log("????");
@@ -93,7 +93,7 @@ function AuthContent() {
   return (
     <>
       <br />
-      <p>authenticating</p>
+      <p>Authenticating...</p>
     </>
   );
 }

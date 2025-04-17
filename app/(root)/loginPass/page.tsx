@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useStytchSession } from "@stytch/nextjs";
@@ -7,10 +7,10 @@ import { useStytch } from "@stytch/nextjs";
 import FooterDiag from "@/app/components/footerDiag";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/app/schema/loginSchema";
+import { loginPassSchema } from "@/app/schema/loginPassSchema";
 import { z } from "zod";
 
-type loginPassInputs = z.infer<typeof loginSchema>;
+type loginPassInputs = z.infer<typeof loginPassSchema>;
 
 const Page = () => {
   const router = useRouter();
@@ -22,10 +22,13 @@ const Page = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<loginPassInputs>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(loginPassSchema),
   });
+
   const [currentEnv, setCurrentEnv] = useState("");
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // This only runs in the browser
@@ -41,11 +44,33 @@ const Page = () => {
   console.log("env", currentEnv);
 
   const submit = handleSubmit(async (data) => {
+    const password = watch("password");
+    try {
+      const res = await stytch.passwords.authenticate({
+        email: data.email as string,
+        password: password,
+        session_duration_minutes: 60,
+      });
+      const session = res.session;
+      console.log("keys", Object.keys(res));
+      console.log("session", session);
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      //   // Clear password fields
+      if (passwordRef.current) passwordRef.current.value = "";
+      alert("incorrect password");
+      console.log("type:", Object.keys(error));
+      console.log("Error with password creation:", error);
+      console.log("Error response:", error.message); // Log error details
+      console.log("Status code:", error.status_code); // Check status code
+      return;
+    }
     try {
       if (currentEnv === "alpha") {
         // alpha environment call
         await stytch.magicLinks.email.send(data.email as string, {
-          login_magic_link_url: "http://localhost:3000/auth/login",
+          login_magic_link_url: "http://localhost:3000/auth/loginPass",
           login_expiration_minutes: 60,
           signup_magic_link_url: "http://localhost:3000/oops",
           signup_expiration_minutes: 60,
@@ -72,6 +97,7 @@ const Page = () => {
       router.push("/signup"); // Navigate to the 'check email' page
       alert("error logging in" + err);
       console.log("err:", err);
+      return;
     }
   });
 
@@ -85,8 +111,8 @@ const Page = () => {
             <form className="create-form" onSubmit={submit}>
               <div className="form-row-1">
                 <p>
-                  Welcome Back! Please enter your Email address to recive your
-                  verification link to log in!
+                  Welcome Back! Please enter your Email Address and Password to
+                  recieve your verification link to log in!
                 </p>
               </div>
               <div className="form-row-2 input-row">
@@ -98,21 +124,19 @@ const Page = () => {
                   placeholder="Email Address"
                 />
                 {errors.email && (
-                  <p className="form-error">
-                    {" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-exclamation-triangle"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
-                      <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
-                    </svg>
-                    {errors.email.message}
-                  </p>
+                  <p className="error">{errors.email.message}</p>
+                )}
+              </div>
+              <div className="form-row-3 input-row">
+                <input
+                  {...register("password")}
+                  name="password"
+                  className="text-input"
+                  type="password"
+                  placeholder="Password"
+                />
+                {errors.password && (
+                  <p className="error">{errors.password.message}</p>
                 )}
               </div>
 

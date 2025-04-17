@@ -16,7 +16,7 @@ const SplitWith2 = () => {
         data-aos="fade-right"
         data-aos-delay="150"
       >
-        <div className="header-bubble auth">Authenticate Your Account</div>
+        <div className="header-bubble auth">Verify Your Account</div>
         <div
           className="box-pic"
           id="resBub"
@@ -26,15 +26,15 @@ const SplitWith2 = () => {
         ></div>
         <div className="square">
           <div className="cont" style={{ paddingTop: "25px" }}>
-            <h3>We have sent a magic link to your email!</h3>
+            <h3>We have sent a verification link to your email!</h3>
             <p style={{ marginTop: "35px" }}>
               <strong>To complete logging in, </strong>
-              please navigate to your email inbox and click the magic link we
-              sent you.
+              please navigate to your email inbox and click the verification
+              link we sent you.
             </p>
 
             <p style={{ fontSize: "16px" }}>
-              If you are having trouble locating your magic link, please{" "}
+              If you are having trouble locating your verification link, please{" "}
               <Link href={"/contact"}>contact support.</Link>
             </p>
           </div>

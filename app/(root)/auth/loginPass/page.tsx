@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useStytch, useStytchSession, useStytchUser } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
-// import { useAppContext } from "@/app/context";
-// import statusDict from "@/app/utilities/statusData/statusDict";
+import { useAppContext } from "@/app/context";
+import statusDict from "@/app/utilities/statusData/statusDict";
 
 // Component with all the hooks
 function AuthContent() {
@@ -13,7 +13,7 @@ function AuthContent() {
   const { session } = useStytchSession();
   const { user } = useStytchUser();
   const router = useRouter();
-  // const { setUserData } = useAppContext();
+  const { setUserData } = useAppContext();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   console.log("session at top:", session);
@@ -29,6 +29,7 @@ function AuthContent() {
       const token = new URLSearchParams(window.location.search).get("token");
       if (token && !isAuthenticating) {
         setIsAuthenticating(true);
+
         stytch.magicLinks
           .authenticate(token, {
             session_duration_minutes: 60,
@@ -52,16 +53,35 @@ function AuthContent() {
       const caseID = user.untrusted_metadata.id as string;
       console.log("User detected, caseID:", caseID);
 
-      async function routeToPass() {
+      async function fetchLogicsUser() {
         try {
-          router.push("/sms");
+          const response = await fetch("/api/case", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              caseID: caseID,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Get request submitted successfully:", data);
+          setUserData(data);
+          const id = data.data.StatusID;
+          const route = statusDict[id as keyof typeof statusDict];
+
+          console.log("route:", route, "id:", id);
+          router.push("/dashboard/" + route);
         } catch (err) {
-          console.log(err);
+          console.error(err);
           router.push("/oops");
         }
       }
 
-      routeToPass();
+      fetchLogicsUser();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);

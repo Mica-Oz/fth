@@ -196,7 +196,7 @@ const Nav = () => {
   }
 
   // For authenticated users
-  if (session) {
+  if (session && session?.authentication_factors.length >= 2) {
     return (
       <div className="nav">
         <Link href="/" className="logo-cont">
