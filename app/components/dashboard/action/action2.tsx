@@ -1,8 +1,6 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-// import Image from "next/image";
-// import report from "@/public/report.png";
 import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
@@ -11,11 +9,48 @@ import { useAppContext } from "@/app/context";
 const Action = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const caseID = user?.untrusted_metadata.id as string;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  console.log("USER DATA FROM CONTEXT BUT INIDE Action2 COMP:", userData);
+  console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
+  useEffect(() => {
+    // Handle only right-click on the container
+    const handleRightClick = (e: MouseEvent) => {
+      e.preventDefault();
+      return false;
+    };
 
+    // Block specific keyboard shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Block Ctrl+S, Ctrl+P, Ctrl+Shift+E, etc.
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        (e.key === "s" || e.key === "p" || e.key === "e")
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    // Add event listeners directly to container instead of using an overlay
+    if (containerRef.current) {
+      containerRef.current.addEventListener("contextmenu", handleRightClick);
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Clean up event listeners on unmount
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener(
+          "contextmenu",
+          handleRightClick
+        );
+      }
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
   async function acknowledge() {
     await updateStatus(188, caseID);
     const updatedUser = await getLogicsUser(caseID);
@@ -48,14 +83,21 @@ const Action = () => {
             </Link>
           </p>
           <p className="form-group">Report</p>
-          <div className="report-cont">
+          <div
+            className="report-cont pdf-cont"
+            style={{ overflow: "hidden", position: "relative" }}
+            ref={containerRef}
+          >
             {/* <Image alt={"icon"} src={"report"} width={800} className="icon3" /> */}
             <iframe
-              // src={"https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf"}
-              src="https://docs.google.com/viewer?url=https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf&embedded=true"
+              ref={iframeRef}
+              src={
+                "https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf#toolbar=0"
+              }
+              // src="https://docs.google.com/viewer?url=https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf&embedded=true"
               width={"100%"}
               height={300}
-              className="icon3"
+              className="icon3 "
             ></iframe>
           </div>
           <Link

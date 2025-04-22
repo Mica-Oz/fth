@@ -2,9 +2,9 @@
 import { AppWrapper } from "@/app/context";
 import Script from "next/script";
 import "./globals.css";
-
 import { StytchProvider, useStytchUser } from "@stytch/nextjs";
 import { createStytchHeadlessClient } from "@stytch/nextjs/headless";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const stytch = createStytchHeadlessClient(
   process.env.NEXT_PUBLIC_STYTCH_PUBLIC_TOKEN || ""
@@ -24,6 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-WLQBF98S" />
       <body>
         <StytchProvider stytch={stytch}>
           <AppWithStytch>{children}</AppWithStytch>
