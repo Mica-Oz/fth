@@ -3,12 +3,15 @@ import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+import { createActivity } from "@/app/utilities/api/activities";
 
 const Action1_1 = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const { userData, setUserData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
+  // const [maritalStatus, setMaritalStatus] = useState("");
+  const [primary, setPrimary] = useState("");
 
   // Check if userData is properly loaded
   useEffect(() => {
@@ -16,21 +19,28 @@ const Action1_1 = () => {
       setIsLoading(false);
     }
   }, [userData]);
-
+  useEffect(() => {
+    console.log("userData just updated:", userData);
+  }, [userData]);
   // Only access caseID when userData is properly loaded
   const caseID = userData?.data?.CaseID;
+  const maritalStatus = userData?.data?.MartialStatus;
 
+  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrimary(e.target.value);
+  };
   const submit: React.MouseEventHandler<HTMLDivElement> = async (e) => {
     e.preventDefault();
     // Check if form ref exists
     if (formRef.current && caseID) {
+      console.log("form ref current:", formRef.current);
       // Create FormData from the form reference
       const form = new FormData(formRef.current);
       const inputs = Object.fromEntries(form.entries());
 
       console.log("action1-1 inputs:", inputs);
       console.log("caseid from context:", caseID);
-
+      console.log("user data", userData);
       setIsLoading(true);
 
       try {
@@ -52,12 +62,16 @@ const Action1_1 = () => {
         );
         const updatedUser = await getLogicsUser(caseID);
         setUserData(updatedUser);
-
+        let comment = "Marital Status: " + maritalStatus + ", <br/>";
+        if (maritalStatus === "Married Filing Jointly") {
+          comment += "Primary?:  " + primary;
+        }
+        await createActivity(caseID, "Marital Info", comment, "MaritalInfo");
         router.push("/dashboard/action1/2"); // Navigate to the 'check email' page
       } catch (err) {
         // setError("There was an error submitting the case. Please try again.");
         console.error(err);
-        alert("There was an error creating your account, please try again.");
+        alert("There was an error submitting this info, please try again.");
         router.refresh();
       }
       // finally {
@@ -111,6 +125,36 @@ const Action1_1 = () => {
               />
               <input type="text" name="ssn" id="ssn" placeholder="SSN" />
             </div>
+
+            {maritalStatus === "Married Filing Jointly" && (
+              <div className="form-cat">
+                <p className="cat-title">
+                  If married Filing Jointly, are you the Primary Taxpayer?
+                </p>
+                <div className="radio-row">
+                  <div className="radio-cont">
+                    <input
+                      type="radio"
+                      id="yes"
+                      name="primary"
+                      value="yes"
+                      onChange={handleRadioChange}
+                    />
+                    <label htmlFor="yes">Yes</label>
+                  </div>
+                  <div className="radio-cont">
+                    <input
+                      type="radio"
+                      id="no"
+                      name="primary"
+                      value="no"
+                      onChange={handleRadioChange}
+                    />
+                    <label htmlFor="no">No</label>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="form-cat">
               <p className="cat-title">Address:</p>
               <input

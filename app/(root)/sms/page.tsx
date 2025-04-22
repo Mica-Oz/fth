@@ -100,7 +100,7 @@ const Page = () => {
     }
     //if it authenticates, add the number to IRS logics
     try {
-      const response = await fetch("/api/case/update/phone", {
+      const response = await fetch("/api/case/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

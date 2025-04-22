@@ -5,7 +5,7 @@ async function updateStatus(status, id) {
   const name = idNameKey[status];
   console.log("status name:", name);
   try {
-    const response = await fetch("/api/case/update/status", {
+    const response = await fetch("/api/case/update", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import updateStatus from "@/app/utilities/api/updateStatus";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 const Action1_2 = () => {
   const router = useRouter();
@@ -224,6 +225,11 @@ const Action1_2 = () => {
 
     try {
       await submitForm(); // Wait for form submission to complete
+      //  Fire GTM event only after successful form submission
+      sendGTMEvent({
+        event: "formSubmitted",
+        value: "Tax Report Request Form Submission",
+      });
       router.push("/dashboard/status2"); // Then navigate programmatically
     } catch (error) {
       console.error("Error details:", {

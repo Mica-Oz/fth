@@ -22,6 +22,7 @@ export async function POST(req: Request) {
       }
       const data = await req.json();
       console.log("dob test", data.dob);
+      console.log("ms test", data.MartialStatus);
       //   const data = await req.body;
 
       // Make the request to the IRS Logics API
@@ -37,6 +38,12 @@ export async function POST(req: Request) {
           city: data.city,
           state: data.state,
           zip: data.zip,
+          //MISSPELLED PURPOSELY
+          // MartialStatus: "single",
+          // sfname: "test",
+          // slname: "test",
+          // sdob: "12/05/1993",
+          // sssn: "000-11-2222",
         },
       });
       console.log("response data", response.data);
