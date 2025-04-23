@@ -225,7 +225,7 @@ const Action1_2 = () => {
     try {
       await submitForm(); // Wait for form submission to complete
 
-      router.push("/dashboard/status2"); // Then navigate programmatically
+      router.push("/dashboard/thr/success"); // Then navigate programmatically
     } catch (error) {
       console.error("Error details:", {
         message: error.message,

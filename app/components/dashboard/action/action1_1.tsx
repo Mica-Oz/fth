@@ -67,7 +67,7 @@ const Action1_1 = () => {
           comment += "Primary?:  " + primary;
         }
         await createActivity(caseID, "Marital Info", comment, "MaritalInfo");
-        router.push("/dashboard/action1/2"); // Navigate to the 'check email' page
+        router.push("/dashboard/action1/1.5"); // Navigate to the 'check email' page
       } catch (err) {
         // setError("There was an error submitting the case. Please try again.");
         console.error(err);
