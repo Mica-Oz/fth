@@ -18,7 +18,7 @@ import fresh from "@/public/fresh.jpeg";
 import damage from "@/public/damage.jpeg";
 import blur1 from "@/public/blurbg1.jpg";
 import blur2 from "@/public/blurbg2.jpg";
-import creditBG from "@/public/credit-bg.png";
+// import creditBG from "@/public/credit-bg.png";
 import footerBG from "@/public/footer-bg-4.jpg";
 import offerIcon1 from "@/public/offer-icon1.jpg";
 import offerIcon2 from "@/public/offer-icon2.jpg";
@@ -567,16 +567,13 @@ export default function Home() {
       </div>
       <div
         className="credit-score"
-        style={{ backgroundImage: `url(${creditBG.src})` }}
+        style={{ backgroundImage: `url(${blur1.src})` }}
       >
         <div className="bubble-cont">
           <div className="box">
-            <h5>
-              Get Your Free Credit Report <br />
-              and FICO Score
-            </h5>
-            <Link href={"/credit"}>
-              <div className="credit-report-btn">GET CREDIT SCORE</div>
+            <h5>Have any questions?</h5>
+            <Link href={"/contact"}>
+              <div className="credit-report-btn">CONTACT US!</div>
             </Link>
           </div>
           <div className="box-behind"></div>

@@ -1,8 +1,8 @@
 const statusDict = {
   183: "status1",
   184: "status2",
-  185: "status2",
-  186: "status2",
+  185: "status2-2",
+  186: "status2-3",
   187: "status3",
   188: "status4",
   189: "status6",

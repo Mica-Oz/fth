@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
-import { createActivity } from "@/app/utilities/api/activities";
 
 const Action1_1 = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -11,7 +10,6 @@ const Action1_1 = () => {
   const { userData, setUserData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   // const [maritalStatus, setMaritalStatus] = useState("");
-  const [primary, setPrimary] = useState("");
 
   // Check if userData is properly loaded
   useEffect(() => {
@@ -24,11 +22,8 @@ const Action1_1 = () => {
   }, [userData]);
   // Only access caseID when userData is properly loaded
   const caseID = userData?.data?.CaseID;
-  const maritalStatus = userData?.data?.MartialStatus;
+  // const maritalStatus = userData?.data?.MartialStatus;
 
-  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPrimary(e.target.value);
-  };
   const submit: React.MouseEventHandler<HTMLDivElement> = async (e) => {
     e.preventDefault();
     // Check if form ref exists
@@ -57,17 +52,13 @@ const Action1_1 = () => {
         }
         const data = await response.json();
         console.log(
-          "Case Updated successfully From action1/1---- response in front end::",
+          "Case Updated successfully From action1/1 SPOUSE---- response in front end::",
           data
         );
         const updatedUser = await getLogicsUser(caseID);
         setUserData(updatedUser);
-        let comment = "Marital Status: " + maritalStatus + ", <br/>";
-        if (maritalStatus === "Married Filing Jointly") {
-          comment += "Primary?:  " + primary;
-        }
-        await createActivity(caseID, "Marital Info", comment, "MaritalInfo");
-        router.push("/dashboard/action1/1.5"); // Navigate to the 'check email' page
+
+        router.push("/dashboard/action1/1.5/spouse"); // Navigate to the 'check email' page
       } catch (err) {
         // setError("There was an error submitting the case. Please try again.");
         console.error(err);
@@ -109,53 +100,35 @@ const Action1_1 = () => {
       >
         <div className="header-bubble">Tax Report Request Form</div>
 
-        <div className="square">
+        <div className="square" style={{ height: "75%" }}>
           <p className="sub-heading">
             We just need a few more details before we can submit your request!
           </p>
           <form className="form-cont" action="submit" ref={formRef}>
             <div className="form-cat">
-              <p className="cat-title">Taxpayer Information:</p>
-
+              <p className="cat-title">Spouse Information:</p>
               <input
                 type="text"
-                name="dob"
-                id="dob"
+                name="sfname"
+                id="sfname"
+                placeholder="First Name"
+              />
+              <input
+                type="text"
+                name="slname"
+                id="slname"
+                placeholder="Last Name"
+              />
+              <input
+                type="text"
+                name="sdob"
+                id="sdob"
                 placeholder="Date of Birth - MM/DD/YYYY"
               />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
+              <input type="text" name="sssn" id="sssn" placeholder="SSN" />
             </div>
 
-            {maritalStatus === "Married Filing Jointly" && (
-              <div className="form-cat">
-                <p className="cat-title">
-                  If married Filing Jointly, are you the Primary Taxpayer?
-                </p>
-                <div className="radio-row">
-                  <div className="radio-cont">
-                    <input
-                      type="radio"
-                      id="yes"
-                      name="primary"
-                      value="yes"
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="yes">Yes</label>
-                  </div>
-                  <div className="radio-cont">
-                    <input
-                      type="radio"
-                      id="no"
-                      name="primary"
-                      value="no"
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="no">No</label>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="form-cat">
+            {/* <div className="form-cat">
               <p className="cat-title">Address:</p>
               <input
                 type="text"
@@ -172,14 +145,14 @@ const Action1_1 = () => {
               <input type="text" name="city" id="city" placeholder="City" />
               <input type="text" name="state" id="state" placeholder="State" />
               <input type="text" name="zip" id="zip" placeholder="Zip Code" />
-            </div>
+            </div> */}
           </form>
           <div className="next-btn" onClick={submit}>
             NEXT
           </div>
         </div>
         <div className="header-bubble-back"></div>
-        <div className="back-square"></div>
+        <div className="back-square" style={{ height: "75%" }}></div>
       </div>
     </>
   );

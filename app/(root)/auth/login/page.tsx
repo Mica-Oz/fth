@@ -3,81 +3,105 @@ import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useStytch, useStytchSession, useStytchUser } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
-// import { useAppContext } from "@/app/context";
-// import statusDict from "@/app/utilities/statusData/statusDict";
 
-// Component with all the hooks
 function AuthContent() {
   const params = useSearchParams();
   const stytch = useStytch();
   const { session } = useStytchSession();
   const { user } = useStytchUser();
   const router = useRouter();
-  // const { setUserData } = useAppContext();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  console.log("session at top:", session);
-  console.log("params:", params);
-  console.log("user at top:", user);
-
-  // First useEffect - handles initial authentication
   useEffect(() => {
-    if (session) {
-      console.log("Session exists, navigating");
-    } else {
-      console.log("No session, attempting authentication");
-      const token = new URLSearchParams(window.location.search).get("token");
-      if (token && !isAuthenticating) {
-        setIsAuthenticating(true);
-        stytch.magicLinks
-          .authenticate(token, {
-            session_duration_minutes: 60,
-          })
-          .then(() => {
-            // alert(`successfully authenticated`);
-            router.refresh();
-          })
-          .catch((error) => {
-            console.error("Authentication failed:", error);
-            router.push("/oops");
-          });
+    const handleAuthentication = async () => {
+      if (session) {
+        console.log("Session exists, waiting for user data");
+        return;
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stytch, session]);
 
-  // Second useEffect - watches for user data changes
+      const token = params.get("token");
+      if (!token) {
+        setError("No authentication token found");
+        return;
+      }
+
+      if (isAuthenticating) {
+        return;
+      }
+
+      try {
+        setIsAuthenticating(true);
+        await stytch.magicLinks.authenticate(token, {
+          session_duration_minutes: 60,
+        });
+        console.log("Authentication successful");
+        router.refresh();
+      } catch (error) {
+        console.error("Authentication failed:", error);
+        setError("Authentication failed");
+        router.push("/oops");
+      } finally {
+        setIsAuthenticating(false);
+      }
+    };
+
+    handleAuthentication();
+  }, [stytch, session, params, router, isAuthenticating]);
+
   useEffect(() => {
-    if (user && user.untrusted_metadata?.id) {
-      const caseID = user.untrusted_metadata.id as string;
-      console.log("User detected, caseID:", caseID);
+    const navigateToSMS = async () => {
+      if (user && user.untrusted_metadata?.id) {
+        const caseID = user.untrusted_metadata.id as string;
+        console.log("User detected, caseID:", caseID);
 
-      async function routeToPass() {
         try {
-          router.push("/sms");
+          await router.push("/sms");
         } catch (err) {
-          console.log(err);
-          router.push("/oops");
+          console.error("Navigation error:", err);
+          await router.push("/oops");
         }
       }
+    };
 
-      routeToPass();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+    navigateToSMS();
+  }, [user, router]);
+
+  if (error) {
+    return (
+      <div className="text-center p-4">
+        <p className="text-red-500">{error}</p>
+        <button
+          onClick={() => router.push("/")}
+          className="mt-4 text-blue-500 underline"
+        >
+          Return to Home
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <br />
-      <p>Authenticating...</p>
-    </>
+    <div className="text-center p-4">
+      <div className="animate-pulse">
+        <p>Authenticating...</p>
+        <p className="text-sm text-gray-500 mt-2">
+          Please wait while we verify your credentials
+        </p>
+      </div>
+    </div>
   );
 }
 
-// Main Auth component with Suspense boundary
 export default function Auth() {
   return (
-    <Suspense fallback={<p>Loading authentication...</p>}>
+    <Suspense
+      fallback={
+        <div className="text-center p-4">
+          <p>Loading authentication...</p>
+        </div>
+      }
+    >
       <AuthContent />
     </Suspense>
   );
