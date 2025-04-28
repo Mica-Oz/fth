@@ -46,7 +46,8 @@ export async function POST(req: Request) {
         "ZipCode",
         "DOB",
         "SSN",
-        "MaritalStatus",
+        "sdob",
+        "sssn",
       ];
       possibleParams.forEach((param) => {
         const key = param.toLowerCase();

@@ -1,17 +1,16 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import { useAppContext } from "@/app/context";
+import Image from "next/image";
 
 const Action = () => {
-  const { userData, setUserData } = useAppContext();
+  const { userData } = useAppContext();
   const { user } = useStytchUser();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const caseID = user?.untrusted_metadata.id as string;
   const containerRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
   useEffect(() => {
@@ -51,25 +50,28 @@ const Action = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-  async function acknowledge() {
-    await updateStatus(188, caseID);
-    const updatedUser = await getLogicsUser(caseID);
-    setUserData(updatedUser);
-  }
+
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1 action-2"
+        className="split-bubble-with-title action-bubble action-1-1 "
         data-aos="fade-right"
         data-aos-delay="150"
       >
-        <div className="header-bubble">Tax History Report</div>
+        <div className="header-bubble">Tax Form 8821</div>
 
         <div className="square">
-          <p className="sub-heading">
-            Here is your Tax History Report! If you have any questions about
-            your report, <br />
-            please{" "}
+          <p
+            className="sub-heading"
+            style={{ textIndent: "25px", marginRight: "105px" }}
+          >
+            On the following page, you will be asked to provide your signature
+            for tax form 8821, which we will securely transmit to the IRS. This
+            form allows us to contact the IRS on your behalf and pull your Tax
+            History Report. <br />
+            <strong>
+              If you have any questions about this process, please feel free to{" "}
+            </strong>
             <Link
               href={"/contact"}
               style={{
@@ -82,31 +84,39 @@ const Action = () => {
               contact support.
             </Link>
           </p>
-          <p className="form-group">Report</p>
+          {/* <p className="form-group">8821</p> */}
           <div
             className="report-cont pdf-cont"
-            style={{ overflow: "hidden", position: "relative" }}
+            style={{
+              overflowX: "scroll",
+              position: "relative",
+              display: "flex",
+              // alignItems: "center",
+              justifyContent: "center",
+            }}
             ref={containerRef}
           >
             {/* <Image alt={"icon"} src={"report"} width={800} className="icon3" /> */}
-            <iframe
-              ref={iframeRef}
-              src={
-                "https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf#toolbar=0"
-              }
-              // src="https://docs.google.com/viewer?url=https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf&embedded=true"
-              width={"100%"}
-              height={300}
-              className="icon3 "
-            ></iframe>
+            <Image
+              alt="8821"
+              src="/f8821.png"
+              width={1000}
+              height={1224}
+              className="icon3"
+              // style={{
+              //   width: "150%",
+              //   // height: "auto",
+              //   maxWidth: "100%",
+              //   objectFit: "contain",
+              // }}
+            />
           </div>
           <Link
-            href="/dashboard/status4"
-            onClick={acknowledge}
-            style={{ width: "450px !important" }}
-            className="next-btn"
+            href="/dashboard/action1/2/spouse"
+            style={{ height: "50px !important", width: "300px !important" }}
+            className="next-btn success"
           >
-            BACK TO DASHBOARD
+            SIGN NOW
           </Link>
         </div>
         <div className="header-bubble-back"></div>

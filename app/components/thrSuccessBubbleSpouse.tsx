@@ -132,10 +132,11 @@ const SplitWith2 = () => {
         ></div>
         <div className="square">
           <div className="cont" style={{ paddingTop: "25px" }}>
-            <h3>Account Successfully Created!</h3>
+            <h3>Tax History Report Successfully Requested!</h3>
             <p style={{ marginTop: "35px" }}>
               <strong>You&apos;re on your way </strong>
-              to getting your Free Tax History Report.
+              to getting your Free Tax History Report. Now we need your
+              spouse&apos;s information.
             </p>
             {/* <Particles
                 id="tsparticles"
@@ -144,11 +145,11 @@ const SplitWith2 = () => {
               /> */}
           </div>
           <Link
-            href="/dashboard/status1"
+            href="/dashboard/action1/1/spouse"
             style={{ width: "450px" }}
             className="next-btn"
           >
-            GO TO DASHBOARD
+            CONFIRM SPOUSE
           </Link>
         </div>
         <div className="header-bubble-back auth"></div>

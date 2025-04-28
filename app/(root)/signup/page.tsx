@@ -270,7 +270,7 @@ const Signup = () => {
                   </p>
                 )}
               </div>
-              {taxType !== "Business" && taxType !== "" && (
+              {taxType !== "" && (
                 <div className="form-row-4 input-row">
                   <select
                     {...register("Marital_Status")}
@@ -283,15 +283,15 @@ const Signup = () => {
                     <option value="" disabled>
                       Select Marital Status...
                     </option>
-                    <option value="Single">Single</option>
-                    <option value="Married Filing Jointly">
+                    <option value="single">Single</option>
+                    <option value="married filing jointly">
                       Married Filing Jointly
                     </option>
-                    <option value="Married Filing Separately">
+                    <option value="married filing separately">
                       Married Filing Separately
                     </option>
-                    <option value="Head of Household">Head of Household</option>
-                    {/* <option value="Qualifying Widow(er)">
+                    <option value="head of household">Head of Household</option>
+                    {/* <option value="qualifying widow(er)">
                       Qualifying Widow
                     </option> */}
                   </select>

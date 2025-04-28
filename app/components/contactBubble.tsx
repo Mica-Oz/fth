@@ -30,16 +30,16 @@ const SplitWith2 = () => {
                 <strong>Give Us a Call:</strong>
               </p>
               <p style={{ color: "#5dacad" }}>
-                <strong>(555)555-555</strong>
+                <strong>(800)-805-3310</strong>
               </p>
             </div>
-            <p>
+            {/* <p>
               <strong>Send Us A Message:</strong>
             </p>
             <form action="submit" className="contact-form">
               <input type="text" name="Subject" id="contact-subject" />
               <input type="text" name="Message" id="contact-message" />
-            </form>
+            </form> */}
           </div>
         </div>
         <div className="header-bubble-back"></div>

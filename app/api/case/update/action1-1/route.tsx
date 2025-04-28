@@ -40,10 +40,18 @@ export async function POST(req: Request) {
           zip: data.zip,
           //MISSPELLED PURPOSELY
           // MartialStatus: "single",
-          // sfname: "test",
-          // slname: "test",
-          // sdob: "12/05/1993",
-          // sssn: "000-11-2222",
+          sfname: data.sfname,
+          slname: data.slname,
+          sdob: data.sdob,
+          sssn: data.sssn,
+          BusinessName: data.BusinessName,
+          BusinessAddress: data.BusinessAddress,
+          BusinessAptNo: data.BusinessAptNo,
+          BusinessCity: data.BusinessCity,
+          BusinessState: data.BusinessState,
+          BusinessZip: data.BusinessZip,
+          BusinessType: data.BusinessType,
+          BusinessEIN: data.BusinessEIN,
         },
       });
       console.log("response data", response.data);

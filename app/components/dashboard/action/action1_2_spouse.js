@@ -206,7 +206,7 @@ const Action1_2 = () => {
 
     const pdfBytes = await pdfDoc.save();
     logicsPdfUpload(pdfBytes, caseID);
-    await updateStatus(184, caseID);
+    await updateStatus(185, caseID);
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
@@ -225,9 +225,8 @@ const Action1_2 = () => {
     try {
       await submitForm(); // Wait for form submission to complete
       console.log(" marital status", userData?.data.MartialStatus);
-      if (userData.data.MartialStatus === "Married Filing Jointly") {
-        router.push("/dashboard/thr/success/spouse");
-      } else if (
+
+      if (
         userData.data.TAX_RELIEF_TAX_TYPE === "PERSONAL AND BUSINESS" ||
         userData.data.TAX_RELIEF_TAX_TYPE === "BUSINESS"
       ) {
@@ -277,7 +276,7 @@ const Action1_2 = () => {
 
         <div className="square">
           <p className="sub-heading">
-            <strong>You&apos;re almost done!</strong>
+            You&apos;re almost done!
             <br />
             Just E-sign below and we will begin generating your Free Tax History
             Report!
