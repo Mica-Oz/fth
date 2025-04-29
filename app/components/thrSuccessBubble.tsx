@@ -132,7 +132,7 @@ const SplitWith2 = () => {
         ></div>
         <div className="square">
           <div className="cont" style={{ paddingTop: "25px" }}>
-            <h3>Business Tax History Report Successfully Requested!</h3>
+            <h3>Tax History Report Successfully Requested!</h3>
             <p style={{ marginTop: "35px" }}>
               <strong>You&apos;re on your way </strong>
               to getting your Free Tax History Report.
