@@ -755,6 +755,36 @@ a {
   left: 20px;
   z-index: 1;
 }
+.signup-main .top-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(226, 241, 241, 0.6);
+  border-radius: 100px;
+  width: 80%;
+  margin: 50px 0 0 0;
+  padding: 20px;
+}
+.signup-main h5 {
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 45px;
+  margin: 0;
+  text-align: center;
+}
+.signup-main h3 {
+  color: #0a1763;
+  font-family: "filson-soft", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 20px;
+  margin: 20px 0 0 0;
+  text-align: center;
+  width: 80%;
+}
 .sign-up {
   width: 100vw;
   min-width: 100vw;
@@ -816,6 +846,12 @@ a {
 }
 .sign-up .cont2 .row-4 {
   justify-content: center;
+}
+.signup.footer-diag {
+  height: 2100px;
+}
+.signup.footer-diag .diag {
+  height: 1610px;
 }
 .diag-3 {
   height: 67%;
@@ -1304,11 +1340,17 @@ a {
   align-items: center;
   justify-content: center;
 }
+.signup-main.main-cont {
+  height: 740px;
+}
 .bubble-cont {
   width: 650px;
   height: 600px;
   position: relative;
   margin-top: 110px;
+}
+.signup-main .bubble-cont {
+  margin-top: 70px;
 }
 .bubble-header {
   width: 70%;
@@ -1361,6 +1403,9 @@ a {
   align-items: center;
   justify-content: center;
   padding: 70px 0 50px;
+}
+.signup-main .bubble-front {
+  padding: 70px 0 20px;
 }
 .bubble-front.login {
   height: 94%;
@@ -3101,8 +3146,12 @@ input[type="checkbox"]:checked {
     display: none;
   }
   .bubble-header,
-  .header-bubble {
+  .header-bubble,
+  .signup-main h5 {
     font-size: 30px !important;
+  }
+  .signup-main .top-header h3 {
+    font-size: 16px;
   }
   .to-do-msg {
     font-size: 26px !important;
@@ -3439,7 +3488,8 @@ input[type="checkbox"]:checked {
     width: 400px;
     font-size: 35px;
   }
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2650px;
   }
   .footer-diag .row-5 {
@@ -3453,7 +3503,9 @@ input[type="checkbox"]:checked {
   .footer-diag .row-5 .group4 {
     text-align: right;
   }
-
+  .signup-main .top-header {
+    padding: 50px;
+  }
   .bubble-cont.signup,
   .bubble-cont.login {
     width: 85vw;
@@ -3586,6 +3638,12 @@ input[type="checkbox"]:checked {
     /* top: 600px; */
     transform: translateY(-700px) !important;
   }
+  /* .signup.footer-diag {
+    height: 2000px !important;
+  }
+  .signup.footer-diag  {
+    height: 2000px !important;
+  } */
 }
 @media (max-width: 900px) {
   .action-3-1 {
@@ -3660,6 +3718,9 @@ input[type="checkbox"]:checked {
     width: 200px !important;
     height: 110px !important;
     font-size: 20px;
+  }
+  .signup-main.main-cont {
+    height: 800px;
   }
 }
 @media (max-width: 770px) {
@@ -3757,7 +3818,8 @@ input[type="checkbox"]:checked {
     width: 320px;
     font-size: 32px;
   }
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     transform: translateY(-1230px);
   }
   .bubble-header,
@@ -3782,7 +3844,8 @@ input[type="checkbox"]:checked {
   } */
 }
 @media (max-width: 675px) {
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2730px;
   }
   .footer-diag .row-3 {
@@ -3801,6 +3864,9 @@ input[type="checkbox"]:checked {
     height: 2600px !important;
     /* top: 600px; */
     transform: translateY(-650px) !important;
+  }
+  .signup-main.main-cont {
+    height: 850px;
   }
 }
 @media (max-width: 625px) {
@@ -3918,12 +3984,14 @@ input[type="checkbox"]:checked {
   }
 }
 @media (max-width: 553px) {
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2760px;
   }
 }
 @media (max-width: 527px) {
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2790px;
   }
 }
@@ -4009,6 +4077,12 @@ input[type="checkbox"]:checked {
     /* top: 600px; */
     transform: translateY(-400px) !important;
   }
+  .signup-main .top-header {
+    padding: 50px 20px;
+  }
+  .signup-main.main-cont {
+    height: 900px;
+  }
 }
 @media (max-width: 475) {
   .action-3-6 .form-cont {
@@ -4024,7 +4098,8 @@ input[type="checkbox"]:checked {
   .app-cont .row-4 .app-btn {
     width: 230px !important;
   }
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2850px;
   }
   .action-2 {
@@ -4063,7 +4138,8 @@ input[type="checkbox"]:checked {
   .blogBG {
     transform: translateY(50px);
   }
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2870px;
   }
 }
@@ -4080,7 +4156,8 @@ input[type="checkbox"]:checked {
   .dash-cont .row-3.long .learn-more-btn {
     width: 200px;
   }
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2900px;
   }
   .app-cont .row-4 .app-btn {
@@ -4129,9 +4206,13 @@ input[type="checkbox"]:checked {
     /* top: 600px; */
     transform: translateY(-350px) !important;
   }
+  .signup-main.main-cont {
+    height: 1000px;
+  }
 }
 @media (max-width: 350) {
-  .footer-diag {
+  .footer-diag,
+  .signup.footer-diag {
     height: 2950px;
   }
   .congrats {

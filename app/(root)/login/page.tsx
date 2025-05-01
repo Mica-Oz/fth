@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/app/schema/loginSchema";
 import { z } from "zod";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 type loginPassInputs = z.infer<typeof loginSchema>;
 
@@ -37,6 +39,9 @@ const Page = () => {
     } else if (currentURL.includes(".com")) {
       setCurrentEnv("prod");
     }
+  }, []);
+  useEffect(() => {
+    AOS.init();
   }, []);
   console.log("env", currentEnv);
 
@@ -78,7 +83,11 @@ const Page = () => {
   return (
     <>
       <div className="main-cont">
-        <div className="bubble-cont login">
+        <div
+          className="bubble-cont login"
+          data-aos="fade-right"
+          data-aos-delay="150"
+        >
           <div className="bubble-header login">LOG IN</div>
           <div className="bubble-header-back login"></div>
           <div className="bubble-front login">

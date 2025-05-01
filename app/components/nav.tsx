@@ -119,9 +119,9 @@ const Nav = () => {
       <div className="nav-menu-item">
         <Link href="/contact">CONTACT</Link>
       </div>
-      <div className="nav-menu-item">
+      {/* <div className="nav-menu-item">
         <Link href="/fin101">FIN101</Link>
-      </div>
+      </div> */}
     </>
   );
 
@@ -163,13 +163,13 @@ const Nav = () => {
       >
         CONTACT
       </Link>
-      <Link
+      {/* <Link
         href="/fin101"
         className="fin101-li user-menu-li"
         onClick={closeAllModals}
       >
         FIN101
-      </Link>
+      </Link> */}
     </>
   );
 

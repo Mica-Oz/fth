@@ -44,10 +44,7 @@ export default function Home() {
 
   useEffect(() => {
     const typed = new Typed(typer.current, {
-      strings: [
-        "Know where you stand with the IRS?",
-        "Know where you stand with the IRS.",
-      ],
+      strings: ["Don't let what you owe be a mystery."],
       typeSpeed: 80,
     });
 
@@ -137,9 +134,10 @@ export default function Home() {
             <span ref={typer}></span>
           </h5>
           <p data-aos="fade-left" data-aos-delay="150">
-            Your confidential IRS tax report will clearly summarize a 10+ year
-            history of your IRS Individual Master File. We can identify any
-            potential issues and help you find resolution safely and securely.
+            Your confidential, Free Tax History Report will clearly summarize a
+            10+ year history of your IRS Individual Master File. We can identify
+            any potential issues and help you find resolution safely and
+            securely.
           </p>
           <Link href={"/signup"}>
             <div
