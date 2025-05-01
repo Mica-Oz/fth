@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "@/app/schema/signupSchema";
 import { z } from "zod";
+import Typed from "typed.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 type SignupInputs = z.infer<typeof signupSchema>;
 
@@ -21,6 +24,24 @@ const Signup = () => {
   console.log("signup-session:", session);
   // const [error, setError] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
+  // Create reference to store the DOM element containing the animation
+  const typer = React.useRef(null);
+  useEffect(() => {
+    const typed = new Typed(typer.current, {
+      strings: ["Don't let what you owe be a mystery."],
+      typeSpeed: 80,
+    });
+
+    return () => {
+      // Destroy Typed instance during cleanup to stop animation
+      typed.destroy();
+    };
+  }, []);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   // Add the handle select change function
   const handleTaxTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectElement = e.target;
@@ -146,8 +167,23 @@ const Signup = () => {
 
   return (
     <>
-      <div className="main-cont">
-        <div className="bubble-cont signup">
+      <div className="main-cont signup-main">
+        <div className="top-header" data-aos="fade-right" data-aos-delay="100">
+          <h5>
+            <span ref={typer}></span>
+          </h5>
+          <h3>
+            Your confidential Free Tax History Report will clearly summarize a
+            10+ year history of your IRS Individual Master File. We can identify
+            any potential issues and help you find resolution safely and
+            securely.
+          </h3>
+        </div>
+        <div
+          className="bubble-cont signup"
+          data-aos="fade-right"
+          data-aos-delay="150"
+        >
           <div className="bubble-header">CREATE ACCOUNT</div>
           <div className="bubble-header-back"></div>
           <div className="bubble-front">
@@ -246,8 +282,7 @@ const Signup = () => {
                     Select Tax Type...
                   </option>
                   <option value="Personal">Personal</option>
-                  <option value="Business">Business</option>
-                  Business
+                  {/* <option value="Business">Business</option> */}
                   <option value="Personal and Business">
                     Personal and Business
                   </option>
@@ -270,7 +305,7 @@ const Signup = () => {
                   </p>
                 )}
               </div>
-              {taxType !== "" && (
+              {taxType == "Personal" && (
                 <div className="form-row-4 input-row">
                   <select
                     {...register("Marital_Status")}
@@ -359,7 +394,7 @@ const Signup = () => {
           <div className="bubble-back"></div>
         </div>
       </div>
-      <FooterDiag />
+      <FooterDiag page={"signup"} />
     </>
   );
 };
