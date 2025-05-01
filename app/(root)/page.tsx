@@ -12,7 +12,7 @@ import icon3 from "@/public/icon3.png";
 import icon from "@/public/fth-logo-icon-new.png";
 import heroBG from "@/public/herobg3.jpg";
 import aboutBG2 from "@/public/aboutbg5.jpg";
-import whyBG from "@/public/taxform2.jpeg";
+import whyBG from "@/public/taxform2-5.png";
 import inflation from "@/public/inflation.jpeg";
 import fresh from "@/public/fresh.jpeg";
 import damage from "@/public/damage.jpeg";
@@ -23,19 +23,27 @@ import footerBG from "@/public/footer-bg-4.jpg";
 import offerIcon1 from "@/public/offer-icon1.jpg";
 import offerIcon2 from "@/public/offer-icon2.jpg";
 import offerIcon3 from "@/public/offer-icon3.jpg";
+import report from "@/public/report.png";
+import cal from "@/public/cal.png";
+import res from "@/public/res.png";
 
 export default function Home() {
   // Create reference to store the DOM element containing the animation
   const typer = React.useRef(null);
 
   type OfferState = {
-    1?: string;
-    2?: string;
-    3?: string;
+    1?: [string, string, string, string];
+    2?: [string, string, string, string];
+    3?: [string, string, string, string];
   };
 
   const [activeOffer, setActiveOffer] = useState<OfferState>({
-    1: "Get a clear picture of your financial standing with the IRS.",
+    1: [
+      "Get a clear picture of your financial standing with the IRS.",
+      report.src,
+      "0px 10px",
+      "550px",
+    ],
   });
 
   useEffect(() => {
@@ -114,21 +122,41 @@ export default function Home() {
     // Update state based on which offer was clicked
     if (containerElement.id === "offer1") {
       setActiveOffer({
-        1: "Get a clear picture of your financial standing with the IRS.",
+        1: [
+          "Get a clear picture of your financial standing with the IRS.",
+          report.src,
+          "0px 10px",
+          "550px",
+        ],
       });
     } else if (containerElement.id === "offer2") {
       setActiveOffer({
-        2: "Expert guidance on how to address your tax situation.",
+        2: [
+          "Expert guidance on how to address your tax situation.",
+          cal.src,
+          "center center",
+          "300px",
+        ],
       });
     } else if (containerElement.id === "offer3") {
       setActiveOffer({
-        3: "Complete resolution services for your tax issues.",
+        3: [
+          "Complete resolution services for your tax issues.",
+          res.src,
+          "center center",
+          "300px",
+        ],
       });
     }
   };
   return (
     <>
-      <div className="hero" style={{ backgroundImage: `url(${heroBG.src})` }}>
+      <div
+        className="hero"
+        style={{
+          backgroundImage: `url(${heroBG.src})`,
+        }}
+      >
         <div className="hero-cont">
           <h5>
             <span ref={typer}></span>
@@ -352,7 +380,34 @@ export default function Home() {
           <div className="row-2">
             <div className="bubble-cont">
               <div className="bubble">
-                {activeOffer[1] || activeOffer[2] || activeOffer[3]}
+                <div
+                  className="circle-offer"
+                  style={{
+                    backgroundImage: `url(${
+                      (activeOffer[1]?.[1] ||
+                        activeOffer[2]?.[1] ||
+                        activeOffer[3]?.[1]) ??
+                      ""
+                    })`,
+                    backgroundSize: `${
+                      (activeOffer[1]?.[3] ||
+                        activeOffer[2]?.[3] ||
+                        activeOffer[3]?.[3]) ??
+                      ""
+                    }`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: `${
+                      (activeOffer[1]?.[2] ||
+                        activeOffer[2]?.[2] ||
+                        activeOffer[3]?.[2]) ??
+                      ""
+                    }`,
+                  }}
+                ></div>
+                {(activeOffer[1]?.[0] ||
+                  activeOffer[2]?.[0] ||
+                  activeOffer[3]?.[0]) ??
+                  ""}
               </div>
               <div className="bubble-back"></div>
             </div>
