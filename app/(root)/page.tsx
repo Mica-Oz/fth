@@ -32,15 +32,17 @@ export default function Home() {
   const typer = React.useRef(null);
 
   type OfferState = {
-    1?: [string, string];
-    2?: [string, string];
-    3?: [string, string];
+    1?: [string, string, string, string];
+    2?: [string, string, string, string];
+    3?: [string, string, string, string];
   };
 
   const [activeOffer, setActiveOffer] = useState<OfferState>({
     1: [
       "Get a clear picture of your financial standing with the IRS.",
       report.src,
+      "0px 10px",
+      "550px",
     ],
   });
 
@@ -123,15 +125,27 @@ export default function Home() {
         1: [
           "Get a clear picture of your financial standing with the IRS.",
           report.src,
+          "0px 10px",
+          "550px",
         ],
       });
     } else if (containerElement.id === "offer2") {
       setActiveOffer({
-        2: ["Expert guidance on how to address your tax situation.", cal.src],
+        2: [
+          "Expert guidance on how to address your tax situation.",
+          cal.src,
+          "center center",
+          "300px",
+        ],
       });
     } else if (containerElement.id === "offer3") {
       setActiveOffer({
-        3: ["Complete resolution services for your tax issues.", res.src],
+        3: [
+          "Complete resolution services for your tax issues.",
+          res.src,
+          "center center",
+          "300px",
+        ],
       });
     }
   };
@@ -375,9 +389,19 @@ export default function Home() {
                         activeOffer[3]?.[1]) ??
                       ""
                     })`,
-                    backgroundSize: "300px",
+                    backgroundSize: `${
+                      (activeOffer[1]?.[3] ||
+                        activeOffer[2]?.[3] ||
+                        activeOffer[3]?.[3]) ??
+                      ""
+                    }`,
                     backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
+                    backgroundPosition: `${
+                      (activeOffer[1]?.[2] ||
+                        activeOffer[2]?.[2] ||
+                        activeOffer[3]?.[2]) ??
+                      ""
+                    }`,
                   }}
                 ></div>
                 {(activeOffer[1]?.[0] ||

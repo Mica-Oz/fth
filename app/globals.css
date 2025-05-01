@@ -3667,6 +3667,9 @@ input[type="checkbox"]:checked {
   .signup.footer-diag  {
     height: 2000px !important;
   } */
+  .top-big-square .box-pic {
+    background-position: -100px;
+  }
 }
 @media (max-width: 900px) {
   .action-3-1 {
@@ -3865,6 +3868,9 @@ input[type="checkbox"]:checked {
   /* .nav-btn-cont.auth {
     margin-right: 30px;
   } */
+  .top-big-square .box-pic {
+    background-position: -200px;
+  }
 }
 @media (max-width: 675px) {
   .footer-diag,
@@ -3910,7 +3916,7 @@ input[type="checkbox"]:checked {
     right: -100px;
   }
   .hero {
-    height: 555px;
+    height: 715px;
   }
   .hero .hero-btn {
     font-size: 20px;
@@ -4251,6 +4257,9 @@ input[type="checkbox"]:checked {
   }
   .circle-offer {
     width: 250px;
+  }
+  .top-big-square .box-pic {
+    background-position: -290px;
   }
 }
 @media (max-width: 350) {
