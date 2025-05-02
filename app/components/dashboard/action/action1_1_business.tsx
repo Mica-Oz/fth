@@ -111,8 +111,8 @@ const Action1_1 = () => {
     <>
       <div
         className="split-bubble-with-title action-bubble action-1-1 action1-1"
-        data-aos="fade-right"
-        data-aos-delay="150"
+        // data-aos="fade-right"
+        // data-aos-delay="150"
       >
         <div className="header-bubble">Tax Report Request Form</div>
 
