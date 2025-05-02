@@ -44,7 +44,10 @@ export const signupSchema = z
   .refine(
     (data) => {
       // If tax type is "Business", we don't need Marital_Status
-      if (data.TAX_RELIEF_TAX_TYPE === "Business") {
+      if (
+        data.TAX_RELIEF_TAX_TYPE === "Business" ||
+        data.TAX_RELIEF_TAX_TYPE === "Personal and Business"
+      ) {
         return true;
       }
 
