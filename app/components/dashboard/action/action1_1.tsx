@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import { createActivity } from "@/app/utilities/api/activities";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Action1_1 = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -22,6 +24,11 @@ const Action1_1 = () => {
   useEffect(() => {
     console.log("userData just updated:", userData);
   }, [userData]);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   // Only access caseID when userData is properly loaded
   const caseID = userData?.data?.CaseID;
   const maritalStatus = userData?.data?.MartialStatus;
@@ -104,8 +111,8 @@ const Action1_1 = () => {
     <>
       <div
         className="split-bubble-with-title action-bubble action-1-1 action1-1"
-        data-aos="fade-right"
-        data-aos-delay="150"
+        // data-aos="fade-right"
+        // data-aos-delay="150"
       >
         <div className="header-bubble">Tax Report Request Form</div>
 

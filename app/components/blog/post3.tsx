@@ -189,7 +189,7 @@ const Post = () => {
         </p>
       </div>
 
-      <div className="row-1">
+      <div className="row-1 bottom">
         <div className="back bottom">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -206,6 +206,9 @@ const Post = () => {
           </svg>
           <Link href={"/blog"}>BACK TO BLOG</Link>
         </div>
+        <Link href="/signup" className="signup-li user-menu-li">
+          GET FREE TAX REPORT
+        </Link>
       </div>
     </div>
   );
