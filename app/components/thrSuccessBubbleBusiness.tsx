@@ -132,7 +132,7 @@ const SplitWith2 = () => {
         ></div>
         <div className="square">
           <div className="cont" style={{ paddingTop: "25px" }}>
-            <h3>Business Tax History Report Successfully Requested!</h3>
+            <h3>Tax History Report Successfully Requested!</h3>
             <p style={{ marginTop: "35px" }}>
               <strong>You&apos;re on your way </strong>
               to getting your Free Tax History Report. Now we need your
@@ -145,11 +145,11 @@ const SplitWith2 = () => {
               /> */}
           </div>
           <Link
-            href="/dashboard/status2"
+            href="/dashboard/action1/1/business"
             style={{ width: "450px" }}
             className="next-btn"
           >
-            BACK TO DASHBOARD
+            CONFIRM BUSINESS
           </Link>
         </div>
         <div className="header-bubble-back auth"></div>
