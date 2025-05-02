@@ -226,7 +226,7 @@ const Action1_2 = () => {
       await submitForm(); // Wait for form submission to complete
       console.log(" marital status", userData?.data.MartialStatus);
 
-      router.push("/dashboard/thr/success/business");
+      router.push("/dashboard/thr/success");
     } catch (error) {
       console.error("Error details:", {
         message: error.message,
