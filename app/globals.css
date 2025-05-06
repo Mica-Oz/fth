@@ -1635,10 +1635,17 @@ a {
   margin-top: 100px;
   z-index: 3;
   width: 60vw; /* Adjust size for the large square */
-  height: 700px;
+  height: 310px;
   position: relative;
 }
-
+.split-bubble-with-title.tax-form.open {
+  width: 60vw; /* Adjust size for the large square */
+  height: 1000px;
+}
+.split-bubble-with-title.tax-form.open .tax-form-cont {
+  position: absolute;
+  top: 70px;
+}
 .auth-bubble {
   height: 440px !important;
 }
@@ -2598,6 +2605,15 @@ input[type="checkbox"]:checked {
   background-color: #5dacad; /* Change background color when checked */
   border-color: #5dacad; /* Optionally, match the border color with the background */
 }
+.action-bubble .action-btn-cont {
+  /* background-color: red; */
+  position: absolute;
+  width: 85%;
+  height: 50px;
+  bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
 .action-bubble .next-btn {
   width: 170px;
   height: 50px;
@@ -2610,12 +2626,10 @@ input[type="checkbox"]:checked {
   border-radius: 50px;
   text-align: center;
   align-self: flex-end;
-  margin-right: 50px;
+  /* margin-right: 50px; */
   margin-top: 25px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  position: absolute;
-  bottom: 20px;
 }
 .next-btn.success {
   width: 270px;

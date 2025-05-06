@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { action1_1_Spouse_Schema } from "@/app/schema/action1_1_Schema_Spouse";
 import { z } from "zod";
 
+type ActionInputs = z.infer<typeof action1_1_Spouse_Schema>;
+
 const Action1_1 = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
@@ -28,7 +30,6 @@ const Action1_1 = () => {
   const caseID = userData?.data?.CaseID;
   // const maritalStatus = userData?.data?.MartialStatus;
 
-  type ActionInputs = z.infer<typeof action1_1_Spouse_Schema>;
   const {
     register,
     handleSubmit,

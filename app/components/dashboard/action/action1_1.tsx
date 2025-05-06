@@ -400,9 +400,11 @@ const Action1_1 = () => {
                 </p>
               )}
             </div>
-            <button type="submit" className="next-btn">
-              {isLoading ? "Loading..." : "NEXT"}
-            </button>
+            <div className="action-btn-cont">
+              <button type="submit" className="next-btn">
+                {isLoading ? "Loading..." : "NEXT"}
+              </button>
+            </div>
           </form>
         </div>
         <div className="header-bubble-back"></div>

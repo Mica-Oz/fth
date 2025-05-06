@@ -8,6 +8,18 @@ import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import updateStatus from "@/app/utilities/api/updateStatus";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+// Define schema for the form
+const createAction1_2_Schema = () => {
+  return z.object({
+    termsAccepted: z.boolean().refine((val) => val === true, {
+      message: "You must accept the Terms & Conditions",
+    }),
+  });
+};
 
 const Action1_2 = () => {
   const router = useRouter();
@@ -19,12 +31,24 @@ const Action1_2 = () => {
   const caseID = user?.untrusted_metadata.id;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [signatureError, setSignatureError] = useState("");
+  // Create the schema
+  const schema = createAction1_2_Schema();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      termsAccepted: false,
+    },
+  });
   function clear() {
     console.log(" sigCanvas.current:", sigCanvas.current);
-    //test
-
     sigCanvas.current.clear();
+    setSignatureError("");
   }
 
   function undo() {
@@ -37,6 +61,10 @@ const Action1_2 = () => {
     }
   }
 
+  // Check if signature pad has data
+  function hasSignature() {
+    return sigCanvas.current && !sigCanvas.current.isEmpty();
+  }
   // let downloadBlob, downloadURL;
 
   // downloadBlob = function (data, fileName, mimeType) {
@@ -200,14 +228,14 @@ const Action1_2 = () => {
     setUserData(updatedUser);
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default navigation
 
-    if (!sigCanvas.current) {
-      console.error("Signature canvas not initialized");
-      alert("Please sign the document before submitting");
+  const onSubmit = handleSubmit(async () => {
+    // Validate signature separately since it's not part of the form state managed by react-hook-form
+    if (!hasSignature()) {
+      setSignatureError("Please sign the document before submitting");
       return;
     }
+
     // Hide the signature canvas during processing
     setIsSubmitting(true);
 
@@ -226,7 +254,7 @@ const Action1_2 = () => {
       alert(`Error: ${error.message || "Unknown error occurred"}`);
       setIsSubmitting(false); // Show the canvas again if there's an error
     }
-  };
+  });
 
   return (
     <>
@@ -263,7 +291,11 @@ const Action1_2 = () => {
             Just E-sign below and we will begin generating your Free Tax History
             Report!
           </p>
-          <form className="form-cont" style={{ height: "56%" }}>
+          <form
+            className="form-cont"
+            style={{ height: "56%" }}
+            onSubmit={onSubmit}
+          >
             <div className="form-cat">
               <p className="cat-title">E-sign:</p>
               <div className="sig-pad-cont">
@@ -273,6 +305,22 @@ const Action1_2 = () => {
                       <SignatureCanvas ref={sigCanvas} />
                     </div>
                   </div>
+                  {signatureError && (
+                    <p className="form-error">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-exclamation-triangle"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                        <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                      </svg>
+                      {signatureError}
+                    </p>
+                  )}
                   <div className="signature-pad--footer">
                     <div className="signature-pad--actions">
                       <div>
@@ -293,31 +341,51 @@ const Action1_2 = () => {
                 </div>
               </div>
             </div>
-          </form>
-          <div className="sig-btm-cont">
-            <input type="checkbox"></input>
-            <p>
-              {" "}
-              I agree to the{" "}
-              <span
-                className="tandc"
-                style={{
-                  color: "#5dacad",
-                  textDecoration: "underline 1px #5dacad",
-                  fontWeight: "600",
-                }}
+            <div className="sig-btm-cont">
+              <input
+                type="checkbox"
+                id="termsAccepted"
+                {...register("termsAccepted")}
+              />{" "}
+              <p>
+                {" "}
+                I agree to the{" "}
+                <span
+                  className="tandc"
+                  style={{
+                    color: "#5dacad",
+                    textDecoration: "underline 1px #5dacad",
+                    fontWeight: "600",
+                  }}
+                >
+                  Terms & Condtitions
+                </span>
+              </p>
+              {errors.termsAccepted && (
+                <p className="form-error">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-exclamation-triangle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                  </svg>
+                  {errors.termsAccepted.message}
+                </p>
+              )}
+              <button
+                onClick={handleSubmit}
+                className="next-btn"
+                id="thrReqSubmit"
               >
-                Terms & Condtitions
-              </span>
-            </p>
-            <button
-              onClick={handleSubmit}
-              className="next-btn"
-              id="thrReqSubmit"
-            >
-              SUBMIT
-            </button>
-          </div>
+                SUBMIT
+              </button>
+            </div>
+          </form>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>
