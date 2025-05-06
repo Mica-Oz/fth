@@ -438,6 +438,8 @@ const Action1_2 = () => {
                   {errors.termsAccepted.message}
                 </p>
               )}
+            </div>
+            <div className="action-btn-cont">
               <button
                 onClick={handleSubmit}
                 className="next-btn"

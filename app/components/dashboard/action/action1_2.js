@@ -399,7 +399,13 @@ const Action1_2 = () => {
                   {errors.termsAccepted.message}
                 </p>
               )}
-              <button type="submit" className="next-btn" id="thrReqSubmit">
+            </div>
+            <div className="action-btn-cont">
+              <button
+                onClick={handleSubmit}
+                className="next-btn"
+                id="thrReqSubmit"
+              >
                 SUBMIT
               </button>
             </div>

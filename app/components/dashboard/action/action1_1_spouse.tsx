@@ -236,9 +236,11 @@ const Action1_1 = () => {
               <input type="text" name="state" id="state" placeholder="State" />
               <input type="text" name="zip" id="zip" placeholder="Zip Code" />
             </div> */}
-            <button className="next-btn" type="submit">
-              NEXT
-            </button>
+            <div className="action-btn-cont">
+              <button className="next-btn" type="submit">
+                NEXT
+              </button>
+            </div>
           </form>
         </div>
         <div className="header-bubble-back"></div>
