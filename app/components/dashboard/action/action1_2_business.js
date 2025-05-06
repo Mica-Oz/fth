@@ -72,6 +72,7 @@ const Action1_2 = () => {
           headers: {
             contentType: "application/pdf",
             caseID: caseID,
+            type: "business",
           },
           body: pdf,
         });
@@ -94,7 +95,7 @@ const Action1_2 = () => {
     }
   }
   async function update_variables() {
-    const formUrl = "/8821-base.pdf";
+    const formUrl = "/8821-base-bus.pdf";
     const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(formPdfBytes);
     const form = pdfDoc.getForm();
@@ -106,28 +107,16 @@ const Action1_2 = () => {
       console.log("typof:", typeof name);
     });
     const box1String =
-      userData.data.FirstName +
-      " " +
-      userData.data.LastName +
-      "\n" +
-      userData.data.Address +
-      " " +
-      userData.data.AptNo +
-      "\n" +
-      userData.data.City +
-      " " +
-      userData.data.State +
-      ", " +
-      userData.data.Zip;
+      userData.data.BusinessName + "\n" + userData.data.BusinessAddress;
     const form_data = {
-      "/8821-base.pdf": {
+      "/8821-base-bus.pdf": {
         "F8821_topmostSubform[0].Page1[0].f1_6[0]": {
           type: "PDFTextField",
           data: box1String,
         },
         "F8821_topmostSubform[0].Page1[0].f1_7[0]": {
           type: "PDFTextField",
-          data: userData.data.SSN,
+          data: userData.data.EIN,
         },
         "F8821_topmostSubform[0].Page1[0].f1_8[0]": {
           type: "PDFTextField",
@@ -142,7 +131,7 @@ const Action1_2 = () => {
     console.log(" sigCanvas.current:", sigCanvas.current);
     var form_data = await update_variables();
     console.log("formdata from submitform call:", form_data);
-    const formUrl = "/8821-base.pdf";
+    const formUrl = "/8821-base-bus.pdf";
     const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
 
     const pdfDoc = await PDFDocument.load(formPdfBytes, {

@@ -61,6 +61,33 @@ const Action1_2 = () => {
   //   a.click();
   //   a.remove();
   // };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async function fetchSpouse(caseID) {
+    try {
+      const response = await fetch("/api/spouse", {
+        method: "GET",
+        headers: {
+          contentType: "application/pdf",
+          caseID: caseID,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      console.log(
+        "Get request submitted successfully---- response in front end::",
+        data
+      );
+      return data;
+    } catch (err) {
+      // setError("There was an error submitting the case. Please try again.");
+      console.error(err);
+      router.push("/oops");
+    }
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function logicsPdfUpload(pdf, caseID) {
@@ -72,6 +99,7 @@ const Action1_2 = () => {
           headers: {
             contentType: "application/pdf",
             caseID: caseID,
+            type: "spouse",
           },
           body: pdf,
         });
@@ -93,7 +121,9 @@ const Action1_2 = () => {
       }
     }
   }
-  async function update_variables() {
+  async function update_variables(spouseData) {
+    console.log("spouseData in update:", spouseData);
+
     const formUrl = "/8821-base.pdf";
     const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(formPdfBytes);
@@ -106,9 +136,9 @@ const Action1_2 = () => {
       console.log("typof:", typeof name);
     });
     const box1String =
-      userData.data.FirstName +
+      spouseData.SpouseFirstName +
       " " +
-      userData.data.LastName +
+      spouseData.SpouseLastName +
       "\n" +
       userData.data.Address +
       " " +
@@ -127,7 +157,7 @@ const Action1_2 = () => {
         },
         "F8821_topmostSubform[0].Page1[0].f1_7[0]": {
           type: "PDFTextField",
-          data: userData.data.SSN,
+          data: spouseData.SpouseSSN,
         },
         "F8821_topmostSubform[0].Page1[0].f1_8[0]": {
           type: "PDFTextField",
@@ -140,7 +170,12 @@ const Action1_2 = () => {
 
   async function submitForm() {
     console.log(" sigCanvas.current:", sigCanvas.current);
-    var form_data = await update_variables();
+    const rawSpouseData = await fetchSpouse(caseID);
+
+    const parsedData = JSON.parse(rawSpouseData.data);
+    console.log("parsedData:", parsedData);
+
+    var form_data = await update_variables(parsedData);
     console.log("formdata from submitform call:", form_data);
     const formUrl = "/8821-base.pdf";
     const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
@@ -209,6 +244,7 @@ const Action1_2 = () => {
     await updateStatus(185, caseID);
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);
+
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
   const handleSubmit = async (e) => {

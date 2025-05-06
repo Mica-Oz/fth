@@ -13,6 +13,15 @@ export async function POST(req: NextRequest) {
       const API_KEY = process.env.LOGICS_API_KEY;
 
       const id = req.headers.get("caseid");
+      const type = req.headers.get("type");
+      let fileName;
+      if (type === "taxpayer") {
+        fileName = "8821.pdf";
+      } else if (type === "spouse") {
+        fileName = "8821-spouse.pdf";
+      } else if (type === "business") {
+        fileName = "8821-business.pdf";
+      }
 
       // Get the PDF binary data directly
       const pdfBuffer = Buffer.from(await req.arrayBuffer());
@@ -21,7 +30,7 @@ export async function POST(req: NextRequest) {
       const outgoingForm = new FormData();
       // Add the PDF buffer to the form
       outgoingForm.append("file", pdfBuffer, {
-        filename: "8821.pdf",
+        filename: fileName,
         contentType: "application/pdf",
       });
 

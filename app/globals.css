@@ -786,10 +786,10 @@ a {
 }
 .signup-main h3 {
   color: #0a1763;
-  font-family: "filson-soft", sans-serif;
+  font-family: "halcom", sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 20px;
+  font-size: 18px;
   margin: 20px 0 0 0;
   text-align: center;
   width: 80%;
@@ -1629,6 +1629,13 @@ a {
   z-index: 3;
   width: 60vw; /* Adjust size for the large square */
   height: 600px;
+  position: relative;
+}
+.split-bubble-with-title.tax-form {
+  margin-top: 100px;
+  z-index: 3;
+  width: 60vw; /* Adjust size for the large square */
+  height: 700px;
   position: relative;
 }
 
@@ -2965,7 +2972,7 @@ input[type="checkbox"]:checked {
 }
 .report-cont {
   width: 80%;
-  height: 300px;
+  height: 380px;
   margin-top: 30px;
   overflow-y: scroll;
   margin-bottom: 30px;

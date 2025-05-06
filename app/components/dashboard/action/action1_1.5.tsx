@@ -54,7 +54,7 @@ const Action = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title action-bubble action-1-1 "
+        className="split-bubble-with-title tax-form action-bubble action-1-1 "
         data-aos="fade-right"
         data-aos-delay="150"
       >
@@ -68,7 +68,9 @@ const Action = () => {
             On the following page, you will be asked to provide your signature
             for tax form 8821, which we will securely transmit to the IRS. This
             form allows us to contact the IRS on your behalf and pull your Tax
-            History Report. <br />
+            History Report. By clicking &quot;SIGN NOW&quot; and agreeing to the
+            terms on the next page you are acknowledging and consenting to this.{" "}
+            <br />
             <strong>
               If you have any questions about this process, please feel free to{" "}
             </strong>
@@ -100,8 +102,8 @@ const Action = () => {
             <Image
               alt="8821"
               src="/f8821.png"
-              width={1000}
-              height={1224}
+              width={300}
+              height={360}
               className="icon3"
               // style={{
               //   width: "150%",
