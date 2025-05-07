@@ -54,7 +54,7 @@ const Dash = () => {
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p style={{ color: "#2e5a7e" }}>Step 1.2:</p>
+              <p style={{ color: "#2e5a7e" }}>Step 1 Part 2:</p>
               <p>Request Spouse Tax History Report</p>
             </div>
           </div>
@@ -72,8 +72,8 @@ const Dash = () => {
               href="/dashboard/action1/1/spouse"
               className="tax-history-req-btn"
             >
-              REQUEST SPOUSE TAX <br />
-              HISTORY REPORT
+              REQUEST SPOUSE <br />
+              TAX HISTORY REPORT
             </Link>
           </div>
           <div className="square-back"></div>

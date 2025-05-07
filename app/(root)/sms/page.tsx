@@ -119,9 +119,25 @@ const Page = () => {
       const updatedUser = await getLogicsUser(caseID);
       setUserData(updatedUser);
       const id = updatedUser.data.StatusID;
-      const route = statusDict[id as keyof typeof statusDict];
-
-      console.log("route:", route, "id:", id);
+      const maritalStatus = updatedUser.data.MartialStatus;
+      const type = updatedUser.data.TAX_RELIEF_TAX_TYPE;
+      let route = statusDict[id as keyof typeof statusDict];
+      if (id == 184 && maritalStatus === "Married Filing Jointly") {
+        route = "status2-2";
+      } else if (
+        (type === "BUSINESS" || type === "PERSONAL AND BUSINESS") &&
+        id == 184
+      ) {
+        route = "status2-3";
+      }
+      console.log(
+        "sign in stuff, route:",
+        route,
+        "id:",
+        id,
+        "marital:",
+        maritalStatus
+      );
       router.push("/dashboard/" + route);
     } catch (err) {
       // setError("There was an error submitting the case. Please try again.");

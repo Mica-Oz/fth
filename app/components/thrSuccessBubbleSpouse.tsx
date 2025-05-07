@@ -144,13 +144,15 @@ const SplitWith2 = () => {
                 options={options}
               /> */}
           </div>
-          <Link
-            href="/dashboard/action1/1/spouse"
-            style={{ width: "450px" }}
-            className="next-btn"
-          >
-            CONFIRM SPOUSE
-          </Link>
+          <div className="action-btn-cont">
+            <Link
+              href="/dashboard/action1/1/spouse"
+              style={{ width: "450px" }}
+              className="next-btn"
+            >
+              CONFIRM SPOUSE
+            </Link>
+          </div>
         </div>
         <div className="header-bubble-back auth"></div>
         <div className="back-square"></div>

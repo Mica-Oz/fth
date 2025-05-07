@@ -786,10 +786,10 @@ a {
 }
 .signup-main h3 {
   color: #0a1763;
-  font-family: "filson-soft", sans-serif;
+  font-family: "halcom", sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 20px;
+  font-size: 18px;
   margin: 20px 0 0 0;
   text-align: center;
   width: 80%;
@@ -1631,7 +1631,21 @@ a {
   height: 600px;
   position: relative;
 }
-
+.split-bubble-with-title.tax-form {
+  margin-top: 100px;
+  z-index: 3;
+  width: 60vw; /* Adjust size for the large square */
+  height: 310px;
+  position: relative;
+}
+.split-bubble-with-title.tax-form.open {
+  width: 60vw; /* Adjust size for the large square */
+  height: 1000px;
+}
+.split-bubble-with-title.tax-form.open .tax-form-cont {
+  position: absolute;
+  top: 70px;
+}
 .auth-bubble {
   height: 440px !important;
 }
@@ -2591,6 +2605,15 @@ input[type="checkbox"]:checked {
   background-color: #5dacad; /* Change background color when checked */
   border-color: #5dacad; /* Optionally, match the border color with the background */
 }
+.action-bubble .action-btn-cont {
+  /* background-color: red; */
+  position: absolute;
+  width: 85%;
+  height: 50px;
+  bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
 .action-bubble .next-btn {
   width: 170px;
   height: 50px;
@@ -2603,12 +2626,10 @@ input[type="checkbox"]:checked {
   border-radius: 50px;
   text-align: center;
   align-self: flex-end;
-  margin-right: 50px;
+  /* margin-right: 50px; */
   margin-top: 25px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  position: absolute;
-  bottom: 20px;
 }
 .next-btn.success {
   width: 270px;
@@ -2965,7 +2986,7 @@ input[type="checkbox"]:checked {
 }
 .report-cont {
   width: 80%;
-  height: 300px;
+  height: 380px;
   margin-top: 30px;
   overflow-y: scroll;
   margin-bottom: 30px;
@@ -3104,15 +3125,15 @@ input[type="checkbox"]:checked {
   bottom: 100px;
 }
 .sig-btm-cont p {
-  transform: translateY(13px);
-  margin-right: 25px;
+  /* transform: translateY(13px); */
+  margin: 0 25px 0 0;
   font-size: 16px;
   font-family: "halcom", sans-serif;
   color: #0a1763;
 }
 .sig-btm-cont input {
-  transform: translateY(12px);
-  margin-right: 15px;
+  /* transform: translateY(12px); */
+  margin: 0 15px 0 0;
   z-index: 50;
 }
 
@@ -3132,6 +3153,8 @@ input[type="checkbox"]:checked {
   /* transform: translate(-5px, 5px); */
   margin-right: 10px;
 }
+
+/* #termsAccepted */
 @media (max-width: 1663px) {
   .split-bubble-with-title {
     height: 650px !important;
