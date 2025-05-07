@@ -165,10 +165,9 @@ const Action1_2 = () => {
       console.log(`${type}: ${name}`);
       console.log("typof:", typeof name);
     });
+    const spName = spouseData.SpouseFirstName + " " + spouseData.SpouseLastName;
     const box1String =
-      spouseData.SpouseFirstName +
-      " " +
-      spouseData.SpouseLastName +
+      spName +
       "\n" +
       userData.data.Address +
       " " +
@@ -192,6 +191,10 @@ const Action1_2 = () => {
         "F8821_topmostSubform[0].Page1[0].f1_8[0]": {
           type: "PDFTextField",
           data: userData.data.CellPhone,
+        },
+        "F8821_topmostSubform[0].Page1[0].#subform[2].f1_27[0]": {
+          type: "PDFTextField",
+          data: spName,
         },
       },
     };

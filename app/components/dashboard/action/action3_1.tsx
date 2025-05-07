@@ -133,7 +133,7 @@ const Action = () => {
                 onChange={handleSelectChange}
               >
                 <option value="" disabled>
-                  Select Martial Status...
+                  Select Marital Status...
                 </option>
                 <option value="1">Single</option>
                 <option value="2">Married Filing Jointly</option>

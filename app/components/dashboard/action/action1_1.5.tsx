@@ -70,8 +70,8 @@ const Action = () => {
       {isModalOpen ? (
         <div
           className="split-bubble-with-title tax-form open action-bubble action-1-1"
-          data-aos="fade-right"
-          data-aos-delay="150"
+          // data-aos="fade-right"
+          // data-aos-delay="150"
         >
           <div className="header-bubble">Tax Form 8821</div>
 
@@ -107,8 +107,8 @@ const Action = () => {
       ) : (
         <div
           className="split-bubble-with-title tax-form action-bubble action-1-1"
-          data-aos="fade-right"
-          data-aos-delay="150"
+          // data-aos="fade-right"
+          // data-aos-delay="150"
         >
           <div className="header-bubble">Tax Form 8821</div>
 

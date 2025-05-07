@@ -418,9 +418,11 @@ const Action1_1 = () => {
                 </p>
               )}
             </div>
-            <button className="next-btn" type="submit">
-              NEXT
-            </button>
+            <div className="action-btn-cont">
+              <button className="next-btn" type="submit">
+                NEXT
+              </button>
+            </div>
           </form>
         </div>
         <div className="header-bubble-back"></div>

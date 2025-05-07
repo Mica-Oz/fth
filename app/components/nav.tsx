@@ -99,7 +99,27 @@ const Nav = () => {
   }, [stytch, closeAllModals]);
 
   const id = userData?.data?.StatusID || undefined;
-  const route = statusDict[id as keyof typeof statusDict];
+  let route = statusDict[id as keyof typeof statusDict];
+  const maritalStatus = userData?.data?.MartialStatus;
+  const type = userData?.data?.TAX_RELIEF_TAX_TYPE;
+  if (id == 184 && maritalStatus === "Married Filing Jointly") {
+    route = "status2-2";
+  } else if (
+    (type === "BUSINESS" || type === "PERSONAL AND BUSINESS") &&
+    id == 184
+  ) {
+    route = "status2-3";
+  }
+  console.log(
+    "nav bar stuff, route:",
+    route,
+    "id:",
+    id,
+    "marital:",
+    maritalStatus,
+    "type:",
+    type
+  );
 
   // Common navigation menu items used in both authenticated and non-authenticated views
   const navMenuItems = (

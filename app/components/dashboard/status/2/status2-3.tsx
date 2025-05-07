@@ -54,8 +54,8 @@ const Dash = () => {
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p style={{ color: "#2e5a7e" }}>Step 1.2:</p>
-              <p>Request Spouse Tax History Report</p>
+              <p style={{ color: "#2e5a7e" }}>Step 1 Part 2:</p>
+              <p>Request Business Tax History Report</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -69,11 +69,11 @@ const Dash = () => {
               Fill out Tax History Report Request Form{" "}
             </p>
             <Link
-              href="/dashboard/action1/1/spouse"
+              href="/dashboard/action1/1/business"
               className="tax-history-req-btn"
             >
-              REQUEST SPOUSE TAX <br />
-              HISTORY REPORT
+              REQUEST BUSINESS <br />
+              TAX HISTORY REPORT
             </Link>
           </div>
           <div className="square-back"></div>

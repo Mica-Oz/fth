@@ -150,6 +150,10 @@ const Action1_2 = () => {
           type: "PDFTextField",
           data: userData.data.CellPhone,
         },
+        "F8821_topmostSubform[0].Page1[0].#subform[2].f1_27[0]": {
+          type: "PDFTextField",
+          data: userData.data.FirstName + " " + userData.data.LastName,
+        },
       },
     };
     return form_data;
@@ -223,7 +227,7 @@ const Action1_2 = () => {
 
     const pdfBytes = await pdfDoc.save();
     logicsPdfUpload(pdfBytes, caseID);
-    await updateStatus(185, caseID);
+    await updateStatus(186, caseID);
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
@@ -377,6 +381,8 @@ const Action1_2 = () => {
                   {errors.termsAccepted.message}
                 </p>
               )}
+            </div>
+            <div className="action-btn-cont">
               <button
                 onClick={handleSubmit}
                 className="next-btn"
