@@ -482,7 +482,7 @@ export default function Home() {
                   with our team of Tax Specialists.
                 </strong>
               </h5>
-              <Link href={"/contact"}>
+              <Link href={"/cal/consult"}>
                 <div className="schedule-btn">SCHEDULE CONSULTATION</div>
               </Link>
             </div>
