@@ -158,9 +158,9 @@ const Dash = () => {
                 consultation{" "}
               </strong>
             </span>
-            with our team of tax lawyers.
+            with our team of tax specialists.
           </p>
-          <Link href={"/contact"} style={{ marginLeft: "auto" }}>
+          <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
             <div className="learn-more-btn">SCHEDULE NOW</div>
           </Link>
         </div>
