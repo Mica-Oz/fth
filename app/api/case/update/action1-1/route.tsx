@@ -52,6 +52,7 @@ export async function POST(req: Request) {
           BusinessZip: data.BusinessZip,
           BusinessType: data.BusinessType,
           BusinessEIN: data.BusinessEIN,
+          taxamount: data.taxamount,
         },
       });
       console.log("response data", response.data);

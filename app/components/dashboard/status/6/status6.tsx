@@ -122,7 +122,7 @@ const Dash = () => {
             <p className="to-do-msg">
               You are Eligible for multiple Fresh Start Payment Plans!
             </p>
-            <Link href="/contact" className="tax-history-req-btn rep">
+            <Link href="/cal/consult" className="tax-history-req-btn rep">
               CONTACT OUR REPS
               <br />
               TO REVIEW PLANS
@@ -197,7 +197,7 @@ const Dash = () => {
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
+      {/* <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +219,7 @@ const Dash = () => {
           </Link>
         </div>
         <div className="square-back"></div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -103,7 +103,6 @@ const Action = () => {
           <Link
             href="/dashboard/status4"
             onClick={acknowledge}
-            style={{ width: "450px !important" }}
             className="next-btn"
           >
             BACK TO DASHBOARD

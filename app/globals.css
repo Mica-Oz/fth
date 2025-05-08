@@ -1212,11 +1212,10 @@ a {
 .faq .footer-diag {
   transform: translateY(-1210px);
 }
-.footer-diag.blog {
-  top: 4509px !important;
-  z-index: 0;
+.footer-diag.cal {
+  transform: translateY(-950px) !important;
 }
-.footer-diag .diag {
+cal-consult-bubble .footer-diag .diag {
   height: 1900px;
   width: 100vw;
   background-color: white;
@@ -1648,6 +1647,9 @@ a {
 }
 .auth-bubble {
   height: 440px !important;
+}
+.cal-consult-bubble {
+  height: 750px !important;
 }
 
 .split-bubble-with-title .header-bubble {
