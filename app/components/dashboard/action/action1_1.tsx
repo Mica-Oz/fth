@@ -16,6 +16,7 @@ const Action1_1 = () => {
   const { userData, setUserData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState("");
+  const [taxAmount, setTaxAmount] = useState("");
 
   // Get values from userData
   const caseID = userData?.data?.CaseID;
@@ -36,6 +37,7 @@ const Action1_1 = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       primary: "",
+      taxamount: "",
       dob: "",
       ssn: "",
       address: "",
@@ -61,6 +63,19 @@ const Action1_1 = () => {
     AOS.init();
   }, []);
 
+  const handleTaxAmountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectElement = e.target;
+
+    // Update the state when the selection changes
+    setTaxAmount(selectElement.value);
+
+    // Change text color based on selection
+    if (selectElement.value) {
+      selectElement.style.color = "#0a1763"; // Change text color to #0a1763
+    } else {
+      selectElement.style.color = "#5dacad"; // Default color if nothing is selected
+    }
+  };
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectElement = e.target;
 
@@ -192,73 +207,28 @@ const Action1_1 = () => {
                 </p>
               )}
             </div>
-            {/* 
+
             <div className="form-cat">
               <p className="cat-title">Estimated Tax Owed:</p>
               <select
-                {...register("state")}
+                {...register("taxamount")}
                 className="text-input"
-                name="state"
-                value={state}
-                onChange={handleStateChange}
+                name="taxamount"
+                value={taxAmount}
+                onChange={handleTaxAmountChange}
                 style={{ color: state ? "#0a1763" : "#5dacad" }}
               >
                 <option value="" disabled>
-                  Select State...
+                  Select Estimated Range...
                 </option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-                <option value="DC">District of Columbia</option>
+                <option value="0">$0</option>
+                <option value="5000">$5,000 or less</option>
+                <option value="10000">$5,000 - $10,000</option>
+                <option value="50000">$10,000 - $50,000</option>
+                <option value="55555">$50,000+</option>
+                <option value="">Not Sure</option>
               </select>
-              {errors.primary && (
+              {errors.taxamount && (
                 <p className="form-error">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -271,10 +241,10 @@ const Action1_1 = () => {
                     <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
                     <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
                   </svg>
-                  {errors.primary.message}
+                  {errors.taxamount.message}
                 </p>
               )}
-            </div> */}
+            </div>
 
             {maritalStatus === "Married Filing Jointly" && (
               <div className="form-cat">
