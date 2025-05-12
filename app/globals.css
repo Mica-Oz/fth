@@ -1630,6 +1630,9 @@ a {
   height: 600px;
   position: relative;
 }
+.split-bubble-with-title.about {
+  height: 650px;
+}
 .split-bubble-with-title.tax-form {
   margin-top: 100px;
   z-index: 3;
