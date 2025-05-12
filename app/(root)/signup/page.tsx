@@ -358,7 +358,14 @@ const Signup = () => {
                 ></input>
                 <p>
                   I agree to the{" "}
-                  <a href="/terms">Terms of Service & Privacy Policy</a>
+                  <a
+                    href="/terms"
+                    style={{ cursor: "pointer" }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Terms of Service & Privacy Policy
+                  </a>
                 </p>
               </div>
               {errors.agreeToTerms && (
