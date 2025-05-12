@@ -11,6 +11,7 @@ import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import Link from "next/link";
 
 // Define schema for the form
 const createAction1_2_Schema = () => {
@@ -345,12 +346,14 @@ const Action1_2 = () => {
                 </div>
               </div>
             </div>
+            <Link href="/terms"></Link>
             <div className="sig-btm-cont">
               <input
                 type="checkbox"
                 id="termsAccepted"
                 {...register("termsAccepted")}
               />{" "}
+              Link
               <p>
                 {" "}
                 I agree to the{" "}
@@ -362,7 +365,7 @@ const Action1_2 = () => {
                     fontWeight: "600",
                   }}
                 >
-                  Terms & Condtitions
+                  <Link href="/terms">Terms & Condtitions</Link>
                 </span>
               </p>
               {errors.termsAccepted && (
