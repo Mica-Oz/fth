@@ -1932,6 +1932,7 @@ a {
   background-color: #e2f1f1;
   clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
 }
+
 .blogBG {
   width: 100vw;
   height: 2330px;
@@ -1942,6 +1943,9 @@ a {
 }
 .diag.blog {
   background-color: #e2f1f1;
+}
+.footer-diag.blog {
+  transform: translateY(1920px);
 }
 .blog .post .box-front {
   /* justify-content: flex-start; */
