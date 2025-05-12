@@ -75,7 +75,8 @@ const Page = () => {
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {
       router.push("/signup"); // Navigate to the 'check email' page
-      alert("error logging in" + err);
+      // alert("error logging in" + err);
+      alert("error logging in");
       console.log("err:", err);
     }
   });
