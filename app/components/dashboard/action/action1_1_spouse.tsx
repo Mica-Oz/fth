@@ -15,6 +15,7 @@ const Action1_1 = () => {
   const router = useRouter();
   const { userData, setUserData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
+
   // const [maritalStatus, setMaritalStatus] = useState("");
 
   // Check if userData is properly loaded
@@ -40,6 +41,7 @@ const Action1_1 = () => {
     //   agreeToTerms: false, // Add a default value
     // },
   });
+
   const submit = handleSubmit(async () => {
     // Check if form ref exists
     if (formRef.current && caseID) {

@@ -216,7 +216,7 @@ const Action1_1 = () => {
                 name="taxamount"
                 value={taxAmount}
                 onChange={handleTaxAmountChange}
-                style={{ color: state ? "#0a1763" : "#5dacad" }}
+                style={{ color: taxAmount ? "#0a1763" : "#5dacad" }}
               >
                 <option value="" disabled>
                   Select Estimated Range...

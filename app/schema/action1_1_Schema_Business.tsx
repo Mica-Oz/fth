@@ -31,7 +31,6 @@ export const action1_1_Business_Schema = z.object({
       }
       return val;
     }),
-
   // Address fields
   BusinessAddress: z
     .string()
