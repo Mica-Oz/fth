@@ -218,13 +218,13 @@ const Action = () => {
                 type="text"
                 name="under65"
                 id="under65"
-                placeholder="Persons Under Age 65"
+                placeholder="Persons in the Household Under Age 65"
               />
               <input
                 type="text"
                 name="over65"
                 id="over65"
-                placeholder="Persons Age 65 or Older"
+                placeholder="Persons in the Household  Age 65 or Older"
               />
               <input
                 type="text"
@@ -308,7 +308,7 @@ const Action = () => {
                 type="text"
                 name="autoExpense"
                 id="autoExpense"
-                placeholder="Auto Expense"
+                placeholder="Fuel Cost"
               />
               <input
                 type="text"
@@ -318,7 +318,7 @@ const Action = () => {
               />
             </div>
             <div className="form-cat">
-              <p className="cat-title">Taxes:</p>
+              <p className="cat-title">Payment Plan for Back Taxes:</p>
               <input
                 type="text"
                 name="totalTax"
@@ -354,33 +354,30 @@ const Action = () => {
               />
               <input
                 type="text"
-                name="otherExpenseName1"
-                id="otherExpenseName1"
-                placeholder="Other Expense #1 Name"
+                name="personalLoans"
+                id="personalLoans"
+                placeholder="Personal Loans"
               />
               <input
                 type="text"
-                name="otherExpenseAmt1"
-                id="otherExpenseAmt1"
-                placeholder="Other Expense #1 Amount"
+                name="studentLoans"
+                id="studentLoans"
+                placeholder="Student Loans"
               />
+
               <input
                 type="text"
-                name="otherExpenseName2"
-                id="otherExpenseName2"
-                placeholder="Other Expense #2 Name"
-              />
-              <input
-                type="text"
-                name="otherExpenseAmt2"
-                id="otherExpenseAmt2"
-                placeholder="Other Expense #2 Amount"
+                name="ccPayment"
+                id="ccPayment"
+                placeholder="Credit Card Payments"
               />
             </div>
           </form>
-          <button onClick={submit} className="next-btn">
-            Next
-          </button>
+          <div className="action-btn-cont">
+            <button onClick={submit} className="next-btn">
+              Next
+            </button>
+          </div>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

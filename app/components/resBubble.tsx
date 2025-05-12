@@ -1,5 +1,6 @@
 import React from "react";
 import blur3 from "@/public/blurbg3.jpg";
+import Link from "next/link";
 
 const SplitWith2 = () => {
   return (
@@ -33,6 +34,11 @@ const SplitWith2 = () => {
               communication and resolve disputes efficiently, ensuring you can
               move forward with peace of mind and manageable payments.
             </p>
+          </div>
+          <div className="res-btn-cont">
+            <Link href="/cal/consult" className="res-btn">
+              SCHEDULE <br /> CONSULTATION
+            </Link>
           </div>
         </div>
         <div className="header-bubble-back"></div>

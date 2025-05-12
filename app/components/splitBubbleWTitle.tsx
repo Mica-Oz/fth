@@ -1,5 +1,6 @@
 import React from "react";
 import blur3 from "@/public/blurbg3.jpg";
+import Link from "next/link";
 
 const SplitWith = () => {
   return (
@@ -34,6 +35,11 @@ const SplitWith = () => {
               records are accurate and up-to-date, providing you with the
               necessary information to address any outstanding tax matters.
             </p>
+          </div>
+          <div className="res-btn-cont">
+            <Link href="/signup" className="res-btn">
+              FREE <br /> SIGN UP
+            </Link>
           </div>
         </div>
         <div className="header-bubble-back"></div>

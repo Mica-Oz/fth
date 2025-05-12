@@ -11,7 +11,7 @@ const Action = () => {
   // Create a ref for the form
   const formRef = useRef<HTMLFormElement>(null);
 
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  // const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
@@ -19,7 +19,7 @@ const Action = () => {
 
     // Check if form ref exists
     if (!formRef.current) return;
-    if (!textAreaRef.current) return;
+    // if (!textAreaRef.current) return;
     // Collect form data using the form elements
     const formData = {
       contact: (
@@ -27,7 +27,7 @@ const Action = () => {
           'input[name="contact"]:checked'
         ) as HTMLInputElement
       )?.value,
-      details: textAreaRef.current?.value, // Direct value access
+      // details: textAreaRef.current?.value, // Direct value access
     };
 
     console.log("Form Data:", formData);
@@ -54,7 +54,7 @@ const Action = () => {
     );
 
     // Your existing routing logic
-    router.push("/dashboard/action3/7");
+    router.push("/dashboard/status6");
   };
   return (
     <>
@@ -97,18 +97,18 @@ const Action = () => {
                 </div>
               </div>
             </div>
-            <div className="form-cat">
+            {/* <div className="form-cat">
               <p className="cat-title">Details:</p>
-              {/* <input
+              <input
                 type="textarea"
                 name="streetAddress1"
                 id="streetAddress1"
                 placeholder="Please include any details for why you are requesting your eligibility..."
                 style={{ height: "70px" }}
-              /> */}
-            </div>
+              />
+            </div> */}
           </form>
-          <textarea
+          {/* <textarea
             ref={textAreaRef}
             name="details"
             id="details"
@@ -116,10 +116,12 @@ const Action = () => {
             form="textareaform"
             wrap="soft"
             style={{ width: "70%", height: "150px" }}
-          ></textarea>
-          <button onClick={submit} className="next-btn">
-            Next
-          </button>
+          ></textarea> */}
+          <div className="action-btn-cont">
+            <button onClick={submit} className="next-btn">
+              Next
+            </button>
+          </div>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

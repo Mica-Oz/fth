@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
@@ -12,6 +12,46 @@ const Action = () => {
   const caseID = user?.untrusted_metadata.id as string;
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [signedURL, setSignedURL] = useState("");
+
+  async function handleGetURL(caseID: string) {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/report", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          caseID: caseID || "",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+      console.log("Response data:", responseData);
+      return responseData; // Return the response data
+    } catch (err) {
+      console.error(err);
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    const fetchURL = async () => {
+      const responseData = await handleGetURL(caseID);
+      if (responseData?.data?.uploadURL) {
+        setSignedURL(responseData.data.uploadURL);
+      }
+    };
+
+    fetchURL();
+  }, [caseID]);
 
   console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
   useEffect(() => {
@@ -51,11 +91,13 @@ const Action = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
   async function acknowledge() {
     await updateStatus(188, caseID);
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);
   }
+
   return (
     <>
       <div
@@ -89,24 +131,27 @@ const Action = () => {
             ref={containerRef}
           >
             {/* <Image alt={"icon"} src={"report"} width={800} className="icon3" /> */}
-            <iframe
-              ref={iframeRef}
-              src={
-                "https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf#toolbar=0"
-              }
-              // src="https://docs.google.com/viewer?url=https://fththr001.s3.us-west-1.amazonaws.com/10127.pdf&embedded=true"
-              width={"100%"}
-              height={300}
-              className="icon3 "
-            ></iframe>
+            {isLoading ? (
+              <div>Loading PDF...</div>
+            ) : (
+              <iframe
+                ref={iframeRef}
+                src={`${signedURL}#toolbar=0` || ""}
+                width={"100%"}
+                height={300}
+                className="icon3"
+              ></iframe>
+            )}
           </div>
-          <Link
-            href="/dashboard/status4"
-            onClick={acknowledge}
-            className="next-btn"
-          >
-            BACK TO DASHBOARD
-          </Link>
+          <div className="action-btn-cont">
+            <Link
+              href="/dashboard/status4"
+              onClick={acknowledge}
+              className="next-btn"
+            >
+              BACK TO DASHBOARD
+            </Link>
+          </div>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>

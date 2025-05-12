@@ -106,9 +106,9 @@ const Dash = () => {
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
             <p className="to-do-msg">
-              Find out what Fresh Start Programs you are eligible for.
+              Find out what Fresh Start Relief Programs you are eligible for.
             </p>
-            <Link href="/dashboard/action3/1" className="tax-history-req-btn">
+            <Link href="/dashboard/action3/3" className="tax-history-req-btn">
               CHECK ELIGIBILITY
             </Link>
           </div>
