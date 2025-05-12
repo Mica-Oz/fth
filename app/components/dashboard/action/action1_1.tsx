@@ -192,7 +192,7 @@ const Action1_1 = () => {
                 </p>
               )}
             </div>
-
+            {/* 
             <div className="form-cat">
               <p className="cat-title">Estimated Tax Owed:</p>
               <select
@@ -274,7 +274,7 @@ const Action1_1 = () => {
                   {errors.primary.message}
                 </p>
               )}
-            </div>
+            </div> */}
 
             {maritalStatus === "Married Filing Jointly" && (
               <div className="form-cat">
