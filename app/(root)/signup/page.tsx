@@ -357,8 +357,8 @@ const Signup = () => {
                   {...register("agreeToTerms")}
                 ></input>
                 <p>
-                  I agree to the <a href="">Terms of Service</a> &{" "}
-                  <a href="">Privacy Policy</a>
+                  I agree to the{" "}
+                  <a href="/terms">Terms of Service & Privacy Policy</a>
                 </p>
               </div>
               {errors.agreeToTerms && (
