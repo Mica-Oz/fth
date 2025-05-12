@@ -3196,7 +3196,13 @@ input[type="checkbox"]:checked {
   /* transform: translate(-5px, 5px); */
   margin-right: 10px;
 }
-
+.tAndC {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
 /* #termsAccepted */
 @media (max-width: 1663px) {
   .split-bubble-with-title {
