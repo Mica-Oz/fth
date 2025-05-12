@@ -5,6 +5,7 @@ import blur3 from "@/public/blurbg3.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Cal from "@/app/components/calConsult";
+// import Link from "next/link";
 
 const SplitWith2 = () => {
   useEffect(() => {
@@ -28,6 +29,11 @@ const SplitWith2 = () => {
         <div className="square">
           <div className="cont">
             <Cal />
+            {/* <div className="action-btn-cont">
+              <Link href="/dashboard/status4" className="next-btn">
+                BACK TO DASHBOARD
+              </Link>
+            </div> */}
           </div>
         </div>
         <div className="header-bubble-back auth"></div>

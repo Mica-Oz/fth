@@ -79,7 +79,7 @@ const Dash = () => {
           />
           <p style={{ width: "100%" }}>
             <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
-            You are eligible for several Fresh Start Payment Programs!
+            You are eligible for several Fresh Start Relief Programs!
           </p>
         </div>
         <div className="square-back"></div>

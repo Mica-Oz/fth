@@ -145,9 +145,11 @@ const Action = () => {
               </div>
             </div>
           </form>
-          <button onClick={submit} className="next-btn">
-            Next
-          </button>
+          <div className="action-btn-cont">
+            <button onClick={submit} className="next-btn">
+              Next
+            </button>
+          </div>
         </div>
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>
