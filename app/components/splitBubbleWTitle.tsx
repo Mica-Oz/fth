@@ -6,7 +6,7 @@ const SplitWith = () => {
   return (
     <>
       <div
-        className="split-bubble-with-title"
+        className="split-bubble-with-title about"
         data-aos="fade-right"
         data-aos-delay="150"
       >
