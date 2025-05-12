@@ -177,8 +177,13 @@ const TermsAndPrivacy = () => {
           at:
         </h4>
         <p>
-          Email: info@freetaxhistory.com Phone: (800) 805-3310 Address: 15991
-          Redhill Ave, Suite 208, Tustin, CA 92780
+          Email: info@freetaxhistory.com
+          <br />
+          Phone: (800) 805-3310
+          <br />
+          Address: 15991 Redhill Ave, Suite 208,
+          <br />
+          Tustin, CA 92780
         </p>
       </div>
     </>

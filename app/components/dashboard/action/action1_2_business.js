@@ -346,14 +346,12 @@ const Action1_2 = () => {
                 </div>
               </div>
             </div>
-            <Link href="/terms"></Link>
             <div className="sig-btm-cont">
               <input
                 type="checkbox"
                 id="termsAccepted"
                 {...register("termsAccepted")}
               />{" "}
-              Link
               <p>
                 {" "}
                 I agree to the{" "}
@@ -365,7 +363,14 @@ const Action1_2 = () => {
                     fontWeight: "600",
                   }}
                 >
-                  <Link href="/terms">Terms & Condtitions</Link>
+                  <Link
+                    href="/terms"
+                    style={{ cursor: "pointer" }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Terms & Condtitions
+                  </Link>
                 </span>
               </p>
               {errors.termsAccepted && (
