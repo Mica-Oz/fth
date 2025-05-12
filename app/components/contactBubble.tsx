@@ -1,5 +1,6 @@
 import React from "react";
 import blur3 from "@/public/blurbg3.jpg";
+import Link from "next/link";
 
 const SplitWith2 = () => {
   return (
@@ -31,6 +32,22 @@ const SplitWith2 = () => {
               </p>
               <p style={{ color: "#5dacad" }}>
                 <strong>(800)-805-3310</strong>
+              </p>
+            </div>
+            <div className="row" style={{ display: "flex" }}>
+              <p style={{ marginRight: "15px" }}>
+                <strong>Send Us An Email:</strong>
+              </p>
+              <p style={{ color: "#5dacad" }}>
+                <strong>
+                  <Link
+                    style={{ cursor: "pointer" }}
+                    href="mailto:info@freetaxhistory.com"
+                  >
+                    {" "}
+                    info@freetaxhistory.com
+                  </Link>
+                </strong>
               </p>
             </div>
             {/* <p>
