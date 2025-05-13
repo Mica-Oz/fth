@@ -38,7 +38,7 @@ export const createAction1_1_Schema = (userData: { maritalStatus: string }) =>
       // Primary taxpayer question (only required for married filing jointly)
       primary: z.string().optional(),
 
-      taxamount: z.string().optional(),
+      taxamount: z.string().min(1, { message: "Answer is required" }),
       // Address fields
       address: z
         .string()
