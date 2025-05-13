@@ -756,10 +756,10 @@ export default function Home() {
                   <Link href="/">Our Mission & Culture</Link>
                 </p>
                 <p>
-                  <Link href="/">Careers</Link>
+                  <Link href="/careers">Careers</Link>
                 </p>
                 <p>
-                  <Link href="/">Partnerships</Link>
+                  <Link href="/partnerships">Partnerships</Link>
                 </p>
 
                 {/* <p>
