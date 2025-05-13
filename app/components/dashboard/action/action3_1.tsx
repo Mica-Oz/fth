@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import { createActivity } from "@/app/utilities/api/activities";
@@ -11,23 +11,6 @@ const Action = () => {
   // Create a ref for the form
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Add a state to manage the selected marital status
-  const [maritalStatus, setMaritalStatus] = useState("");
-
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectElement = e.target;
-
-    // Update the state when the selection changes
-    setMaritalStatus(selectElement.value);
-
-    // Change text color based on selection
-    if (selectElement.value) {
-      selectElement.style.color = "#0a1763"; // Change text color to #0a1763
-    } else {
-      selectElement.style.color = "#5dacad"; // Default color if nothing is selected
-    }
-  };
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submit = async (e: any) => {
     e.preventDefault();
@@ -37,28 +20,6 @@ const Action = () => {
 
     // Collect form data using the form elements
     const formData = {
-      maritalStatus,
-      spouseFirstName: (
-        formRef.current.querySelector(
-          'input[name="firstName"]'
-        ) as HTMLInputElement
-      )?.value,
-      spouseMiddleInit: (
-        formRef.current.querySelector(
-          'input[name="middleInit"]'
-        ) as HTMLInputElement
-      )?.value,
-      spouseLastName: (
-        formRef.current.querySelector(
-          'input[name="lastName"]'
-        ) as HTMLInputElement
-      )?.value,
-      spouseDOB: (
-        formRef.current.querySelector('input[name="dob"]') as HTMLInputElement
-      )?.value,
-      spouseSSN: (
-        formRef.current.querySelector('input[name="ssn"]') as HTMLInputElement
-      )?.value,
       householdSize: (
         formRef.current.querySelector(
           'input[name="householdSize"]'
@@ -126,52 +87,6 @@ const Action = () => {
           {/* Add ref to the form */}
           <form ref={formRef} className="form-cont">
             <div className="form-cat">
-              <p className="cat-title">Marital Status:</p>
-              <select
-                name="marital-status"
-                value={maritalStatus} // Controlled select box
-                onChange={handleSelectChange}
-              >
-                <option value="" disabled>
-                  Select Marital Status...
-                </option>
-                <option value="1">Single</option>
-                <option value="2">Married Filing Jointly</option>
-                <option value="3">Married Filing Separately</option>
-                <option value="4">Head of Household</option>
-                <option value="5">Qualifying Widow</option>
-              </select>
-            </div>
-            <div className="form-cat">
-              <p className="cat-title">Spouse Information:</p>
-
-              <input
-                type="text"
-                name="spouseFirstName"
-                id="firstName"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                name="spouseMiddleInit"
-                id="middleInit"
-                placeholder="Middle Initial"
-              />
-              <input
-                type="text"
-                name="spouseLastName"
-                id="spouseLastName"
-                placeholder="Last Name"
-              />
-              <input
-                type="text"
-                name="dob"
-                id="dob"
-                placeholder="Date of Birth"
-              />
-              <input type="text" name="ssn" id="ssn" placeholder="SSN" />
-            </div>
-            <div className="form-cat">
               <p className="cat-title">Household Size:</p>
               <input
                 type="text"
@@ -193,9 +108,11 @@ const Action = () => {
               />
             </div>
           </form>
-          <button onClick={submit} className="next-btn">
-            Next
-          </button>
+          <div className="action-btn-cont">
+            <button onClick={submit} className="next-btn">
+              Next
+            </button>
+          </div>
         </div>
         <div className="header-bubble-back break"></div>
         <div className="back-square"></div>

@@ -5,6 +5,7 @@ import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import { useAppContext } from "@/app/context";
+import { useRouter } from "next/navigation";
 
 const Action = () => {
   const { userData, setUserData } = useAppContext();
@@ -14,6 +15,7 @@ const Action = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [signedURL, setSignedURL] = useState("");
+  const router = useRouter();
 
   async function handleGetURL(caseID: string) {
     setIsLoading(true);
@@ -93,9 +95,26 @@ const Action = () => {
   }, []);
 
   async function acknowledge() {
-    await updateStatus(188, caseID);
+    const status = userData?.data.StatusID;
+    let fastTrack = false;
+    if (status === 193) {
+      fastTrack = true;
+    }
+
+    //if fast track
+    if (fastTrack === true) {
+      await updateStatus(189, caseID);
+    } else {
+      await updateStatus(188, caseID);
+    }
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);
+
+    if (fastTrack === true) {
+      router.push("/dashboard/status6");
+    } else if (status === 187) {
+      router.push("/dashboard/status4");
+    }
   }
 
   return (
@@ -144,13 +163,9 @@ const Action = () => {
             )}
           </div>
           <div className="action-btn-cont">
-            <Link
-              href="/dashboard/status4"
-              onClick={acknowledge}
-              className="next-btn"
-            >
+            <button onClick={acknowledge} className="next-btn">
               BACK TO DASHBOARD
-            </Link>
+            </button>
           </div>
         </div>
         <div className="header-bubble-back"></div>

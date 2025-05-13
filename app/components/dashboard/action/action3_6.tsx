@@ -3,9 +3,11 @@ import React, { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import { createActivity } from "@/app/utilities/api/activities";
+import updateStatus from "@/app/utilities/api/updateStatus";
+import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Action = () => {
-  const { userData } = useAppContext();
+  const { userData, setUserData } = useAppContext();
   const router = useRouter();
 
   // Create a ref for the form
@@ -52,9 +54,18 @@ const Action = () => {
       processedJSON,
       "FinancialInterview"
     );
-
-    // Your existing routing logic
-    router.push("/dashboard/status6");
+    // update to status 5.1 if no fast track - eligibilityStarted !== true
+    if (userData?.eligibilityStarted === true) {
+      await updateStatus(192, userData?.data.CaseID);
+      const updatedUser = await getLogicsUser(userData?.data.CaseID);
+      setUserData(updatedUser);
+      router.push("/dashboard/status2");
+    } else {
+      await updateStatus(189, userData?.data.CaseID);
+      const updatedUser = await getLogicsUser(userData?.data.CaseID);
+      setUserData(updatedUser);
+      router.push("/dashboard/status6");
+    }
   };
   return (
     <>

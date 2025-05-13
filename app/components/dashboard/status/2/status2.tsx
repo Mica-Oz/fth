@@ -7,7 +7,7 @@ import scales from "@/public/scales-icon.png";
 import { useAppContext } from "@/app/context";
 
 const Dash = () => {
-  const { userData } = useAppContext();
+  const { userData, setUserData } = useAppContext();
   console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 2 COMP:", userData);
 
   return (
@@ -66,7 +66,7 @@ const Dash = () => {
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-3 bar-bubble">
+      {/* <div className="row-3 bar-bubble">
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -87,9 +87,9 @@ const Dash = () => {
           </Link>
         </div>
         <div className="square-back"></div>
-      </div>
+      </div> */}
       {/* commented out until i can secure the flow/status situation */}
-      {/* <div className="row-3 bar-bubble long">
+      <div className="row-3 bar-bubble long">
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -107,12 +107,21 @@ const Dash = () => {
             Submit Eligibility Request Form to see what Fresh Start programs you
             are eligible for.
           </p>
-          <Link href={"/dashboard/action3/1"} style={{ marginLeft: "auto" }}>
+          <Link
+            href={"/dashboard/action3/1"}
+            style={{ marginLeft: "auto" }}
+            onClick={() =>
+              setUserData((prev: typeof userData) => ({
+                ...prev,
+                eligibilityStarted: true,
+              }))
+            }
+          >
             <div className="learn-more-btn">CHECK ELIGIBILITY</div>
           </Link>
         </div>
         <div className="square-back"></div>
-      </div> */}
+      </div>
       <div className="row-4">
         <div className="detail-bubble">
           <div className="bubble-header break" style={{ fontSize: "30px" }}>
