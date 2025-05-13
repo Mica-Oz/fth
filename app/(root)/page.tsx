@@ -753,7 +753,7 @@ export default function Home() {
               <div className="footer-group group2">
                 <h5 className="section-cat">Company Information</h5>
                 <p>
-                  <Link href="/">Our Mission & Culture</Link>
+                  <Link href="/mission">Our Mission & Culture</Link>
                 </p>
                 <p>
                   <Link href="/careers">Careers</Link>
