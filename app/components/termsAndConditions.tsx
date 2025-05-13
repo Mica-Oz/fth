@@ -12,7 +12,7 @@ const TermsAndPrivacy = () => {
   return (
     <>
       <div className="tAndC">
-        <h1>Terms of Use</h1>
+        <h1 id="use">Terms of Use</h1>
 
         <h3>1. Introduction</h3>
         <p>
@@ -92,7 +92,7 @@ const TermsAndPrivacy = () => {
           shall be resolved in the courts located in Tustin, CA. ---
         </p>
 
-        <h1>Privacy Policy</h1>
+        <h1 id="privacy">Privacy Policy</h1>
 
         <h3>1. Introduction</h3>
         <p>

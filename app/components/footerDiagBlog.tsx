@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import icon from "@/public/fth-logo-icon-new.png";
 import footerBG from "@/public/footer-bg-4.jpg";
+import Link from "next/link";
 
 const FooterDiag = () => {
   return (
@@ -14,7 +15,15 @@ const FooterDiag = () => {
         <div className="cont">
           <div className="row-1">
             <div className="icon-logo">
-              <Image src={icon} alt="Logo" height={81} className="iconLogo" />
+              <Link href="/">
+                <Image
+                  src={icon}
+                  alt="Logo"
+                  height={80}
+                  style={{ cursor: "pointer" }}
+                  className="iconLogo"
+                />
+              </Link>
             </div>
           </div>
           <div className="row-2">
@@ -103,33 +112,64 @@ const FooterDiag = () => {
             <div className="sub-row sub-row-1">
               <div className="footer-group group1">
                 <h5 className="section-cat">Navigation</h5>
-                <p>About</p>
-                <p>Tax Resolution</p>
-                <p>Blog</p>
-                <p>FAQ</p>
-                <p>Contact</p>
+                <p>
+                  <Link href="/about">About</Link>
+                </p>
+                <p>
+                  <Link href="/resolution">Tax Resolution</Link>
+                </p>
+                <p>
+                  <Link href="blog">Blog</Link>
+                </p>
+                <Link href="/faq">FAQ</Link>
+                <p>
+                  <Link href="/contact">Contact</Link>
+                </p>
               </div>
               <div className="footer-group group2">
                 <h5 className="section-cat">Company Information</h5>
-                <p>Our Mission & Culture</p>
-                <p>Careers</p>
-                <p>Partnerships</p>
-                <p>Security</p>
-                <p>Terms & Conditions</p>
-                <p>Privacy Policy</p>
+                <p>
+                  <Link href="/">Our Mission & Culture</Link>
+                </p>
+                <p>
+                  <Link href="/">Careers</Link>
+                </p>
+                <p>
+                  <Link href="/">Partnerships</Link>
+                </p>
+
+                {/* <p>
+                  <Link href="/security">Security</Link>
+                </p> */}
+
+                <p>
+                  <Link href="/terms#use">Terms & Conditions</Link>
+                </p>
+
+                <p>
+                  <Link href="/terms#privacy">Privacy Policy</Link>
+                </p>
               </div>
             </div>
             <div className="sub-row sub-row-2">
               <div className="footer-group group3">
                 <h5 className="section-cat">Services</h5>
-                <p>Free Tax History</p>
-                <p>Tax Resolution</p>
-                <p>Free Credit Report</p>
+                <p>
+                  <Link href="why">Free Tax History</Link>
+                </p>
+                <p>
+                  <Link href="/resolution">Tax Resolution</Link>
+                </p>
+                {/* <p>Free Credit Report</p> */}
               </div>
               <div className="footer-group group4">
                 <h5 className="section-cat">Support</h5>
-                <p>Customer Success</p>
-                <p>FAQ</p>
+                <p>
+                  <Link href="contact">Contact Support</Link>
+                </p>
+                <p>
+                  <Link href="faq">FAQ</Link>
+                </p>
               </div>
             </div>
           </div>
