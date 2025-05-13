@@ -640,7 +640,15 @@ export default function Home() {
         <div className="cont">
           <div className="row-1">
             <div className="icon-logo">
-              <Image src={icon} alt="Logo" height={80} className="iconLogo" />
+              <Link href="/">
+                <Image
+                  src={icon}
+                  alt="Logo"
+                  height={80}
+                  style={{ cursor: "pointer" }}
+                  className="iconLogo"
+                />
+              </Link>
             </div>
           </div>
           <div className="row-2">
@@ -745,18 +753,18 @@ export default function Home() {
               <div className="footer-group group2">
                 <h5 className="section-cat">Company Information</h5>
                 <p>
-                  <Link href="/mission">Our Mission & Culture</Link>
+                  <Link href="/">Our Mission & Culture</Link>
                 </p>
                 <p>
-                  <Link href="/careers">Careers</Link>
+                  <Link href="/">Careers</Link>
                 </p>
                 <p>
-                  <Link href="/partnerships">Partnerships</Link>
+                  <Link href="/">Partnerships</Link>
                 </p>
 
-                <p>
+                {/* <p>
                   <Link href="/security">Security</Link>
-                </p>
+                </p> */}
 
                 <p>
                   <Link href="/terms#use">Terms & Conditions</Link>
