@@ -221,12 +221,12 @@ const Action1_1 = () => {
                 <option value="" disabled>
                   Select Estimated Range...
                 </option>
-                <option value="0">$0</option>
+                <option value="1">$0</option>
                 <option value="5000">$5,000 or less</option>
                 <option value="10000">$5,000 - $10,000</option>
                 <option value="50000">$10,000 - $50,000</option>
                 <option value="55555">$50,000+</option>
-                <option value="">Not Sure</option>
+                <option value="2">Not Sure</option>
               </select>
               {errors.taxamount && (
                 <p className="form-error">
