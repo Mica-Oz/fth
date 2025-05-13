@@ -108,7 +108,7 @@ const Dash = () => {
             are eligible for.
           </p>
           <Link
-            href={"/dashboard/action3/1"}
+            href={"/dashboard/action3/3"}
             style={{ marginLeft: "auto" }}
             onClick={() =>
               setUserData((prev: typeof userData) => ({
