@@ -21,9 +21,10 @@ const Signup = () => {
   const session = useStytchSession();
   const [maritalStatus, setMaritalStatus] = useState("");
   const [taxType, setTaxType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   console.log("signup-session:", session);
-  // const [error, setError] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
+
   // Create reference to store the DOM element containing the animation
   const typer = React.useRef(null);
   useEffect(() => {
@@ -96,11 +97,16 @@ const Signup = () => {
 
   console.log("env", currentEnv);
   const submit = handleSubmit(async (data) => {
+    // Prevent multiple submissions
+    if (isLoading) return;
+
+    setIsLoading(true);
+    setError("");
+
     data.statusID = "183";
     data.statusName = "Status 1.1 - Report Not Yet Requested";
     data.SETOfficerName = "James Grant";
     console.log("Submitting Data:", data);
-    // setIsLoading(true);
 
     try {
       const response = await fetch("/api/case", {
@@ -154,15 +160,13 @@ const Signup = () => {
 
       router.push("/awaitauth"); // Navigate to the 'check email' page
     } catch (err) {
-      // setError("There was an error submitting the case. Please try again.");
+      setError("There was an error submitting the case. Please try again.");
       console.error(err);
       alert("There was an error creating your account, please try again.");
       router.refresh();
+    } finally {
+      setIsLoading(false);
     }
-
-    // finally {
-    //   setIsLoading(false);
-    // }
   });
 
   return (
@@ -198,6 +202,7 @@ const Signup = () => {
                   className="text-input"
                   type="text"
                   placeholder="Email Address"
+                  disabled={isLoading}
                 />
                 {errors.email && (
                   <p className="form-error">
@@ -224,6 +229,7 @@ const Signup = () => {
                   className="text-input"
                   type="text"
                   placeholder="First Name"
+                  disabled={isLoading}
                 />
                 {errors.FirstName && (
                   <p className="form-error">
@@ -251,6 +257,7 @@ const Signup = () => {
                   className="text-input"
                   type="text"
                   placeholder="Last Name"
+                  disabled={isLoading}
                 />
                 {errors.LastName && (
                   <p className="form-error">
@@ -278,6 +285,7 @@ const Signup = () => {
                   value={taxType}
                   onChange={handleTaxTypeChange}
                   style={{ color: taxType ? "#0a1763" : "#5dacad" }}
+                  disabled={isLoading}
                 >
                   <option value="" disabled>
                     Select Tax Type...
@@ -315,6 +323,7 @@ const Signup = () => {
                     value={maritalStatus}
                     onChange={handleMaritalChange}
                     style={{ color: maritalStatus ? "#0a1763" : "#5dacad" }}
+                    disabled={isLoading}
                   >
                     <option value="" disabled>
                       Select Marital Status...
@@ -355,6 +364,7 @@ const Signup = () => {
                   type="checkbox"
                   className="checkbox"
                   {...register("agreeToTerms")}
+                  disabled={isLoading}
                 ></input>
                 <p>
                   I agree to the{" "}
@@ -385,8 +395,107 @@ const Signup = () => {
                   {errors.agreeToTerms.message}
                 </p>
               )}
-              <button type="submit" className="form-row-8">
-                SIGN UP
+              {error && (
+                <p className="form-error">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-exclamation-triangle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                  </svg>
+                  {error}
+                </p>
+              )}
+              <button
+                type="submit"
+                className="form-row-8 sign-up-btn"
+                disabled={isLoading}
+                style={{
+                  cursor: isLoading ? "not-allowed" : "pointer",
+                  position: "relative",
+                }}
+              >
+                {isLoading ? (
+                  <span
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 200 200"
+                      style={{ height: "50px", width: "120px" }}
+                    >
+                      <circle
+                        className="loader-dot"
+                        fill="#0a1763"
+                        stroke="#0a1763"
+                        strokeWidth="15"
+                        r="15"
+                        cx="40"
+                        cy="65"
+                      >
+                        <animate
+                          attributeName="cy"
+                          calcMode="spline"
+                          dur="2"
+                          values="65;135;65;"
+                          keySplines=".5 0 .5 1;.5 0 .5 1"
+                          repeatCount="indefinite"
+                          begin="-.4"
+                        />
+                      </circle>
+                      <circle
+                        className="loader-dot"
+                        fill="#0a1763"
+                        stroke="#0a1763"
+                        strokeWidth="15"
+                        r="15"
+                        cx="100"
+                        cy="65"
+                      >
+                        <animate
+                          attributeName="cy"
+                          calcMode="spline"
+                          dur="2"
+                          values="65;135;65;"
+                          keySplines=".5 0 .5 1;.5 0 .5 1"
+                          repeatCount="indefinite"
+                          begin="-.2"
+                        />
+                      </circle>
+                      <circle
+                        className="loader-dot"
+                        fill="#0a1763"
+                        stroke="#0a1763"
+                        strokeWidth="15"
+                        r="15"
+                        cx="160"
+                        cy="65"
+                      >
+                        <animate
+                          attributeName="cy"
+                          calcMode="spline"
+                          dur="2"
+                          values="65;135;65;"
+                          keySplines=".5 0 .5 1;.5 0 .5 1"
+                          repeatCount="indefinite"
+                          begin="0"
+                        />
+                      </circle>
+                    </svg>
+                  </span>
+                ) : (
+                  "SIGN UP"
+                )}
               </button>
               <div className="form-row-9">
                 <p>
