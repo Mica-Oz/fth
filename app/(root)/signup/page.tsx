@@ -97,68 +97,74 @@ const Signup = () => {
 
   console.log("env", currentEnv);
   const submit = handleSubmit(async (data) => {
-    // Prevent multiple submissions
     if (isLoading) return;
 
     setIsLoading(true);
     setError("");
 
-    data.statusID = "183";
-    data.statusName = "Status 1.1 - Report Not Yet Requested";
-    data.SETOfficerName = "James Grant";
-    console.log("Submitting Data:", data);
-
     try {
+      // Step 1: Check if email already exists
+      const checkRes = await fetch("/api/stytch/check-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email }),
+      });
+      console.log("check res:", checkRes);
+      const { userExists } = await checkRes.json();
+
+      if (userExists) {
+        setError("An account with this email already exists. Please log in.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Step 2: Proceed as normal
+      data.statusID = "183";
+      data.statusName = "Status 1.1 - Report Not Yet Requested";
+      data.SETOfficerName = "James Grant";
+
       const response = await fetch("/api/case", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
+
       const resJSON = await response.json();
-      console.log(
-        "Case submitted successfully---- response in front end::",
-        resJSON
-      );
-      console.log("datadata::", resJSON.data);
       const caseIdPattern = /(\d+)/;
       const match = resJSON.data.match(caseIdPattern);
       const caseID = match[1];
-      console.log("caseid just nums::", caseID);
+
+      const magicLinkParams = {
+        login_magic_link_url: "",
+        signup_magic_link_url: "",
+        login_expiration_minutes: 60,
+        signup_expiration_minutes: 60,
+      };
+
       if (currentEnv === "alpha") {
-        //local alpha environment call
-        await stytch.magicLinks.email.loginOrCreate(data.email as string, {
-          login_magic_link_url: "http://localhost:3000/auth/login",
-          login_expiration_minutes: 60,
-          signup_magic_link_url:
-            "http://localhost:3000/auth/signup?id={" + caseID + "}",
-          signup_expiration_minutes: 60,
-        });
+        magicLinkParams.login_magic_link_url =
+          "http://localhost:3000/auth/login";
+        magicLinkParams.signup_magic_link_url = `http://localhost:3000/auth/signup?id=${caseID}`;
       } else if (currentEnv === "beta") {
-        //beta environment call
-        await stytch.magicLinks.email.loginOrCreate(data.email as string, {
-          login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
-          login_expiration_minutes: 60,
-          signup_magic_link_url:
-            "https://fth-beta.vercel.app/auth/signup?id={" + caseID + "}",
-          signup_expiration_minutes: 60,
-        });
-      } else if (currentEnv === "prod") {
-        //prod environment call
-        await stytch.magicLinks.email.loginOrCreate(data.email as string, {
-          login_magic_link_url: "https://freetaxhistory.com/auth/login",
-          login_expiration_minutes: 60,
-          signup_magic_link_url:
-            "https://freetaxhistory.com/auth/signup?id={" + caseID + "}",
-          signup_expiration_minutes: 60,
-        });
+        magicLinkParams.login_magic_link_url =
+          "https://fth-beta.vercel.app/auth/login";
+        magicLinkParams.signup_magic_link_url = `https://fth-beta.vercel.app/auth/signup?id=${caseID}`;
+      } else {
+        magicLinkParams.login_magic_link_url =
+          "https://freetaxhistory.com/auth/login";
+        magicLinkParams.signup_magic_link_url = `https://freetaxhistory.com/auth/signup?id=${caseID}`;
       }
 
-      router.push("/awaitauth"); // Navigate to the 'check email' page
+      await stytch.magicLinks.email.loginOrCreate(
+        data.email as string,
+        magicLinkParams
+      );
+
+      router.push("/awaitauth");
     } catch (err) {
       setError("There was an error submitting the case. Please try again.");
       console.error(err);
