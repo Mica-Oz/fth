@@ -35,6 +35,7 @@ export async function POST(req: Request) {
 
     const userExists = response.results?.length > 0;
     return NextResponse.json({ userExists });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error querying Stytch API:", error);
 
