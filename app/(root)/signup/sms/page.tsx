@@ -174,10 +174,18 @@ const Page = () => {
                     </p>
                   )}
                 </div>
-
                 <button type="submit" className="form-row-8">
                   VERIFY
                 </button>
+                <div className="form-row-9 phone-disclaimer">
+                  <p>
+                    By clicking “Verify”: I accept and agree to the Terms of Use
+                    Agreement as well as acknowledge receipt of your Privacy
+                    Policy. I consent to FreeTaxHistory.com sending a one-time
+                    verification text, and communications about my account to
+                    the phone number provided. Message and data rates may apply.
+                  </p>
+                </div>
                 <div className="form-row-9">
                   <p>
                     Issues verifying phone?{" "}
@@ -228,6 +236,15 @@ const Page = () => {
                 <button type="submit" className="form-row-8">
                   VERIFY
                 </button>
+                <div className="form-row-9 phone-disclaimer">
+                  <p>
+                    By clicking “Verify”: I accept and agree to the Terms of Use
+                    Agreement as well as acknowledge receipt of your Privacy
+                    Policy. I consent to FreeTaxHistory.com sending a one-time
+                    verification text, and communications about my account to
+                    the phone number provided. Message and data rates may apply.
+                  </p>
+                </div>
 
                 <div className="form-row-9">
                   <p>

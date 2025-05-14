@@ -181,9 +181,9 @@ const TermsAndPrivacy = () => {
           <br />
           Phone: (800) 805-3310
           <br />
-          Address: 15991 Redhill Ave, Suite 208,
+          Address: 1810 E Sahara Ave Suite 334
           <br />
-          Tustin, CA 92780
+          Las Vegas, NV 89104
         </p>
       </div>
     </>
