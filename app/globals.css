@@ -1487,6 +1487,20 @@ a {
   font-weight: 300;
   color: #0a1763;
 }
+.form-row-9 p {
+  margin: 0;
+  text-align: center;
+}
+.form-row-9.phone-disclaimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "halcom", sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: #0a1763;
+  width: 95%;
+}
 .create-form .text-input {
   width: 100%;
   background-color: #e2f1f1;
