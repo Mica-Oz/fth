@@ -97,6 +97,10 @@ a {
   background-color: #0a1763;
   color: white;
 }
+.sign-up-btn:hover .loader-dot {
+  fill: white;
+  stroke: white;
+}
 .log-in-btn {
   border: 3px solid #5dacad;
   color: #5dacad;
