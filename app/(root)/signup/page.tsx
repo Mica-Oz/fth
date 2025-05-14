@@ -185,7 +185,7 @@ const Signup = () => {
           <h3>
             Your confidential, Free Tax History Report will clearly summarize a
             10+ year history of your IRS Individual Master File. We can identify
-            the current balance, any open issues and help you find a solution
+            the current balance, any open issues, and help you find a solution
             safely and securely.
           </h3>
         </div>

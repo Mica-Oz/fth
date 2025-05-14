@@ -164,7 +164,7 @@ export default function Home() {
           <p data-aos="fade-left" data-aos-delay="150">
             Your confidential, Free Tax History Report will clearly summarize a
             10+ year history of your IRS Individual Master File. We can identify
-            the current balance, any open issues and help you find a solution
+            the current balance, any open issues, and help you find a solution
             safely and securely.
           </p>
           <Link href={"/signup"}>
