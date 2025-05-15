@@ -25,7 +25,7 @@ const createAction1_2_Schema = () => {
 const Action1_2 = () => {
   const router = useRouter();
   const { userData, setUserData } = useAppContext();
-  console.log("USER DATA FROM CONTEXT BUT INIDE Action1/2 COMP:", userData);
+  // console.log("USER DATA FROM CONTEXT BUT INIDE Action1/2 COMP:", userData);
   const sigCanvas = useRef(null);
   const { user } = useStytchUser();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -48,13 +48,13 @@ const Action1_2 = () => {
   });
 
   function clear() {
-    console.log(" sigCanvas.current:", sigCanvas.current);
+    // console.log(" sigCanvas.current:", sigCanvas.current);
     sigCanvas.current.clear();
     setSignatureError("");
   }
 
   function undo() {
-    console.log(" sigCanvas.current:", sigCanvas.current);
+    // console.log(" sigCanvas.current:", sigCanvas.current);
 
     let data = sigCanvas.current.toData();
     if (data) {
@@ -95,7 +95,7 @@ const Action1_2 = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function logicsPdfUpload(pdf, caseID) {
     if (pdf) {
-      console.log("pdf:", pdf);
+      // console.log("pdf:", pdf);
       try {
         const response = await fetch("/api/pdf", {
           method: "POST",
@@ -112,10 +112,10 @@ const Action1_2 = () => {
 
         const data = await response.json();
 
-        console.log(
-          "Get request submitted successfully---- response in front end::",
-          data
-        );
+        // console.log(
+        //   "Get request submitted successfully---- response in front end::",
+        //   data
+        // );
         return data;
       } catch (err) {
         // setError("There was an error submitting the case. Please try again.");
@@ -125,17 +125,17 @@ const Action1_2 = () => {
     }
   }
   async function update_variables() {
-    const formUrl = "/8821-base.pdf";
-    const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
-    const pdfDoc = await PDFDocument.load(formPdfBytes);
-    const form = pdfDoc.getForm();
-    const fields = form.getFields();
-    fields.forEach((field) => {
-      const type = field.constructor.name;
-      const name = field.getName();
-      console.log(`${type}: ${name}`);
-      console.log("typof:", typeof name);
-    });
+    // const formUrl = "/8821-base.pdf";
+    // const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
+    // const pdfDoc = await PDFDocument.load(formPdfBytes);
+    // const form = pdfDoc.getForm();
+    // const fields = form.getFields();
+    // fields.forEach((field) => {
+    //   const type = field.constructor.name;
+    //   const name = field.getName();
+    //   console.log(`${type}: ${name}`);
+    //   console.log("typof:", typeof name);
+    // });
     const tpName = userData.data.FirstName + " " + userData.data.LastName;
     const box1String =
       tpName +
@@ -216,10 +216,36 @@ const Action1_2 = () => {
 
     const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer());
     const pngImage = await pdfDoc.embedPng(pngImageBytes);
-    const pngDims = pngImage.scale(0.25);
+    let pngDims;
+    console.log("pngImage dimensions: width:", pngImage.width);
+    console.log("pngImage dimensions: height:", pngImage.height);
+    if (pngImage.height > 200) {
+      pngDims = pngImage.scale(0.1);
+    } else {
+      pngDims = pngImage.scale(0.25);
+    }
+
     const pages = pdfDoc.getPages();
     const page = pages[0];
+    // console.log(
+    //   "pngdims dimensions: width:",
+    //   pngDims.width,
+    //   "height",
+    //   pngDims.height
+    // );
+    // console.log(
+    //   "pngimage dimensions: width:",
+    //   pngImage.width,
+    //   "height",
+    //   pngImage.height
+    // );
 
+    // console.log(
+    //   "new dimensions: width:",
+    //   pngDims.width,
+    //   "height",
+    //   pngDims.height
+    // );
     page.drawImage(pngImage, {
       x: 65,
       y: 130,
