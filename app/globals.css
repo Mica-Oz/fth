@@ -3070,7 +3070,7 @@ input[type="checkbox"]:checked {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center; */
-  height: 250px;
+  height: 200px;
   width: 100%;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -3168,7 +3168,7 @@ input[type="checkbox"]:checked {
   height: 2px;
   background: #0a1763;
   position: absolute;
-  top: 150px;
+  top: 130px;
   left: 5%;
   right: auto;
 }
