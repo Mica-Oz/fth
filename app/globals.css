@@ -4036,7 +4036,9 @@ input[type="checkbox"]:checked {
     right: -100px;
   }
   .hero {
-    height: 715px;
+    height: 600px;
+    justify-content: flex-start;
+    padding-top: 30px;
   }
   .hero .hero-btn {
     font-size: 20px;
