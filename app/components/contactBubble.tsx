@@ -50,7 +50,30 @@ const SplitWith2 = () => {
                 </strong>
               </p>
             </div>
+            <div
+              className="row"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <p style={{ marginRight: "15px" }}>
+                <strong>Address:</strong>
+              </p>
+              <div className="address-block">
+                <p style={{ textAlign: "left", marginLeft: "30px" }}>
+                  1810 E Sahara Ave. Suite 334
+                </p>
+
+                <p style={{ textAlign: "left", marginLeft: "30px" }}>
+                  Las Vegas, NV 89104
+                </p>
+              </div>
+            </div>
+
             {/* <p>
+            
               <strong>Send Us A Message:</strong>
             </p>
             <form action="submit" className="contact-form">
