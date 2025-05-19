@@ -4051,7 +4051,9 @@ input[type="checkbox"]:checked {
   .blog-prev h1 {
     font-size: 35px !important;
   }
-
+  .top-big-square .box-pic {
+    background-position: -290px;
+  }
   /* .squares {
     left: 27%;
   } */
