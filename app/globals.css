@@ -4036,7 +4036,9 @@ input[type="checkbox"]:checked {
     right: -100px;
   }
   .hero {
-    height: 715px;
+    height: 620px;
+    justify-content: flex-start;
+    padding-top: 30px;
   }
   .hero .hero-btn {
     font-size: 20px;
@@ -4049,7 +4051,9 @@ input[type="checkbox"]:checked {
   .blog-prev h1 {
     font-size: 35px !important;
   }
-
+  .top-big-square .box-pic {
+    background-position: -290px;
+  }
   /* .squares {
     left: 27%;
   } */
@@ -4378,7 +4382,7 @@ input[type="checkbox"]:checked {
     height: 800px;
   }
   .circle-offer {
-    width: 250px;
+    width: 200px;
   }
   .top-big-square .box-pic {
     background-position: -290px;
