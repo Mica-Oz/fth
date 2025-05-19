@@ -16,7 +16,7 @@ const Action1_1 = () => {
   const { userData, setUserData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState("");
-  const [taxAmount, setTaxAmount] = useState("");
+  const [isNotSure, setIsNotSure] = useState(false);
 
   // Get values from userData
   const caseID = userData?.data?.CaseID;
@@ -32,6 +32,8 @@ const Action1_1 = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<ActionInputs>({
     resolver: zodResolver(schema),
@@ -48,6 +50,9 @@ const Action1_1 = () => {
     },
   });
 
+  // Watch the taxamount field
+  const taxAmount = watch("taxamount");
+
   // Check if userData is properly loaded
   useEffect(() => {
     if (userData && userData.data) {
@@ -63,19 +68,20 @@ const Action1_1 = () => {
     AOS.init();
   }, []);
 
-  const handleTaxAmountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectElement = e.target;
+  // Handle the "not sure" checkbox
+  const handleNotSureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = e.target.checked;
+    setIsNotSure(isChecked);
 
-    // Update the state when the selection changes
-    setTaxAmount(selectElement.value);
-
-    // Change text color based on selection
-    if (selectElement.value) {
-      selectElement.style.color = "#0a1763"; // Change text color to #0a1763
+    if (isChecked) {
+      // If checkbox is checked, set taxamount to "2"
+      setValue("taxamount", "2", { shouldValidate: true });
     } else {
-      selectElement.style.color = "#5dacad"; // Default color if nothing is selected
+      // If unchecked, clear the value
+      setValue("taxamount", "", { shouldValidate: true });
     }
   };
+
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectElement = e.target;
 
@@ -92,7 +98,7 @@ const Action1_1 = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     setIsLoading(true);
-
+    console.log("submissiondata", data);
     try {
       const response = await fetch("/api/case/update/action1-1", {
         method: "POST",
@@ -210,24 +216,50 @@ const Action1_1 = () => {
 
             <div className="form-cat">
               <p className="cat-title">Estimated Tax Owed:</p>
-              <select
-                {...register("taxamount")}
-                className="text-input"
-                name="taxamount"
-                value={taxAmount}
-                onChange={handleTaxAmountChange}
-                style={{ color: taxAmount ? "#0a1763" : "#5dacad" }}
+              <div
+                className="tax-amt-row"
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
               >
-                <option value="" disabled>
-                  Select Estimated Range...
-                </option>
-                <option value="1">$0</option>
-                <option value="5000">$5,000 or less</option>
-                <option value="10000">$5,000 - $10,000</option>
-                <option value="50000">$10,000 - $50,000</option>
-                <option value="55555">$50,000+</option>
-                <option value="2">Not Sure</option>
-              </select>
+                <input
+                  type="number"
+                  {...register("taxamount")}
+                  placeholder="Estimated Tax Amount"
+                  disabled={isNotSure}
+                  style={{
+                    color: taxAmount ? "#0a1763" : "#5dacad",
+                    display: isNotSure ? "none" : "block",
+                  }}
+                />
+                <div
+                  className="check-row"
+                  style={{
+                    marginTop: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    id="notSure"
+                    checked={isNotSure}
+                    onChange={handleNotSureChange}
+                  />
+                  <label
+                    htmlFor="notSure"
+                    style={{
+                      marginLeft: "18px",
+                      fontFamily: "Halcom, sans-serif",
+                      color: "#0a1763",
+                    }}
+                  >
+                    I&apos;m not sure how much I owe
+                  </label>
+                </div>
+              </div>
               {errors.taxamount && (
                 <p className="form-error">
                   <svg
