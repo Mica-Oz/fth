@@ -2632,7 +2632,7 @@ textarea:focus {
 input[type="number"] {
   margin: 0 10px 0 0; /* Remove default margin */
   padding: 0 10px 0 0; /* Remove default padding */
-  width: 70px;
+  width: 80%;
   height: 30px;
   position: relative;
   cursor: pointer; /* Show pointer cursor on hover */
@@ -2677,6 +2677,11 @@ input[type="checkbox"]:checked {
   bottom: 20px;
   display: flex;
   justify-content: flex-end;
+}
+.ckeck-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .action-bubble .next-btn {
   width: 170px;
