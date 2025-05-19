@@ -3825,6 +3825,7 @@ input[type="checkbox"]:checked {
 @media (max-width: 850px) {
   .learn-more {
     width: 180px;
+    left: 57%;
   }
   .learn-more a {
     font-size: 19px;
@@ -3891,8 +3892,8 @@ input[type="checkbox"]:checked {
     font-size: 16px !important;
   }
   .offer-cont img {
-    width: 110px !important;
-    height: 98px !important;
+    width: 90px !important;
+    height: 78px !important;
   }
   .sign-up {
     height: 1400px;
@@ -4048,11 +4049,13 @@ input[type="checkbox"]:checked {
   .blog-prev h1 {
     font-size: 35px !important;
   }
-  .squares {
+
+  /* .squares {
     left: 27%;
-  }
+  } */
   .squares .square {
     width: 80vw;
+    margin-left: 80%;
   }
   .bottom-heading {
     margin-top: 20px;
@@ -4389,10 +4392,10 @@ input[type="checkbox"]:checked {
   .congrats {
     font-size: 22px !important;
   }
-
+  /* 
   .nav-btn-cont.dropdown-cont.auth {
     margin-right: 0px;
-  }
+  } */
 }
 @media (max-width: 300) {
   .dash-cont .row-3,
