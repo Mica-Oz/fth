@@ -4036,7 +4036,7 @@ input[type="checkbox"]:checked {
     right: -100px;
   }
   .hero {
-    height: 620px;
+    height: 550px;
     justify-content: flex-start;
     padding-top: 30px;
   }
@@ -4400,6 +4400,9 @@ input[type="checkbox"]:checked {
   .nav-btn-cont.dropdown-cont.auth {
     margin-right: 0px;
   } */
+  .hero {
+    height: 620px;
+  }
 }
 @media (max-width: 300) {
   .dash-cont .row-3,
