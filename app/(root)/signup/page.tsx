@@ -122,6 +122,7 @@ const Signup = () => {
       data.statusID = "183";
       data.statusName = "Status 1.1 - Report Not Yet Requested";
       data.SETOfficerName = "James Grant";
+      data.SMSPermit = true;
 
       const response = await fetch("/api/case", {
         method: "POST",
