@@ -40,6 +40,7 @@ export const signupSchema = z
     statusID: z.string().optional(),
     statusName: z.string().optional(),
     SETOfficerName: z.string().optional(),
+    SMSPermit: z.boolean().optional(),
   })
   .refine(
     (data) => {
