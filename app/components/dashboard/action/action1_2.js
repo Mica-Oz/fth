@@ -124,6 +124,38 @@ const Action1_2 = () => {
       }
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async function logicsPdfFax(pdf, caseID) {
+    if (pdf) {
+      console.log("pdf:", pdf);
+      try {
+        const response = await fetch("/api/fax", {
+          method: "POST",
+          headers: {
+            contentType: "application/pdf",
+            caseID: caseID,
+            state: userData?.data.State,
+          },
+          body: pdf,
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        console.log(
+          "Fax request submitted successfully---- response in front end::",
+          data
+        );
+        return data;
+      } catch (err) {
+        // setError("There was an error submitting the case. Please try again.");
+        console.error(err);
+        router.push("/oops");
+      }
+    }
+  }
   async function update_variables() {
     // const formUrl = "/8821-base.pdf";
     // const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
@@ -265,7 +297,10 @@ const Action1_2 = () => {
     //call api
 
     const pdfBytes = await pdfDoc.save();
-    logicsPdfUpload(pdfBytes, caseID);
+    await logicsPdfUpload(pdfBytes, caseID);
+    if (userData?.data.LastName !== "Test") {
+      await logicsPdfFax(pdfBytes, caseID);
+    }
     await updateStatus(184, caseID);
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);

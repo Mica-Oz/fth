@@ -4137,6 +4137,10 @@ input[type="checkbox"]:checked {
     /* top: 600px; */
     transform: translateY(-420px) !important;
   }
+  .res-btn {
+    width: 180px;
+    font-size: 20px;
+  }
 }
 @media (max-width: 553px) {
   .footer-diag,
