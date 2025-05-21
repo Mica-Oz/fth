@@ -47,12 +47,20 @@ const Page = () => {
 
   const submit = handleSubmit(async (data) => {
     try {
+      //get user from stytch to get the caseID
+      const caseIDRes = await fetch("/api/stytch/get-case-id", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email }),
+      });
+      const { id } = await caseIDRes.json();
+      // console.log("caseidroute:", id);
       if (currentEnv === "alpha") {
         // alpha environment call
         await stytch.magicLinks.email.send(data.email as string, {
           login_magic_link_url: "http://localhost:3000/auth/login",
           login_expiration_minutes: 60,
-          signup_magic_link_url: "http://localhost:3000/oops",
+          signup_magic_link_url: `http://localhost:3000/auth/signup?id=${id}`,
           signup_expiration_minutes: 60,
         });
       } else if (currentEnv === "beta") {
@@ -60,7 +68,7 @@ const Page = () => {
         await stytch.magicLinks.email.send(data.email as string, {
           login_magic_link_url: "https://fth-beta.vercel.app/auth/login",
           login_expiration_minutes: 60,
-          signup_magic_link_url: "https://fth-beta.vercel.app/oops",
+          signup_magic_link_url: `https://fth-beta.vercel.app/auth/signup?id=${id}`,
           signup_expiration_minutes: 60,
         });
       } else if (currentEnv === "prod") {
@@ -68,7 +76,7 @@ const Page = () => {
         await stytch.magicLinks.email.send(data.email as string, {
           login_magic_link_url: "https://freetaxhistory.com/auth/login",
           login_expiration_minutes: 60,
-          signup_magic_link_url: "https://freetaxhistory.com/oops",
+          signup_magic_link_url: `https://freetaxhistory.com/auth/signup?id=${id}`,
           signup_expiration_minutes: 60,
         });
       }

@@ -68,17 +68,7 @@ function AuthContent() {
   }, [user, router]);
 
   if (error) {
-    return (
-      <div className="text-center p-4">
-        <p className="text-red-500">{error}</p>
-        <button
-          onClick={() => router.push("/")}
-          className="mt-4 text-blue-500 underline"
-        >
-          Return to Home
-        </button>
-      </div>
-    );
+    router.push("/oops");
   }
 
   return (
