@@ -10,6 +10,9 @@ const statusDict = {
   191: "status7",
   192: "status2",
   193: "status3",
+  194: "status2-R",
+  195: "status2-RS",
+  196: "status2-RB",
 };
 
 export default statusDict;
