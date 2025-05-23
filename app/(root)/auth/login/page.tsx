@@ -12,7 +12,8 @@ function AuthContent() {
   const router = useRouter();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const email = user?.emails[0]?.email as string;
+  console.log("email:", email);
   useEffect(() => {
     const handleAuthentication = async () => {
       if (session) {
@@ -48,9 +49,41 @@ function AuthContent() {
 
     handleAuthentication();
   }, [stytch, session, params, router, isAuthenticating]);
+  useEffect(() => {
+    // Fetch user data from Logics
+    const fetchLogicsUserByEmail = async (email: string) => {
+      if (email) {
+        console.log("fetching case by email", email);
+        try {
+          const response = await fetch("/api/case/find-by-email", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              email: email,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          return await response.json();
+        } catch (err) {
+          console.error("Failed to fetch user data:", err);
+          setError("Failed to fetch user information");
+          router.push("/oops");
+          return null;
+        }
+      }
+    };
+
+    const logicsCase = fetchLogicsUserByEmail(email);
+    console.log("logics case:", logicsCase);
+  }, [user, router, email]);
 
   useEffect(() => {
     const navigateToSMS = async () => {
+      console.log("User data:", user, user?.untrusted_metadata);
       if (user && user.untrusted_metadata?.id) {
         const caseID = user.untrusted_metadata.id as string;
         console.log("User detected, caseID:", caseID);
