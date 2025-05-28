@@ -388,7 +388,13 @@ const Action1_2 = () => {
             You&apos;re almost done!
             <br />
             Just E-sign below and we will begin generating your Free Tax History
-            Report!
+            Report! <br />
+            <strong>
+              Note: Please provide a proper digital signature <u>on the line</u>{" "}
+              that resembles your handwritten signature. Submissions using only
+              symbols, dots, or lines may not be accepted and could delay
+              processing. A valid signature is required to authorize Form 8821.
+            </strong>
           </p>
           <form
             className="form-cont"
