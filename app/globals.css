@@ -2447,7 +2447,7 @@ a {
 .action-bubble .form-cont {
   width: 80%;
   height: 60%;
-  z-index: 6;
+  /* z-index: 6; */
   overflow-y: auto;
 }
 .action-3 .form-cont {
