@@ -4267,7 +4267,8 @@ input[type="checkbox"]:checked {
     height: 43% !important;
   }
   .circle-offer {
-    width: 300px !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 @media (max-width: 450) {
@@ -4404,9 +4405,9 @@ input[type="checkbox"]:checked {
   .action-3-9 {
     height: 800px;
   }
-  .circle-offer {
+  /* .circle-offer {
     width: 200px !important;
-  }
+  } */
   .top-big-square .box-pic {
     background-position: -290px;
   }
