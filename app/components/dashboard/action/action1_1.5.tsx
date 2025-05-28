@@ -113,10 +113,7 @@ const Action = () => {
           <div className="header-bubble">Tax Form 8821</div>
 
           <div className="square">
-            <p
-              className="sub-heading"
-              style={{ textIndent: "25px", marginRight: "105px" }}
-            >
+            <p className="sub-heading" style={{ textIndent: "25px" }}>
               On the following page, you will be asked to provide your signature
               for{" "}
               <strong

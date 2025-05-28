@@ -2457,6 +2457,7 @@ a {
   z-index: 7;
   align-self: flex-start;
   margin-left: 80px;
+  margin-right: 80px;
   margin-top: 70px;
   font-family: "halcom", sans-serif;
   color: #0a1763;
@@ -3759,7 +3760,8 @@ input[type="checkbox"]:checked {
     /* transform: translate(20px, 20px); */
     margin-right: 5px;
   }
-  .split-bubble-with-title {
+  .split-bubble-with-title,
+  .split-bubble-with-title.tax-form {
     width: 84vw;
   }
   .split-bubble-with-title .box-pic {
