@@ -146,8 +146,8 @@ const SplitWith2 = () => {
           <div className="action-btn-cont">
             <Link
               href="/dashboard/status2"
-              style={{ width: "450px" }}
-              className="next-btn"
+              // style={{ width: "450px" }}
+              className="next-btn success"
             >
               BACK TO DASHBOARD
             </Link>

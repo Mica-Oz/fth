@@ -2701,7 +2701,10 @@ input[type="checkbox"]:checked {
   transition: all 0.3s ease-in-out;
 }
 .next-btn.success {
-  width: 270px;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .action-bubble .next-btn:hover {
   color: white;
@@ -3868,6 +3871,13 @@ input[type="checkbox"]:checked {
   .signup-main.main-cont {
     height: 800px;
   }
+  .split-bubble-with-title .square .cont h3 {
+    font-size: 35px;
+  }
+  .next-btn.success {
+    font-size: 30px;
+    padding: 10px;
+  }
 }
 @media (max-width: 770px) {
   .action-1-2 {
@@ -3990,6 +4000,9 @@ input[type="checkbox"]:checked {
   } */
   .top-big-square .box-pic {
     background-position: -200px;
+  }
+  .next-btn.success {
+    font-size: 20px;
   }
 }
 @media (max-width: 675px) {
@@ -4140,6 +4153,9 @@ input[type="checkbox"]:checked {
   .res-btn {
     width: 180px;
     font-size: 20px;
+  }
+  .split-bubble-with-title .square .cont h3 {
+    font-size: 30px;
   }
 }
 @media (max-width: 553px) {
@@ -4390,6 +4406,9 @@ input[type="checkbox"]:checked {
   }
   .top-big-square .box-pic {
     background-position: -290px;
+  }
+  .split-bubble-with-title .square .cont h3 {
+    font-size: 25px;
   }
 }
 @media (max-width: 350) {
