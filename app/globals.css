@@ -3369,7 +3369,7 @@ input[type="checkbox"]:checked {
     cursor: pointer;
   }
   .split-bubble-with-title.action-1-2 {
-    height: 800px !important;
+    height: 950px !important;
   }
 }
 @media (max-width: 1380px) {
@@ -3761,7 +3761,8 @@ input[type="checkbox"]:checked {
     margin-right: 5px;
   }
   .split-bubble-with-title,
-  .split-bubble-with-title.tax-form {
+  .split-bubble-with-title.tax-form,
+  .split-bubble-with-title.tax-form.open {
     width: 84vw;
   }
   .split-bubble-with-title .box-pic {
