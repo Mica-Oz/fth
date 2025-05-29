@@ -155,7 +155,7 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p className="active">{userData?.currentLiability}</p>
+            <p className="active">{userData?.currentLiability || ""}</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
@@ -167,7 +167,7 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              {userData?.yearsUnfiled}
+              {userData?.yearsUnfiled || ""}
               <br />
               Unfiled
             </p>
@@ -177,12 +177,12 @@ const Dash = () => {
         </div>
         <div className="detail-bubble">
           <div className="bubble-header break" style={{ fontSize: "30px" }}>
-            Payment Status
+            Collection Status
           </div>
 
           <div className="square-front">
             <p className="active">
-              {userData?.paymentStatus}
+              {userData?.paymentStatus || ""}
               {/* Unpaid
               <br />
               -
