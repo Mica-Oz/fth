@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import scales from "@/public/scales-icon.png";
@@ -175,9 +175,7 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              <p className="active">
-                {isLoading ? "Loading..." : userData?.yearsUnfiled}
-              </p>
+              {isLoading ? "Loading..." : userData?.yearsUnfiled}
               <br />
               Unfiled
             </p>
@@ -192,9 +190,8 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              <p className="active">
-                {isLoading ? "Loading..." : userData?.paymentStatus}
-              </p>
+              {isLoading ? "Loading..." : userData?.paymentStatus}
+
               {/* Unpaid
               <br />
               -
