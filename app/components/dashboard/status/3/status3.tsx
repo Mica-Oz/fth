@@ -54,8 +54,10 @@ const Dash = () => {
   }
 
   useEffect(() => {
-    loadActivities();
-  }, []);
+    if (caseID) {
+      loadActivities();
+    }
+  }, [caseID]);
 
   console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 3 COMP:", userData);
 
