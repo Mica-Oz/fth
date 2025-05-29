@@ -25,6 +25,8 @@ export async function GET(req: NextRequest) {
       Bucket: process.env.AWS_BUCKET_NAME,
       Key,
       Expires: 60,
+      ResponseContentType: "application/pdf",
+      ResponseContentDisposition: 'inline; filename="report.pdf"',
     };
 
     const uploadURL = await s3.getSignedUrl("getObject", s3Params);
