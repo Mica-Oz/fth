@@ -12,7 +12,10 @@ const Dash = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
   const caseID = user?.untrusted_metadata.id as string;
+
+  const [isLoading, setIsLoading] = useState(true);
   async function loadActivities() {
+    setIsLoading(true);
     const activities = await getActivities(caseID);
     console.log("ACTIVITIES:", activities);
     for (const key in activities) {
@@ -51,13 +54,14 @@ const Dash = () => {
         }
       }
     }
+    setIsLoading(false);
   }
 
   useEffect(() => {
     if (caseID) {
       loadActivities();
     }
-  }, [caseID]);
+  }, [caseID, setUserData]); // Add setUserData here
 
   console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 3 COMP:", userData);
 
@@ -157,7 +161,9 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p className="active">{userData?.currentLiability}</p>
+            <p className="active">
+              {isLoading ? "Loading..." : userData?.currentLiability}
+            </p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
@@ -169,7 +175,9 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              {userData?.yearsUnfiled}
+              <p className="active">
+                {isLoading ? "Loading..." : userData?.yearsUnfiled}
+              </p>
               <br />
               Unfiled
             </p>
@@ -184,7 +192,9 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              {userData?.paymentStatus}
+              <p className="active">
+                {isLoading ? "Loading..." : userData?.paymentStatus}
+              </p>
               {/* Unpaid
               <br />
               -
