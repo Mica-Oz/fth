@@ -159,7 +159,7 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p className="active">{userData.currentLiability}</p>
+            <p className="active">{userData?.currentLiability || ""}</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
@@ -171,7 +171,7 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              {userData.yearsUnfiled}
+              {userData?.yearsUnfiled || ""}
               <br />
               Unfiled
             </p>
@@ -185,13 +185,13 @@ const Dash = () => {
           </div>
 
           <div className="square-front" style={{ backgroundColor: "#59c8ea" }}>
-            <p className="active">{userData.negotiation}</p>
+            <p className="active">{userData?.negotiation || ""}</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
+      {/* <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +213,7 @@ const Dash = () => {
           </Link>
         </div>
         <div className="square-back"></div>
-      </div>
+      </div> */}
     </div>
   );
 };

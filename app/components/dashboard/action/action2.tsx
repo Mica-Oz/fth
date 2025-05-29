@@ -104,16 +104,22 @@ const Action = () => {
     //if fast track
     if (fastTrack === true) {
       await updateStatus(189, caseID);
-    } else {
+    } else if (status === 187) {
       await updateStatus(188, caseID);
+    } else if (status === 188 || status === 189) {
+      //no update needed
     }
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);
 
     if (fastTrack === true) {
       router.push("/dashboard/status6");
-    } else if (status === 187) {
+    } else if (status === 187 || status === 188) {
       router.push("/dashboard/status4");
+    } else if (status === 189) {
+      router.push("/dashboard/status6");
+    } else if (status === 191) {
+      router.push("/dashboard/status7");
     }
   }
 
