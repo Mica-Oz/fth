@@ -30,6 +30,10 @@ const Action = () => {
       });
 
       if (!response.ok) {
+        if (response.status === 404) {
+          setSignedURL(""); // No report
+          return { error: "not_found" };
+        }
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
@@ -155,17 +159,20 @@ const Action = () => {
             style={{ overflow: "hidden", position: "relative" }}
             ref={containerRef}
           >
-            {/* <Image alt={"icon"} src={"report"} width={800} className="icon3" /> */}
             {isLoading ? (
               <div>Loading PDF...</div>
-            ) : (
+            ) : signedURL ? (
               <iframe
                 ref={iframeRef}
-                src={`${signedURL}#toolbar=0` || ""}
+                src={`${signedURL}#toolbar=0`}
                 width={"100%"}
                 height={300}
                 className="icon3"
               ></iframe>
+            ) : (
+              <div style={{ color: "red", fontWeight: 500 }}>
+                Report is not available. Please contact support.
+              </div>
             )}
           </div>
           <div className="action-btn-cont">
