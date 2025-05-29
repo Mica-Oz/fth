@@ -81,7 +81,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // ✅ File exists — generate signed URL
+    // File exists — generate signed URL
     const s3Params = {
       Bucket,
       Key,
