@@ -175,9 +175,7 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              <p className="active">
-                {isLoading ? "Loading..." : userData?.yearsUnfiled}
-              </p>
+              {isLoading ? "Loading..." : userData?.yearsUnfiled}
               <br />
               Unfiled
             </p>
@@ -192,9 +190,8 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              <p className="active">
-                {isLoading ? "Loading..." : userData?.paymentStatus}
-              </p>
+              {isLoading ? "Loading..." : userData?.paymentStatus}
+
               {/* Unpaid
               <br />
               -
