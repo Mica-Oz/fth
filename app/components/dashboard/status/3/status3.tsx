@@ -63,9 +63,9 @@ const Dash = () => {
     <div className="dash-cont">
       <div className="row-1">
         <p className="dash-greet">
-          Welcome to your Dashboard
+          Welcome to your Dashboard,{" "}
           <strong style={{ color: "#2e5a7e" }}>
-            , {userData?.data?.FirstName || ""}!
+            {userData?.data?.FirstName || ""}!
           </strong>
         </p>
       </div>
