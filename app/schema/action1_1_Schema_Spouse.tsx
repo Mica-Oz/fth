@@ -2,11 +2,7 @@ import { z } from "zod";
 
 // Utility function for formatting text input
 const toTitleCase = (str: string) => {
-  return str
-    .toLowerCase()
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
 
 // Regex patterns
@@ -17,15 +13,31 @@ export const action1_1_Spouse_Schema = z.object({
   sfname: z
     .string()
     .min(1, { message: "First name is required" })
-    .regex(/^[A-Za-z\s'-]+$/, {
-      message: "First name must not contain numbers or symbols",
+    .regex(/^[A-Za-z'-]+$/, {
+      message: "First name must be a single word with no spaces",
+    })
+    .refine((val) => !val.includes(" "), {
+      message: "First name cannot contain spaces",
     })
     .transform((val) => toTitleCase(val)),
+  // smname: z
+  //   .string()
+  //   .regex(/^[A-Za-z'-]+$/, {
+  //     message: "Middle name must be a single word with no spaces",
+  //   })
+  //   .refine((val) => !val.includes(" "), {
+  //     message: "Middle name cannot contain spaces",
+  //   })
+  //   .transform((val) => toTitleCase(val))
+  //   .optional(),
   slname: z
     .string()
     .min(1, { message: "Last name is required" })
-    .regex(/^[A-Za-z\s'-]+$/, {
-      message: "Last name must not contain numbers or symbols",
+    .regex(/^[A-Za-z'-]+$/, {
+      message: "Last name must be a single word with no spaces",
+    })
+    .refine((val) => !val.includes(" "), {
+      message: "Last name cannot contain spaces",
     })
     .transform((val) => toTitleCase(val)),
   sdob: z

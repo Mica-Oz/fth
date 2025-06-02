@@ -168,7 +168,18 @@ const Action1_2 = () => {
     //   console.log(`${type}: ${name}`);
     //   console.log("typof:", typeof name);
     // });
-    const tpName = userData.data.FirstName + " " + userData.data.LastName;
+    let tpName;
+    if (!userData.data.MiddleName) {
+      tpName = userData.data.FirstName + " " + userData.data.LastName;
+    } else {
+      tpName =
+        userData.data.FirstName +
+        " " +
+        userData.data.MiddleName +
+        " " +
+        userData.data.LastName;
+    }
+
     const box1String =
       tpName +
       "\n" +
