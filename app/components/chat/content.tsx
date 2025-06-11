@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import ChatMessage from "@/app/components/chat/message";
 
 interface ContentProps {
-  chatHistory: { role: string; content: string }[];
+  chatHistory: { role: string; content: string; isError: boolean }[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

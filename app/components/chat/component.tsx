@@ -1,21 +1,35 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Content from "@/app/components/chat/content";
+import { companyInfo } from "@/app/utilities/chatbot/companyInfo";
 
 const ChatIcon = () => {
   const [chatOpen, setChatOpen] = useState(false);
-  type ChatMessage = { role: string; content: string };
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+  type ChatMessage = {
+    role: string;
+    content: string;
+    isError: boolean;
+    hideInChat?: boolean;
+  };
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
+    {
+      hideInChat: true,
+      role: "model",
+      content: companyInfo,
+      isError: false,
+    },
+  ]);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const toggleChat = () => {
     setChatOpen(!chatOpen);
   };
 
-  const updateHistory = (text: string) => {
+  const updateHistory = (text: string, isError = false) => {
     setChatHistory((prevHistory) => [
       ...prevHistory.filter((msg) => msg.content !== "Thinking..."),
-      { role: "model", content: text },
+      { role: "model", content: text, isError },
     ]);
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,7 +39,7 @@ const ChatIcon = () => {
       role,
       parts: [{ text: content }],
     }));
-    console.log("Formatted history for API:", history);
+    // console.log("Formatted history for API:", history);
     // make api request
     const requestOptions = {
       method: "POST",
@@ -46,16 +60,29 @@ const ChatIcon = () => {
       );
       // const response = await fetch(process.env.VITE_API_URL, requestOptions);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
+      let apiResponseText;
       if (!response.ok) {
-        throw new Error(data.error.message || "Something went wrong!");
+        apiResponseText = data.error.message || "Something went wrong!";
+        updateHistory(
+          "Something went wrong. Try again, or contact support if the issue persists.",
+          true
+        );
+      } else {
+        apiResponseText = data.candidates[0].content.parts[0].text
+          .replace(/\*\*(.*?)\*\*/g, "$1")
+          .trim();
+        updateHistory(apiResponseText, false);
       }
-      const apiResponseText = data.candidates[0].content.parts[0].text
-        .replace(/\*\*(.*?)\*\*/g, "$1")
-        .trim();
-      updateHistory(apiResponseText);
-    } catch (error) {
-      console.log(error);
+      // console.log("chat history", chatHistory);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      updateHistory(
+        "Something went wrong. Try again, or contact support if the issue persists.",
+        true
+      );
+      // console.log("chat history", chatHistory);
+      console.error("Error generating bot response:", error);
     }
   }
 
@@ -63,11 +90,11 @@ const ChatIcon = () => {
     event.preventDefault();
     const usrMsg = inputRef.current?.value.trim() || "";
     if (!usrMsg) return;
-    console.log("User message:", usrMsg);
+    // console.log("User message:", usrMsg);
     inputRef.current!.value = ""; // Clear the input field
     setChatHistory((prevHistory) => [
       ...prevHistory,
-      { role: "user", content: usrMsg },
+      { role: "user", content: usrMsg, isError: false },
     ]);
     setTimeout(() => {
       setChatHistory((prevHistory) => [
@@ -75,9 +102,16 @@ const ChatIcon = () => {
         {
           role: "model",
           content: `Thinking...`,
+          isError: false,
         },
       ]);
-      generateBotResponse([...chatHistory, { role: "user", content: usrMsg }]);
+      generateBotResponse([
+        ...chatHistory,
+        {
+          role: "user",
+          content: `Using the details provided above, please address this query: ${usrMsg}`,
+        },
+      ]);
     }, 600);
   }
 
