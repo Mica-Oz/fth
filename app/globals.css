@@ -251,7 +251,7 @@ a {
   height: 30px;
 }
 .chat-message {
-  width: 70%;
+  width: 85%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
