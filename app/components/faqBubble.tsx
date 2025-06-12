@@ -210,10 +210,15 @@ const SplitWith2 = () => {
               </div>
               <div className="a-slide-cont">
                 <div className="a-cont">
-                  <p>Yes! Your information is completely safe.</p>
                   <p>
-                    We use the highest standards of security to ensure your
-                    information is safe and secure from bad actors.
+                    Absolutely! We take your privacy and security very
+                    seriously.
+                  </p>
+                  <p>
+                    All information you provide is encrypted and stored
+                    securely. We comply with all relevant data protection
+                    regulations to ensure your personal and financial
+                    information remains confidential.
                   </p>
                 </div>
               </div>

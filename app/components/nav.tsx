@@ -92,7 +92,7 @@ const Nav = () => {
   }, [isMounted, wideModalOpen, narrowModalOpen, closeAllModals]);
 
   const handleLogOut = useCallback(async () => {
-    console.log("logout clicked");
+    // console.log("logout clicked");
     await stytch.session.revoke();
     alert("logged out");
     closeAllModals();
@@ -110,16 +110,16 @@ const Nav = () => {
   ) {
     route = "status2-3";
   }
-  console.log(
-    "nav bar stuff, route:",
-    route,
-    "id:",
-    id,
-    "marital:",
-    maritalStatus,
-    "type:",
-    type
-  );
+  // console.log(
+  //   "nav bar stuff, route:",
+  //   route,
+  //   "id:",
+  //   id,
+  //   "marital:",
+  //   maritalStatus,
+  //   "type:",
+  //   type
+  // );
 
   // Common navigation menu items used in both authenticated and non-authenticated views
   const navMenuItems = (
