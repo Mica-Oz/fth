@@ -21,14 +21,19 @@ export const signupSchema = z
       })
       .transform((val) => toTitleCase(val)),
     MiddleName: z
-      .string()
-      .regex(/^[A-Za-z'-]+$/, {
-        message: "Middle name must be a single word with no spaces",
-      })
-      .refine((val) => !val.includes(" "), {
-        message: "Middle name cannot contain spaces",
-      })
-      .transform((val) => toTitleCase(val))
+      .union([
+        z.string().length(0), // Allow empty string
+        z
+          .string()
+          .min(1)
+          .regex(/^[A-Za-z'-]+$/, {
+            message: "Middle name must be a single word with no spaces",
+          })
+          .refine((val) => !val.includes(" "), {
+            message: "Middle name cannot contain spaces",
+          })
+          .transform((val) => toTitleCase(val)),
+      ])
       .optional(),
     LastName: z
       .string()
