@@ -8,7 +8,7 @@ import { useAppContext } from "@/app/context";
 
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
-  console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 2 COMP:", userData);
+  // console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 2 COMP:", userData);
 
   return (
     <div className="dash-cont">

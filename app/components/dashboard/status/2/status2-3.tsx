@@ -10,7 +10,7 @@ const Dash = () => {
   const { isInitialized } = useStytchUser();
   // const { session } = useStytchSession();
   const { userData } = useAppContext();
-  console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 1 COMP:", userData);
+  // console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 1 COMP:", userData);
   // console.log("USER SESSION INIDE STATUS 1 COMP:", session);
 
   console.log(
