@@ -27,63 +27,209 @@ const ChatIcon = () => {
   };
 
   const updateHistory = (text: string, isError = false) => {
-    setChatHistory((prevHistory) => [
-      ...prevHistory.filter((msg) => msg.content !== "Thinking..."),
-      { role: "model", content: text, isError },
-    ]);
+    setChatHistory((prevHistory) => {
+      // Remove any existing "Thinking..." messages and add the new message
+      const filteredHistory = prevHistory.filter(
+        (msg) => msg.content !== "Thinking..."
+      );
+      return [...filteredHistory, { role: "model", content: text, isError }];
+    });
   };
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const logChatEvent = (
+    level: "info" | "warn" | "error" | "debug",
+    message: string,
+    data?: object
+  ) => {
+    const logEntry = {
+      timestamp: new Date().toISOString(),
+      level,
+      message,
+      ...data,
+    };
+    console.log(`[CHAT LOG - ${level.toUpperCase()}]`, logEntry);
+    // In a real app, if you still want frontend logs, send `logEntry` to your backend `/api/log` endpoint here.
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function generateBotResponse(history: any) {
-    // format chat history for api request
-    history = history.map(({ role, content }: ChatMessage) => ({
-      role,
-      parts: [{ text: content }],
-    }));
-    // console.log("Formatted history for API:", history);
-    // make api request
+    // logChatEvent("debug", "Attempting to generate bot response via backend", {
+    //   inputHistoryLength: history.length,
+    // });
+
+    // Retry logic with exponential backoff
+    const MAX_RETRIES = 5;
+    const BASE_DELAY_MS = 1000; // Start with 1 second
+    const MAX_BACKOFF_MS = 30000; // Cap at 30 seconds
+    const JITTER_FACTOR = 0.1; // 10% jitter
+
+    // Helper function to add jitter to delay
+    const addJitter = (delay: number): number => {
+      const jitter = delay * JITTER_FACTOR * Math.random();
+      return delay + jitter;
+    };
+
+    // Helper function to calculate exponential backoff delay
+    const calculateDelay = (attempt: number): number => {
+      const delay = BASE_DELAY_MS * Math.pow(2, attempt);
+      return Math.min(addJitter(delay), MAX_BACKOFF_MS);
+    };
+
+    // Helper function to check if error is retryable
+    const isRetryableError = (status: number): boolean => {
+      return (
+        status === 429 || // Rate limit
+        status === 500 || // Internal server error
+        status === 502 || // Bad gateway
+        status === 503 || // Service unavailable
+        status === 504
+      ); // Gateway timeout
+    };
+
+    // The backend API expects the `contents` field directly, so format it as such.
+    const requestBodyForBackend = {
+      contents: history.map(({ role, content }: ChatMessage) => ({
+        role,
+        parts: [{ text: content }],
+      })),
+    };
+
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        contents: history,
-      }),
+      body: JSON.stringify(requestBodyForBackend), // Send the formatted request body
     };
-    try {
-      if (!process.env.NEXT_PUBLIC_API_URL) {
-        throw new Error("API URL is not defined");
+
+    let lastError: Error | null = null;
+
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        const response = await fetch("/api/chat", requestOptions);
+
+        // If response is successful, process it
+        if (response.ok) {
+          const data = await response.json();
+          // *** IMPORTANT CHANGE: Access the botResponse field from your backend's response ***
+          // Your backend now returns { botResponse: "..." }
+          const apiResponseText = data.botResponse;
+
+          if (
+            typeof apiResponseText === "string" &&
+            apiResponseText.trim().length > 0
+          ) {
+            updateHistory(apiResponseText, false);
+            // logChatEvent(
+            //   "info",
+            //   "Bot response successfully received from backend",
+            //   {
+            //     responseTextLength: apiResponseText.length,
+            //   }
+            // );
+            return; // Success - exit the retry loop
+          } else {
+            // Handle cases where botResponse might be empty or not a string
+            // logChatEvent(
+            //   "error",
+            //   "Backend returned an empty or invalid botResponse",
+            //   { data }
+            // );
+            updateHistory(
+              "I couldn't generate a response. Please try again.",
+              true
+            );
+            return;
+          }
+        }
+
+        // Handle non-200 responses from your backend API route
+        const errorData = await response.json(); // Backend now returns { error: "message" }
+        const errorMessage = errorData.error || `HTTP ${response.status}`;
+
+        // logChatEvent("warn", "Backend API request failed, processing error", {
+        //   status: response.status,
+        //   errorMessageFromBackend: errorMessage,
+        //   attempt: attempt + 1,
+        // });
+
+        // Check if this is a retryable error from your backend
+        if (isRetryableError(response.status) && attempt < MAX_RETRIES) {
+          console.warn(
+            `Backend API request failed with status ${
+              response.status
+            }. Retrying in ${calculateDelay(attempt)}ms... (Attempt ${
+              attempt + 1
+            }/${MAX_RETRIES + 1})`
+          );
+
+          // Wait before retrying
+          await new Promise((resolve) =>
+            setTimeout(resolve, calculateDelay(attempt))
+          );
+          continue; // Retry the request
+        }
+
+        // Non-retryable error or max retries reached, or unhandled status
+        if (response.status === 429) {
+          updateHistory(
+            "Our servers are experiencing high traffic. Please try again in a few moments.",
+            true
+          );
+        } else if (response.status >= 400 && response.status < 500) {
+          // Use the error message provided by your backend if available
+          updateHistory(
+            errorMessage, // Use the specific error message from your backend
+            true
+          );
+        } else {
+          // Generic catch-all for other server errors (500s not explicitly handled as retryable)
+          updateHistory(
+            "Something went wrong on our end. Please try again, or contact support if the issue persists.",
+            true
+          );
+        }
+        return; // Stop after handling the error or max retries
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        lastError = error;
+        // logChatEvent(
+        //   "error",
+        //   `Frontend network request to backend API failed (Attempt ${
+        //     attempt + 1
+        //   })`,
+        //   {
+        //     errorName: error.name,
+        //     errorMessage: error.message,
+        //     // Don't include full error.stack in production frontend logs if sending to external service
+        //   }
+        // );
+
+        // If this is a network error (e.g., backend server not reachable) and we haven't exhausted retries, try again
+        if (attempt < MAX_RETRIES) {
+          console.warn(
+            `Network error occurred when connecting to backend. Retrying in ${calculateDelay(
+              attempt
+            )}ms... (Attempt ${attempt + 1}/${MAX_RETRIES + 1})`
+          );
+          await new Promise((resolve) =>
+            setTimeout(resolve, calculateDelay(attempt))
+          );
+          continue;
+        }
       }
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL,
-        requestOptions
-      );
-      // const response = await fetch(process.env.VITE_API_URL, requestOptions);
-      const data = await response.json();
-      // console.log(data);
-      let apiResponseText;
-      if (!response.ok) {
-        apiResponseText = data.error.message || "Something went wrong!";
-        updateHistory(
-          "Something went wrong. Try again, or contact support if the issue persists.",
-          true
-        );
-      } else {
-        apiResponseText = data.candidates[0].content.parts[0].text
-          .replace(/\*\*(.*?)\*\*/g, "$1")
-          .trim();
-        updateHistory(apiResponseText, false);
-      }
-      // console.log("chat history", chatHistory);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      updateHistory(
-        "Something went wrong. Try again, or contact support if the issue persists.",
-        true
-      );
-      // console.log("chat history", chatHistory);
-      console.error("Error generating bot response:", error);
     }
+
+    // If we've exhausted all retries without success
+    console.error(
+      "All frontend retry attempts exhausted. Last error:",
+      lastError
+    );
+    updateHistory(
+      "Unable to connect to our services. Please check your internet connection and try again, or contact support if the issue persists.",
+      true
+    );
   }
 
   function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
