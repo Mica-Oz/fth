@@ -1,131 +1,90 @@
-import { NextResponse } from "next/server";
 import axios from "axios";
 
 export async function POST(req: Request) {
-  const { email } = await req.json();
-
-  if (!email) {
-    return NextResponse.json({ error: "Missing email" }, { status: 400 });
-  }
-  // IRS Logics API endpoint and key
-  const API_URL =
-    "https://freetaxhistory.logiqs.com/publicapi/V3/Find/FindCaseByEmail";
-  const API_KEY = process.env.LOGICS_API_KEY;
-
   try {
-    // Search for the user
+    const API_URL =
+      "https://freetaxhistory.logiqs.com/publicapi/V3/Find/FindCaseByEmail";
+    const API_KEY = process.env.LOGICS_API_KEY;
+    const SECRET_TOKEN = process.env.LOGICS_SECRET_KEY; // Retrieve your Secret Token
+
+    if (!API_KEY || !SECRET_TOKEN) {
+      console.error("LOGICS_API_KEY or LOGICS_SECRET_TOKEN is not defined");
+      return new Response(
+        JSON.stringify({ error: "API credentials not configured" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const { email } = await req.json();
+
+    if (!email) {
+      return new Response(JSON.stringify({ error: "Email is required" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    console.log("Checking email:", email);
+
+    // Construct the Basic Auth string as per documentation: "API_Key:Secret_Token"
+    const credentials = `${API_KEY}:${SECRET_TOKEN}`;
+    // Base64 encode the credentials
+    const encodedCredentials = Buffer.from(credentials).toString("base64");
+
     // Make the request to the IRS Logics API
     const response = await axios.get(API_URL, {
-      withCredentials: true,
       params: {
-        apikey: API_KEY,
         email: email,
+      },
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`, // Use the base64 encoded string
+        "Content-Type": "application/json",
       },
     });
 
-    console.log("response data", response.data);
-    console.log("response status", response.status);
+    // console.log("IRS Logics response:", response.data);
 
-    const userExists = false;
-    return NextResponse.json({ userExists });
+    // Check if user exists based on the response
+    // Based on your Postman screenshots, it looks like it returns data when found
+    const userExistsLogics =
+      response.data && response.data.Data && response.data.Data.length > 0;
+
+    console.log("User exists in IRS Logics:", userExistsLogics);
+    return new Response(JSON.stringify({ userExistsLogics }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    console.error("Error querying Stytch API:", error);
+    console.error("Error checking email in IRS Logics:", error);
+    console.error("Error response:", error.response?.data);
+    console.error("Status code:", error.response?.status);
 
-    // Return a more detailed error response
-    return NextResponse.json(
+    // If it's a 404 or similar "not found" error, that means user doesn't exist
+    // The API might return other status codes for "not found" depending on its implementation.
+    // The provided Postman success screenshot shows a `Data` array, so checking its length is key.
+    // However, if a 404 specifically indicates no user, we can handle that.
+    if (error.response?.status === 404) {
+      return new Response(JSON.stringify({ userExistsLogics: false }), {
+        status: 200, // Return 200 as it's a successful check for existence, just that it doesn't exist
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // For other errors, return a detailed error response
+    return new Response(
+      JSON.stringify({
+        error: "Failed to check email with IRS Logics", // More descriptive error message
+        details: error.response?.data || error.message,
+        statusCode: error.response?.status, // Include the original status code for debugging
+      }),
       {
-        error: "Failed to search users",
-        details: error.message || String(error),
-        // Include error type if available
-        errorType: error.error_type || null,
-      },
-      { status: 500 }
+        status: error.response?.status || 500, // Use original status code if available, else 500
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }
-
-// export async function POST(req: Request) {
-//   if (req.method === "POST") {
-//     try {
-//       // IRS Logics API endpoint and key
-//       const API_URL =
-//         "https://freetaxhistory.logiqs.com/publicapi/2020-02-22/cases/casefile";
-//       const API_KEY = process.env.LOGICS_API_KEY;
-
-//       const data = await req.json();
-//       // const data = await req.body;
-//       console.log("data body:", data);
-
-//       // Make the request to the IRS Logics API
-//       const response = await axios.post(API_URL, data, {
-//         withCredentials: true,
-//         params: {
-//           apikey: API_KEY,
-//         },
-//       });
-//       console.log("response data", response.data);
-//       console.log("response status", response.status);
-
-//       return Response.json(response.data);
-//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     } catch (error: any) {
-//       // Handle any errors (e.g., logging, custom error response)
-//       console.error("Error hitting IRS Logics API:", error);
-//       console.error("Error response:", error.response?.data); // Log error details
-//       console.error("Status code:", error.response?.status); // Check status code
-//       console.error("Error message:", error.message); // Check error message
-//       return error;
-//     }
-//   } else {
-//     return;
-//   }
-// }
-// // export async function GET(req: Request) {
-//   if (req.method === "GET") {
-//     try {
-//       // IRS Logics API endpoint and key
-//       const API_URL =
-//         "https://freetaxhistory.logiqs.com/publicapi/2020-02-22/cases/caseinfo";
-//       const API_KEY = process.env.LOGICS_API_KEY;
-
-//       // const data = await req.json();
-//       // const data = await req.body;
-//       const id = (await req.headers.get("caseid")) as string;
-//       console.log("caseID!!!!!!!!!!!!!!!!", id);
-//       const caseIdInt = await parseInt(id, 10);
-//       console.log("caseIdInt!!!!!!!!!!!!!!!!", caseIdInt);
-//       // Check if parsing was successful
-//       if (isNaN(caseIdInt)) {
-//         return new Response(
-//           JSON.stringify({ error: "Invalid CaseID format" }),
-//           { status: 400 }
-//         );
-//       }
-
-//       // Make the request to the IRS Logics API
-//       const response = await axios.get(API_URL, {
-//         withCredentials: true,
-
-//         params: {
-//           apikey: API_KEY,
-//           CaseID: id,
-//         },
-//       });
-//       console.log("response data TYPE", typeof Response.json(response.data));
-//       console.log("response status", response.status);
-
-//       return Response.json(response.data);
-//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     } catch (error: any) {
-//       // Handle any errors (e.g., logging, custom error response)
-//       console.error("Error hitting IRS Logics API:", error);
-//       console.error("Error response:", error.response?.data); // Log error details
-//       console.error("Status code:", error.response?.status); // Check status code
-//       console.error("Error message:", error.message); // Check error message
-//       return error;
-//     }
-//   } else {
-//     return;
-//   }
-// }

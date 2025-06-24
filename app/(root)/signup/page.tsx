@@ -18,12 +18,13 @@ type SignupInputs = z.infer<typeof signupSchema>;
 const Signup = () => {
   const router = useRouter();
   const stytch = useStytch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const session = useStytchSession();
   const [maritalStatus, setMaritalStatus] = useState("");
   const [taxType, setTaxType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  console.log("signup-session:", session);
+  // console.log("signup-session:", session);
 
   // Create reference to store the DOM element containing the animation
   const typer = React.useRef(null);
@@ -95,7 +96,7 @@ const Signup = () => {
     }
   }, []);
 
-  console.log("env", currentEnv);
+  // console.log("env", currentEnv);
   const submit = handleSubmit(async (data) => {
     if (isLoading) return;
 
@@ -104,20 +105,24 @@ const Signup = () => {
 
     try {
       // Step 1-1: Check if email already exists stytch
-      const checkRes = await fetch("/api/stytch/check-user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: data.email }),
-      });
-      console.log("check res:", checkRes);
-      const { userExistsStytch } = await checkRes.json();
 
-      if (userExistsStytch) {
-        setError("An account with this email already exists. Please log in.");
-        setIsLoading(false);
-        return;
+      const skipStytchCheck = false;
+      if (!skipStytchCheck) {
+        // console.log("Skipping Stytch check for alpha environment");
+        const checkRes = await fetch("/api/stytch/check-user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: data.email }),
+        });
+
+        const { userExistsStytch } = await checkRes.json();
+
+        if (userExistsStytch) {
+          setError("An account with this email already exists. Please log in.");
+          setIsLoading(false);
+          return;
+        }
       }
-
       // If in alpha and email is mica@freetaxhistory.com, skip IRS Logics check
       const skipLogicsCheck =
         currentEnv === "alpha" && data.email === "mica@freetaxhistory.com";
@@ -129,7 +134,7 @@ const Signup = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: data.email }),
         });
-        console.log("check LOGICS RES:", checkResLogics);
+        // console.log("check LOGICS RES:", checkResLogics);
         if (!checkResLogics.ok) {
           setError("An account with this email already exists. Please log in.");
           setIsLoading(false);
