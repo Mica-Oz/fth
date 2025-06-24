@@ -124,8 +124,7 @@ const Signup = () => {
         }
       }
       // If in alpha and email is mica@freetaxhistory.com, skip IRS Logics check
-      const skipLogicsCheck =
-        currentEnv === "alpha" && data.email === "mica@freetaxhistory.com";
+      const skipLogicsCheck = data.email === "mica@freetaxhistory.com";
 
       if (!skipLogicsCheck) {
         // Step 1-2: Check if email already exists in IRS Logics
