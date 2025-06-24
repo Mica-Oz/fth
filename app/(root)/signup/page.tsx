@@ -105,7 +105,7 @@ const Signup = () => {
 
     try {
       // Step 1-1: Check if email already exists stytch
-
+      //redeployline
       const skipStytchCheck = false;
       if (!skipStytchCheck) {
         // console.log("Skipping Stytch check for alpha environment");
