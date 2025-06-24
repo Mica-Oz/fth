@@ -103,19 +103,45 @@ const Signup = () => {
     setError("");
 
     try {
-      // Step 1: Check if email already exists
+      // Step 1-1: Check if email already exists stytch
       const checkRes = await fetch("/api/stytch/check-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: data.email }),
       });
       console.log("check res:", checkRes);
-      const { userExists } = await checkRes.json();
+      const { userExistsStytch } = await checkRes.json();
 
-      if (userExists) {
+      if (userExistsStytch) {
         setError("An account with this email already exists. Please log in.");
         setIsLoading(false);
         return;
+      }
+
+      // If in alpha and email is mica@freetaxhistory.com, skip IRS Logics check
+      const skipLogicsCheck =
+        currentEnv === "alpha" && data.email === "mica@freetaxhistory.com";
+
+      if (!skipLogicsCheck) {
+        // Step 1-2: Check if email already exists in IRS Logics
+        const checkResLogics = await fetch("/api/case/find/byEmail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: data.email }),
+        });
+        console.log("check LOGICS RES:", checkResLogics);
+        if (!checkResLogics.ok) {
+          setError("An account with this email already exists. Please log in.");
+          setIsLoading(false);
+          return;
+        }
+        const { userExistsLogics } = await checkResLogics.json();
+
+        if (userExistsLogics) {
+          setError("An account with this email already exists. Please log in.");
+          setIsLoading(false);
+          return;
+        }
       }
 
       // Step 2: Proceed as normal
