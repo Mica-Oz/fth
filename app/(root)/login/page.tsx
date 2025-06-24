@@ -17,8 +17,9 @@ type loginPassInputs = z.infer<typeof loginSchema>;
 const Page = () => {
   const router = useRouter();
   const stytch = useStytch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const session = useStytchSession();
-  console.log("login-session:", session);
+  // console.log("login-session:", session);
 
   const {
     register,
@@ -43,7 +44,7 @@ const Page = () => {
   useEffect(() => {
     AOS.init();
   }, []);
-  console.log("env", currentEnv);
+  // console.log("env", currentEnv);
 
   const submit = handleSubmit(async (data) => {
     try {
