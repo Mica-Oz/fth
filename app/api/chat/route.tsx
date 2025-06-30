@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -167,6 +168,7 @@ export async function POST(req: Request) {
       latestUserMessage = extractLatestUserMessage(
         requestBodyFromClient.contents || []
       );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       // Ignore parsing errors in error handler
     }
