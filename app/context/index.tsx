@@ -35,7 +35,7 @@ export function AppWrapper({
         try {
           // Fetch from CRM and update context state
           const logicsUserData = await getLogicsUser(caseID);
-          console.log("CONTEXT USE EFFECT FOR GETTING USER FROM IRS LOGICS");
+          console.log("CONTEXT USE EFFECT FOR GETTING USER FROM IRS LOGICS.");
           setUserData(logicsUserData);
         } catch (error) {
           console.error("Failed to fetch user data from CRM:", error);
