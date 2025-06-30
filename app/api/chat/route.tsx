@@ -1,9 +1,62 @@
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai"; // Make sure this is installed: npm install @google/generative-ai
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// Helper function to extract and clean the latest user message
+function extractLatestUserMessage(contents: any[]): string | null {
+  // Find the last user message in the conversation
+  for (let i = contents.length - 1; i >= 0; i--) {
+    const content = contents[i];
+    if (content.role === "user" && content.parts && content.parts.length > 0) {
+      // Extract text from parts array
+      const textParts = content.parts
+        .filter((part: any) => part.text)
+        .map((part: any) => part.text)
+        .join(" ");
+
+      if (textParts) {
+        // Clean up common prompt prefixes
+        const cleanedMessage = textParts
+          .replace(
+            /^Using the details provided above,?\s*please address this query:\s*/i,
+            ""
+          )
+          .replace(/^Please address this query:\s*/i, "")
+          .replace(/^Query:\s*/i, "")
+          .trim();
+
+        return cleanedMessage || textParts; // Fallback to original if cleaning results in empty string
+      }
+    }
+  }
+  return null;
+}
+
+// Helper function to analyze conversation metrics
+function analyzeConversation(contents: any[]) {
+  const userMessages = contents.filter((c) => c.role === "user").length;
+  const modelMessages = contents.filter((c) => c.role === "model").length;
+  const totalTurns = contents.length;
+
+  return {
+    userMessageCount: userMessages,
+    modelMessageCount: modelMessages,
+    totalTurns,
+    conversationLength: totalTurns,
+    isNewConversation: totalTurns <= 2, // First user message + first model response
+    conversationType:
+      totalTurns <= 2
+        ? "new"
+        : totalTurns <= 6
+        ? "short"
+        : totalTurns <= 12
+        ? "medium"
+        : "long",
+  };
+}
 
 export async function POST(req: Request) {
-  // It's good practice to explicitly check the method,
-  // though Next.js App Router handles this by function name (POST).
+  const startTime = Date.now();
+
   if (req.method !== "POST") {
     return new NextResponse(null, {
       status: 405,
@@ -12,8 +65,6 @@ export async function POST(req: Request) {
   }
 
   try {
-    // IMPORTANT: Your API key should be an environment variable.
-    // It MUST NOT be prefixed with NEXT_PUBLIC_ as it's server-side only.
     const API_KEY = process.env.GEMINI_API_KEY;
 
     if (!API_KEY) {
@@ -26,89 +77,141 @@ export async function POST(req: Request) {
       );
     }
 
-    // Parse the request body coming from your frontend
+    // Parse the request body
     const requestBodyFromClient = await req.json();
-    console.log(
-      "Backend: Incoming request body from client:",
-      requestBodyFromClient
+
+    // Extract analytics data
+    const latestUserMessage = extractLatestUserMessage(
+      requestBodyFromClient.contents || []
+    );
+    const conversationMetrics = analyzeConversation(
+      requestBodyFromClient.contents || []
     );
 
-    // Basic validation of the incoming request body
-    // Ensure 'contents' (your chat history) is present and an array
+    // Log structured conversation start
+    console.log(
+      "CHAT_REQUEST_START",
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        userMessage: latestUserMessage,
+        conversationMetrics,
+        requestMetadata: {
+          hasContents: !!requestBodyFromClient.contents,
+          contentsLength: requestBodyFromClient.contents?.length || 0,
+        },
+      })
+    );
+
+    // Validate request
     if (
       !requestBodyFromClient ||
       !Array.isArray(requestBodyFromClient.contents)
     ) {
+      console.log(
+        "CHAT_REQUEST_ERROR",
+        JSON.stringify({
+          timestamp: new Date().toISOString(),
+          error: "Invalid request body",
+          userMessage: latestUserMessage,
+        })
+      );
+
       return NextResponse.json(
         { error: "Invalid request body. 'contents' array is required." },
         { status: 400 }
       );
     }
 
-    // Initialize the Google Generative AI SDK with your API key
+    // Initialize Gemini AI
     const genAI = new GoogleGenerativeAI(API_KEY);
-    // Get the Generative Model instance
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Make the content generation request to the Gemini API using the SDK
+    // Make API call to Gemini
+    const geminiStartTime = Date.now();
     const result = await model.generateContent({
-      contents: requestBodyFromClient.contents, // Use the chat history directly from the client's request
+      contents: requestBodyFromClient.contents,
     });
+    const geminiDuration = Date.now() - geminiStartTime;
 
-    // Get the response object from the Gemini API call
     const apiResponse = await result.response;
-
-    // Extract the actual text content from the Gemini API response
-    // The .text() method from the SDK correctly pulls out the string content.
     const botTextContent = apiResponse.text();
 
-    console.log("Backend: Extracted bot text content:", botTextContent);
+    // Log structured conversation completion
+    console.log(
+      "CHAT_REQUEST_SUCCESS",
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        userMessage: latestUserMessage,
+        botResponse: botTextContent,
+        conversationMetrics,
+        performance: {
+          totalDuration: Date.now() - startTime,
+          geminiApiDuration: geminiDuration,
+          responseLength: botTextContent.length,
+        },
+        metadata: {
+          model: "gemini-1.5-flash",
+          status: "success",
+        },
+      })
+    );
 
-    // Optional: Further clean or format the text if needed (e.g., stripping more markdown)
-    // For example, if you want to remove all bold markdown like "**text**"
-    // const cleanedBotTextContent = botTextContent.replace(/\*\*(.*?)\*\*/g, '$1').trim();
-
-    // Return the extracted (and optionally cleaned) text to the frontend
-    // The frontend expects this to be in a 'botResponse' field.
     return NextResponse.json({ botResponse: botTextContent }, { status: 200 });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    // Log detailed error information on the server side for debugging
-    console.error("Backend: Error calling Gemini API or processing request:");
+    const errorDuration = Date.now() - startTime;
+
+    // Extract user message even in error cases
+    let latestUserMessage = null;
+    try {
+      const requestBodyFromClient = await req.json().catch(() => ({}));
+      latestUserMessage = extractLatestUserMessage(
+        requestBodyFromClient.contents || []
+      );
+    } catch (e) {
+      // Ignore parsing errors in error handler
+    }
 
     let statusCode = 500;
     let errorMessage = "An unexpected server error occurred. Please try again.";
 
-    // Check if it's an error from the Google Generative AI SDK (or underlying network issue)
+    // Enhanced error handling
     if (error.response && error.response.status) {
-      // If the error object has a 'response' with a 'status', it's likely an HTTP error from Gemini
       statusCode = error.response.status;
       if (statusCode === 429) {
         errorMessage =
           "Our services are experiencing high traffic. Please try again in a moment.";
       } else if (statusCode >= 400 && statusCode < 500) {
-        // Attempt to extract a more specific error message from Gemini's response body
         errorMessage =
           error.response.data?.error?.message || `API error: ${error.message}`;
       } else {
         errorMessage = `An external service error occurred: ${error.message}`;
       }
     } else if (error instanceof Error) {
-      // General JavaScript error (e.g., network issue before reaching API, parsing error)
       errorMessage = `Internal server error: ${error.message}`;
     }
 
-    // Log the specific error details that led to this catch
-    console.error("Error details:", {
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-      // For SDK errors, 'error.response' might contain more details
-      responseStatus: error.response?.status,
-      responseData: error.response?.data,
-    });
+    // Log structured error
+    console.log(
+      "CHAT_REQUEST_ERROR",
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        userMessage: latestUserMessage,
+        error: {
+          message: errorMessage,
+          status: statusCode,
+          name: error.name,
+          stack: error.stack,
+        },
+        performance: {
+          failureDuration: errorDuration,
+        },
+        metadata: {
+          model: "gemini-1.5-flash",
+          status: "error",
+        },
+      })
+    );
 
-    // Return a structured error response to the client
     return NextResponse.json({ error: errorMessage }, { status: statusCode });
   }
 }
