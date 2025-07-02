@@ -20,7 +20,6 @@ export const createAction1_1_Schema = (userData: { maritalStatus: string }) =>
       // Taxpayer Information
       FirstName: z
         .string()
-        .min(1, { message: "First name is required" })
         .regex(/^[A-Za-z'-]+$/, {
           message: "First name must be a single word with no spaces",
         })
@@ -28,11 +27,11 @@ export const createAction1_1_Schema = (userData: { maritalStatus: string }) =>
           message: "First name cannot contain spaces",
         })
         .transform((val) => toTitleCase(val))
-        .optional(),
+        .optional()
+        .or(z.literal("")), // Allow empty string
 
       LastName: z
         .string()
-        .min(1, { message: "Last name is required" })
         .regex(/^[A-Za-z'-]+$/, {
           message: "Last name must be a single word with no spaces",
         })
@@ -40,7 +39,9 @@ export const createAction1_1_Schema = (userData: { maritalStatus: string }) =>
           message: "Last name cannot contain spaces",
         })
         .transform((val) => toTitleCase(val))
-        .optional(),
+        .optional()
+        .or(z.literal("")), // Allow empty string
+
       dob: z
         .string()
         .min(1, { message: "Date of birth is required" })
