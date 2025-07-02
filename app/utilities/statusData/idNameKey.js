@@ -7,6 +7,7 @@ const idNameKey = {
   194: "Status 2.R - Re-Sign Needed; Taxpayer;",
   195: "Status 2.RS - Re-Sign Needed; Spouse;",
   196: "Status 2.RB - Re-Sign Needed; Business;",
+  197: "Status 2.FR - Full Re-Submit Needed; Taxpayer;",
   187: "Status 3.1 - THR Live; Awaiting User Ack;",
   193: "Status 3.2 - THR Live; FAST TRACK; Fin Interview Complete; Awaiting User Ack;",
   188: "Status 4.1 - THR acknowledged; Awaiting Financial Interview;",
