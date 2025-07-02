@@ -21,8 +21,9 @@ export async function POST(req: Request) {
         );
       }
       const data = await req.json();
-      console.log("dob test", data.dob);
-      console.log("ms test", data.MartialStatus);
+      // console.log("dob test", data.dob);
+      // console.log("ms test", data.MartialStatus);
+      // console.log("data", data);
       //   const data = await req.body;
 
       // Make the request to the IRS Logics API
@@ -38,6 +39,8 @@ export async function POST(req: Request) {
           city: data.city,
           state: data.state,
           zip: data.zip,
+          fname: data.FirstName,
+          lname: data.LastName,
           //MISSPELLED PURPOSELY
           // MartialStatus: "single",
           sfname: data.sfname,

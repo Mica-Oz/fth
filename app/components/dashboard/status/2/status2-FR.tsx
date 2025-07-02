@@ -56,11 +56,15 @@ const Dash = () => {
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
             <p className="to-do-msg">
-              Your 8821 was rejected by the IRS. Please resubmit your
-              information and signature, ensuring your info is correct.
+              Your 8821 was rejected by the IRS. Please confirm your information
+              is correct.
             </p>
-            <Link href="/dashboard/action1/1" className="tax-history-req-btn">
-              RE-SUBMIT <br />
+            <Link
+              href="/dashboard/action1/1/resubmit"
+              className="tax-history-req-btn"
+            >
+              CONFIRM
+              <br />
               NOW
             </Link>
           </div>
