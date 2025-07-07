@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+
+import updateStatus from "@/app/utilities/api/updateStatus";
 import { createActivity } from "@/app/utilities/api/activities";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -129,7 +131,7 @@ const Action1_1 = () => {
         comment,
         "MaritalInfo"
       );
-
+      await updateStatus(198, caseID);
       router.push("/dashboard/action1/1.5");
     } catch (err) {
       console.error(err);

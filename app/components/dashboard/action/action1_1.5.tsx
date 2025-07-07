@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useStytchUser } from "@stytch/nextjs";
 import { useAppContext } from "@/app/context";
 import Image from "next/image";
+import updateStatus from "@/app/utilities/api/updateStatus";
 
 const Action = () => {
   const { userData } = useAppContext();
@@ -96,6 +97,9 @@ const Action = () => {
                 href="/dashboard/action1/2"
                 style={{ height: "50px !important", width: "300px !important" }}
                 className="next-btn success"
+                onClick={async () => {
+                  await updateStatus(199, caseID);
+                }}
               >
                 SIGN NOW
               </Link>
@@ -154,6 +158,9 @@ const Action = () => {
                 href="/dashboard/action1/2"
                 style={{ height: "50px !important", width: "300px !important" }}
                 className="next-btn success"
+                onClick={async () => {
+                  await updateStatus(199, caseID);
+                }}
               >
                 SIGN NOW
               </Link>
