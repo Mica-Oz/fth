@@ -14,7 +14,7 @@ const Action = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
+  // console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
 
   useEffect(() => {
     // Handle only right-click on the container
