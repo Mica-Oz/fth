@@ -7,6 +7,7 @@ import Image from "next/image";
 import updateStatus from "@/app/utilities/api/updateStatus";
 
 const Action = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { userData } = useAppContext();
   const { user } = useStytchUser();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
