@@ -102,7 +102,7 @@ const Action = () => {
                 className="next-btn success"
                 onClick={async () => {
                   await updateStatus(199, caseID);
-                  const updatedUser = await getLogicsUser(caseID || "");
+                  const updatedUser = await getLogicsUser(caseID);
                   setUserData(updatedUser);
                 }}
               >
@@ -165,7 +165,7 @@ const Action = () => {
                 className="next-btn success"
                 onClick={async () => {
                   await updateStatus(199, caseID);
-                  const updatedUser = await getLogicsUser(caseID || "");
+                  const updatedUser = await getLogicsUser(caseID);
                   setUserData(updatedUser);
                 }}
               >

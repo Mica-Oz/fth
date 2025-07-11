@@ -131,7 +131,7 @@ const Action1_1 = () => {
       );
       await updateStatus(198, caseID);
 
-      const updatedUser = await getLogicsUser(caseID || "");
+      const updatedUser = await getLogicsUser(caseID);
       setUserData(updatedUser);
 
       router.push("/dashboard/action1/1.5");
