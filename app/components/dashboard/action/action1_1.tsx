@@ -117,8 +117,6 @@ const Action1_1 = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const responseData = await response.json();
-      const updatedUser = await getLogicsUser(caseID || "");
-      setUserData(updatedUser);
 
       let comment = `Marital Status: ${maritalStatus}`;
       if (maritalStatus === "Married Filing Jointly") {
@@ -132,6 +130,10 @@ const Action1_1 = () => {
         "MaritalInfo"
       );
       await updateStatus(198, caseID);
+
+      const updatedUser = await getLogicsUser(caseID || "");
+      setUserData(updatedUser);
+
       router.push("/dashboard/action1/1.5");
     } catch (err) {
       console.error(err);

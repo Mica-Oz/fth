@@ -5,14 +5,16 @@ import { useStytchUser } from "@stytch/nextjs";
 import { useAppContext } from "@/app/context";
 import Image from "next/image";
 import updateStatus from "@/app/utilities/api/updateStatus";
+import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Action = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { userData } = useAppContext();
+  const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const caseID = user?.untrusted_metadata.id as string;
   const containerRef = useRef<HTMLDivElement>(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
@@ -100,6 +102,8 @@ const Action = () => {
                 className="next-btn success"
                 onClick={async () => {
                   await updateStatus(199, caseID);
+                  const updatedUser = await getLogicsUser(caseID || "");
+                  setUserData(updatedUser);
                 }}
               >
                 SIGN NOW
@@ -161,6 +165,8 @@ const Action = () => {
                 className="next-btn success"
                 onClick={async () => {
                   await updateStatus(199, caseID);
+                  const updatedUser = await getLogicsUser(caseID || "");
+                  setUserData(updatedUser);
                 }}
               >
                 SIGN NOW
