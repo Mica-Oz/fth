@@ -122,7 +122,7 @@ const Action1_1 = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const responseData = await response.json();
-      const updatedUser = await getLogicsUser(caseID || "");
+      const updatedUser = await getLogicsUser(caseID);
       setUserData(updatedUser);
 
       let comment = `Marital Status: ${maritalStatus}`;

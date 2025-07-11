@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+
+import updateStatus from "@/app/utilities/api/updateStatus";
 import { createActivity } from "@/app/utilities/api/activities";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -115,8 +117,6 @@ const Action1_1 = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const responseData = await response.json();
-      const updatedUser = await getLogicsUser(caseID || "");
-      setUserData(updatedUser);
 
       let comment = `Marital Status: ${maritalStatus}`;
       if (maritalStatus === "Married Filing Jointly") {
@@ -129,6 +129,10 @@ const Action1_1 = () => {
         comment,
         "MaritalInfo"
       );
+      await updateStatus(198, caseID);
+
+      const updatedUser = await getLogicsUser(caseID);
+      setUserData(updatedUser);
 
       router.push("/dashboard/action1/1.5");
     } catch (err) {

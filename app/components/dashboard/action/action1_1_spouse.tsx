@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { action1_1_Spouse_Schema } from "@/app/schema/action1_1_Schema_Spouse";
 import { z } from "zod";
+import updateStatus from "@/app/utilities/api/updateStatus";
 
 type ActionInputs = z.infer<typeof action1_1_Spouse_Schema>;
 
@@ -72,6 +73,7 @@ const Action1_1 = () => {
           "Case Updated successfully From action1/1 SPOUSE---- response in front end::",
           data
         );
+        await updateStatus(202, caseID);
         const updatedUser = await getLogicsUser(caseID);
         setUserData(updatedUser);
 

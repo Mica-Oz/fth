@@ -25,14 +25,14 @@ const createAction1_2_Schema = () => {
 const Action1_2 = () => {
   const router = useRouter();
   const { userData, setUserData } = useAppContext();
-  console.log("USER DATA FROM CONTEXT BUT INIDE Action1/2 COMP:", userData);
+  console.log("USER DATA FROM CONTEXT BUT INSIDE Action1/2 COMP:", userData);
   const sigCanvas = useRef(null);
   const { user } = useStytchUser();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const caseID = user?.untrusted_metadata.id;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [signatureError, setSignatureError] = useState("");
+
   // Create the schema
   const schema = createAction1_2_Schema();
 
@@ -55,7 +55,6 @@ const Action1_2 = () => {
 
   function undo() {
     console.log(" sigCanvas.current:", sigCanvas.current);
-
     let data = sigCanvas.current.toData();
     if (data) {
       data.pop(); // remove the last dot or line
@@ -68,31 +67,6 @@ const Action1_2 = () => {
     return sigCanvas.current && !sigCanvas.current.isEmpty();
   }
 
-  // let downloadBlob, downloadURL;
-
-  // downloadBlob = function (data, fileName, mimeType) {
-  //   var blob, url;
-  //   blob = new Blob([data], {
-  //     type: mimeType,
-  //   });
-  //   url = window.URL.createObjectURL(blob);
-  //   downloadURL(url, fileName);
-  //   setTimeout(function () {
-  //     return window.URL.revokeObjectURL(url);
-  //   }, 1000);
-  // };
-
-  // downloadURL = function (data, fileName) {
-  //   let a;
-  //   a = document.createElement("a");
-  //   a.href = data;
-  //   a.download = fileName;
-  //   document.body.appendChild(a);
-  //   a.style = "display: none";
-  //   a.click();
-  //   a.remove();
-  // };
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function fetchSpouse(caseID) {
     try {
       const response = await fetch("/api/spouse", {
@@ -107,20 +81,17 @@ const Action1_2 = () => {
       }
 
       const data = await response.json();
-
       console.log(
         "Get request submitted successfully---- response in front end::",
         data
       );
       return data;
     } catch (err) {
-      // setError("There was an error submitting the case. Please try again.");
       console.error(err);
-      router.push("/oops");
+      throw new Error("Failed to fetch spouse data");
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function logicsPdfUpload(pdf, caseID) {
     if (pdf) {
       console.log("pdf:", pdf);
@@ -139,20 +110,15 @@ const Action1_2 = () => {
         }
 
         const data = await response.json();
-
-        console.log(
-          "Get request submitted successfully---- response in front end::",
-          data
-        );
+        console.log("PDF upload successful:", data);
         return data;
       } catch (err) {
-        // setError("There was an error submitting the case. Please try again.");
         console.error(err);
-        router.push("/oops");
+        throw new Error("Failed to upload PDF");
       }
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   async function logicsPdfFax(pdf, caseID) {
     if (pdf) {
       console.log("pdf:", pdf);
@@ -171,33 +137,18 @@ const Action1_2 = () => {
         }
 
         const data = await response.json();
-
-        console.log(
-          "Fax request submitted successfully---- response in front end::",
-          data
-        );
+        console.log("Fax request submitted successfully:", data);
         return data;
       } catch (err) {
-        // setError("There was an error submitting the case. Please try again.");
         console.error(err);
-        router.push("/oops");
+        throw new Error("Failed to send fax");
       }
     }
   }
+
   async function update_variables(spouseData) {
     console.log("spouseData in update:", spouseData);
 
-    const formUrl = "/8821-base.pdf";
-    const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
-    const pdfDoc = await PDFDocument.load(formPdfBytes);
-    const form = pdfDoc.getForm();
-    const fields = form.getFields();
-    fields.forEach((field) => {
-      const type = field.constructor.name;
-      const name = field.getName();
-      console.log(`${type}: ${name}`);
-      console.log("typof:", typeof name);
-    });
     const spName = spouseData.SpouseFirstName + " " + spouseData.SpouseLastName;
     const box1String =
       spName +
@@ -211,6 +162,7 @@ const Action1_2 = () => {
       userData.data.State +
       ", " +
       userData.data.Zip;
+
     const form_data = {
       "/8821-base.pdf": {
         "F8821_topmostSubform[0].Page1[0].f1_6[0]": {
@@ -234,105 +186,126 @@ const Action1_2 = () => {
     return form_data;
   }
 
+  // Fixed submitForm function - handles ALL navigation
   async function submitForm() {
     console.log(" sigCanvas.current:", sigCanvas.current);
-    const rawSpouseData = await fetchSpouse(caseID);
-
-    const parsedData = JSON.parse(rawSpouseData.data);
-    console.log("parsedData:", parsedData);
-
-    var form_data = await update_variables(parsedData);
-    console.log("formdata from submitform call:", form_data);
-    const formUrl = "/8821-base.pdf";
-    const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
-
-    const pdfDoc = await PDFDocument.load(formPdfBytes, {
-      ignoreEncryption: true,
-    });
-
-    const form = pdfDoc.getForm();
-    console.log("get form call 304", form);
-
-    for (const [fieldname, datadict] of Object.entries(form_data[formUrl])) {
-      console.log("fieldname:", fieldname, "datadict:", datadict);
-      var field = form.getField(fieldname);
-      console.log("field:", field);
-      switch (datadict["type"]) {
-        case "PDFTextField":
-          try {
-            field.setText(datadict["data"]);
-          } catch (error) {
-            console.log(error);
-          }
-          break;
-        case "PDFCheckBox":
-          if (datadict["data"] == "check") {
-            field.check();
-          }
-          break;
-      }
-    }
-    // Get the raw canvas element from the signature component
-    const rawCanvas = sigCanvas.current._canvas;
-
-    // Apply the trim function to get a trimmed canvas
-    const trimmedCanvas = trimCanvas(rawCanvas);
-
-    // Get the data URL from the trimmed canvas
-    const pngUrl = trimmedCanvas.toDataURL("image/png");
-
-    const pngImageBytes = await fetch(pngUrl).then((res) => res.arrayBuffer());
-    const pngImage = await pdfDoc.embedPng(pngImageBytes);
-    const pngDims = pngImage.scale(0.25);
-    const pages = pdfDoc.getPages();
-    const page = pages[0];
-
-    page.drawImage(pngImage, {
-      x: 65,
-      y: 130,
-      width: pngDims.width,
-      height: pngDims.height,
-    });
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
-    const day = String(today.getDate()).padStart(2, "0");
-
-    const formattedDate = `${month}/${day}/${year}`;
-    console.log(formattedDate);
-    page.drawText(`${formattedDate}`, { x: 450, y: 140, size: 10 });
-    form.flatten();
-
-    //call api
-
-    const pdfBytes = await pdfDoc.save();
-    await logicsPdfUpload(pdfBytes, caseID);
-    if (userData?.data.LastName !== "Test") {
-      await logicsPdfFax(pdfBytes, caseID);
-    }
-    await updateStatus(185, caseID);
-    const updatedUser = await getLogicsUser(caseID);
-    setUserData(updatedUser);
-
-    // downloadBlob(pdfBytes, formUrl, "application/pdf");
-  }
-  const onSubmit = handleSubmit(async () => {
-    // Validate signature separately since it's not part of the form state managed by react-hook-form
-    if (!hasSignature()) {
-      setSignatureError("Please sign the document before submitting");
-      return;
-    }
-
-    if (!sigCanvas.current) {
-      console.error("Signature canvas not initialized");
-      alert("Please sign the document before submitting");
-      return;
-    }
-    // Hide the signature canvas during processing
-    setIsSubmitting(true);
 
     try {
-      await submitForm(); // Wait for form submission to complete
+      const rawSpouseData = await fetchSpouse(caseID);
+      console.log("rawSpouseData:", rawSpouseData);
+
+      if (!rawSpouseData || !rawSpouseData.data) {
+        throw new Error("No spouse data found");
+      }
+
+      const parsedData = JSON.parse(rawSpouseData.data);
+      console.log("parsedData:", parsedData);
+
+      // Basic completion check
+      const missingFields = [];
+      if (!parsedData.SpouseSSN || parsedData.SpouseSSN.trim() === "") {
+        missingFields.push("Spouse SSN");
+      }
+      if (
+        !parsedData.SpouseFirstName ||
+        parsedData.SpouseFirstName.trim() === ""
+      ) {
+        missingFields.push("Spouse First Name");
+      }
+      if (
+        !parsedData.SpouseLastName ||
+        parsedData.SpouseLastName.trim() === ""
+      ) {
+        missingFields.push("Spouse Last Name");
+      }
+
+      // If missing required info, show helpful message and redirect
+      if (missingFields.length > 0) {
+        alert(
+          `Missing required information: ${missingFields.join(", ")}.\n\n` +
+            `Please go back to Step 1 to complete your information.`
+        );
+        router.push("/dashboard/action1/1/spouse");
+        return; // CRITICAL: This stops ALL execution
+      }
+
+      // Continue with PDF processing only if validation passes
+      var form_data = await update_variables(parsedData);
+      console.log("formdata from submitform call:", form_data);
+
+      const formUrl = "/8821-base.pdf";
+      const formPdfBytes = await fetch(formUrl).then((res) =>
+        res.arrayBuffer()
+      );
+
+      const pdfDoc = await PDFDocument.load(formPdfBytes, {
+        ignoreEncryption: true,
+      });
+
+      const form = pdfDoc.getForm();
+      console.log("get form call 304", form);
+
+      for (const [fieldname, datadict] of Object.entries(form_data[formUrl])) {
+        console.log("fieldname:", fieldname, "datadict:", datadict);
+        var field = form.getField(fieldname);
+        console.log("field:", field);
+        switch (datadict["type"]) {
+          case "PDFTextField":
+            try {
+              field.setText(datadict["data"]);
+            } catch (error) {
+              console.log(error);
+            }
+            break;
+          case "PDFCheckBox":
+            if (datadict["data"] == "check") {
+              field.check();
+            }
+            break;
+        }
+      }
+
+      // Get the raw canvas element from the signature component
+      const rawCanvas = sigCanvas.current._canvas;
+      const trimmedCanvas = trimCanvas(rawCanvas);
+      const pngUrl = trimmedCanvas.toDataURL("image/png");
+      const pngImageBytes = await fetch(pngUrl).then((res) =>
+        res.arrayBuffer()
+      );
+      const pngImage = await pdfDoc.embedPng(pngImageBytes);
+      const pngDims = pngImage.scale(0.25);
+      const pages = pdfDoc.getPages();
+      const page = pages[0];
+
+      page.drawImage(pngImage, {
+        x: 65,
+        y: 130,
+        width: pngDims.width,
+        height: pngDims.height,
+      });
+
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      const formattedDate = `${month}/${day}/${year}`;
+
+      console.log(formattedDate);
+      page.drawText(`${formattedDate}`, { x: 450, y: 140, size: 10 });
+      form.flatten();
+
+      const pdfBytes = await pdfDoc.save();
+      await logicsPdfUpload(pdfBytes, caseID);
+
+      if (userData?.data.LastName !== "Test") {
+        await logicsPdfFax(pdfBytes, caseID);
+      }
+
+      await updateStatus(185, caseID);
+      const updatedUser = await getLogicsUser(caseID);
+      setUserData(updatedUser);
+
+      // SUCCESS NAVIGATION - Only happens if everything above succeeds
       console.log(" marital status", userData?.data.MartialStatus);
 
       if (
@@ -344,6 +317,35 @@ const Action1_2 = () => {
         router.push("/dashboard/thr/success");
       }
     } catch (error) {
+      console.error("Error in submitForm:", error);
+      throw error; // Re-throw so onSubmit can handle it
+    }
+  }
+
+  // Simplified onSubmit - NO navigation logic here
+  const onSubmit = handleSubmit(async () => {
+    if (!sigCanvas.current) {
+      console.error("Signature canvas not initialized");
+      alert("Please sign the document before submitting");
+      return;
+    }
+
+    if (!hasSignature()) {
+      setSignatureError("Please sign the document before submitting");
+      return;
+    }
+
+    if (!userData?.data) {
+      alert("Unable to load your information. Please refresh and try again.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // submitForm handles ALL logic including navigation
+      await submitForm();
+    } catch (error) {
       console.error("Error details:", {
         message: error.message,
         stack: error.stack,
@@ -351,7 +353,8 @@ const Action1_2 = () => {
         error: error.toString(),
       });
       alert(`Error: ${error.message || "Unknown error occurred"}`);
-      setIsSubmitting(false); // Show the canvas again if there's an error
+    } finally {
+      setIsSubmitting(false);
     }
   });
 
@@ -464,7 +467,7 @@ const Action1_2 = () => {
                 type="checkbox"
                 id="termsAccepted"
                 {...register("termsAccepted")}
-              ></input>
+              />
               <p>
                 {" "}
                 I agree to the{" "}
@@ -482,7 +485,7 @@ const Action1_2 = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Terms & Condtitions
+                    Terms & Conditions
                   </Link>
                 </span>
               </p>
@@ -505,11 +508,12 @@ const Action1_2 = () => {
             </div>
             <div className="action-btn-cont">
               <button
-                onClick={handleSubmit}
+                type="submit"
                 className="next-btn"
                 id="thrReqSubmit"
+                disabled={isSubmitting}
               >
-                SUBMIT
+                {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
               </button>
             </div>
           </form>
