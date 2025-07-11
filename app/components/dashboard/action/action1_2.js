@@ -318,19 +318,95 @@ const Action1_2 = () => {
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
 
+  // Enhanced onSubmit handler in your Action1_2 component
   const onSubmit = handleSubmit(async () => {
-    // Validate signature separately since it's not part of the form state managed by react-hook-form
+    // 1. Validate signature (existing)
     if (!hasSignature()) {
       setSignatureError("Please sign the document before submitting");
       return;
     }
 
-    // Hide the signature canvas during processing
+    // 2. Quick client-side prerequisite check (NEW)
+    if (!userData?.data) {
+      alert("Unable to load your information. Please refresh and try again.");
+      return;
+    }
+
+    // Basic step 1 completion check
+    const missingFields = [];
+    if (!userData.data.SSN || userData.data.SSN.trim() === "") {
+      missingFields.push("SSN");
+    }
+    if (!userData.data.Address || userData.data.Address.trim() === "") {
+      missingFields.push("Address");
+    }
+    if (!userData.data.City || userData.data.City.trim() === "") {
+      missingFields.push("City");
+    }
+    if (!userData.data.State || userData.data.State.trim() === "") {
+      missingFields.push("State");
+    }
+    if (!userData.data.Zip || userData.data.Zip.trim() === "") {
+      missingFields.push("Zip code");
+    }
+    if (
+      userData.data.TaxLiability === null ||
+      userData.data.TaxLiability === undefined
+    ) {
+      missingFields.push("Tax amount");
+    }
+
+    // Check married filing jointly
+    if (userData.data.MartialStatus === "Married Filing Jointly") {
+      if (!userData.data.Primary || userData.data.Primary.trim() === "") {
+        missingFields.push("Primary taxpayer selection");
+      }
+    }
+
+    // If missing required info, show helpful message
+    if (missingFields.length > 0) {
+      alert(
+        `Missing required information: ${missingFields.join(", ")}.\n\n` +
+          `Please go back to Step 1 to complete your information.`
+      );
+      router.push("/dashboard/action1/1");
+      return;
+    }
+
+    // 3. Proceed with submission
     setIsSubmitting(true);
 
     try {
-      await submitForm(); // Wait for form submission to complete
-      console.log(" marital status", userData?.data.MartialStatus);
+      // Call server validation first before processing PDF
+      // const validationResponse = await fetch("/api/validate-submission", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     caseID: caseID,
+      //     action: "sign-form",
+      //   }),
+      // });
+
+      // const validationResult = await validationResponse.json();
+
+      // if (!validationResponse.ok) {
+      //   if (validationResult.redirectTo) {
+      //     alert(
+      //       `${validationResult.error}\n\nYou'll be redirected to complete the missing information.`
+      //     );
+      //     router.push(validationResult.redirectTo);
+      //   } else {
+      //     alert(`Error: ${validationResult.error}`);
+      //   }
+      //   return;
+      // }
+
+      // Server validation passed - proceed with form submission
+      await submitForm();
+
+      // Success navigation logic (existing)
       if (userData.data.MartialStatus === "Married Filing Jointly") {
         router.push("/dashboard/thr/success/spouse");
       } else if (
@@ -342,14 +418,10 @@ const Action1_2 = () => {
         router.push("/dashboard/thr/success");
       }
     } catch (error) {
-      console.error("Error details:", {
-        message: error.message,
-        stack: error.stack,
-        name: error.name,
-        error: error.toString(),
-      });
+      console.error("Error details:", error);
       alert(`Error: ${error.message || "Unknown error occurred"}`);
-      setIsSubmitting(false); // Show the canvas again if there's an error
+    } finally {
+      setIsSubmitting(false);
     }
   });
 
