@@ -320,13 +320,19 @@ const Action1_2 = () => {
 
   // Enhanced onSubmit handler in your Action1_2 component
   const onSubmit = handleSubmit(async () => {
-    // 1. Validate signature (existing)
+    // 1. Validate signature canvas is initialized
+    if (!sigCanvas.current) {
+      console.error("Signature canvas not initialized");
+      alert("Please sign the document before submitting");
+      return;
+    }
+    // 2. Validate signature (existing)
     if (!hasSignature()) {
       setSignatureError("Please sign the document before submitting");
       return;
     }
 
-    // 2. Quick client-side prerequisite check (NEW)
+    // 3. Quick client-side prerequisite check (NEW)
     if (!userData?.data) {
       alert("Unable to load your information. Please refresh and try again.");
       return;
@@ -354,13 +360,6 @@ const Action1_2 = () => {
       userData.data.TaxLiability === undefined
     ) {
       missingFields.push("Tax amount");
-    }
-
-    // Check married filing jointly
-    if (userData.data.MartialStatus === "Married Filing Jointly") {
-      if (!userData.data.Primary || userData.data.Primary.trim() === "") {
-        missingFields.push("Primary taxpayer selection");
-      }
     }
 
     // If missing required info, show helpful message
