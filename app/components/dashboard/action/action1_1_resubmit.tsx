@@ -3,14 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
-
-import updateStatus from "@/app/utilities/api/updateStatus";
 import { createActivity } from "@/app/utilities/api/activities";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createAction1_1_Schema } from "@/app/schema/action1_1_Schema";
+import { createAction1_1_Schema } from "@/app/schema/action1_1_Schema_Resubmit";
 import { z } from "zod";
 
 const Action1_1 = () => {
@@ -23,6 +21,11 @@ const Action1_1 = () => {
   // Get values from userData
   const caseID = userData?.data?.CaseID;
   const maritalStatus = userData?.data?.MartialStatus;
+  const firstName = userData?.data?.FirstName;
+  const lastName = userData?.data?.LastName;
+  const fullName = `${firstName} ${lastName}`;
+
+  // console.log("userData in Action1_1:", userData.data);
 
   // Create schema with marital status directly from userData
   const schema = createAction1_1_Schema({
@@ -40,6 +43,8 @@ const Action1_1 = () => {
   } = useForm<ActionInputs>({
     resolver: zodResolver(schema),
     defaultValues: {
+      FirstName: "",
+      LastName: "",
       primary: "",
       taxamount: "",
       dob: "",
@@ -63,7 +68,7 @@ const Action1_1 = () => {
   }, [userData]);
 
   useEffect(() => {
-    console.log("userData just updated:", userData);
+    console.log("userData  updated");
   }, [userData]);
 
   useEffect(() => {
@@ -100,7 +105,7 @@ const Action1_1 = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     setIsLoading(true);
-    console.log("submissiondata", data);
+    // console.log("submissiondata", data);
     try {
       const response = await fetch("/api/case/update/action1-1", {
         method: "POST",
@@ -117,6 +122,8 @@ const Action1_1 = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const responseData = await response.json();
+      const updatedUser = await getLogicsUser(caseID);
+      setUserData(updatedUser);
 
       let comment = `Marital Status: ${maritalStatus}`;
       if (maritalStatus === "Married Filing Jointly") {
@@ -129,10 +136,6 @@ const Action1_1 = () => {
         comment,
         "MaritalInfo"
       );
-      await updateStatus(198, caseID);
-
-      const updatedUser = await getLogicsUser(caseID);
-      setUserData(updatedUser);
 
       router.push("/dashboard/action1/1.5");
     } catch (err) {
@@ -170,12 +173,100 @@ const Action1_1 = () => {
         <div className="header-bubble">Tax Report Request Form</div>
 
         <div className="square">
-          <p className="sub-heading">
-            We just need a few more details before we can submit your request!
+          <p className="sub-heading" style={{ width: "70%" }}>
+            <strong>
+              There was an error on your previously submitted 8821. Please
+              confirm all of your information below.
+            </strong>
           </p>
           <form className="form-cont" onSubmit={onSubmit}>
             <div className="form-cat">
-              <p className="cat-title">Taxpayer Information:</p>
+              <p
+                className="cat-title"
+                style={{
+                  marginBottom: "0",
+                }}
+              >
+                Confirm Name: {fullName}
+              </p>
+              <p
+                style={{
+                  fontFamily: "Halcom, sans-serif",
+                  color: "#0a1763",
+                  width: "90%",
+                  marginTop: "5px",
+                }}
+              >
+                If the name you entered, {fullName}, is incorrect or has typos,
+                please resubmit your corrected name.{" "}
+              </p>
+
+              <input
+                {...register("FirstName")}
+                name="FirstName"
+                className="text-input"
+                type="text"
+                placeholder="Corrected First Name"
+                disabled={isLoading}
+              />
+              {errors.FirstName && (
+                <p className="form-error">
+                  {" "}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-exclamation-triangle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                  </svg>
+                  {errors.FirstName.message}
+                </p>
+              )}
+
+              <input
+                {...register("LastName")}
+                name="LastName"
+                className="text-input"
+                type="text"
+                placeholder="Corrected Last Name"
+                disabled={isLoading}
+              />
+              {errors.LastName && (
+                <p className="form-error">
+                  {" "}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-exclamation-triangle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                  </svg>
+                  {errors.LastName.message}
+                </p>
+              )}
+            </div>
+            <div className="form-cat">
+              <p
+                style={{
+                  fontFamily: "Halcom, sans-serif",
+                  color: "#0a1763",
+                  width: "90%",
+                  marginBottom: "0px",
+                }}
+              >
+                You must resubmit the following information.
+              </p>
+              <p className="cat-title" style={{ marginTop: "5px" }}>
+                Taxpayer Information:
+              </p>
 
               <input
                 type="text"

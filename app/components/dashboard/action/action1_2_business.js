@@ -270,9 +270,52 @@ const Action1_2 = () => {
   }
 
   const onSubmit = handleSubmit(async () => {
+    if (!sigCanvas.current) {
+      console.error("Signature canvas not initialized");
+      alert("Please sign the document before submitting");
+      return;
+    }
     // Validate signature separately since it's not part of the form state managed by react-hook-form
     if (!hasSignature()) {
       setSignatureError("Please sign the document before submitting");
+      return;
+    }
+    if (!userData?.data) {
+      alert("Unable to load your information. Please refresh and try again.");
+      return;
+    }
+
+    // Basic step 1 completion check
+    const missingFields = [];
+    if (!userData.data.EIN || userData.data.EIN.trim() === "") {
+      missingFields.push("EIN");
+    }
+    if (
+      !userData.data.BusinessName ||
+      userData.data.BusinessName.trim() === ""
+    ) {
+      missingFields.push("Business Name");
+    }
+    if (
+      !userData.data.BusinessType ||
+      userData.data.BusinessType.trim() === ""
+    ) {
+      missingFields.push("Business Type");
+    }
+    if (
+      !userData.data.BusinessAddress ||
+      userData.data.BusinessAddress.trim() === ""
+    ) {
+      missingFields.push("Business Address");
+    }
+
+    // If missing required info, show helpful message
+    if (missingFields.length > 0) {
+      alert(
+        `Missing required information: ${missingFields.join(", ")}.\n\n` +
+          `Please go back to Step 1 to complete your information.`
+      );
+      router.push("/dashboard/action1/1/business");
       return;
     }
 
