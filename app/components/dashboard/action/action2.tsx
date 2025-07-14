@@ -100,30 +100,75 @@ const Action = () => {
 
   async function acknowledge() {
     const status = userData?.data.StatusID;
-    let fastTrack = false;
-    if (status === 193) {
-      fastTrack = true;
+    let isLegacyUserPath = false;
+
+    // to do : make all of this legacy
+    // check if status 187 or 193
+
+    if (status === 187 || status === 193) {
+      isLegacyUserPath = true;
     }
 
-    //if fast track
-    if (fastTrack === true) {
-      await updateStatus(189, caseID);
-    } else if (status === 187) {
-      await updateStatus(188, caseID);
-    } else if (status === 188 || status === 189) {
-      //no update needed
-    }
-    const updatedUser = await getLogicsUser(caseID);
-    setUserData(updatedUser);
+    if (isLegacyUserPath) {
+      let fastTrack = false;
+      if (status === 193) {
+        fastTrack = true;
+      }
 
-    if (fastTrack === true) {
-      router.push("/dashboard/status6");
-    } else if (status === 187 || status === 188) {
-      router.push("/dashboard/status4");
-    } else if (status === 189) {
-      router.push("/dashboard/status6");
-    } else if (status === 191) {
-      router.push("/dashboard/status7");
+      //if fast track
+      if (fastTrack === true) {
+        await updateStatus(189, caseID);
+      } else if (status === 187) {
+        await updateStatus(188, caseID);
+      } else if (status === 188 || status === 189) {
+        //no update needed
+      }
+      const updatedUser = await getLogicsUser(caseID);
+      setUserData(updatedUser);
+
+      if (fastTrack === true) {
+        router.push("/dashboard/status6");
+      } else if (status === 187 || status === 188) {
+        router.push("/dashboard/status4");
+      } else if (status === 189) {
+        router.push("/dashboard/status6");
+      } else if (status === 191) {
+        router.push("/dashboard/status7");
+      }
+    } else {
+      // to do: // if status is 204, 205, 206, or 207,
+      // redirect to the appropriate status page
+      // 204>208
+      // 205>209
+      // 206>210
+      // 207>211
+      //213>212
+      if (status === 204) {
+        await updateStatus(208, caseID);
+        const updatedUser = await getLogicsUser(caseID);
+        setUserData(updatedUser);
+        router.push("/dashboard/status4/A");
+      } else if (status === 205) {
+        await updateStatus(209, caseID);
+        const updatedUser = await getLogicsUser(caseID);
+        setUserData(updatedUser);
+        router.push("/dashboard/status4/B");
+      } else if (status === 206) {
+        await updateStatus(210, caseID);
+        const updatedUser = await getLogicsUser(caseID);
+        setUserData(updatedUser);
+        router.push("/dashboard/status4/B/F");
+      } else if (status === 207) {
+        await updateStatus(211, caseID);
+        const updatedUser = await getLogicsUser(caseID);
+        setUserData(updatedUser);
+        router.push("/dashboard/status4/C");
+      } else if (status === 213) {
+        await updateStatus(212, caseID);
+        const updatedUser = await getLogicsUser(caseID);
+        setUserData(updatedUser);
+        router.push("/dashboard/status4/D");
+      }
     }
   }
 
@@ -162,13 +207,19 @@ const Action = () => {
             {isLoading ? (
               <div>Loading PDF...</div>
             ) : signedURL ? (
-              <iframe
-                ref={iframeRef}
-                src={`${signedURL}#toolbar=0`}
-                width={"100%"}
-                height={300}
-                className="icon3"
-              ></iframe>
+              <div
+                style={{ width: "100%", height: 300, position: "relative" }}
+                onContextMenu={(e) => e.preventDefault()}
+              >
+                <iframe
+                  ref={iframeRef}
+                  src={`${signedURL}#toolbar=0`}
+                  width="100%"
+                  height="100%"
+                  className="icon3"
+                  style={{ pointerEvents: "auto" }}
+                ></iframe>
+              </div>
             ) : (
               <div style={{ color: "red", fontWeight: 500 }}>
                 Report is not available. Please contact support.

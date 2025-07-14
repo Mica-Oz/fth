@@ -7,7 +7,7 @@ import { useStytchUser } from "@stytch/nextjs";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
 import updateStatus from "@/app/utilities/api/updateStatus";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+// import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -24,7 +24,7 @@ const createAction1_2_Schema = () => {
 
 const Action1_2 = () => {
   const router = useRouter();
-  const { userData, setUserData } = useAppContext();
+  const { userData } = useAppContext();
   // console.log("USER DATA FROM CONTEXT BUT INIDE Action1/2 COMP:", userData);
   const sigCanvas = useRef(null);
   const { user } = useStytchUser();
@@ -313,8 +313,8 @@ const Action1_2 = () => {
       await logicsPdfFax(pdfBytes, caseID);
     }
     await updateStatus(184, caseID);
-    const updatedUser = await getLogicsUser(caseID);
-    setUserData(updatedUser);
+    // const updatedUser = await getLogicsUser(caseID);
+    // setUserData(updatedUser);
     // downloadBlob(pdfBytes, formUrl, "application/pdf");
   }
 
