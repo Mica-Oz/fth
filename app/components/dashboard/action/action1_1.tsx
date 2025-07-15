@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+// import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 import updateStatus from "@/app/utilities/api/updateStatus";
 import { createActivity } from "@/app/utilities/api/activities";
@@ -15,7 +15,7 @@ import { z } from "zod";
 
 const Action1_1 = () => {
   const router = useRouter();
-  const { userData, setUserData } = useAppContext();
+  const { userData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState("");
   const [isNotSure, setIsNotSure] = useState(false);
@@ -131,8 +131,8 @@ const Action1_1 = () => {
       );
       await updateStatus(198, caseID);
 
-      const updatedUser = await getLogicsUser(caseID);
-      setUserData(updatedUser);
+      // const updatedUser = await getLogicsUser(caseID);
+      // setUserData(updatedUser);
 
       router.push("/dashboard/action1/1.5");
     } catch (err) {
