@@ -15,7 +15,21 @@ const Action = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [signedURL, setSignedURL] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   async function handleGetURL(caseID: string) {
     setIsLoading(true);
@@ -60,43 +74,8 @@ const Action = () => {
   }, [caseID]);
 
   console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
-  useEffect(() => {
-    // Handle only right-click on the container
-    const handleRightClick = (e: MouseEvent) => {
-      e.preventDefault();
-      return false;
-    };
 
-    // Block specific keyboard shortcuts
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Block Ctrl+S, Ctrl+P, Ctrl+Shift+E, etc.
-      if (
-        (e.ctrlKey || e.metaKey) &&
-        (e.key === "s" || e.key === "p" || e.key === "e")
-      ) {
-        e.preventDefault();
-        return false;
-      }
-    };
-
-    // Add event listeners directly to container instead of using an overlay
-    if (containerRef.current) {
-      containerRef.current.addEventListener("contextmenu", handleRightClick);
-    }
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    // Clean up event listeners on unmount
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener(
-          "contextmenu",
-          handleRightClick
-        );
-      }
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  // Removed the problematic event listeners that were blocking scrolling
 
   async function acknowledge() {
     const status = userData?.data.StatusID;
@@ -127,6 +106,39 @@ const Action = () => {
     }
   }
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // Handle modal close on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isModalOpen) {
+        closeModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isModalOpen]);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
   return (
     <>
       <div
@@ -153,28 +165,68 @@ const Action = () => {
               contact support.
             </Link>
           </p>
-          <p className="form-group">Report</p>
-          <div
-            className="report-cont pdf-cont"
-            style={{ overflow: "hidden", position: "relative" }}
-            ref={containerRef}
-          >
-            {isLoading ? (
-              <div>Loading PDF...</div>
-            ) : signedURL ? (
-              <iframe
-                ref={iframeRef}
-                src={`${signedURL}#toolbar=0`}
-                width={"100%"}
-                height={300}
-                className="icon3"
-              ></iframe>
-            ) : (
-              <div style={{ color: "red", fontWeight: 500 }}>
-                Report is not available. Please contact support.
-              </div>
-            )}
-          </div>
+          {!isMobile && <p className="form-group">Report</p>}
+
+          {isMobile ? (
+            // Mobile: Show button to open modal
+            <div
+              className="report-cont pdf-cont"
+              style={{ textAlign: "center", padding: "20px" }}
+            >
+              {isLoading ? (
+                <div>Loading PDF...</div>
+              ) : signedURL ? (
+                <button
+                  onClick={openModal}
+                  // className="next-btn"
+                  style={{
+                    background: "#5dacad",
+                    color: "white",
+                    border: "none",
+                    padding: "12px 24px",
+                    borderRadius: "6px",
+                    cursor: "pointer",
+                    fontSize: "1.5rem",
+                    fontFamily: "Halcom, sans-serif",
+                    fontWeight: "500",
+                    width: "90%",
+                    minWidth: "200px",
+                    height: "150px",
+                  }}
+                >
+                  VIEW REPORT
+                </button>
+              ) : (
+                <div style={{ color: "red", fontWeight: 500 }}>
+                  Report is not available. Please contact support.
+                </div>
+              )}
+            </div>
+          ) : (
+            // Desktop: Show iframe directly
+            <div
+              className="report-cont pdf-cont"
+              style={{ overflow: "hidden", position: "relative" }}
+              ref={containerRef}
+            >
+              {isLoading ? (
+                <div>Loading PDF...</div>
+              ) : signedURL ? (
+                <iframe
+                  ref={iframeRef}
+                  src={`${signedURL}#toolbar=0`}
+                  width={"100%"}
+                  height={300}
+                  className="icon3"
+                ></iframe>
+              ) : (
+                <div style={{ color: "red", fontWeight: 500 }}>
+                  Report is not available. Please contact support.
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="action-btn-cont">
             <button onClick={acknowledge} className="next-btn">
               BACK TO DASHBOARD
@@ -184,6 +236,71 @@ const Action = () => {
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>
       </div>
+
+      {/* Mobile Modal */}
+      {isModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={closeModal}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "95vw",
+              height: "95vh",
+              backgroundColor: "white",
+              borderRadius: "8px",
+              overflow: "hidden",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "rgba(0, 0, 0, 0.5)",
+                color: "white",
+                border: "none",
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                fontSize: "20px",
+                cursor: "pointer",
+                zIndex: 10000,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              ×
+            </button>
+
+            {/* PDF iframe */}
+            <iframe
+              src={`${signedURL}#toolbar=0`}
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+              }}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
