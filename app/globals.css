@@ -4654,3 +4654,9 @@ html {
 html::-webkit-scrollbar-track {
   background: white;
 }
+
+iframe {
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  height: 100vh;
+}
