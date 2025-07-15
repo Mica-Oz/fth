@@ -15,7 +15,6 @@ const Action = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [signedURL, setSignedURL] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
@@ -75,8 +74,6 @@ const Action = () => {
 
   console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
 
-  // Removed the problematic event listeners that were blocking scrolling
-
   async function acknowledge() {
     const status = userData?.data.StatusID;
     let fastTrack = false;
@@ -106,39 +103,6 @@ const Action = () => {
     }
   }
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Handle modal close on escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isModalOpen) {
-        closeModal();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [isModalOpen]);
-
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isModalOpen]);
-
   return (
     <>
       <div
@@ -165,10 +129,10 @@ const Action = () => {
               contact support.
             </Link>
           </p>
-          {!isMobile && <p className="form-group">Report</p>}
+          <p className="form-group">Report</p>
 
           {isMobile ? (
-            // Mobile: Show button to open modal
+            // Mobile: Show button to open PDF in new tab
             <div
               className="report-cont pdf-cont"
               style={{
@@ -182,8 +146,7 @@ const Action = () => {
                 <div>Loading PDF...</div>
               ) : signedURL ? (
                 <button
-                  onClick={openModal}
-                  // className="next-btn"
+                  onClick={() => window.open(signedURL, "_blank")}
                   style={{
                     background: "#5dacad",
                     color: "white",
@@ -241,71 +204,6 @@ const Action = () => {
         <div className="header-bubble-back"></div>
         <div className="back-square"></div>
       </div>
-
-      {/* Mobile Modal */}
-      {isModalOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onClick={closeModal}
-        >
-          <div
-            style={{
-              position: "relative",
-              width: "95vw",
-              height: "95vh",
-              backgroundColor: "white",
-              borderRadius: "8px",
-              overflow: "hidden",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={closeModal}
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "10px",
-                background: "rgba(0, 0, 0, 0.5)",
-                color: "white",
-                border: "none",
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                fontSize: "20px",
-                cursor: "pointer",
-                zIndex: 10000,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              ×
-            </button>
-
-            {/* PDF iframe */}
-            <iframe
-              src={`${signedURL}#toolbar=0`}
-              style={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-              }}
-            />
-          </div>
-        </div>
-      )}
     </>
   );
 };
