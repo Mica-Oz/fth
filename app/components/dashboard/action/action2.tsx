@@ -171,7 +171,12 @@ const Action = () => {
             // Mobile: Show button to open modal
             <div
               className="report-cont pdf-cont"
-              style={{ textAlign: "center", padding: "20px" }}
+              style={{
+                textAlign: "center",
+                padding: "20px",
+                height: "auto",
+                overflow: "hidden",
+              }}
             >
               {isLoading ? (
                 <div>Loading PDF...</div>
@@ -189,8 +194,8 @@ const Action = () => {
                     fontSize: "1.5rem",
                     fontFamily: "Halcom, sans-serif",
                     fontWeight: "500",
-                    width: "90%",
-                    minWidth: "200px",
+                    width: "100%",
+                    minWidth: "180px",
                     height: "150px",
                   }}
                 >
@@ -227,7 +232,7 @@ const Action = () => {
             </div>
           )}
 
-          <div className="action-btn-cont">
+          <div className="action-btn-cont" style={{ bottom: "60px" }}>
             <button onClick={acknowledge} className="next-btn">
               BACK TO DASHBOARD
             </button>

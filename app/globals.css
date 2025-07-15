@@ -4080,6 +4080,9 @@ input[type="checkbox"]:checked {
   .action-3-6 .form-cont {
     height: 38% !important;
   }
+  .action-2 {
+    height: 600px !important;
+  }
 }
 @media (max-width: 700px) {
   .top-big-square h3 {
@@ -4404,7 +4407,6 @@ input[type="checkbox"]:checked {
     padding: 10px 20px;
   }
   .action-2 {
-    height: 750px !important;
     margin-right: 40px;
   }
   .action-2 .next-btn {
