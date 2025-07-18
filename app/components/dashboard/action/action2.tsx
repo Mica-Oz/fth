@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import updateStatus from "@/app/utilities/api/updateStatus";
+// import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+// import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import { useAppContext } from "@/app/context";
 import { useRouter } from "next/navigation";
 
 const Action = () => {
-  const { userData, setUserData } = useAppContext();
+  const { userData } = useAppContext();
   const { user } = useStytchUser();
   const caseID = user?.untrusted_metadata.id as string;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,7 +51,7 @@ const Action = () => {
       }
 
       const responseData = await response.json();
-      console.log("Response data:", responseData);
+      // console.log("Response data:", responseData);
       return responseData; // Return the response data
     } catch (err) {
       console.error(err);
@@ -72,25 +72,14 @@ const Action = () => {
     fetchURL();
   }, [caseID]);
 
-  console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
+  // console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
 
-  async function acknowledge() {
+  async function routeToDash() {
     const status = userData?.data.StatusID;
     let fastTrack = false;
     if (status === 193) {
       fastTrack = true;
     }
-
-    //if fast track
-    if (fastTrack === true) {
-      await updateStatus(189, caseID);
-    } else if (status === 187) {
-      await updateStatus(188, caseID);
-    } else if (status === 188 || status === 189) {
-      //no update needed
-    }
-    const updatedUser = await getLogicsUser(caseID);
-    setUserData(updatedUser);
 
     if (fastTrack === true) {
       router.push("/dashboard/status6");
@@ -196,7 +185,7 @@ const Action = () => {
           )}
 
           <div className="action-btn-cont" style={{ bottom: "60px" }}>
-            <button onClick={acknowledge} className="next-btn">
+            <button onClick={routeToDash} className="next-btn">
               BACK TO DASHBOARD
             </button>
           </div>

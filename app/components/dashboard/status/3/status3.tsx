@@ -7,6 +7,8 @@ import LogoIcon from "@/public/fth-logo-icon-new.png";
 import { useAppContext } from "@/app/context";
 import { getActivities } from "@/app/utilities/api/activities";
 import { useStytchUser } from "@stytch/nextjs";
+import updateStatus from "@/app/utilities/api/updateStatus";
+import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
@@ -63,7 +65,25 @@ const Dash = () => {
     }
   }, [caseID, setUserData]); // Add setUserData here
 
-  console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 3 COMP:", userData);
+  async function acknowledge() {
+    const status = userData?.data.StatusID;
+    let fastTrack = false;
+    if (status === 193) {
+      fastTrack = true;
+    }
+
+    //if fast track
+    if (fastTrack === true) {
+      await updateStatus(189, caseID);
+    } else if (status === 187) {
+      await updateStatus(188, caseID);
+    } else if (status === 188 || status === 189) {
+      //no update needed
+    }
+    const updatedUser = await getLogicsUser(caseID);
+    setUserData(updatedUser);
+  }
+  // console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 3 COMP:", userData);
 
   return (
     <div className="dash-cont">
@@ -126,7 +146,11 @@ const Dash = () => {
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
             <p className="to-do-msg">Your Tax Report History is complete!</p>
-            <Link href="/dashboard/action2" className="tax-history-req-btn">
+            <Link
+              href="/dashboard/action2"
+              onClick={acknowledge}
+              className="tax-history-req-btn"
+            >
               VIEW TAX <br />
               HISTORY REPORT
             </Link>
