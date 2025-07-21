@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+// import scales from "@/public/scales-icon.png";
 import LogoIcon from "@/public/fth-logo-icon-new.png";
-import scales from "@/public/scales-icon.png";
 import { useAppContext } from "@/app/context";
 import { getActivities } from "@/app/utilities/api/activities";
 import { useStytchUser } from "@stytch/nextjs";
@@ -11,7 +11,6 @@ import { useStytchUser } from "@stytch/nextjs";
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
-  console.log("USER STATUS 4 ?", user);
   const caseID = user?.untrusted_metadata.id as string;
   async function loadActivities() {
     const activities = await getActivities(caseID);
@@ -39,15 +38,15 @@ const Dash = () => {
             ...prevData,
             yearsUnfiled,
           }));
-        } else if (key === "ActivityType" && subObj[key] === "PaymentStatus") {
+        } else if (key === "ActivityType" && subObj[key] === "Negotiation") {
           console.log("activitytype:", subObj[key]);
           console.log("Subject", subObj["Subject"]);
-          const paymentStatus = subObj["Subject"];
+          const negotiation = subObj["Subject"];
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setUserData((prevData: any) => ({
             ...prevData,
-            paymentStatus,
+            negotiation,
           }));
         }
       }
@@ -59,6 +58,7 @@ const Dash = () => {
   }, []);
 
   console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 4 COMP:", userData);
+
   return (
     <div className="dash-cont">
       <div className="row-1">
@@ -69,7 +69,21 @@ const Dash = () => {
           </strong>
         </p>
       </div>
-
+      {/* <div className="row-6 alert bar-bubble">
+        <div className="square-front">
+          <Image
+            alt={"icon"}
+            src={LogoIcon}
+            width={60}
+            className="scale-icon"
+          />
+          <p style={{ width: "100%" }}>
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            You are enrolled in a Fresh Start Payment Plan!
+          </p>
+        </div>
+        <div className="square-back"></div>
+      </div> */}
       <div className="row-2">
         <div className="progress-bubble">
           <div className="bubble-header break">
@@ -83,19 +97,19 @@ const Dash = () => {
 
               <div className="outer-circle complete"></div>
 
-              <div className="outer-circle">
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete final">
                 <div className="inner-circle"></div>
               </div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>Check Fresh Start Eligibility</p>
+              <p>Your Tax History Report is complete!</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -104,12 +118,18 @@ const Dash = () => {
 
         <div className="to-do-bubble">
           <div className="square-front">
-            <p className="to-do-head">To Do:</p>
-            <p className="to-do-msg">
-              Find out what Fresh Start Relief Programs you are eligible for.
+            <p className="to-do-head congrats">CONGRATS!</p>
+            <p className="to-do-msg" style={{ fontSize: "22px" }}>
+              You are up to date with your taxes and you do not owe the IRS!
+              <br />
+              No further steps needed.{" "}
             </p>
-            <Link href="/dashboard/action3/3" className="tax-history-req-btn">
-              CHECK ELIGIBILITY
+            <p className="to-do-head congrats" style={{ fontSize: "34px" }}>
+              Questions?
+            </p>
+
+            <Link href="/contact" className="tax-history-req-btn contact">
+              CONTACT SUPPORT
             </Link>
           </div>
           <div className="square-back"></div>
@@ -123,7 +143,10 @@ const Dash = () => {
             width={60}
             className="scale-icon"
           />
-          <p>Congratulations! Your Tax History Report is complete!</p>
+          <p>
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            Your Tax History Report is complete!
+          </p>
           <Link href={"/dashboard/action2"} style={{ marginLeft: "auto" }}>
             <div className="learn-more-btn">VIEW HERE</div>
           </Link>
@@ -162,23 +185,14 @@ const Dash = () => {
             Collection Status
           </div>
 
-          <div className="square-front">
-            <p className="active">
-              {userData?.paymentStatus || ""}
-              {/* Unpaid
-              <br />
-              -
-              <br />
-              No Payment
-              <br />
-              Plan Yet */}
-            </p>
+          <div className="square-front" style={{ backgroundColor: "#59c8ea" }}>
+            <p className="active">{userData?.negotiation || ""}</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
         </div>
       </div>
-      {/* <div className="row-5 bar-bubble">
+      {/* <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -201,26 +215,6 @@ const Dash = () => {
         </div>
         <div className="square-back"></div>
       </div> */}
-      <div className="row-6 bar-bubble">
-        <div className="square-front">
-          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
-          <p>
-            Looking for Tax Resolution? Schedule a{" "}
-            <span style={{ color: "#59c8ea" }}>
-              {" "}
-              <strong>
-                free 15 minute <br />
-                consultation{" "}
-              </strong>
-            </span>
-            with our team of tax specialists.
-          </p>
-          <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">SCHEDULE NOW</div>
-          </Link>
-        </div>
-        <div className="square-back"></div>
-      </div>
     </div>
   );
 };

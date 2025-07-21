@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+// import scales from "@/public/scales-icon.png";
 import LogoIcon from "@/public/fth-logo-icon-new.png";
-import scales from "@/public/scales-icon.png";
 import { useAppContext } from "@/app/context";
 import { getActivities } from "@/app/utilities/api/activities";
 import { useStytchUser } from "@stytch/nextjs";
@@ -11,7 +11,6 @@ import { useStytchUser } from "@stytch/nextjs";
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
-  console.log("USER STATUS 4 ?", user);
   const caseID = user?.untrusted_metadata.id as string;
   async function loadActivities() {
     const activities = await getActivities(caseID);
@@ -59,6 +58,7 @@ const Dash = () => {
   }, []);
 
   console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 4 COMP:", userData);
+
   return (
     <div className="dash-cont">
       <div className="row-1">
@@ -83,19 +83,19 @@ const Dash = () => {
 
               <div className="outer-circle complete"></div>
 
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
               <div className="outer-circle">
                 <div className="inner-circle"></div>
               </div>
 
               <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>Check Fresh Start Eligibility</p>
+              <p>Become Compliant With the IRS</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -106,10 +106,11 @@ const Dash = () => {
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
             <p className="to-do-msg">
-              Find out what Fresh Start Relief Programs you are eligible for.
+              To view your Fresh Start Eligibility, you must first become
+              compliant with the IRS.
             </p>
-            <Link href="/dashboard/action3/3" className="tax-history-req-btn">
-              CHECK ELIGIBILITY
+            <Link href="/cal/consult" className="tax-history-req-btn rep">
+              BECOME COMPLIANT
             </Link>
           </div>
           <div className="square-back"></div>
@@ -123,7 +124,10 @@ const Dash = () => {
             width={60}
             className="scale-icon"
           />
-          <p>Congratulations! Your Tax History Report is complete!</p>
+          <p>
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            Your Tax History Report is complete!
+          </p>
           <Link href={"/dashboard/action2"} style={{ marginLeft: "auto" }}>
             <div className="learn-more-btn">VIEW HERE</div>
           </Link>
@@ -178,7 +182,7 @@ const Dash = () => {
           <div className="square-back"></div>
         </div>
       </div>
-      {/* <div className="row-5 bar-bubble">
+      {/* <div className="row-5 bar-bubble" style={{ marginBottom: "90px" }}>
         <div className="square-front">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -201,26 +205,6 @@ const Dash = () => {
         </div>
         <div className="square-back"></div>
       </div> */}
-      <div className="row-6 bar-bubble">
-        <div className="square-front">
-          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
-          <p>
-            Looking for Tax Resolution? Schedule a{" "}
-            <span style={{ color: "#59c8ea" }}>
-              {" "}
-              <strong>
-                free 15 minute <br />
-                consultation{" "}
-              </strong>
-            </span>
-            with our team of tax specialists.
-          </p>
-          <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">SCHEDULE NOW</div>
-          </Link>
-        </div>
-        <div className="square-back"></div>
-      </div>
     </div>
   );
 };

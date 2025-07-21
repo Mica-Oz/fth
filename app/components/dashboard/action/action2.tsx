@@ -1,14 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import updateStatus from "@/app/utilities/api/updateStatus";
+// import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import { useAppContext } from "@/app/context";
 import { useRouter } from "next/navigation";
 
 const Action = () => {
-  const { userData, setUserData } = useAppContext();
+  const { userData } = useAppContext();
   const { user } = useStytchUser();
   const caseID = user?.untrusted_metadata.id as string;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,75 +97,37 @@ const Action = () => {
     };
   }, []);
 
-  async function acknowledge() {
+  async function routeByStatus() {
     const status = userData?.data.StatusID;
+    console.log("clicked routeByStatus, status:", status);
     let isLegacyUserPath = false;
-
-    // to do : make all of this legacy
-    // check if status 187 or 193
-
-    if (status === 187 || status === 193) {
+    if (status === 188 || status === 189) {
       isLegacyUserPath = true;
     }
-
     if (isLegacyUserPath) {
       let fastTrack = false;
-      if (status === 193) {
+      if (status === 189) {
         fastTrack = true;
       }
-
-      //if fast track
       if (fastTrack === true) {
-        await updateStatus(189, caseID);
-      } else if (status === 187) {
-        await updateStatus(188, caseID);
-      } else if (status === 188 || status === 189) {
-        //no update needed
-      }
-      const updatedUser = await getLogicsUser(caseID);
-      setUserData(updatedUser);
-
-      if (fastTrack === true) {
-        router.push("/dashboard/status6");
+        router.push("/dashboard/status5");
       } else if (status === 187 || status === 188) {
         router.push("/dashboard/status4");
       } else if (status === 189) {
-        router.push("/dashboard/status6");
+        router.push("/dashboard/status5");
       } else if (status === 191) {
         router.push("/dashboard/status7");
       }
     } else {
-      // to do: // if status is 204, 205, 206, or 207,
-      // redirect to the appropriate status page
-      // 204>208
-      // 205>209
-      // 206>210
-      // 207>211
-      //213>212
-      if (status === 204) {
-        await updateStatus(208, caseID);
-        const updatedUser = await getLogicsUser(caseID);
-        setUserData(updatedUser);
+      if (status === 208) {
         router.push("/dashboard/status4/A");
-      } else if (status === 205) {
-        await updateStatus(209, caseID);
-        const updatedUser = await getLogicsUser(caseID);
-        setUserData(updatedUser);
+      } else if (status === 209) {
         router.push("/dashboard/status4/B");
-      } else if (status === 206) {
-        await updateStatus(210, caseID);
-        const updatedUser = await getLogicsUser(caseID);
-        setUserData(updatedUser);
+      } else if (status === 210) {
         router.push("/dashboard/status4/B/F");
-      } else if (status === 207) {
-        await updateStatus(211, caseID);
-        const updatedUser = await getLogicsUser(caseID);
-        setUserData(updatedUser);
+      } else if (status === 211) {
         router.push("/dashboard/status4/C");
-      } else if (status === 213) {
-        await updateStatus(212, caseID);
-        const updatedUser = await getLogicsUser(caseID);
-        setUserData(updatedUser);
+      } else if (status === 212) {
         router.push("/dashboard/status4/D");
       }
     }
@@ -227,7 +188,7 @@ const Action = () => {
             )}
           </div>
           <div className="action-btn-cont">
-            <button onClick={acknowledge} className="next-btn">
+            <button onClick={routeByStatus} className="next-btn">
               BACK TO DASHBOARD
             </button>
           </div>
