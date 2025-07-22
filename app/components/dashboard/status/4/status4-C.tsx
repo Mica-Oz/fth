@@ -69,21 +69,7 @@ const Dash = () => {
           </strong>
         </p>
       </div>
-      <div className="row-6 alert bar-bubble">
-        <div className="square-front">
-          <Image
-            alt={"icon"}
-            src={LogoIcon}
-            width={60}
-            className="scale-icon"
-          />
-          <p style={{ width: "100%" }}>
-            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
-            You are eligible for several Fresh Start Relief Programs!
-          </p>
-        </div>
-        <div className="square-back"></div>
-      </div>
+
       <div className="row-2">
         <div className="progress-bubble">
           <div className="bubble-header break">
@@ -109,7 +95,7 @@ const Dash = () => {
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>View Your Eligibility</p>
+              <p>Become Compliant With the IRS</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -120,12 +106,11 @@ const Dash = () => {
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
             <p className="to-do-msg">
-              You are Eligible for multiple Fresh Start Payment Plans!
+              To view your Fresh Start Eligibility, you must first become
+              compliant with the IRS.
             </p>
             <Link href="/cal/consult" className="tax-history-req-btn rep">
-              CONTACT OUR REPS
-              <br />
-              TO REVIEW PLANS
+              BECOME COMPLIANT
             </Link>
           </div>
           <div className="square-back"></div>

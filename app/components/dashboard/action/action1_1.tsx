@@ -100,7 +100,6 @@ const Action1_1 = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     setIsLoading(true);
-    console.log("submissiondata", data);
     try {
       const response = await fetch("/api/case/update/action1-1", {
         method: "POST",
@@ -131,10 +130,9 @@ const Action1_1 = () => {
       );
       await updateStatus(198, caseID);
 
-      // const updatedUser = await getLogicsUser(caseID);
-      // setUserData(updatedUser);
 
-      router.push("/dashboard/action1/1.5");
+      router.push("/dashboard/action1/1.5"); // Move this up
+
     } catch (err) {
       console.error(err);
     } finally {

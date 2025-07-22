@@ -12,6 +12,46 @@ const Dash = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
   const caseID = user?.untrusted_metadata.id as string;
+  // async function loadActivities() {
+  //   const activities = await getActivities(caseID);
+  //   console.log("ACTIVITIES:", activities);
+  //   for (const key in activities) {
+  //     const subObj = activities[key];
+  //     for (const key in subObj) {
+  //       if (key === "ActivityType" && subObj[key] === "CurrLiab") {
+  //         console.log("activitytype:", subObj[key]);
+  //         console.log("Subject", subObj["Subject"]);
+  //         const currentLiability = subObj["Subject"];
+
+  //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //         setUserData((prevData: any) => ({
+  //           ...prevData,
+  //           currentLiability,
+  //         }));
+  //       } else if (key === "ActivityType" && subObj[key] === "YearsUnfiled") {
+  //         console.log("activitytype:", subObj[key]);
+  //         console.log("Subject", subObj["Subject"]);
+  //         const yearsUnfiled = subObj["Subject"];
+
+  //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //         setUserData((prevData: any) => ({
+  //           ...prevData,
+  //           yearsUnfiled,
+  //         }));
+  //       } else if (key === "ActivityType" && subObj[key] === "Negotiation") {
+  //         console.log("activitytype:", subObj[key]);
+  //         console.log("Subject", subObj["Subject"]);
+  //         const negotiation = subObj["Subject"];
+
+  //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //         setUserData((prevData: any) => ({
+  //           ...prevData,
+  //           negotiation,
+  //         }));
+  //       }
+  //     }
+  //   }
+  // }
   async function loadActivities() {
     const activities = await getActivities(caseID);
     console.log("ACTIVITIES:", activities);
@@ -52,7 +92,6 @@ const Dash = () => {
       }
     }
   }
-
   useEffect(() => {
     loadActivities();
   }, []);
@@ -69,7 +108,7 @@ const Dash = () => {
           </strong>
         </p>
       </div>
-      <div className="row-6 alert bar-bubble">
+      {/* <div className="row-6 alert bar-bubble">
         <div className="square-front">
           <Image
             alt={"icon"}
@@ -79,11 +118,11 @@ const Dash = () => {
           />
           <p style={{ width: "100%" }}>
             <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
-            You are eligible for several Fresh Start Relief Programs!
+            You are enrolled in a Fresh Start Payment Plan!
           </p>
         </div>
         <div className="square-back"></div>
-      </div>
+      </div> */}
       <div className="row-2">
         <div className="progress-bubble">
           <div className="bubble-header break">
@@ -101,15 +140,15 @@ const Dash = () => {
 
               <div className="outer-circle complete"></div>
 
-              <div className="outer-circle">
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete final">
                 <div className="inner-circle"></div>
               </div>
-
-              <div className="outer-circle"></div>
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>View Your Eligibility</p>
+              <p>Your Tax History Report is complete!</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -118,14 +157,18 @@ const Dash = () => {
 
         <div className="to-do-bubble">
           <div className="square-front">
-            <p className="to-do-head">To Do:</p>
-            <p className="to-do-msg">
-              You are Eligible for multiple Fresh Start Payment Plans!
-            </p>
-            <Link href="/cal/consult" className="tax-history-req-btn rep">
-              CONTACT OUR REPS
+            <p className="to-do-head congrats">CONGRATS!</p>
+            <p className="to-do-msg" style={{ fontSize: "22px" }}>
+              You are up to date with your taxes and you do not owe the IRS!
               <br />
-              TO REVIEW PLANS
+              No further steps needed.{" "}
+            </p>
+            <p className="to-do-head congrats" style={{ fontSize: "34px" }}>
+              Questions?
+            </p>
+
+            <Link href="/contact" className="tax-history-req-btn contact">
+              CONTACT SUPPORT
             </Link>
           </div>
           <div className="square-back"></div>
@@ -176,6 +219,17 @@ const Dash = () => {
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
         </div>
+        {/* <div className="detail-bubble">
+          <div className="bubble-header break" style={{ fontSize: "30px" }}>
+            Collection Status
+          </div>
+
+          <div className="square-front" style={{ backgroundColor: "#59c8ea" }}>
+            <p className="active">{userData?.negotiation || ""}</p>
+          </div>
+          <div className="bubble-header-back"></div>
+          <div className="square-back"></div>
+        </div> */}
         <div className="detail-bubble">
           <div className="bubble-header break" style={{ fontSize: "30px" }}>
             Collection Status

@@ -67,18 +67,38 @@ const Dash = () => {
 
   async function acknowledge() {
     const status = userData?.data.StatusID;
-    let fastTrack = false;
-    if (status === 193) {
-      fastTrack = true;
-    }
 
-    //if fast track
-    if (fastTrack === true) {
-      await updateStatus(189, caseID);
-    } else if (status === 187) {
-      await updateStatus(188, caseID);
-    } else if (status === 188 || status === 189) {
-      //no update needed
+
+    let isLegacyUserPath = false;
+    if (status === 187 || status === 193) {
+      isLegacyUserPath = true;
+    }
+    if (isLegacyUserPath) {
+      let fastTrack = false;
+      if (status === 193) {
+        fastTrack = true;
+      }
+      //if fast track
+      if (fastTrack === true) {
+        await updateStatus(189, caseID);
+      } else if (status === 187) {
+        await updateStatus(188, caseID);
+      } else if (status === 188 || status === 189) {
+        //no update needed
+      }
+    } else {
+      if (status === 204) {
+        await updateStatus(208, caseID);
+      } else if (status === 205) {
+        await updateStatus(209, caseID);
+      } else if (status === 206) {
+        await updateStatus(210, caseID);
+      } else if (status === 207) {
+        await updateStatus(211, caseID);
+      } else if (status === 213) {
+        await updateStatus(212, caseID);
+      }
+
     }
     const updatedUser = await getLogicsUser(caseID);
     setUserData(updatedUser);

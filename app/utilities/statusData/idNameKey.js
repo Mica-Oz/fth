@@ -22,8 +22,14 @@ const idNameKey = {
   197: "Status 2.FR - Full Re-Submit Needed; Taxpayer;",
 
   // 3
+  //LEGACY
   187: "Status 3.1 - THR Live; Awaiting User Ack;",
   193: "Status 3.2 - THR Live; FAST TRACK; Fin Interview Complete; Awaiting User Ack;",
+  //NEW
+  204: "Status 3A - THR Live; No Eligibility; Awaiting User Ack;",
+  205: "Status 3B - THR Live; Compliant; Owe; Awaiting User Ack;",
+  206: "Status 3C - THR Live; Not Compliant; Owe; Awaiting User Ack;",
+  207: "Status 3D - THR Live; Not Compliant; Refund; Awaiting User Ack;",
 
   //4
   188: "Status 4.1 - THR acknowledged; Awaiting Financial Interview;",

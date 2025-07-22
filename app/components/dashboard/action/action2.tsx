@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 // import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
-// import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+
 import { useAppContext } from "@/app/context";
 import { useRouter } from "next/navigation";
 
@@ -74,21 +74,43 @@ const Action = () => {
 
   // console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
 
+
   async function routeToDash() {
+
     const status = userData?.data.StatusID;
-    let fastTrack = false;
-    if (status === 193) {
-      fastTrack = true;
+
+    let isLegacyUserPath = false;
+    if (status === 188 || status === 189) {
+      isLegacyUserPath = true;
     }
 
-    if (fastTrack === true) {
-      router.push("/dashboard/status6");
-    } else if (status === 187 || status === 188) {
-      router.push("/dashboard/status4");
-    } else if (status === 189) {
-      router.push("/dashboard/status6");
-    } else if (status === 191) {
-      router.push("/dashboard/status7");
+    if (isLegacyUserPath) {
+      let fastTrack = false;
+      if (status === 189) {
+        fastTrack = true;
+      }
+      if (fastTrack === true) {
+        router.push("/dashboard/status5");
+      } else if (status === 187 || status === 188) {
+        router.push("/dashboard/status4");
+      } else if (status === 189) {
+        router.push("/dashboard/status5");
+      } else if (status === 191) {
+        router.push("/dashboard/status7");
+      }
+    } else {
+      if (status === 208) {
+        router.push("/dashboard/status4/A");
+      } else if (status === 209) {
+        router.push("/dashboard/status4/B");
+      } else if (status === 210) {
+        router.push("/dashboard/status4/B/F");
+      } else if (status === 211) {
+        router.push("/dashboard/status4/C");
+      } else if (status === 212) {
+        router.push("/dashboard/status4/D");
+      }
+
     }
   }
 
@@ -119,6 +141,7 @@ const Action = () => {
             </Link>
           </p>
           <p className="form-group">Report</p>
+
 
           {isMobile ? (
             // Mobile: Show button to open PDF in new tab
@@ -186,6 +209,7 @@ const Action = () => {
 
           <div className="action-btn-cont" style={{ bottom: "60px" }}>
             <button onClick={routeToDash} className="next-btn">
+
               BACK TO DASHBOARD
             </button>
           </div>
