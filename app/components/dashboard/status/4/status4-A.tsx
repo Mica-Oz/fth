@@ -12,6 +12,46 @@ const Dash = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
   const caseID = user?.untrusted_metadata.id as string;
+  // async function loadActivities() {
+  //   const activities = await getActivities(caseID);
+  //   console.log("ACTIVITIES:", activities);
+  //   for (const key in activities) {
+  //     const subObj = activities[key];
+  //     for (const key in subObj) {
+  //       if (key === "ActivityType" && subObj[key] === "CurrLiab") {
+  //         console.log("activitytype:", subObj[key]);
+  //         console.log("Subject", subObj["Subject"]);
+  //         const currentLiability = subObj["Subject"];
+
+  //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //         setUserData((prevData: any) => ({
+  //           ...prevData,
+  //           currentLiability,
+  //         }));
+  //       } else if (key === "ActivityType" && subObj[key] === "YearsUnfiled") {
+  //         console.log("activitytype:", subObj[key]);
+  //         console.log("Subject", subObj["Subject"]);
+  //         const yearsUnfiled = subObj["Subject"];
+
+  //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //         setUserData((prevData: any) => ({
+  //           ...prevData,
+  //           yearsUnfiled,
+  //         }));
+  //       } else if (key === "ActivityType" && subObj[key] === "Negotiation") {
+  //         console.log("activitytype:", subObj[key]);
+  //         console.log("Subject", subObj["Subject"]);
+  //         const negotiation = subObj["Subject"];
+
+  //         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //         setUserData((prevData: any) => ({
+  //           ...prevData,
+  //           negotiation,
+  //         }));
+  //       }
+  //     }
+  //   }
+  // }
   async function loadActivities() {
     const activities = await getActivities(caseID);
     console.log("ACTIVITIES:", activities);
@@ -38,21 +78,20 @@ const Dash = () => {
             ...prevData,
             yearsUnfiled,
           }));
-        } else if (key === "ActivityType" && subObj[key] === "Negotiation") {
+        } else if (key === "ActivityType" && subObj[key] === "PaymentStatus") {
           console.log("activitytype:", subObj[key]);
           console.log("Subject", subObj["Subject"]);
-          const negotiation = subObj["Subject"];
+          const paymentStatus = subObj["Subject"];
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setUserData((prevData: any) => ({
             ...prevData,
-            negotiation,
+            paymentStatus,
           }));
         }
       }
     }
   }
-
   useEffect(() => {
     loadActivities();
   }, []);
@@ -180,13 +219,33 @@ const Dash = () => {
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
         </div>
-        <div className="detail-bubble">
+        {/* <div className="detail-bubble">
           <div className="bubble-header break" style={{ fontSize: "30px" }}>
             Collection Status
           </div>
 
           <div className="square-front" style={{ backgroundColor: "#59c8ea" }}>
             <p className="active">{userData?.negotiation || ""}</p>
+          </div>
+          <div className="bubble-header-back"></div>
+          <div className="square-back"></div>
+        </div> */}
+        <div className="detail-bubble">
+          <div className="bubble-header break" style={{ fontSize: "30px" }}>
+            Collection Status
+          </div>
+
+          <div className="square-front">
+            <p className="active">
+              {userData?.paymentStatus || ""}
+              {/* Unpaid
+              <br />
+              -
+              <br />
+              No Payment
+              <br />
+              Plan Yet */}
+            </p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
