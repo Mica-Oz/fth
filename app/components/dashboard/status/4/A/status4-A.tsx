@@ -1,23 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import scales from "@/public/scales-icon.png";
+// import scales from "@/public/scales-icon.png";
 import LogoIcon from "@/public/fth-logo-icon-new.png";
 import { useAppContext } from "@/app/context";
 import { getActivities } from "@/app/utilities/api/activities";
 import { useStytchUser } from "@stytch/nextjs";
-import updateStatus from "@/app/utilities/api/updateStatus";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
   const { user } = useStytchUser();
   const caseID = user?.untrusted_metadata.id as string;
-
-  const [isLoading, setIsLoading] = useState(true);
   async function loadActivities() {
-    setIsLoading(true);
     const activities = await getActivities(caseID);
     console.log("ACTIVITIES:", activities);
     for (const key in activities) {
@@ -43,67 +38,26 @@ const Dash = () => {
             ...prevData,
             yearsUnfiled,
           }));
-        } else if (key === "ActivityType" && subObj[key] === "PaymentStatus") {
+        } else if (key === "ActivityType" && subObj[key] === "Negotiation") {
           console.log("activitytype:", subObj[key]);
           console.log("Subject", subObj["Subject"]);
-          const paymentStatus = subObj["Subject"];
+          const negotiation = subObj["Subject"];
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setUserData((prevData: any) => ({
             ...prevData,
-            paymentStatus,
+            negotiation,
           }));
         }
       }
     }
-    setIsLoading(false);
   }
 
   useEffect(() => {
-    if (caseID) {
-      loadActivities();
-    }
-  }, [caseID, setUserData]); // Add setUserData here
+    loadActivities();
+  }, []);
 
-  async function acknowledge() {
-    const status = userData?.data.StatusID;
-
-
-    let isLegacyUserPath = false;
-    if (status === 187 || status === 193) {
-      isLegacyUserPath = true;
-    }
-    if (isLegacyUserPath) {
-      let fastTrack = false;
-      if (status === 193) {
-        fastTrack = true;
-      }
-      //if fast track
-      if (fastTrack === true) {
-        await updateStatus(189, caseID);
-      } else if (status === 187) {
-        await updateStatus(188, caseID);
-      } else if (status === 188 || status === 189) {
-        //no update needed
-      }
-    } else {
-      if (status === 204) {
-        await updateStatus(208, caseID);
-      } else if (status === 205) {
-        await updateStatus(209, caseID);
-      } else if (status === 206) {
-        await updateStatus(210, caseID);
-      } else if (status === 207) {
-        await updateStatus(211, caseID);
-      } else if (status === 213) {
-        await updateStatus(212, caseID);
-      }
-
-    }
-    const updatedUser = await getLogicsUser(caseID);
-    setUserData(updatedUser);
-  }
-  // console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 3 COMP:", userData);
+  console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 4 COMP:", userData);
 
   return (
     <div className="dash-cont">
@@ -111,11 +65,11 @@ const Dash = () => {
         <p className="dash-greet">
           Welcome to your Dashboard,{" "}
           <strong style={{ color: "#2e5a7e" }}>
-            {userData?.data?.FirstName || ""}!
+            {userData?.data.FirstName}!
           </strong>
         </p>
       </div>
-      <div className="row-6 alert bar-bubble">
+      {/* <div className="row-6 alert bar-bubble">
         <div className="square-front">
           <Image
             alt={"icon"}
@@ -123,13 +77,13 @@ const Dash = () => {
             width={60}
             className="scale-icon"
           />
-          <p>
+          <p style={{ width: "100%" }}>
             <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
-            Your Tax History Report is complete!
+            You are enrolled in a Fresh Start Payment Plan!
           </p>
         </div>
         <div className="square-back"></div>
-      </div>
+      </div> */}
       <div className="row-2">
         <div className="progress-bubble">
           <div className="bubble-header break">
@@ -141,21 +95,21 @@ const Dash = () => {
               <div className="outer-circle complete"></div>
               <div className="outer-circle complete"></div>
 
-              <div className="outer-circle">
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete"></div>
+
+              <div className="outer-circle complete final">
                 <div className="inner-circle"></div>
               </div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>View Tax History Report</p>
+              <p>Your Tax History Report is complete!</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -164,36 +118,37 @@ const Dash = () => {
 
         <div className="to-do-bubble">
           <div className="square-front">
-            <p className="to-do-head">To Do:</p>
-            <p className="to-do-msg">Your Tax Report History is complete!</p>
-            <Link
-              href="/dashboard/action2"
-              onClick={acknowledge}
-              className="tax-history-req-btn"
-            >
-              VIEW TAX <br />
-              HISTORY REPORT
+            <p className="to-do-head congrats">CONGRATS!</p>
+            <p className="to-do-msg" style={{ fontSize: "22px" }}>
+              You are up to date with your taxes and you do not owe the IRS!
+              <br />
+              No further steps needed.{" "}
+            </p>
+            <p className="to-do-head congrats" style={{ fontSize: "34px" }}>
+              Questions?
+            </p>
+
+            <Link href="/contact" className="tax-history-req-btn contact">
+              CONTACT SUPPORT
             </Link>
           </div>
           <div className="square-back"></div>
         </div>
       </div>
-      <div className="row-6 bar-bubble">
+      <div className="row-3 bar-bubble">
         <div className="square-front">
-          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
+          <Image
+            alt={"icon"}
+            src={LogoIcon}
+            width={60}
+            className="scale-icon"
+          />
           <p>
-            Looking for Tax Resolution? Schedule a{" "}
-            <span style={{ color: "#2e5a7e" }}>
-              {" "}
-              <strong>
-                free 15 minute <br />
-                consultation{" "}
-              </strong>
-            </span>
-            with our team of tax specialists.
+            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+            Your Tax History Report is complete!
           </p>
-          <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">SCHEDULE NOW</div>
+          <Link href={"/dashboard/action2"} style={{ marginLeft: "auto" }}>
+            <div className="learn-more-btn">VIEW HERE</div>
           </Link>
         </div>
         <div className="square-back"></div>
@@ -205,9 +160,7 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p className="active">
-              {isLoading ? "Loading..." : userData?.currentLiability}
-            </p>
+            <p className="active">{userData?.currentLiability || ""}</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
@@ -219,7 +172,7 @@ const Dash = () => {
 
           <div className="square-front">
             <p className="active">
-              {isLoading ? "Loading..." : userData?.yearsUnfiled}
+              {userData?.yearsUnfiled || ""}
               <br />
               Unfiled
             </p>
@@ -232,18 +185,8 @@ const Dash = () => {
             Collection Status
           </div>
 
-          <div className="square-front">
-            <p className="active">
-              {isLoading ? "Loading..." : userData?.paymentStatus}
-
-              {/* Unpaid
-              <br />
-              -
-              <br />
-              No Payment
-              <br />
-              Plan Yet */}
-            </p>
+          <div className="square-front" style={{ backgroundColor: "#59c8ea" }}>
+            <p className="active">{userData?.negotiation || ""}</p>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 // import updateStatus from "@/app/utilities/api/updateStatus";
 import { useStytchUser } from "@stytch/nextjs";
+
 import { useAppContext } from "@/app/context";
 import { useRouter } from "next/navigation";
 
@@ -14,7 +15,20 @@ const Action = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [signedURL, setSignedURL] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   async function handleGetURL(caseID: string) {
     setIsLoading(true);
@@ -37,7 +51,7 @@ const Action = () => {
       }
 
       const responseData = await response.json();
-      console.log("Response data:", responseData);
+      // console.log("Response data:", responseData);
       return responseData; // Return the response data
     } catch (err) {
       console.error(err);
@@ -58,52 +72,18 @@ const Action = () => {
     fetchURL();
   }, [caseID]);
 
-  console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
-  useEffect(() => {
-    // Handle only right-click on the container
-    const handleRightClick = (e: MouseEvent) => {
-      e.preventDefault();
-      return false;
-    };
+  // console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
 
-    // Block specific keyboard shortcuts
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Block Ctrl+S, Ctrl+P, Ctrl+Shift+E, etc.
-      if (
-        (e.ctrlKey || e.metaKey) &&
-        (e.key === "s" || e.key === "p" || e.key === "e")
-      ) {
-        e.preventDefault();
-        return false;
-      }
-    };
 
-    // Add event listeners directly to container instead of using an overlay
-    if (containerRef.current) {
-      containerRef.current.addEventListener("contextmenu", handleRightClick);
-    }
+  async function routeToDash() {
 
-    document.addEventListener("keydown", handleKeyDown);
-
-    // Clean up event listeners on unmount
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener(
-          "contextmenu",
-          handleRightClick
-        );
-      }
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
-  async function routeByStatus() {
     const status = userData?.data.StatusID;
-    console.log("clicked routeByStatus, status:", status);
+
     let isLegacyUserPath = false;
     if (status === 188 || status === 189) {
       isLegacyUserPath = true;
     }
+
     if (isLegacyUserPath) {
       let fastTrack = false;
       if (status === 189) {
@@ -130,6 +110,7 @@ const Action = () => {
       } else if (status === 212) {
         router.push("/dashboard/status4/D");
       }
+
     }
   }
 
@@ -160,35 +141,75 @@ const Action = () => {
             </Link>
           </p>
           <p className="form-group">Report</p>
-          <div
-            className="report-cont pdf-cont"
-            style={{ overflow: "hidden", position: "relative" }}
-            ref={containerRef}
-          >
-            {isLoading ? (
-              <div>Loading PDF...</div>
-            ) : signedURL ? (
-              <div
-                style={{ width: "100%", height: 300, position: "relative" }}
-                onContextMenu={(e) => e.preventDefault()}
-              >
+
+
+          {isMobile ? (
+            // Mobile: Show button to open PDF in new tab
+            <div
+              className="report-cont pdf-cont"
+              style={{
+                textAlign: "center",
+                padding: "20px",
+                height: "auto",
+                overflow: "hidden",
+              }}
+            >
+              {isLoading ? (
+                <div>Loading PDF...</div>
+              ) : signedURL ? (
+                <button
+                  onClick={() => window.open(signedURL, "_blank")}
+                  style={{
+                    background: "#5dacad",
+                    color: "white",
+                    border: "none",
+                    padding: "12px 24px",
+                    borderRadius: "6px",
+                    cursor: "pointer",
+                    fontSize: "1.5rem",
+                    fontFamily: "Halcom, sans-serif",
+                    fontWeight: "500",
+                    width: "100%",
+                    minWidth: "180px",
+                    height: "150px",
+                  }}
+                >
+                  VIEW REPORT
+                </button>
+              ) : (
+                <div style={{ color: "red", fontWeight: 500 }}>
+                  Report is not available. Please contact support.
+                </div>
+              )}
+            </div>
+          ) : (
+            // Desktop: Show iframe directly
+            <div
+              className="report-cont pdf-cont"
+              style={{ overflow: "hidden", position: "relative" }}
+              ref={containerRef}
+            >
+              {isLoading ? (
+                <div>Loading PDF...</div>
+              ) : signedURL ? (
                 <iframe
                   ref={iframeRef}
                   src={`${signedURL}#toolbar=0`}
-                  width="100%"
-                  height="100%"
+                  width={"100%"}
+                  height={300}
                   className="icon3"
-                  style={{ pointerEvents: "auto" }}
                 ></iframe>
-              </div>
-            ) : (
-              <div style={{ color: "red", fontWeight: 500 }}>
-                Report is not available. Please contact support.
-              </div>
-            )}
-          </div>
-          <div className="action-btn-cont">
-            <button onClick={routeByStatus} className="next-btn">
+              ) : (
+                <div style={{ color: "red", fontWeight: 500 }}>
+                  Report is not available. Please contact support.
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="action-btn-cont" style={{ bottom: "60px" }}>
+            <button onClick={routeToDash} className="next-btn">
+
               BACK TO DASHBOARD
             </button>
           </div>

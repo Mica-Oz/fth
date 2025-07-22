@@ -130,11 +130,9 @@ const Action1_1 = () => {
       );
       await updateStatus(198, caseID);
 
+
       router.push("/dashboard/action1/1.5"); // Move this up
 
-      // Optionally update context after navigation
-      // const updatedUser = await getLogicsUser(caseID);
-      // setUserData(updatedUser);
     } catch (err) {
       console.error(err);
     } finally {

@@ -3232,7 +3232,7 @@ input[type="checkbox"]:checked {
   color: #fff;
 }
 .action-2 {
-  height: 680px !important;
+  height: 750px !important;
 }
 .action-2 .next-btn {
   width: 450px !important;
@@ -3441,6 +3441,9 @@ input[type="checkbox"]:checked {
 @media (max-width: 1663px) {
   .split-bubble-with-title {
     height: 650px !important;
+  }
+  .action-2 {
+    height: 750px !important;
   }
   .split-bubble-with-title.auth-bubble {
     height: 550px !important;
@@ -3709,9 +3712,9 @@ input[type="checkbox"]:checked {
   .action-bubble {
     width: 86%;
   }
-  .action-2 {
+  /* .action-2 {
     height: 720px !important;
-  }
+  } */
   .congrats {
     font-size: 35px !important;
   }
@@ -4057,11 +4060,7 @@ input[type="checkbox"]:checked {
     width: 350px;
     font-size: 32px;
   }
-  .action-2 .next-btn {
-    width: 200px !important;
-    height: 110px !important;
-    font-size: 20px;
-  }
+
   .signup-main.main-cont {
     height: 800px;
   }
@@ -4073,13 +4072,24 @@ input[type="checkbox"]:checked {
     padding: 10px;
   }
 }
-@media (max-width: 770px) {
+@media (max-width: 768px) {
   .action-1-2 {
     height: 700px;
+  }
+  .action-2 {
+    height: 650px !important;
+  }
+  .action-2 .next-btn {
+    width: 200px !important;
+    height: 110px !important;
+    font-size: 20px;
   }
   .action-3-6 .form-cont {
     height: 38% !important;
   }
+  /* .action-2 {
+    height: 600px !important;
+  } */
 }
 @media (max-width: 700px) {
   .top-big-square h3 {
@@ -4404,11 +4414,10 @@ input[type="checkbox"]:checked {
     padding: 10px 20px;
   }
   .action-2 {
-    height: 750px !important;
     margin-right: 40px;
   }
   .action-2 .next-btn {
-    align-self: center;
+    /* align-self: center; */
     margin-right: 0;
   }
   .next-btn.ack {
@@ -4651,4 +4660,10 @@ html {
 
 html::-webkit-scrollbar-track {
   background: white;
+}
+
+iframe {
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  height: 100vh;
 }
