@@ -31,8 +31,10 @@ const statusDict = {
   211: "status4/C",
   212: "status4/D",
 
+  //Status 5
+  189: "status5",
+
   //Status 6
-  189: "status6",
   190: "status6",
 
   // Status 7
