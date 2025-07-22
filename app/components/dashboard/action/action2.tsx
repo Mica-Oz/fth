@@ -155,7 +155,7 @@ const Action = () => {
               }}
             >
               {isLoading ? (
-                <div>Loading PDF...</div>
+                <div>Loading Report...</div>
               ) : signedURL ? (
                 <button
                   onClick={() => window.open(signedURL, "_blank")}
