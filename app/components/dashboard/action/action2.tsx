@@ -74,9 +74,7 @@ const Action = () => {
 
   // console.log("USER DATA FROM CONTEXT - INSIDE ACTION2:", userData);
 
-
   async function routeToDash() {
-
     const status = userData?.data.StatusID;
 
     let isLegacyUserPath = false;
@@ -110,7 +108,6 @@ const Action = () => {
       } else if (status === 212) {
         router.push("/dashboard/status4/D");
       }
-
     }
   }
 
@@ -141,7 +138,6 @@ const Action = () => {
             </Link>
           </p>
           <p className="form-group">Report</p>
-
 
           {isMobile ? (
             // Mobile: Show button to open PDF in new tab
@@ -190,7 +186,7 @@ const Action = () => {
               ref={containerRef}
             >
               {isLoading ? (
-                <div>Loading PDF...</div>
+                <div>Loading Report...</div>
               ) : signedURL ? (
                 <iframe
                   ref={iframeRef}
@@ -209,7 +205,6 @@ const Action = () => {
 
           <div className="action-btn-cont" style={{ bottom: "60px" }}>
             <button onClick={routeToDash} className="next-btn">
-
               BACK TO DASHBOARD
             </button>
           </div>
