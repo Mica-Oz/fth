@@ -3,6 +3,9 @@ import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { useStytch, useStytchSession, useStytchUser } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
+import { isPhoneExempt } from "@/app/utilities/support/customerSupport";
+import statusDict from "@/app/utilities/statusData/statusDict";
+import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 function AuthContent() {
   const params = useSearchParams();
@@ -53,13 +56,28 @@ function AuthContent() {
     const navigateToSMS = async () => {
       if (user && user.untrusted_metadata?.id) {
         const caseID = user.untrusted_metadata.id as string;
-        console.log("User detected, caseID:", caseID);
+        console.log("User detected, caseID:", caseID, typeof caseID);
+        // Check if the user is exempt from phone verification
+        if (isPhoneExempt(caseID)) {
+          const logicsUser = await getLogicsUser(caseID);
+          console.log("EXEMPTION!!! user data:", logicsUser);
+          try {
+            const id = logicsUser.data.StatusID;
 
-        try {
-          await router.push("/sms");
-        } catch (err) {
-          console.error("Navigation error:", err);
-          await router.push("/oops");
+            const route = statusDict[id as keyof typeof statusDict];
+            router.push("/dashboard/" + route);
+          } catch (err) {
+            console.error("Navigation error:", err);
+            router.push("/oops");
+          }
+        } else {
+          console.log("User is not exempt, redirecting to SMS verification");
+          try {
+            router.push("/sms");
+          } catch (err) {
+            console.error("Navigation error:", err);
+            router.push("/oops");
+          }
         }
       }
     };

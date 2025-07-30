@@ -9,9 +9,8 @@ export async function POST(req: Request) {
       const API_KEY = process.env.LOGICS_API_KEY;
       const id = req.headers.get("caseid") as string;
 
-      console.log("caseID!!!!!!!!!!!!!!!!", id);
+      console.log("Update Status - CaseID", id);
       const caseIdInt = parseInt(id, 10);
-      console.log("caseIdInt!!!!!!!!!!!!!!!!", caseIdInt);
 
       // Check if parsing was successful
       if (isNaN(caseIdInt)) {
@@ -21,7 +20,7 @@ export async function POST(req: Request) {
         );
       }
       const data = await req.json();
-      console.log("id test", data.StatusID, "name test", data.StatusName);
+      console.log("New Status:", data.StatusID, " - ", data.StatusName);
       //   const data = await req.body;
 
       // Make the request to the IRS Logics API

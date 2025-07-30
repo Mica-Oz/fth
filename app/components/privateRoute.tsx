@@ -13,7 +13,7 @@ function PrivateRoute({
   // const { userData } = useAppContext();
   const { session } = useStytchSession();
   const router = useRouter();
-  console.log("session from private route:", session);
+  // console.log("session from private route:", session);
   useEffect(() => {
     if (!session) {
       router.push("/login");

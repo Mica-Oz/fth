@@ -15,8 +15,9 @@ type loginPassInputs = z.infer<typeof loginPassSchema>;
 const Page = () => {
   const router = useRouter();
   const stytch = useStytch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const session = useStytchSession();
-  console.log("login-session:", session);
+  // console.log("login-session:", session);
 
   const {
     register,

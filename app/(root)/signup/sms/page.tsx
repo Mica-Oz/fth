@@ -1,3 +1,4 @@
+// app/signup/sms/page.tsx - Updated for custom SMS service
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -11,6 +12,7 @@ import { smsSchema, smsAuthSchema } from "@/app/schema/smsSchema";
 import { z } from "zod";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+import { useSessionActions } from "@/app/context/AuthContext";
 // import statusDict from "@/app/utilities/statusData/statusDict";
 
 type smsInputs = z.infer<typeof smsSchema>;
@@ -18,10 +20,13 @@ type otpInputs = z.infer<typeof smsAuthSchema>;
 
 const Page = () => {
   const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const stytch = useStytch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const session = useStytchSession();
-  console.log("login-session:", session);
+  // console.log("login-session:", session);
   const { userData, setUserData } = useAppContext();
+  const { createSessionAfterSMS, refreshSession } = useSessionActions();
   const [isLoading, setIsLoading] = useState(true);
   // Track UI state and methodId
   const [codeSent, setCodeSent] = useState(false);
@@ -65,21 +70,43 @@ const Page = () => {
   const submitPhone = phoneForm.handleSubmit(async (data) => {
     setPhoneNum(data.CellPhone);
     try {
-      // alpha environment call
-      const response = await stytch.otps.sms.send("+1" + data.CellPhone, {
-        expiration_minutes: 5,
+      // NEW: Use custom SMS service instead of Stytch
+      const response = await fetch("/api/auth/sms/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          phoneNumber: data.CellPhone,
+          caseId: caseID,
+        }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send verification code");
+      }
+
+      const result = await response.json();
+
       // Reset the OTP form before showing it
       otpForm.reset({ otp: "" });
-      // Store the methodId for authentication
-      setMethodId(response.method_id);
+      // Store the methodId for authentication (same as Stytch flow)
+      setMethodId(result.method_id);
       setCodeSent(true);
-    } catch (err) {
-      router.push("/signup"); // Navigate to the 'check email' page
-      alert("error signing up" + err);
-      console.log("err:", err);
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.error("Error sending SMS:", err);
+      alert("Error sending verification code: " + err.message);
+
+      // If it's a rate limiting error, don't redirect to signup
+      if (!err.message.includes("Too many")) {
+        router.push("/signup");
+      }
     }
   });
+
   // Verify OTP code
   const submitOtp = otpForm.handleSubmit(async (data) => {
     console.log("caseid from context:", caseID);
@@ -87,17 +114,52 @@ const Page = () => {
 
     setIsLoading(true);
     try {
-      // Authenticate with the OTP code
-      await stytch.otps.authenticate(data.otp, methodId, {
-        session_duration_minutes: 60,
+      // NEW: Use custom SMS service instead of Stytch
+      const response = await fetch("/api/auth/sms/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          code: data.otp,
+          method_id: methodId,
+        }),
       });
-    } catch (err) {
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Verification failed");
+      }
+
+      const result = await response.json();
+      console.log("SMS verification successful:", result);
+      const sessionResult = await createSessionAfterSMS(caseID, phoneNum);
+      if (sessionResult.success) {
+        console.log("⏳ Waiting for AuthContext to refresh...");
+        await refreshSession();
+
+        // Small delay to ensure state updates
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        console.log("✅ AuthContext should be updated now");
+      } else {
+        console.warn("Failed to create session:", sessionResult.error);
+        // Continue anyway - verification worked
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       setIsLoading(false);
-      alert("Error verifying code! Try again");
-      console.log("err:", err);
-      setCodeSent(false);
+      console.error("Error verifying code:", err);
+      alert("Error verifying code! " + err.message);
+
+      // If too many attempts, reset to phone entry
+      if (err.message.includes("Too many incorrect attempts")) {
+        setCodeSent(false);
+        phoneForm.reset();
+      }
       return;
     }
+
     //if it authenticates, add the number to IRS logics
     try {
       const response = await fetch("/api/case/update", {
@@ -127,6 +189,7 @@ const Page = () => {
       router.refresh();
     }
   });
+
   if (isLoading) {
     return <div className="">Loading...</div>;
   }
@@ -179,11 +242,12 @@ const Page = () => {
                 </button>
                 <div className="form-row-9 phone-disclaimer">
                   <p>
-                    By clicking “Verify”: I accept and agree to the Terms of Use
-                    Agreement as well as acknowledge receipt of your Privacy
-                    Policy. I consent to FreeTaxHistory.com sending a one-time
-                    verification text, and communications about my account to
-                    the phone number provided. Message and data rates may apply.
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
                   </p>
                 </div>
                 <div className="form-row-9">
@@ -238,11 +302,12 @@ const Page = () => {
                 </button>
                 <div className="form-row-9 phone-disclaimer">
                   <p>
-                    By clicking “Verify”: I accept and agree to the Terms of Use
-                    Agreement as well as acknowledge receipt of your Privacy
-                    Policy. I consent to FreeTaxHistory.com sending a one-time
-                    verification text, and communications about my account to
-                    the phone number provided. Message and data rates may apply.
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
                   </p>
                 </div>
 
@@ -253,6 +318,7 @@ const Page = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         setCodeSent(false);
+                        phoneForm.reset();
                       }}
                       style={{ cursor: "pointer" }}
                     >

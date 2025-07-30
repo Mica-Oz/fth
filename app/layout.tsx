@@ -3,6 +3,7 @@ import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { StytchWrapper } from "@/app/components/stytchWrapper";
 import Chat from "@/app/components/chat/component";
+import { AuthProvider } from "@/app/context/AuthContext";
 
 export const metadata = {
   title: "FreeTaxHistory.com",
@@ -18,7 +19,10 @@ export default function RootLayout({
     <html lang="en">
       <GoogleTagManager gtmId="GTM-WLQBF98S" />
       <body>
-        <StytchWrapper>{children}</StytchWrapper>
+        <AuthProvider>
+          <StytchWrapper>{children}</StytchWrapper>
+        </AuthProvider>
+
         <Script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js" />
         <Chat />
       </body>
