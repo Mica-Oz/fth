@@ -262,16 +262,20 @@ const Page = () => {
                 <div className="form-row-9 phone-disclaimer">
                   <p>
                     By clicking &quot;Verify&quot;: I accept and agree to the
-                    Terms of Use Agreement at{" "}
-                    <a>https://www.freetaxhistory.com/terms</a> and acknowledge
-                    receipt of your Privacy Policy at
-                    <a>https://www.freetaxhistory.com/terms#privacy.</a> I
-                    consent to FreeTaxHistory.com sending one-time verification
-                    texts and account communications to the phone number
-                    provided. Your mobile opt-in data will not be shared with
-                    third parties. Message and data rates may apply. Reply HELP
-                    for help or STOP to cancel.
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
                   </p>
+                  {/* <p>
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
+                  </p> */}
                 </div>
                 <div className="form-row-9">
                   <p>
@@ -326,16 +330,20 @@ const Page = () => {
                 <div className="form-row-9 phone-disclaimer">
                   <p>
                     By clicking &quot;Verify&quot;: I accept and agree to the
-                    Terms of Use Agreement at{" "}
-                    <a>https://www.freetaxhistory.com/terms</a>
-                    and acknowledge receipt of your Privacy Policy at
-                    <a>https://www.freetaxhistory.com/terms#privacy.</a>I
-                    consent to FreeTaxHistory.com sending one-time verification
-                    texts and account communications to the phone number
-                    provided. Your mobile opt-in data will not be shared with
-                    third parties. Message and data rates may apply. Reply HELP
-                    for help or STOP to cancel.
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
                   </p>
+                  {/* <p>
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
+                  </p> */}
                 </div>
 
                 <div className="form-row-9">

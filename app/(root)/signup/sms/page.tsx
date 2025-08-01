@@ -249,6 +249,14 @@ const Page = () => {
                     account to the phone number provided. Message and data rates
                     may apply.
                   </p>
+                  {/* <p>
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
+                  </p> */}
                 </div>
                 <div className="form-row-9">
                   <p>
@@ -309,6 +317,14 @@ const Page = () => {
                     account to the phone number provided. Message and data rates
                     may apply.
                   </p>
+                  {/* <p>
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
+                  </p> */}
                 </div>
 
                 <div className="form-row-9">
