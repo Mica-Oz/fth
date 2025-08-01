@@ -9,9 +9,8 @@ export async function POST(req: Request) {
       const API_KEY = process.env.LOGICS_API_KEY;
       const id = req.headers.get("caseid") as string;
 
-      console.log("caseID!!!!!!!!!!!!!!!!", id);
+      console.log("Update Case - Case ID", id);
       const caseIdInt = parseInt(id, 10);
-      console.log("caseIdInt!!!!!!!!!!!!!!!!", caseIdInt);
 
       // Check if parsing was successful
       if (isNaN(caseIdInt)) {

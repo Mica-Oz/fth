@@ -12,16 +12,20 @@ import { z } from "zod";
 import { useAppContext } from "@/app/context";
 import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 import statusDict from "@/app/utilities/statusData/statusDict";
+import { useSessionActions } from "@/app/context/AuthContext";
 
 type smsInputs = z.infer<typeof smsSchema>;
 type otpInputs = z.infer<typeof smsAuthSchema>;
 
 const Page = () => {
   const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const stytch = useStytch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const session = useStytchSession();
-  console.log("login-session:", session);
+  // console.log("login-session:", session);
   const { userData, setUserData } = useAppContext();
+  const { createSessionAfterSMS, refreshSession } = useSessionActions();
   const [isLoading, setIsLoading] = useState(true);
   // Track UI state and methodId
   const [codeSent, setCodeSent] = useState(false);
@@ -65,21 +69,42 @@ const Page = () => {
   const submitPhone = phoneForm.handleSubmit(async (data) => {
     setPhoneNum(data.CellPhone);
     try {
-      // alpha environment call
-      const response = await stytch.otps.sms.send("+1" + data.CellPhone, {
-        expiration_minutes: 5,
+      // NEW: Use custom SMS service instead of Stytch
+      const response = await fetch("/api/auth/sms/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          phoneNumber: data.CellPhone,
+          caseId: caseID,
+        }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send verification code");
+      }
+
+      const result = await response.json();
+
       // Reset the OTP form before showing it
       otpForm.reset({ otp: "" });
-      // Store the methodId for authentication
-      setMethodId(response.method_id);
+      // Store the methodId for authentication (same as Stytch flow)
+      setMethodId(result.method_id);
       setCodeSent(true);
-    } catch (err) {
-      router.push("/signup"); // Navigate to the 'check email' page
-      alert("error signing up" + err);
-      console.log("err:", err);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.error("Error sending SMS:", err);
+      alert("Error sending verification code: " + err.message);
+
+      // For login, if error, redirect to signup
+      if (!err.message.includes("Too many")) {
+        router.push("/signup");
+      }
     }
   });
+
   // Verify OTP code
   const submitOtp = otpForm.handleSubmit(async (data) => {
     console.log("caseid from context:", caseID);
@@ -87,17 +112,51 @@ const Page = () => {
 
     setIsLoading(true);
     try {
-      // Authenticate with the OTP code
-      await stytch.otps.authenticate(data.otp, methodId, {
-        session_duration_minutes: 60,
+      // NEW: Use custom SMS service instead of Stytch
+      const response = await fetch("/api/auth/sms/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          code: data.otp,
+          method_id: methodId,
+        }),
       });
-    } catch (err) {
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Verification failed");
+      }
+
+      const result = await response.json();
+      console.log("SMS verification successful:", result);
+      const sessionResult = await createSessionAfterSMS(caseID, phoneNum);
+      if (sessionResult.success) {
+        console.log("⏳ Waiting for AuthContext to refresh...");
+        await refreshSession();
+
+        // Small delay to ensure state updates
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        console.log("✅ AuthContext should be updated now");
+      } else {
+        console.warn("Failed to create session:", sessionResult.error);
+        // Continue anyway - verification worked
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       setIsLoading(false);
-      alert("Error verifying code! Try again");
-      console.log("err:", err);
-      setCodeSent(false);
+      console.error("Error verifying code:", err);
+      alert("Error verifying code! " + err.message);
+
+      // If too many attempts, reset to phone entry
+      if (err.message.includes("Too many incorrect attempts")) {
+        setCodeSent(false);
+        phoneForm.reset();
+      }
       return;
     }
+
     //if it authenticates, add the number to IRS logics
     try {
       const response = await fetch("/api/case/update", {
@@ -118,6 +177,8 @@ const Page = () => {
       );
       const updatedUser = await getLogicsUser(caseID);
       setUserData(updatedUser);
+
+      // LOGIN FLOW: Navigate to appropriate dashboard based on user status
       const id = updatedUser.data.StatusID;
       const maritalStatus = updatedUser.data.MartialStatus;
       const type = updatedUser.data.TAX_RELIEF_TAX_TYPE;
@@ -146,6 +207,7 @@ const Page = () => {
       router.refresh();
     }
   });
+
   if (isLoading) {
     return <div className="">Loading...</div>;
   }
@@ -199,12 +261,21 @@ const Page = () => {
                 </button>
                 <div className="form-row-9 phone-disclaimer">
                   <p>
-                    By clicking “Verify”: I accept and agree to the Terms of Use
-                    Agreement as well as acknowledge receipt of your Privacy
-                    Policy. I consent to FreeTaxHistory.com sending a one-time
-                    verification text, and communications about my account to
-                    the phone number provided. Message and data rates may apply.
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
                   </p>
+                  {/* <p>
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
+                  </p> */}
                 </div>
                 <div className="form-row-9">
                   <p>
@@ -245,7 +316,7 @@ const Page = () => {
                         className="bi bi-exclamation-triangle"
                         viewBox="0 0 16 16"
                       >
-                        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L .165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
                         <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
                       </svg>
                       {otpForm.formState.errors.otp.message}
@@ -258,12 +329,21 @@ const Page = () => {
                 </button>
                 <div className="form-row-9 phone-disclaimer">
                   <p>
-                    By clicking “Verify”: I accept and agree to the Terms of Use
-                    Agreement as well as acknowledge receipt of your Privacy
-                    Policy. I consent to FreeTaxHistory.com sending a one-time
-                    verification text, and communications about my account to
-                    the phone number provided. Message and data rates may apply.
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
                   </p>
+                  {/* <p>
+                    By clicking &quot;Verify&quot;: I accept and agree to the
+                    Terms of Use Agreement as well as acknowledge receipt of
+                    your Privacy Policy. I consent to FreeTaxHistory.com sending
+                    a one-time verification text, and communications about my
+                    account to the phone number provided. Message and data rates
+                    may apply.
+                  </p> */}
                 </div>
 
                 <div className="form-row-9">
@@ -273,6 +353,7 @@ const Page = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         setCodeSent(false);
+                        phoneForm.reset();
                       }}
                       style={{ cursor: "pointer" }}
                     >

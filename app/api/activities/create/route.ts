@@ -12,9 +12,13 @@ export async function POST(req: Request) {
       // const data = await req.body;
 
       const id = req.headers.get("caseid") as string;
-      console.log("caseID!!!!!!!!!!!!!!!!", id);
+      const subject = req.headers.get("subject") as string;
+      const comment = req.headers.get("comment") as string;
+      const activityType = req.headers.get("activityType") as string;
+      console.log("Create activities request - Case ID:", id);
+      console.log("Activity:", subject, comment, activityType);
       const caseIdInt = await parseInt(id, 10);
-      console.log("caseIdInt!!!!!!!!!!!!!!!!", caseIdInt);
+
       // Check if parsing was successful
       if (isNaN(caseIdInt)) {
         return new Response(
@@ -22,10 +26,6 @@ export async function POST(req: Request) {
           { status: 400 }
         );
       }
-
-      const subject = req.headers.get("subject") as string;
-      const comment = req.headers.get("comment") as string;
-      const activityType = req.headers.get("activityType") as string;
 
       // Make the request to the IRS Logics API
       const response = await axios.post(

@@ -11,9 +11,9 @@ export async function GET(req: Request) {
       // const data = await req.json();
       // const data = await req.body;
       const id = (await req.headers.get("caseid")) as string;
-      console.log("caseID!!!!!!!!!!!!!!!!", id);
+      console.log("Get Spouse - Case ID", id);
       const caseIdInt = await parseInt(id, 10);
-      console.log("caseIdInt!!!!!!!!!!!!!!!!", caseIdInt);
+
       // Check if parsing was successful
       if (isNaN(caseIdInt)) {
         return new Response(

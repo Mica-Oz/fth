@@ -6,6 +6,7 @@ import logo from "@/public/fth-logo-new.png";
 import { useStytchSession, useStytch } from "@stytch/nextjs";
 import { useAppContext } from "@/app/context";
 import statusDict from "@/app/utilities/statusData/statusDict";
+import { useAuthChecks, useSessionActions } from "@/app/context/AuthContext"; // NEW: Import auth checks
 
 const Nav = () => {
   const { session } = useStytchSession();
@@ -18,6 +19,14 @@ const Nav = () => {
 
   // Add a state to track whether we're mounted on client side
   const [isMounted, setIsMounted] = useState(false);
+  const { phoneVerified, isExempt } = useAuthChecks();
+  const { clearSession } = useSessionActions();
+  // console.log("Auth checks:", {
+  //   phoneVerified,
+  //   sessionValid,
+  //   isExempt,
+  //   isLoading,
+  // });
 
   // Ensure we only render client-specific elements after mounting
   useEffect(() => {
@@ -94,6 +103,7 @@ const Nav = () => {
   const handleLogOut = useCallback(async () => {
     // console.log("logout clicked");
     await stytch.session.revoke();
+    clearSession();
     alert("logged out");
     closeAllModals();
   }, [stytch, closeAllModals]);
@@ -216,7 +226,11 @@ const Nav = () => {
   }
 
   // For authenticated users
-  if (session && session?.authentication_factors.length >= 2) {
+  if (
+    session &&
+    session?.authentication_factors.length >= 1 &&
+    (phoneVerified || isExempt)
+  ) {
     return (
       <div className="nav">
         <Link href="/" className="logo-cont">
