@@ -7,8 +7,8 @@ import LogoIcon from "@/public/fth-logo-icon-new.png";
 import { useAppContext } from "@/app/context";
 import { getActivities } from "@/app/utilities/api/activities";
 import { useStytchUser } from "@stytch/nextjs";
-import updateStatus from "@/app/utilities/api/updateStatus";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+// import updateStatus from "@/app/utilities/api/updateStatus";
+// import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
@@ -65,44 +65,42 @@ const Dash = () => {
     }
   }, [caseID, setUserData]); // Add setUserData here
 
-  async function acknowledge() {
-    const status = userData?.data.StatusID;
+  // async function acknowledge() {
+  //   const status = userData?.data.StatusID;
 
-
-    let isLegacyUserPath = false;
-    if (status === 187 || status === 193) {
-      isLegacyUserPath = true;
-    }
-    if (isLegacyUserPath) {
-      let fastTrack = false;
-      if (status === 193) {
-        fastTrack = true;
-      }
-      //if fast track
-      if (fastTrack === true) {
-        await updateStatus(189, caseID);
-      } else if (status === 187) {
-        await updateStatus(188, caseID);
-      } else if (status === 188 || status === 189) {
-        //no update needed
-      }
-    } else {
-      if (status === 204) {
-        await updateStatus(208, caseID);
-      } else if (status === 205) {
-        await updateStatus(209, caseID);
-      } else if (status === 206) {
-        await updateStatus(210, caseID);
-      } else if (status === 207) {
-        await updateStatus(211, caseID);
-      } else if (status === 213) {
-        await updateStatus(212, caseID);
-      }
-
-    }
-    const updatedUser = await getLogicsUser(caseID);
-    setUserData(updatedUser);
-  }
+  //   let isLegacyUserPath = false;
+  //   if (status === 187 || status === 193) {
+  //     isLegacyUserPath = true;
+  //   }
+  //   if (isLegacyUserPath) {
+  //     let fastTrack = false;
+  //     if (status === 193) {
+  //       fastTrack = true;
+  //     }
+  //     //if fast track
+  //     if (fastTrack === true) {
+  //       await updateStatus(189, caseID);
+  //     } else if (status === 187) {
+  //       await updateStatus(188, caseID);
+  //     } else if (status === 188 || status === 189) {
+  //       //no update needed
+  //     }
+  //   } else {
+  //     if (status === 204) {
+  //       await updateStatus(208, caseID);
+  //     } else if (status === 205) {
+  //       await updateStatus(209, caseID);
+  //     } else if (status === 206) {
+  //       await updateStatus(210, caseID);
+  //     } else if (status === 207) {
+  //       await updateStatus(211, caseID);
+  //     } else if (status === 213) {
+  //       await updateStatus(212, caseID);
+  //     }
+  //   }
+  //   const updatedUser = await getLogicsUser(caseID);
+  //   setUserData(updatedUser);
+  // }
   // console.log("USER DATA FROM CONTEXT BUT INIDE STATUS 3 COMP:", userData);
 
   return (
@@ -155,7 +153,7 @@ const Dash = () => {
             </div>
             <div className="line-cont"></div>
             <div className="status-bubble">
-              <p>View Tax History Report</p>
+              <p>Review Tax History Report</p>
             </div>
           </div>
           <div className="bubble-header-back"></div>
@@ -166,14 +164,19 @@ const Dash = () => {
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
             <p className="to-do-msg">Your Tax Report History is complete!</p>
-            <Link
-              href="/dashboard/action2"
-              onClick={acknowledge}
-              className="tax-history-req-btn"
+            <div
+              // className="tax-history-req-btn"
+              style={{
+                background: "none",
+                border: "none",
+                fontSize: "30px",
+                fontWeight: "600",
+              }}
             >
-              VIEW TAX <br />
-              HISTORY REPORT
-            </Link>
+              CALL US @ (800)-805-3310
+              <br />
+              to Review Tax History Report
+            </div>
           </div>
           <div className="square-back"></div>
         </div>
@@ -182,15 +185,15 @@ const Dash = () => {
         <div className="square-front">
           <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
           <p>
-            Looking for Tax Resolution? Schedule a{" "}
+            Can&apos;t call now?{" "}
             <span style={{ color: "#2e5a7e" }}>
               {" "}
               <strong>
-                free 15 minute <br />
-                consultation{" "}
+                schedule a call <br />
+                with a tax specialist{" "}
               </strong>
             </span>
-            with our team of tax specialists.
+            to review your Tax History Report.
           </p>
           <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
             <div className="learn-more-btn">SCHEDULE NOW</div>
