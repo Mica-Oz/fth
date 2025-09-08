@@ -38,7 +38,19 @@ export const createAction1_1_Schema = (userData: { maritalStatus: string }) =>
       // Primary taxpayer question (only required for married filing jointly)
       primary: z.string().optional(),
 
-      taxamount: z.string().min(1, { message: "Answer is required" }),
+      taxamount: z
+        .string()
+        .min(1, { message: "Answer is required" })
+        .refine(
+          (val) => {
+            const numValue = parseFloat(val.replace(/[,$]/g, ""));
+            return !isNaN(numValue) && numValue >= 10000;
+          },
+          {
+            message: "Tax amount must be at least $10,000.",
+          }
+        ),
+
       // Address fields
       address: z
         .string()

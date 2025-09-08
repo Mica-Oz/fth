@@ -18,7 +18,7 @@ const Action1_1 = () => {
   const { userData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState("");
-  const [isNotSure, setIsNotSure] = useState(false);
+  // const [isNotSure, setIsNotSure] = useState(false);
 
   // Get values from userData
   const caseID = userData?.data?.CaseID;
@@ -34,7 +34,7 @@ const Action1_1 = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+    // setValue,
     watch,
     formState: { errors },
   } = useForm<ActionInputs>({
@@ -70,19 +70,19 @@ const Action1_1 = () => {
     AOS.init();
   }, []);
 
-  // Handle the "not sure" checkbox
-  const handleNotSureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    setIsNotSure(isChecked);
+  // // Handle the "not sure" checkbox
+  // const handleNotSureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const isChecked = e.target.checked;
+  //   setIsNotSure(isChecked);
 
-    if (isChecked) {
-      // If checkbox is checked, set taxamount to "2"
-      setValue("taxamount", "2", { shouldValidate: true });
-    } else {
-      // If unchecked, clear the value
-      setValue("taxamount", "", { shouldValidate: true });
-    }
-  };
+  //   if (isChecked) {
+  //     // If checkbox is checked, set taxamount to "2"
+  //     setValue("taxamount", "2", { shouldValidate: true });
+  //   } else {
+  //     // If unchecked, clear the value
+  //     setValue("taxamount", "", { shouldValidate: true });
+  //   }
+  // };
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectElement = e.target;
@@ -130,9 +130,7 @@ const Action1_1 = () => {
       );
       await updateStatus(198, caseID);
 
-
       router.push("/dashboard/action1/1.5"); // Move this up
-
     } catch (err) {
       console.error(err);
     } finally {
@@ -230,13 +228,13 @@ const Action1_1 = () => {
                   type="number"
                   {...register("taxamount")}
                   placeholder="Estimated Tax Amount"
-                  disabled={isNotSure}
+                  // disabled={isNotSure}
                   style={{
                     color: taxAmount ? "#0a1763" : "#5dacad",
-                    display: isNotSure ? "none" : "block",
+                    // display: isNotSure ? "none" : "block",
                   }}
                 />
-                <div
+                {/* <div
                   className="check-row"
                   style={{
                     marginTop: "10px",
@@ -260,23 +258,45 @@ const Action1_1 = () => {
                   >
                     I&apos;m not sure how much I owe
                   </label>
-                </div>
+                </div> */}
               </div>
               {errors.taxamount && (
-                <p className="form-error">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-exclamation-triangle"
-                    viewBox="0 0 16 16"
+                <div style={{ display: "flex" }}>
+                  <p className="form-error">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-exclamation-triangle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                      <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                    </svg>
+                    {errors.taxamount.message}
+                  </p>
+                  <p
+                    style={{
+                      margin: "0",
+                      transform: "translateY(4px)",
+                    }}
                   >
-                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
-                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
-                  </svg>
-                  {errors.taxamount.message}
-                </p>
+                    <a
+                      href="/dashboard/status1"
+                      style={{
+                        color: "#5dacad",
+                        fontFamily: `"halcolm", sans-serif`,
+                        margin: "0",
+                        marginLeft: "15px",
+                        fontSize: "13px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Return to Dashboard
+                    </a>
+                  </p>
+                </div>
               )}
             </div>
 
