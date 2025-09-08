@@ -7,8 +7,8 @@ import LogoIcon from "@/public/fth-logo-icon-new.png";
 import { useAppContext } from "@/app/context";
 import { getActivities } from "@/app/utilities/api/activities";
 import { useStytchUser } from "@stytch/nextjs";
-import updateStatus from "@/app/utilities/api/updateStatus";
-import getLogicsUser from "@/app/utilities/api/getLogicsUser";
+// import updateStatus from "@/app/utilities/api/updateStatus";
+// import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
 const Dash = () => {
   const { userData, setUserData } = useAppContext();
