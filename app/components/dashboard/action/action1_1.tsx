@@ -18,7 +18,6 @@ const Action1_1 = () => {
   const { userData } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState("");
-  // const [isNotSure, setIsNotSure] = useState(false);
 
   // Get values from userData
   const caseID = userData?.data?.CaseID;
@@ -34,7 +33,6 @@ const Action1_1 = () => {
   const {
     register,
     handleSubmit,
-    // setValue,
     watch,
     formState: { errors },
   } = useForm<ActionInputs>({
@@ -42,6 +40,7 @@ const Action1_1 = () => {
     defaultValues: {
       primary: "",
       taxamount: "",
+      unfiledyears: "",
       dob: "",
       ssn: "",
       address: "",
@@ -52,8 +51,9 @@ const Action1_1 = () => {
     },
   });
 
-  // Watch the taxamount field
+  // Watch the taxamount and unfiledyears fields
   const taxAmount = watch("taxamount");
+  const unfiledYears = watch("unfiledyears");
 
   // Check if userData is properly loaded
   useEffect(() => {
@@ -69,20 +69,6 @@ const Action1_1 = () => {
   useEffect(() => {
     AOS.init();
   }, []);
-
-  // // Handle the "not sure" checkbox
-  // const handleNotSureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const isChecked = e.target.checked;
-  //   setIsNotSure(isChecked);
-
-  //   if (isChecked) {
-  //     // If checkbox is checked, set taxamount to "2"
-  //     setValue("taxamount", "2", { shouldValidate: true });
-  //   } else {
-  //     // If unchecked, clear the value
-  //     setValue("taxamount", "", { shouldValidate: true });
-  //   }
-  // };
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectElement = e.target;
@@ -207,7 +193,7 @@ const Action1_1 = () => {
                     viewBox="0 0 16 16"
                   >
                     <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
-                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.100 0z" />
                   </svg>
                   {errors.ssn.message}
                 </p>
@@ -215,51 +201,45 @@ const Action1_1 = () => {
             </div>
 
             <div className="form-cat">
-              <p className="cat-title">Estimated Tax Owed:</p>
-              <div
-                className="tax-amt-row"
-                style={{
-                  position: "relative",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
+              <p className="cat-title">Tax Information:</p>
+
+              <div className="tax-info-row" style={{ marginBottom: "15px" }}>
                 <input
                   type="number"
                   {...register("taxamount")}
-                  placeholder="Estimated Tax Amount"
-                  // disabled={isNotSure}
+                  placeholder="Estimated Tax Amount Owed"
                   style={{
                     color: taxAmount ? "#0a1763" : "#5dacad",
-                    // display: isNotSure ? "none" : "block",
                   }}
                 />
-                {/* <div
-                  className="check-row"
-                  style={{
-                    marginTop: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    id="notSure"
-                    checked={isNotSure}
-                    onChange={handleNotSureChange}
-                  />
-                  <label
-                    htmlFor="notSure"
-                    style={{
-                      marginLeft: "18px",
-                      fontFamily: "Halcom, sans-serif",
-                      color: "#0a1763",
-                    }}
-                  >
-                    I&apos;m not sure how much I owe
-                  </label>
-                </div> */}
               </div>
+
+              <div
+                className="unfiled-years-row"
+                style={{ marginBottom: "15px" }}
+              >
+                <input
+                  type="number"
+                  {...register("unfiledyears")}
+                  placeholder="Number of Unfiled Tax Years"
+                  min="0"
+                  style={{
+                    color: unfiledYears ? "#0a1763" : "#5dacad",
+                  }}
+                />
+              </div>
+
+              {/* <div
+                style={{
+                  fontSize: "12px",
+                  color: "#666",
+                  marginBottom: "10px",
+                }}
+              >
+                * You must either owe at least $10,000 OR have at least 1
+                unfiled year to proceed
+              </div> */}
+
               {errors.taxamount && (
                 <div style={{ display: "flex" }}>
                   <p className="form-error">
@@ -297,6 +277,23 @@ const Action1_1 = () => {
                     </a>
                   </p>
                 </div>
+              )}
+
+              {errors.unfiledyears && (
+                <p className="form-error">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-exclamation-triangle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z" />
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                  </svg>
+                  {errors.unfiledyears.message}
+                </p>
               )}
             </div>
 

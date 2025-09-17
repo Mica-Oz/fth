@@ -40,14 +40,27 @@ export const createAction1_1_Schema = (userData: { maritalStatus: string }) =>
 
       taxamount: z
         .string()
-        .min(1, { message: "Answer is required" })
+        .min(1, { message: "Tax amount is required" })
         .refine(
           (val) => {
             const numValue = parseFloat(val.replace(/[,$]/g, ""));
-            return !isNaN(numValue) && numValue >= 10000;
+            return !isNaN(numValue) && numValue >= 0;
           },
           {
-            message: "Tax amount must be at least $10,000.",
+            message: "Please enter a valid tax amount.",
+          }
+        ),
+
+      unfiledyears: z
+        .string()
+        .min(1, { message: "Number of unfiled years is required" })
+        .refine(
+          (val) => {
+            const numValue = parseInt(val);
+            return !isNaN(numValue) && numValue >= 0;
+          },
+          {
+            message: "Please enter a valid number of years.",
           }
         ),
 
@@ -86,5 +99,19 @@ export const createAction1_1_Schema = (userData: { maritalStatus: string }) =>
       {
         message: "Question required",
         path: ["primary"],
+      }
+    )
+    .refine(
+      (data) => {
+        const taxAmount = parseFloat(data.taxamount.replace(/[,$]/g, ""));
+        const unfiledYears = parseInt(data.unfiledyears);
+
+        // Either tax amount must be 10k+ OR unfiled years must be 1+
+        return taxAmount >= 10000 || unfiledYears >= 1;
+      },
+      {
+        message:
+          "You must either owe at least $10,000 in taxes OR have at least 1 year of unfiled returns to proceed.",
+        path: ["taxamount"], // Show error on tax amount field
       }
     );
