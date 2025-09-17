@@ -114,6 +114,12 @@ const Action1_1 = () => {
         comment,
         "MaritalInfo"
       );
+      await createActivity(
+        caseID || "",
+        "Unfiled Years",
+        `Estimated Unfiled Years: ${data.unfiledyears}`,
+        "EstUnfiledYears"
+      );
       await updateStatus(198, caseID);
 
       router.push("/dashboard/action1/1.5"); // Move this up
