@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -7,6 +8,8 @@ import LogoIcon from "@/public/fth-logo-icon-new.png";
 import { useAppContext } from "@/app/context";
 import { getActivities } from "@/app/utilities/api/activities";
 import { useStytchUser } from "@stytch/nextjs";
+// Import the component at the top
+import SFRTooltip from "../../../tooltips/sfrToolTip"; // adjust path as needed
 // import updateStatus from "@/app/utilities/api/updateStatus";
 // import getLogicsUser from "@/app/utilities/api/getLogicsUser";
 
@@ -16,49 +19,84 @@ const Dash = () => {
   const caseID = user?.untrusted_metadata.id as string;
 
   const [isLoading, setIsLoading] = useState(true);
+
   async function loadActivities() {
     setIsLoading(true);
     const activities = await getActivities(caseID);
     console.log("ACTIVITIES:", activities);
+
+    // Find the most recent activity for each activity type
+    const mostRecentActivities = {
+      CurrLiab: null as any,
+      YearsUnfiled: null as any,
+      PaymentStatus: null as any,
+      SFRinQ: null as any,
+    };
+
+    // Iterate through activities to find the most recent for each type
     for (const key in activities) {
-      const subObj = activities[key];
-      for (const key in subObj) {
-        if (key === "ActivityType" && subObj[key] === "CurrLiab") {
-          console.log("activitytype:", subObj[key]);
-          console.log("Subject", subObj["Subject"]);
-          const currentLiability = subObj["Subject"];
+      const activity = activities[key];
+      const activityType = activity.ActivityType;
+      const createdDate = new Date(activity.CreatedDate);
 
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          setUserData((prevData: any) => ({
-            ...prevData,
-            currentLiability,
-          }));
-        } else if (key === "ActivityType" && subObj[key] === "YearsUnfiled") {
-          console.log("activitytype:", subObj[key]);
-          console.log("Subject", subObj["Subject"]);
-          const yearsUnfiled = subObj["Subject"];
+      if (
+        activityType === "CurrLiab" ||
+        activityType === "YearsUnfiled" ||
+        activityType === "PaymentStatus" ||
+        activityType === "SFRinQ"
+      ) {
+        const current =
+          mostRecentActivities[
+            activityType as keyof typeof mostRecentActivities
+          ];
 
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          setUserData((prevData: any) => ({
-            ...prevData,
-            yearsUnfiled,
-          }));
-        } else if (key === "ActivityType" && subObj[key] === "PaymentStatus") {
-          console.log("activitytype:", subObj[key]);
-          console.log("Subject", subObj["Subject"]);
-          const paymentStatus = subObj["Subject"];
-
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          setUserData((prevData: any) => ({
-            ...prevData,
-            paymentStatus,
-          }));
+        if (!current || createdDate > new Date(current.CreatedDate)) {
+          mostRecentActivities[
+            activityType as keyof typeof mostRecentActivities
+          ] = activity;
         }
       }
     }
+
+    // Now update userData with the most recent values
+    const updates: any = {};
+
+    if (mostRecentActivities.CurrLiab) {
+      console.log("Most recent CurrLiab:", mostRecentActivities.CurrLiab);
+      updates.currentLiability = mostRecentActivities.CurrLiab.Subject;
+    }
+
+    if (mostRecentActivities.YearsUnfiled) {
+      console.log(
+        "Most recent YearsUnfiled:",
+        mostRecentActivities.YearsUnfiled
+      );
+      updates.yearsUnfiled = mostRecentActivities.YearsUnfiled.Subject;
+    }
+
+    if (mostRecentActivities.PaymentStatus) {
+      console.log(
+        "Most recent PaymentStatus:",
+        mostRecentActivities.PaymentStatus
+      );
+      updates.paymentStatus = mostRecentActivities.PaymentStatus.Subject;
+    }
+
+    if (mostRecentActivities.SFRinQ) {
+      console.log("Most recent SFRinQ:", mostRecentActivities.SFRinQ);
+      updates.sfrInQueue = mostRecentActivities.SFRinQ.Subject;
+    }
+
+    // Single state update with all the new values
+    if (Object.keys(updates).length > 0) {
+      setUserData((prevData: any) => ({
+        ...prevData,
+        ...updates,
+      }));
+    }
+
     setIsLoading(false);
   }
-
   useEffect(() => {
     if (caseID) {
       loadActivities();
@@ -113,21 +151,50 @@ const Dash = () => {
           </strong>
         </p>
       </div>
-      <div className="row-6 alert bar-bubble">
-        <div className="square-front">
-          <Image
-            alt={"icon"}
-            src={LogoIcon}
-            width={60}
-            className="scale-icon"
-          />
-          <p>
-            <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
-            Your Tax History Report is complete!
-          </p>
+      {userData?.data?.TaxLiability > 0 ? (
+        //|| userData?.yearsUnfiled >0
+        <div className="row-6 alert bar-bubble">
+          <div
+            className="square-front"
+            style={{ backgroundColor: "#eb4034", border: "#eb4034" }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              fill="#0a1763"
+              className="bi bi-exclamation-circle"
+              viewBox="0 0 16 16"
+              id="call-us-alert-icon"
+            >
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+              <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+            </svg>
+            <p>
+              We have found details in your <strong>Tax History Report</strong>{" "}
+              that require your attention immediately.
+            </p>
+          </div>
+          <div className="square-back"></div>
         </div>
-        <div className="square-back"></div>
-      </div>
+      ) : (
+        <div className="row-6 alert bar-bubble">
+          <div className="square-front">
+            <Image
+              alt={"icon"}
+              src={LogoIcon}
+              width={60}
+              className="scale-icon"
+            />
+            <p>
+              <span style={{ color: "#2e5a7e" }}>Congratulations! </span>
+              Your Tax History Report is complete!
+            </p>
+          </div>
+          <div className="square-back"></div>
+        </div>
+      )}
+
       <div className="row-2">
         <div className="progress-bubble">
           <div className="bubble-header break">
@@ -138,14 +205,12 @@ const Dash = () => {
             <div className="circle-cont">
               <div className="outer-circle complete"></div>
               <div className="outer-circle complete"></div>
+              <div className="outer-circle complete"></div>
+              <div className="outer-circle complete"></div>
 
               <div className="outer-circle">
                 <div className="inner-circle"></div>
               </div>
-
-              <div className="outer-circle"></div>
-
-              <div className="outer-circle"></div>
 
               <div className="outer-circle"></div>
 
@@ -163,16 +228,14 @@ const Dash = () => {
         <div className="to-do-bubble">
           <div className="square-front">
             <p className="to-do-head">To Do:</p>
-            <p className="to-do-msg">Your Tax Report History is complete!</p>
-            <div
-              // className="tax-history-req-btn"
-              style={{
-                background: "none",
-                border: "none",
-                fontSize: "30px",
-                fontWeight: "600",
-              }}
-            >
+            {userData?.data?.TaxLiability >= 10000 ? (
+              <p className="to-do-msg">
+                Your Tax Report History is complete and requires your attention!
+              </p>
+            ) : (
+              <p className="to-do-msg">Your Tax Report History is complete!</p>
+            )}
+            <div id="call-us-to-do">
               CALL US @ (800)-805-3310
               <br />
               to Review Tax History Report
@@ -221,11 +284,27 @@ const Dash = () => {
           </div>
 
           <div className="square-front">
-            <p className="active">
-              {isLoading ? "Loading..." : userData?.yearsUnfiled}
-              <br />
-              Unfiled
-            </p>
+            <div className="active" id="sfr-in-queue-active">
+              {isLoading ? "Loading..." : userData?.yearsUnfiled} Years Unfiled
+              {userData?.sfrInQueue !== null && (
+                <span style={{ fontSize: "25px" }}>
+                  <>
+                    {/* <br /> */}
+                    {/* - */}
+                    <br />
+                    <span
+                      style={{
+                        color: " rgb(235, 64, 52)",
+                      }}
+                    >
+                      {isLoading ? "Loading..." : userData?.sfrInQueue}
+                    </span>
+                    <br />
+                    <SFRTooltip />
+                  </>
+                </span>
+              )}
+            </div>
           </div>
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
