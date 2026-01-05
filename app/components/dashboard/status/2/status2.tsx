@@ -35,14 +35,18 @@ const Dash = () => {
           </svg>
           <p>
             The IRS is already calculating penalties on your unfiled years.
-            Interest accrues daily. For $50, our tax specialists will give you a
+            Interest accrues daily. For only $50, our tax specialists will give
+            you a
             <span style={{ color: "#2e5a7e" }}>
               {" "}
               <strong>clear, personalized plan </strong>
             </span>
             to become compliant—before enforcement action begins.{" "}
           </p>
-          <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
+          <Link
+            href={"/dashboard/complianceplan"}
+            style={{ marginLeft: "auto" }}
+          >
             <div className="learn-more-btn">GET COMPLIANCE PLAN</div>
           </Link>
         </div>
