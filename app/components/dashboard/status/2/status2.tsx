@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import scales from "@/public/scales-icon.png";
+// import Image from "next/image";
+// import scales from "@/public/scales-icon.png";
 import { useAppContext } from "@/app/context";
 
 const Dash = () => {
@@ -19,6 +19,34 @@ const Dash = () => {
             {userData?.data.FirstName}!
           </strong>
         </p>
+      </div>
+      <div className="row-6 bar-bubble compliance">
+        <div className="square-front">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="60"
+            height="60"
+            fill="red"
+            className="bi bi-exclamation-diamond"
+            viewBox="0 0 16 16"
+          >
+            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z" />
+            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+          </svg>
+          <p>
+            The IRS is already calculating penalties on your unfiled years.
+            Interest accrues daily. For $50, our tax specialists will give you a
+            <span style={{ color: "#2e5a7e" }}>
+              {" "}
+              <strong>clear, personalized plan </strong>
+            </span>
+            to become compliant—before enforcement action begins.{" "}
+          </p>
+          <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
+            <div className="learn-more-btn">GET COMPLIANCE PLAN</div>
+          </Link>
+        </div>
+        <div className="square-back"></div>
       </div>
       <div className="row-2">
         <div className="progress-bubble">
@@ -179,26 +207,6 @@ const Dash = () => {
           <div className="bubble-header-back"></div>
           <div className="square-back"></div>
         </div>
-      </div>
-      <div className="row-6 bar-bubble">
-        <div className="square-front">
-          <Image alt={"icon"} src={scales} width={60} className="scale-icon" />
-          <p>
-            Looking for Tax Resolution? Schedule a{" "}
-            <span style={{ color: "#2e5a7e" }}>
-              {" "}
-              <strong>
-                free 15 minute <br />
-                consultation{" "}
-              </strong>
-            </span>
-            with our team of tax specialists.
-          </p>
-          <Link href={"/cal/consult"} style={{ marginLeft: "auto" }}>
-            <div className="learn-more-btn">SCHEDULE NOW</div>
-          </Link>
-        </div>
-        <div className="square-back"></div>
       </div>
     </div>
   );
