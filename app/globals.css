@@ -3538,6 +3538,10 @@ input[type="checkbox"]:checked {
   .row-6.alert p {
     width: 800px !important;
   }
+
+  .dash-cont .row-6.compliance {
+    height: 300px;
+  }
 }
 @media (max-width: 1500px) {
   .bubble-header,
@@ -3768,6 +3772,9 @@ input[type="checkbox"]:checked {
   } */
   .congrats {
     font-size: 35px !important;
+  }
+  .dash-cont .row-6.compliance {
+    height: 400px;
   }
 }
 @media (max-width: 1124px) {
