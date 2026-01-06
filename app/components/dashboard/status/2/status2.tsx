@@ -47,6 +47,69 @@ const Dash = () => {
       </div>
       <div className="row-6 bar-bubble compliance">
         <div className="square-front">
+          {showTooltip && (
+            <span
+              ref={tooltipRef}
+              style={{
+                position: "absolute",
+                top: "-20%",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#fff",
+                border: "1px solid #2e5a7e",
+                borderRadius: "8px",
+                padding: "16px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                zIndex: 1000,
+                width: "700px",
+                marginTop: "8px",
+                animation: "slideDown 0.3s ease-out forwards",
+                color: "#333",
+                lineHeight: "1.5",
+                textAlign: "left",
+                fontFamily: "filson-soft, sans-serif",
+                fontStyle: "normal",
+                fontSize: "16px",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <strong
+                style={{
+                  color: "#2e5a7e",
+                  display: "block",
+                  marginBottom: "8px",
+                  fontWeight: "800",
+                }}
+              >
+                What&apos;s included in your plan?
+              </strong>
+              Your Compliance Plan includes a 30 minute call with one of our top
+              of the line tax specialists, who will go over with you in detail
+              what steps you need to take to become compliant with the IRS. You
+              will leave the call with a sense of empowerment and a clear
+              step-by-step plan tailored to your unique situation, outlining
+              exactly what you need to do to minimize penalties and get back on
+              the right track with the IRS. Our specialists have extensive
+              experience in dealing with the IRS and will provide you with
+              expert guidance and support throughout the process. Don&apos;t
+              wait until it&apos;s too late—get your personalized compliance
+              plan today and take the first step towards financial peace of
+              mind.
+              {/* <span
+                style={{
+                  position: "absolute",
+                  top: "-8px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "0",
+                  height: "0",
+                  borderLeft: "8px solid transparent",
+                  borderRight: "8px solid transparent",
+                  borderBottom: "8px solid #2e5a7e",
+                }}
+              /> */}
+            </span>
+          )}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="60"
@@ -86,67 +149,6 @@ const Dash = () => {
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                 <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
               </svg>
-              {showTooltip && (
-                <span
-                  ref={tooltipRef}
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: "55%",
-                    transform: "translateX(-50%)",
-                    backgroundColor: "#fff",
-                    border: "1px solid #2e5a7e",
-                    borderRadius: "8px",
-                    padding: "16px",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                    zIndex: 1000,
-                    width: "700px",
-                    marginTop: "8px",
-                    animation: "slideDown 0.3s ease-out forwards",
-                    fontWeight: "normal",
-                    color: "#333",
-                    fontSize: "14px",
-                    lineHeight: "1.5",
-                    textAlign: "left",
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <strong
-                    style={{
-                      color: "#2e5a7e",
-                      display: "block",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    What&apos;s included in your plan?
-                  </strong>
-                  Your Compliance Plan includes a 30 minute call with one of our
-                  top of the line tax specialists, who will go over with you in
-                  detail what steps you need to take to become compliant with
-                  the IRS. You will leave the call with a sense of empowerment
-                  and a clear step-by-step plan tailored to your unique
-                  situation, outlining exactly what you need to do to minimize
-                  penalties and get back on the right track with the IRS. Our
-                  specialists have extensive experience in dealing with the IRS
-                  and will provide you with expert guidance and support
-                  throughout the process. Don&apos;t wait until it&apos;s too
-                  late—get your personalized compliance plan today and take the
-                  first step towards financial peace of mind.
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "-8px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "0",
-                      height: "0",
-                      borderLeft: "8px solid transparent",
-                      borderRight: "8px solid transparent",
-                      borderBottom: "8px solid #2e5a7e",
-                    }}
-                  />
-                </span>
-              )}
             </span>
             to become compliant—before enforcement action begins.{" "}
           </p>

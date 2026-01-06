@@ -3774,7 +3774,7 @@ input[type="checkbox"]:checked {
     font-size: 35px !important;
   }
   .dash-cont .row-6.compliance {
-    height: 400px;
+    height: 450px;
   }
 }
 @media (max-width: 1124px) {
@@ -4049,6 +4049,10 @@ input[type="checkbox"]:checked {
   }
   #call-us-alert-icon {
     margin: 0;
+  }
+
+  .bar-bubble .square-front svg {
+    margin-left: 0px;
   }
 }
 @media (max-width: 900px) {
@@ -4424,6 +4428,13 @@ input[type="checkbox"]:checked {
   }
   .split-bubble-with-title .square .cont h3 {
     font-size: 30px;
+  }
+  .dash-cont .row-6.compliance {
+    height: 650px;
+  }
+  .dash-cont .row-6.compliance .learn-more-btn {
+    width: 250px;
+    font-size: 17px;
   }
 }
 @media (max-width: 553px) {
