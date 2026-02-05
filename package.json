@@ -6,7 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate": "tsx automation/db/migrate.ts",
+    "db:migrate:full": "tsx automation/db/migrate.ts --migrate",
+    "auto": "tsx automation/cli.ts",
+    "auto:stats": "tsx automation/cli.ts stats",
+    "auto:pending": "tsx automation/cli.ts pending",
+    "auto:archive": "tsx automation/cli.ts archive-success && tsx automation/cli.ts archive-problems"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.806.0",
@@ -52,6 +58,7 @@
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

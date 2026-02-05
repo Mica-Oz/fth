@@ -42,3 +42,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# data files (contain sensitive client info)
+/data/*.json
+!/data/.gitkeep
+
+# old automation folder (migrated to /automation)
+/auto

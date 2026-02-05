@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import AdminHomeView from "./view";
 import AdminUsersView from "./users";
 import AdminLogicsView from "./logics";
+import AdminClientsView from "./clients";
 // Placeholder for AdminPhoneView
 const AdminPhoneView = () => (
   <div className="p-8 text-xl ">Phone view coming soon...</div>
@@ -15,8 +16,8 @@ const AdminPhoneView = () => (
 
 const AdminMain = () => {
   const [selected, setSelected] = useState<
-    "home" | "users" | "logics" | "phone"
-  >("users");
+    "home" | "users" | "logics" | "clients" | "phone"
+  >("clients");
 
   return (
     <div className="body">
@@ -73,6 +74,22 @@ const AdminMain = () => {
           </svg>
         </div>
         <div
+          className={`nav-icon${selected === "clients" ? " selected" : ""}`}
+          onClick={() => setSelected("clients")}
+          style={{ cursor: "pointer" }}
+          title="AWS Clients"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill={selected === "clients" ? "#5cacad" : "#20634f"}
+            viewBox="0 0 16 16"
+          >
+            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z"/>
+          </svg>
+        </div>
+        <div
           className={`nav-icon phone${selected === "phone" ? " selected" : ""}`}
           onClick={() => setSelected("phone")}
           style={{ cursor: "pointer" }}
@@ -94,6 +111,7 @@ const AdminMain = () => {
       {selected === "home" && <AdminHomeView />}
       {selected === "users" && <AdminUsersView />}
       {selected === "logics" && <AdminLogicsView />}
+      {selected === "clients" && <AdminClientsView />}
       {selected === "phone" && <AdminPhoneView />}
     </div>
   );

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState, useRef } from "react";
 
-interface User {
-  id: string;
+interface Client {
+  case_number: string;
   [key: string]: unknown;
 }
 
@@ -12,28 +12,23 @@ const ALL_FIELDS = [
   { key: "case_number", label: "Case Number" },
   { key: "name", label: "Name" },
   { key: "first_name", label: "First Name" },
-  { key: "middle_name", label: "Middle Name" },
   { key: "last_name", label: "Last Name" },
   { key: "email", label: "Email" },
   { key: "phone", label: "Phone" },
-  { key: "date", label: "Date" },
   { key: "dob", label: "DOB" },
   { key: "ssn", label: "SSN" },
   { key: "address", label: "Address" },
   { key: "city", label: "City" },
   { key: "state", label: "State" },
   { key: "zip", label: "ZIP" },
+  { key: "status", label: "Transcript Status" },
+  { key: "status_id", label: "Logics Status ID" },
   { key: "registry_type", label: "Registry Type" },
-  { key: "status", label: "Status" },
+  { key: "tax_type", label: "Tax Type" },
   { key: "irs_logics_status", label: "IRS Logics Status" },
-  { key: "first_seen", label: "First Seen" },
-  { key: "last_seen", label: "Last Seen" },
-  { key: "last_attempt_date", label: "Last Attempt Date" },
-  { key: "last_attempt_message", label: "Last Attempt Message" },
-  { key: "retry_after", label: "Retry After" },
   { key: "transcripts_pulled", label: "Transcripts Pulled" },
   { key: "activities_created", label: "Activities Created" },
-  { key: "activities_count", label: "Activities Count" },
+  { key: "first_seen", label: "First Seen" },
   { key: "created_at", label: "Created At" },
   { key: "updated_at", label: "Updated At" },
 ];
@@ -42,52 +37,102 @@ const ALL_FIELDS = [
 const DEFAULT_VISIBLE_FIELDS = [
   "case_number",
   "name",
-  "date",
-  "phone",
   "email",
-  "ssn",
-  "transcripts_pulled",
+  "phone",
+  "status",
+  "status_id",
 ];
 
-const AdminUsersView = () => {
-  const [users, setUsers] = useState<User[]>([]);
+const AdminClientsView = () => {
+  const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc"); // desc = newest first
   const [visibleFields, setVisibleFields] = useState<string[]>(
     DEFAULT_VISIBLE_FIELDS
   );
   const [showFieldSelector, setShowFieldSelector] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const [syncing, setSyncing] = useState(false);
+  const [lastSyncResult, setLastSyncResult] = useState<{
+    fetched?: number;
+    upserted?: number;
+    newClients?: number;
+    totalClients?: number;
+  } | null>(null);
+
+  const SYNC_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
+
+  const syncWithLogics = async () => {
+    setSyncing(true);
+    try {
+      const response = await fetch("/api/logics/sync", { method: "POST" });
+      const data = await response.json();
+      if (data.success) {
+        setLastSyncResult({
+          fetched: data.fetched,
+          upserted: data.upserted,
+          newClients: data.newClients,
+          totalClients: data.totalClients,
+        });
+        localStorage.setItem("lastLogicsSync", Date.now().toString());
+        console.log("Sync result:", data);
+      }
+    } catch (err) {
+      console.error("Sync failed:", err);
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  // Sync with IRS Logics on mount if last sync was over 30 minutes ago
   useEffect(() => {
-    const fetchUsers = async () => {
+    const lastSync = localStorage.getItem("lastLogicsSync");
+    const lastSyncTime = lastSync ? parseInt(lastSync, 10) : 0;
+    const timeSinceLastSync = Date.now() - lastSyncTime;
+
+    if (timeSinceLastSync > SYNC_INTERVAL_MS) {
+      syncWithLogics();
+    }
+  }, []);
+
+  useEffect(() => {
+    // Don't fetch while syncing - wait for sync to complete
+    if (syncing) return;
+
+    const fetchClients = async () => {
       try {
-        const response = await fetch("/api/admin/users");
+        const params = new URLSearchParams();
+        if (statusFilter !== "all") {
+          params.set("status", statusFilter);
+        }
+
+        const response = await fetch(`/api/admin/clients?${params}`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log("Received data:", data);
 
-        if (data.success && data.users) {
-          setUsers(data.users);
+        if (data.success && data.clients) {
+          setClients(data.clients);
         } else {
-          throw new Error(data.error || "Failed to fetch users data");
+          throw new Error(data.error || "Failed to fetch clients");
         }
       } catch (err) {
-        console.error("Failed to fetch users:", err);
-        setError(err instanceof Error ? err.message : "Failed to fetch users");
+        console.error("Failed to fetch clients:", err);
+        setError(err instanceof Error ? err.message : "Failed to fetch clients");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
-  }, []);
+    fetchClients();
+  }, [statusFilter, syncing]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -120,34 +165,43 @@ const AdminUsersView = () => {
     setVisibleFields([]);
   };
 
-  // Filter and sort users
-  const filteredUsers = users
-    .filter((user) => {
+  // Filter and sort clients
+  const filteredClients = clients
+    .filter((client) => {
       if (!searchQuery) return true;
       const query = searchQuery.toLowerCase();
-      return Object.values(user).some((value) =>
+      return Object.values(client).some((value) =>
         String(value).toLowerCase().includes(query)
       );
     })
     .sort((a, b) => {
-      const dateA = new Date((a.first_seen || a.created_at || a.date || 0) as string).getTime();
-      const dateB = new Date((b.first_seen || b.created_at || b.date || 0) as string).getTime();
-      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+      const getTime = (val: unknown) => {
+        if (!val) return 0;
+        const date = new Date(val as string);
+        return isNaN(date.getTime()) ? 0 : date.getTime();
+      };
+      const dateA = getTime(a.created_at) || getTime(a.first_seen);
+      const dateB = getTime(b.created_at) || getTime(b.first_seen);
+      return sortOrder === "asc" ? dateB - dateA : dateA - dateB;
     });
 
   // Format cell value for display
   const formatCellValue = (key: string, value: unknown): string => {
     if (value === null || value === undefined) return "-";
     if (typeof value === "boolean") return value ? "Yes" : "No";
-    if (key === "created_at" || key === "updated_at") {
-      return new Date(value as string).toLocaleString();
+    if (key.includes("_at") || key.includes("_seen") || key.includes("_date")) {
+      try {
+        return new Date(value as string).toLocaleDateString();
+      } catch {
+        return String(value);
+      }
     }
     if (typeof value === "object") return JSON.stringify(value);
     return String(value);
   };
 
   if (loading) {
-    return <div className="p-4">Loading users...</div>;
+    return <div className="p-4">Loading clients...</div>;
   }
 
   if (error) {
@@ -156,7 +210,7 @@ const AdminUsersView = () => {
 
   return (
     <div className="p-4 users-view">
-      <h1 className="text-2xl font-bold mb-4">Users</h1>
+      <h1 className="text-2xl font-bold mb-4">Clients (AWS DB)</h1>
 
       {/* Toolbar */}
       <div className="toolbar">
@@ -164,12 +218,30 @@ const AdminUsersView = () => {
         <div className="flex-1 min-w-[200px]">
           <input
             type="text"
-            placeholder="Search users..."
+            placeholder="Search clients..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
         </div>
+
+        {/* Status Filter */}
+        <select
+          value={statusFilter}
+          onChange={(e) => {
+            setStatusFilter(e.target.value);
+            setLoading(true);
+          }}
+          className="search-input"
+          style={{ width: "auto", minWidth: "120px" }}
+        >
+          <option value="all">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="success">Success</option>
+          <option value="failed">Failed</option>
+          <option value="no_8821">No 8821</option>
+          <option value="problem_child">Problem Children</option>
+        </select>
 
         {/* Sort Toggle */}
         <button
@@ -244,9 +316,50 @@ const AdminUsersView = () => {
           )}
         </div>
 
-        {/* Results count */}
+        {/* Sync Button */}
+        <button
+          type="button"
+          onClick={syncWithLogics}
+          disabled={syncing}
+          className="column-selector-btn"
+          title="Sync with IRS Logics"
+        >
+          {syncing ? (
+            <span>Syncing...</span>
+          ) : (
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                style={{ marginRight: "4px" }}
+              >
+                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                <path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+              </svg>
+              Sync
+            </>
+          )}
+        </button>
+
+        {/* Results count and sync status */}
         <div className="text-sm" style={{ color: "#7b90ef" }}>
-          {filteredUsers.length} of {users.length} users
+          {syncing ? (
+            <span>Syncing with IRS Logics...</span>
+          ) : lastSyncResult ? (
+            <span>
+              {filteredClients.length} of {clients.length} clients
+              {lastSyncResult.newClients
+                ? ` (${lastSyncResult.newClients} new, ${lastSyncResult.upserted} synced)`
+                : lastSyncResult.upserted
+                ? ` (${lastSyncResult.upserted} synced)`
+                : ""}
+            </span>
+          ) : (
+            <span>{filteredClients.length} of {clients.length} clients</span>
+          )}
         </div>
       </div>
 
@@ -263,15 +376,15 @@ const AdminUsersView = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user, index) => (
-              <tr key={String(user.case_number ?? index)}>
+            {filteredClients.map((client, index) => (
+              <tr key={String(client.case_number ?? index)}>
                 {ALL_FIELDS.filter((f) => visibleFields.includes(f.key)).map(
                   (field) => (
                     <td
                       key={field.key}
-                      title={formatCellValue(field.key, user[field.key])}
+                      title={formatCellValue(field.key, client[field.key])}
                     >
-                      {formatCellValue(field.key, user[field.key])}
+                      {formatCellValue(field.key, client[field.key])}
                     </td>
                   )
                 )}
@@ -280,9 +393,9 @@ const AdminUsersView = () => {
           </tbody>
         </table>
 
-        {filteredUsers.length === 0 && (
+        {filteredClients.length === 0 && (
           <div className="text-center py-8 text-gray-500">
-            {searchQuery ? "No users match your search" : "No users found"}
+            {searchQuery ? "No clients match your search" : "No clients found"}
           </div>
         )}
       </div>
@@ -290,4 +403,4 @@ const AdminUsersView = () => {
   );
 };
 
-export default AdminUsersView;
+export default AdminClientsView;
